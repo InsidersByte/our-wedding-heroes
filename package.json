@@ -4,6 +4,7 @@
   "description": "A Honeymoon Registry",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src && jscs src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/InsidersByte/honeymoon-registry/issues"
   },
-  "homepage": "https://github.com/InsidersByte/honeymoon-registry#readme"
+  "homepage": "https://github.com/InsidersByte/honeymoon-registry#readme",
+  "devDependencies": {
+    "eslint": "^1.8.0",
+    "jscs": "^2.5.0"
+  }
 }
