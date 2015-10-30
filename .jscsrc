@@ -1,0 +1,12 @@
+{
+    // JSCS Configuration File
+    // See http://jscs.info/overview for more details
+
+    // Preset JSCS configuration taken from Airbnb
+    // See https://github.com/airbnb/javascript
+    // We might not stick to this but it is a start
+    "preset": "airbnb",
+
+    "validateIndentation": 4,
+    "safeContextKeyword": ["self"]
+}
