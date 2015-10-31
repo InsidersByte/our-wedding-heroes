@@ -29,7 +29,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Honeymoon Registry',
+            title: 'Honeymoon Gift List',
             template: './src/public/index.html', // Load a custom template
             inject: 'body', // Inject all scripts into the body
         }),

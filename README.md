@@ -1,1 +1,1 @@
-# honeymoon-registry
+# honeymoon-gift-list

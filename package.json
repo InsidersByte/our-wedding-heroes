@@ -1,7 +1,7 @@
 {
-  "name": "honeymoon-registry",
+  "name": "honeymoon-gift-list",
   "version": "0.1.0",
-  "description": "A Honeymoon Registry",
+  "description": "A Honeymoon Gift List",
   "main": "./src/server",
   "scripts": {
     "postinstall": "npm run build",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://insidersbyte@github.com/InsidersByte/honeymoon-registry.git"
+    "url": "git+https://insidersbyte@github.com/InsidersByte/honeymoon-gift-list.git"
   },
   "author": "Jonathon Kelly <jonathon.kelly@insidersbyte.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/InsidersByte/honeymoon-registry/issues"
+    "url": "https://github.com/InsidersByte/honeymoon-gift-list/issues"
   },
-  "homepage": "https://github.com/InsidersByte/honeymoon-registry#readme",
+  "homepage": "https://github.com/InsidersByte/honeymoon-gift-list#readme",
   "dependencies": {
     "express": "^4.13.3",
     "material-ui": "^0.13.1",
