@@ -4,6 +4,7 @@ switch (environment) {
     case 'production':
         const express = require('express');
         const logger = require('morgan');
+        const path = require('path');
 
         const app = express();
 
@@ -11,7 +12,7 @@ switch (environment) {
 
         app.set('port', (process.env.PORT || 5000));
 
-        app.use(express.static('./dist'));
+        app.use(express.static(path.resolve(__dirname, '../../dist/')));
 
         app.get('*', express.static('index.html'));
 

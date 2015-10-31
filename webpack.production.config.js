@@ -6,8 +6,8 @@ const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'public/app.jsx'),
-        vendors: ['react', 'react-dom', 'react-intl', 'exports?componentHandler&MaterialRipple!material-design-lite/material.js'],
+        app: path.resolve(__dirname, 'src/public/main.jsx'),
+        vendors: ['react', 'react-dom'],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -29,8 +29,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Smart Mortgage Calculator - React',
-            template: './public/index.html', // Load a custom template
+            title: 'Honeymoon Registry',
+            template: './src/public/index.html', // Load a custom template
             inject: 'body', // Inject all scripts into the body
         }),
         new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.[hash].js'),

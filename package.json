@@ -4,9 +4,10 @@
   "description": "A Honeymoon Registry",
   "main": "./src/server",
   "scripts": {
-    "postinstall": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "postinstall": "npm run build",
     "lint": "eslint src && jscs src",
     "test": "npm run lint",
+    "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "start": "node ./src/server"
   },
   "repository": {
