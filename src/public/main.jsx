@@ -8,16 +8,19 @@ injectTapEventPlugin();
 
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import RaisedButton from 'material-ui/lib/raised-button';
+import { Router } from 'react-router';
 
-// jscs:disable validateQuoteMarks
+const rootRoute = {
+    component: 'div',
+    childRoutes: [
+        {
+            path: '/',
+            component: require('./components/App.jsx'),
+        },
+    ],
+};
+
 ReactDOM.render(
-    <div>
-        <h1>
-            Hello World
-        </h1>
-
-        <RaisedButton label="Default" />
-    </div>,
+    <Router routes={rootRoute} />,
     document.getElementById('content')
 );

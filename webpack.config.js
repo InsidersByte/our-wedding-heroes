@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'eval',
     entry: [
         'webpack/hot/dev-server',
         'webpack-dev-server/client?http://localhost:8080',
