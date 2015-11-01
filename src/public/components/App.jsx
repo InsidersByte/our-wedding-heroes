@@ -1,11 +1,11 @@
 import React from 'react';
+import { AppBar } from 'material-ui';
+import './app.styl';
 
 class App extends React.Component {
     render() {
         return (
-            <h1>
-                Hello World
-            </h1>
+            <AppBar title="Honeymoon Gift List" showMenuIconButton={false} />
         );
     }
 }
