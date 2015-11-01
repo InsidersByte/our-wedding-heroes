@@ -1,3 +1,6 @@
+import React from 'react'; //eslint-disable-line
+import ReactDOM from 'react-dom';
+import { Router } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap
@@ -5,10 +8,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // Check this repo:
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
-
-import React from 'react'; //eslint-disable-line
-import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
 
 const rootRoute = {
     component: 'div',
