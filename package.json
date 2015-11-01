@@ -5,7 +5,7 @@
   "main": "./src/server",
   "scripts": {
     "postinstall": "npm run build",
-    "lint": "eslint ./src/**/*.js* && jscs ./src/**/*.js*",
+    "lint": "eslint ./src/**/*.js*",
     "test": "npm run lint",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "start": "node ./src/server"
