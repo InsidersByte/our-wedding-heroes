@@ -1,6 +1,0 @@
-{
-    "preset": "airbnb",
-
-    "validateIndentation": 4,
-    "safeContextKeyword": ["self"]
-}
