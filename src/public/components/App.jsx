@@ -1,18 +1,23 @@
 import React from 'react';
-import { AppBar, FlatButton } from 'material-ui';
+import { Navbar, NavBrand, Nav } from 'react-bootstrap';
 import { Link } from 'react-router';
 import './app.styl';
 
 class App extends React.Component {
     render() {
-        const LoginButton = (
-            <FlatButton label="Login" linkButton containerElement={<Link to="/login" />} />
-        );
-
         return (
             <div>
-                <AppBar title="Honeymoon Gift List" showMenuIconButton={false} iconElementRight={LoginButton} />
-                {this.props.children}
+                <Navbar inverse toggleNavKey={0}>
+                    <NavBrand><Link to="/">Honeymoon Gift List</Link></NavBrand>
+                    <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+                        <li>
+                            <Link to="login">Login</Link>
+                        </li>
+                    </Nav>
+                </Navbar>
+                <div className="container">
+                    {this.props.children}
+                </div>
             </div>
         );
     }

@@ -1,20 +1,16 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import { Router, Route } from 'react-router';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-// Needed for onTouchTap
-// Can go away when react 1.0 release
-// Check this repo:
-// https://github.com/zilverline/react-tap-event-plugin
-injectTapEventPlugin();
+import { Router, Route, IndexRoute } from 'react-router';
+require('bootstrap/dist/css/bootstrap.css');
 
 import App from './components/App.jsx';
+import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 
 ReactDOM.render(
     <Router>
         <Route path="/" component={App}>
+            <IndexRoute component={Landing} />
             <Route path="login" component={Login} />
         </Route>
     </Router>,

@@ -1,7 +1,22 @@
 import React from 'react';
-import { Card, CardTitle, CardText, CardActions, TextField, RaisedButton } from 'material-ui';
+import auth from '../utils/auth';
 
 class App extends React.Component {
+    handleSubmit() {
+        event.preventDefault();
+
+        console.log(this);
+
+        auth
+            .login(this.refs.username, this.refs.password)
+            .then((response) => {
+                alert(response);
+            })
+            .catch((error) => {
+                alert(`error: ${error}`);
+            });
+    }
+
     render() {
         const mainStyle = {
             position: 'absolute',
@@ -11,21 +26,9 @@ class App extends React.Component {
         };
 
         return (
-            <main style={mainStyle}>
-                <Card>
-                    <CardTitle
-                        title="Login"
-                        subtitle="enter your details"/>
-                    <CardText>
-                        <TextField hintText="Username" /><br/>
-
-                        <TextField hintText="Password" type="password" />
-                    </CardText>
-                    <CardActions>
-                        <RaisedButton label="Login" primary />
-                    </CardActions>
-                </Card>
-            </main>
+            <h1>
+                Coming Soon!
+            </h1>
         );
     }
 }
