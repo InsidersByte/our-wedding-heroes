@@ -1,6 +1,6 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
+import { Router, Route } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap
@@ -9,17 +9,14 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-const rootRoute = {
-    component: 'div',
-    childRoutes: [
-        {
-            path: '/',
-            component: require('./components/App.jsx'),
-        },
-    ],
-};
+import App from './components/App.jsx';
+import Login from './components/Login.jsx';
 
 ReactDOM.render(
-    <Router routes={rootRoute} />,
+    <Router>
+        <Route path="/" component={App}>
+            <Route path="login" component={Login} />
+        </Route>
+    </Router>,
     document.getElementById('content')
 );

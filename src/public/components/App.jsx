@@ -1,11 +1,19 @@
 import React from 'react';
-import { AppBar } from 'material-ui';
+import { AppBar, FlatButton } from 'material-ui';
+import { Link } from 'react-router';
 import './app.styl';
 
 class App extends React.Component {
     render() {
+        const LoginButton = (
+            <FlatButton label="Login" linkButton containerElement={<Link to="/login" />} />
+        );
+
         return (
-            <AppBar title="Honeymoon Gift List" showMenuIconButton={false} />
+            <div>
+                <AppBar title="Honeymoon Gift List" showMenuIconButton={false} iconElementRight={LoginButton} />
+                {this.props.children}
+            </div>
         );
     }
 }
