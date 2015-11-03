@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, NavBrand, Nav } from 'react-bootstrap';
 import { Link } from 'react-router';
-import './app.styl';
 
 class App extends React.Component {
     render() {

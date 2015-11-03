@@ -1,7 +1,7 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
-require('bootstrap/dist/css/bootstrap.css');
+import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App.jsx';
 import Landing from './components/Landing.jsx';
