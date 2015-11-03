@@ -1,8 +1,8 @@
-function login(username, password) {
+function login(email, password) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (username === 'username' && password === 'password') {
-                resolve(true);
+            if (email === 'a@a.com' && password === 'password') {
+                resolve();
             } else {
                 reject('Invalid login credentials');
             }
