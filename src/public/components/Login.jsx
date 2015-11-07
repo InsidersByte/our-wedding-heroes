@@ -1,7 +1,7 @@
 import React from 'react/addons';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron } from 'react-bootstrap';
-import auth from '../utils/auth';
+import auth from '../services/auth';
 
 class Login extends React.Component {
     constructor() {
@@ -16,12 +16,7 @@ class Login extends React.Component {
     login(event) {
         event.preventDefault();
 
-        auth
-            .login(this.state.email, this.state.password)
-            .then(() => {
-            })
-            .catch(() => {
-            });
+        auth.login(this.state.email, this.state.password);
     }
 
     render() {
@@ -30,12 +25,12 @@ class Login extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <form>
-                        <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} />
+                    <form onSubmit={this.login.bind(this)}>
+                        <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} required />
 
-                        <Input type="password" label="Password" placeholder="Enter password" valueLink={this.linkState('password')} />
+                        <Input type="password" label="Password" placeholder="Enter password" valueLink={this.linkState('password')} required />
 
-                        <Button type="submit" bsStyle="primary" block onClick={this.login.bind(this)}>Login</Button>
+                        <Button type="submit" bsStyle="primary" block>Login</Button>
                     </form>
                 </Jumbotron>
             </div>
