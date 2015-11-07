@@ -5,9 +5,11 @@ import auth from '../utils/auth';
 class App extends React.Component {
     constructor(props) {
         super(props);
+
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
         this.state = {
             email: '',
             password: '',
