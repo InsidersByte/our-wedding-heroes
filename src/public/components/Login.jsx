@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button, ButtonToolbar, Jumbotron } from 'react-bootstrap';
+import { Input, Button, Jumbotron } from 'react-bootstrap';
 import auth from '../utils/auth';
 
 class App extends React.Component {
