@@ -5,7 +5,7 @@ class Auth {
     login(email, password) {
         // We call the server to log the user in.
         return when(request({
-            url: 'http://localhost:3000/',
+            url: 'http://localhost:3000/api/authenticate',
             method: 'POST',
             crossOrigin: true,
             type: 'json',
