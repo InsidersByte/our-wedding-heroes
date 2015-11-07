@@ -1,14 +1,11 @@
-import React from 'react';
+import React from 'react/addons';
+import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron } from 'react-bootstrap';
 import auth from '../utils/auth';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+class Login extends React.Component {
+    constructor() {
+        super();
 
         this.state = {
             email: '',
@@ -16,23 +13,7 @@ class App extends React.Component {
         };
     }
 
-    handleEmailChange() {
-        // This could also be done using ReactLink:
-        // http://facebook.github.io/react/docs/two-way-binding-helpers.html
-        this.setState({
-            email: this.refs.email.getValue(),
-        });
-    }
-
-    handlePasswordChange() {
-        // This could also be done using ReactLink:
-        // http://facebook.github.io/react/docs/two-way-binding-helpers.html
-        this.setState({
-            password: this.refs.password.getValue(),
-        });
-    }
-
-    handleSubmit() {
+    login(event) {
         event.preventDefault();
 
         auth
@@ -49,14 +30,12 @@ class App extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <form onSubmit={this.handleSubmit}>
-                        <Input type="email" label="Email Address" placeholder="Enter email" ref="email"
-                               onChange={this.handleEmailChange}/>
+                    <form>
+                        <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} />
 
-                        <Input type="password" label="Password" placeholder="Enter password" ref="password"
-                               onChange={this.handlePasswordChange}/>
+                        <Input type="password" label="Password" placeholder="Enter password" valueLink={this.linkState('password')} />
 
-                        <Button type="submit" bsStyle="primary" block>Login</Button>
+                        <Button type="submit" bsStyle="primary" block onClick={this.login.bind(this)}>Login</Button>
                     </form>
                 </Jumbotron>
             </div>
@@ -64,4 +43,7 @@ class App extends React.Component {
     }
 }
 
-export default App;
+// We’re using the mixin `LinkStateMixin` to have two-way databinding between our component and the HTML.
+reactMixin(Login.prototype, React.addons.LinkedStateMixin);
+
+export default Login;

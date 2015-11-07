@@ -24,9 +24,10 @@
     "bootstrap": "^3.3.5",
     "express": "^4.13.3",
     "morgan": "^1.6.1",
-    "react": "^0.14.1",
+    "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.1",
+    "react-mixin": "^3.0.3",
     "react-router": "^1.0.0-rc3"
   },
   "devDependencies": {
