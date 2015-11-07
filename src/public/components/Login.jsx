@@ -54,10 +54,7 @@ class App extends React.Component {
                         <Input type="password" label="Password" placeholder="Enter password" ref="password"
                                onChange={this.handlePasswordChange}/>
 
-                        <ButtonToolbar>
-                            <Button type="submit" bsStyle="primary">Login</Button>
-                            <Button type="reset">Reset</Button>
-                        </ButtonToolbar>
+                        <Button type="submit" bsStyle="primary" block>Login</Button>
                     </form>
                 </Jumbotron>
             </div>
