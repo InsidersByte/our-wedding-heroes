@@ -65,9 +65,7 @@ class App extends React.Component {
                     <NavBrand><Link to="/">Honeymoon Gift List</Link></NavBrand>
                     {headerItems}
                 </Navbar>
-                <div className="container">
-                    {this.props.children}
-                </div>
+                {this.props.children}
             </div>
         );
     }

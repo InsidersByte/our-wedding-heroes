@@ -5,6 +5,7 @@ import loginActions from './actions/login.action';
 import loginStore from './stores/login.store';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import './main.styl';
 
 import App from './components/App.jsx';
 import Landing from './components/Landing.jsx';
