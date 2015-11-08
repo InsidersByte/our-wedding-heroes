@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**/*.js*'",
     "test": "npm run lint",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "start": "node ./src/server"
+    "start": "nodemon ./src/server"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,13 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
+    "co": "^4.6.0",
     "crypto": "0.0.3",
     "express": "^4.13.3",
+    "express-jwt": "^3.1.0",
     "history": "^1.13.0",
     "http-proxy": "^1.12.0",
+    "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.2",
     "react": "^0.14.2",
     "react-bootstrap": "^0.27.3",
