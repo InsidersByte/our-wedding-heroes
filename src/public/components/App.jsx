@@ -3,7 +3,7 @@ import React from 'react';
 class App extends React.Component {
     render() {
         return (
-            <div>
+            <div className="maximum-size">
                 {this.props.children}
             </div>
         );

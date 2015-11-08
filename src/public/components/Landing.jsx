@@ -2,11 +2,6 @@ import React from 'react';
 
 class Landing extends React.Component {
     render() {
-        const mainStyle = {
-            width: '100%',
-            height: '100%',
-        };
-
         const headerStyle = {
             background: 'url(http://lanarkshireweddings.com/wp-content/uploads/2015/04/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg) no-repeat center center scroll',
             backgroundSize: 'cover',
@@ -23,7 +18,7 @@ class Landing extends React.Component {
         };
 
         return (
-            <div style={mainStyle}>
+            <div className='maximum-size'>
                 <header style={headerStyle}>
                     <div style={textStyle}>
                         <h1>Our Wedding</h1>
