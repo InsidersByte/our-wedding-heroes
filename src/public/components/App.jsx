@@ -50,6 +50,9 @@ class App extends React.Component {
             headerItems = (
                 <Nav right eventKey={0}>
                     <li>
+                        <Link to="admin">Admin</Link>
+                    </li>
+                    <li>
                         <a href="" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>

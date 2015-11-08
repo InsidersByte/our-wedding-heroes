@@ -10,6 +10,7 @@ import App from './components/App.jsx';
 import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
+import Admin from './components/Admin.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -28,7 +29,8 @@ ReactDOM.render(
         <Route path="/" component={App}>
             <IndexRoute component={Landing} />
             <Route path="login" component={Login} />
-            <Route path="setup" component={Setup} onEnter={requireAuth} />
+            <Route path="setup" component={Setup} />
+            <Route path="admin" component={Admin} onEnter={requireAuth} />
         </Route>
     </Router>,
     document.getElementById('content')
