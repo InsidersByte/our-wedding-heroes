@@ -12,6 +12,7 @@ import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
 import Admin from './components/Admin.jsx';
+import AuthenticatedLanding from './components/AuthenticatedLanding.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -21,7 +22,7 @@ if (jwt) {
 
 function requireAuth(nextState, replaceState) {
     if (!loginStore.isLoggedIn()) {
-        replaceState({ nextPathname: nextState.location.pathname }, '/login');
+        replaceState({ nextPathname: nextState.location.pathname }, 'admin/login');
     }
 }
 
@@ -29,9 +30,11 @@ ReactDOM.render(
     <Router>
         <Route path="/" component={App}>
             <IndexRoute component={Landing} />
-            <Route path="login" component={Login} />
-            <Route path="setup" component={Setup} />
-            <Route path="admin" component={Admin} onEnter={requireAuth} />
+            <Route path="admin" component={Admin}>
+                <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
+                <Route path="login" component={Login} />
+                <Route path="setup" component={Setup} />
+            </Route>
         </Route>
     </Router>,
     document.getElementById('content')
