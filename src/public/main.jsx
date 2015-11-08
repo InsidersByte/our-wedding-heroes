@@ -2,7 +2,6 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import loginActions from './actions/login.action';
-import history from './services/history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 

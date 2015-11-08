@@ -1,6 +1,5 @@
 import AppDispatcher from '../dispatchers/app.dispatcher';
 import constants from '../constants/login.constants';
-import history from '../services/history';
 
 export default {
     loginUser: (jwt) => {
@@ -12,7 +11,6 @@ export default {
         });
 
         if (savedJwt !== jwt) {
-            history.replaceState(null, '/')
             localStorage.setItem('jwt', jwt);
         }
     },
