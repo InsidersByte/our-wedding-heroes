@@ -2,6 +2,7 @@ import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import loginActions from './actions/login.action';
+import loginStore from './stores/login.store';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -16,12 +17,18 @@ if (jwt) {
     loginActions.loginUser(jwt);
 }
 
+function requireAuth(nextState, replaceState) {
+    if (!loginStore.isLoggedIn()) {
+        replaceState({ nextPathname: nextState.location.pathname }, '/login');
+    }
+}
+
 ReactDOM.render(
     <Router>
         <Route path="/" component={App}>
             <IndexRoute component={Landing} />
             <Route path="login" component={Login} />
-            <Route path="setup" component={Setup} />
+            <Route path="setup" component={Setup} onEnter={requireAuth} />
         </Route>
     </Router>,
     document.getElementById('content')
