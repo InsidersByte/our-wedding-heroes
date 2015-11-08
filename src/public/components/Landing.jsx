@@ -1,27 +1,13 @@
 import React from 'react';
+import './landing.styl';
 
 class Landing extends React.Component {
     render() {
-        const headerStyle = {
-            background: 'url(http://lanarkshireweddings.com/wp-content/uploads/2015/04/Thavorn_Wedding_Phuket_Romantic_Beachside.jpg) no-repeat center center scroll',
-            backgroundSize: 'cover',
-            width: '100%',
-            height: '100%',
-            position: 'relative',
-            display: 'table',
-        };
-
-        const textStyle = {
-            display: 'table-cell',
-            textAlign: 'center',
-            verticalAlign: 'middle',
-        };
-
         return (
-            <div className="maximum-size">
-                <header style={headerStyle}>
-                    <div style={textStyle}>
-                        <h1>Our Wedding</h1>
+            <div className="one-page">
+                <header className="one-page__header">
+                    <div className="one-page__header__content">
+                        <h1 className="one-page__header__content__header">Our Wedding</h1>
                     </div>
                 </header>
             </div>
