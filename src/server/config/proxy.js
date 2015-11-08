@@ -18,7 +18,7 @@ module.exports = (app, environment) => {
 
     // Any requests to localhost:3000/build is proxied
     // to webpack-dev-server
-    app.all('/build/*', function proxyBuild(req, res) {
+    app.all('/build/*', (req, res) => {
         proxy.web(req, res, {
             target: 'http://localhost:8080',
         });
@@ -27,7 +27,7 @@ module.exports = (app, environment) => {
     // It is important to catch any errors from the proxy or the
     // server will crash. An example of this is connecting to the
     // server when webpack is bundling
-    proxy.on('error', function logProxyError() {
+    proxy.on('error', () => {
         console.log('Could not connect to proxy, please try again...'); // eslint-disable-line no-console
     });
 };

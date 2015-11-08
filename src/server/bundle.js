@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('./../../webpack.config.js');
 
-module.exports = function bundle() {
+module.exports = () => {
     // First we fire up Webpack an pass in the configuration we
     // created
     let bundleStart = null;
@@ -13,14 +13,14 @@ module.exports = function bundle() {
 
     // We give notice in the terminal when it starts bundling and
     // set the time it started
-    compiler.plugin('compile', function logBuildStarted() {
+    compiler.plugin('compile', () => {
         console.log('Bundling...'); // eslint-disable-line no-console
         bundleStart = Date.now();
     });
 
     // We also give notice when it is done compiling, including the
     // time it took. Nice to have
-    compiler.plugin('done', function logBuildCompleted() {
+    compiler.plugin('done', () => {
         console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!'); // eslint-disable-line no-console
     });
 
@@ -44,7 +44,7 @@ module.exports = function bundle() {
 
     // We fire up the development server and give notice in the terminal
     // that we are starting the initial bundle
-    bundler.listen(8080, 'localhost', function logBundlingStarted() {
+    bundler.listen(8080, 'localhost', () => {
         console.log('Bundling project, please wait...'); // eslint-disable-line no-console
     });
 };

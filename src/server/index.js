@@ -13,6 +13,6 @@ require('./config/express')(app, environment);
 
 require('./config/proxy')(app, environment);
 
-app.listen(config.port, function logStart() {
+app.listen(config.port, () => {
     console.log('Server running on port ' + config.port); // eslint-disable-line no-console
 });
