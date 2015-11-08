@@ -1,44 +1,37 @@
-const environment = process.env.NODE_ENV;
+const express = require('express');
+const httpProxy = require('http-proxy');
 
-switch (environment) {
-    case 'production':
-        const express = require('express');
-        const logger = require('morgan');
-        const path = require('path');
+const proxy = httpProxy.createProxyServer();
+const app = express();
 
-        const app = express();
+const isProduction = process.env.NODE_ENV === 'production';
+const port = isProduction ? process.env.PORT : 5000;
 
-        app.use(logger('dev'));
+// We only want to run the workflow when not in production
+if (!isProduction) {
+    // We require the bundler inside the if block because
+    // it is only needed in a development environment. Later
+    // you will see why this is a good idea
+    const bundle = require('./bundle.js');
 
-        app.set('port', (process.env.PORT || 5000));
+    bundle();
 
-        app.use(express.static(path.resolve(__dirname, '../../dist/')));
-
-        app.get('*', express.static('index.html'));
-
-        app.listen(app.get('port'), function logStart() {
-            console.log('Node app is running on port', app.get('port')); // eslint-disable-line no-console
+    // Any requests to localhost:3000/build is proxied
+    // to webpack-dev-server
+    app.all('/build/*', function proxyBuild(req, res) {
+        proxy.web(req, res, {
+            target: 'http://localhost:8080',
         });
-
-        break;
-    default:
-        const webpack = require('webpack');
-        const config = require('../../webpack.config');
-        const WebpackDevServer = require('webpack-dev-server');
-
-        new WebpackDevServer(
-            webpack(config),
-            {
-                hot: true,
-                stats: {
-                    colors: true,
-                },
-            }
-        )
-        .listen(
-            8080,
-            'localhost'
-        );
-
-        break;
+    });
 }
+
+// It is important to catch any errors from the proxy or the
+// server will crash. An example of this is connecting to the
+// server when webpack is bundling
+proxy.on('error', function logProxyError() {
+    console.log('Could not connect to proxy, please try again...'); // eslint-disable-line no-console
+});
+
+app.listen(port, function logStart() {
+    console.log('Server running on port ' + port); // eslint-disable-line no-console
+});

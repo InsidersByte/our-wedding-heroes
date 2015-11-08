@@ -14,6 +14,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
+
+        // Everything related to Webpack should go through a build path,
+        // localhost:3000/build. That makes proxying easier to handle
+        publicPath: '/build/',
     },
     module: {
         loaders: [
