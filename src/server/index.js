@@ -1,10 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const environment = process.env.NODE_ENV || 'development';
 
 const app = express();
 
 const config = require('./config/config');
+
+mongoose.connect(config.database);
 
 require('./config/express')(app, environment);
 
