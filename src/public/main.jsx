@@ -13,6 +13,7 @@ import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
 import Admin from './components/Admin.jsx';
 import AuthenticatedLanding from './components/AuthenticatedLanding.jsx';
+import NoMatch from './components/NoMatch.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -36,6 +37,7 @@ ReactDOM.render(
                 <Route path="setup" component={Setup} />
             </Route>
         </Route>
+        <Route path="*" component={NoMatch}/>
     </Router>,
     document.getElementById('content')
 );
