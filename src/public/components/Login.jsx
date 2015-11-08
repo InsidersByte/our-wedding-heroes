@@ -16,7 +16,12 @@ class Login extends React.Component {
     login(event) {
         event.preventDefault();
 
-        auth.login(this.state.email, this.state.password);
+        auth
+            .login(this.state.email, this.state.password)
+            .catch((err) => {
+                alert('There\'s an error logging in'); //eslint-disable-line
+                console.log('Error logging in', err); //eslint-disable-line
+            });
     }
 
     render() {

@@ -30,7 +30,7 @@ UserSchema.pre('save', function preSave(next) {
 
 // method to compare a given password with the database hash
 UserSchema.methods.comparePassword = function comparePassword(password) {
-    return encryption.hashPassword(this.salt, password) === self.password;
+    return encryption.hashPassword(this.salt, password) === this.password;
 };
 
 // return the model
