@@ -16,7 +16,7 @@ class Auth {
             },
         }))
         .then((response) => {
-            let jwt = response.token;
+            const jwt = response.token;
 
             loginActions.loginUser(jwt);
 
@@ -35,15 +35,17 @@ class Auth {
                 email, password, name,
             },
         }))
-            .then((/* response */) => {
-                // We get a JWT back.
-                // let jwt = response.token;
+        .then((response) => {
+            const jwt = response.token;
 
-                // We trigger the LoginAction with that JWT.
-                // loginActions.loginUser(jwt);
+            loginActions.loginUser(jwt);
 
-                return true;
-            });
+            return true;
+        });
+    }
+
+    logout() {
+        loginActions.logoutUser();
     }
 }
 

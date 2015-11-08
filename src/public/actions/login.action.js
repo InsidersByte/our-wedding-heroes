@@ -15,11 +15,11 @@ export default {
         }
     },
 
-    //logoutUser: () => {
-    //    RouterContainer.get().transitionTo('/login');
-    //    localStorage.removeItem('jwt');
-    //    AppDispatcher.dispatch({
-    //        actionType: constants.LOGOUT_USER,
-    //    });
-    //},
+    logoutUser: () => {
+        localStorage.removeItem('jwt');
+
+        AppDispatcher.dispatch({
+            actionType: constants.LOGOUT_USER,
+        });
+    },
 };

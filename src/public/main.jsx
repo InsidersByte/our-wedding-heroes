@@ -10,7 +10,7 @@ import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
 
-let jwt = localStorage.getItem('jwt');
+const jwt = localStorage.getItem('jwt');
 
 if (jwt) {
     loginActions.loginUser(jwt);
