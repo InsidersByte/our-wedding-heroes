@@ -18,7 +18,7 @@ class Landing extends React.Component {
         };
 
         return (
-            <div className='maximum-size'>
+            <div className="maximum-size">
                 <header style={headerStyle}>
                     <div style={textStyle}>
                         <h1>Our Wedding</h1>
