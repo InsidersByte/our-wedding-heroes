@@ -1,12 +1,21 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
+import loginActions from './actions/login.action';
+import history from './services/history';
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 import App from './components/App.jsx';
 import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
+
+let jwt = localStorage.getItem('jwt');
+
+if (jwt) {
+    loginActions.loginUser(jwt);
+}
 
 ReactDOM.render(
     <Router>
