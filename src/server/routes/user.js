@@ -3,26 +3,20 @@
 const User = require('../models/user');
 const co = require('co');
 
-module.exports = function(app, express) {
-    let router = express.Router();
+module.exports = (app, express) => {
+    const router = new express.Router();
 
-    // on routes that end in /users
-    // ----------------------------------------------------
     router.route('/')
+        .post(co.wrap(function* createUser(req, res) {
+            const user = new User();
 
-        // create a user (accessed at POST http://localhost:8080/users)
-        .post(co.wrap(function*(req, res) {
-            let user = new User();		// create a new instance of the User model
-
-            user.name = req.body.name;  // set the users name (comes from the request)
-            user.username = req.body.username;  // set the users username (comes from the request)
-            user.password = req.body.password;  // set the users password (comes from the request)
+            user.name = req.body.name;
+            user.username = req.body.username;
+            user.password = req.body.password;
 
             try {
                 yield user.save();
-            }
-            catch (err) {
-                // duplicate entry
+            } catch (err) {
                 if (err.code === 11000) {
                     return res.json({success: false, message: 'A user with that username already exists. '});
                 }
@@ -30,35 +24,25 @@ module.exports = function(app, express) {
                 return res.send(err);
             }
 
-            // return a message
             res.json({message: 'User created!'});
         }))
 
-        // get all the users (accessed at GET http://localhost:8080/api/users)
-        .get(co.wrap(function*(req, res) {
-            let users = yield User.find({});
+        .get(co.wrap(function* getUsers(req, res) {
+            const users = yield User.find({});
 
-            // return the users
             return res.json(users);
         }));
 
-    // on routes that end in /users/:user_id
-    // ----------------------------------------------------
     router.route('/:userId')
+        .get(co.wrap(function* findUser(req, res) {
+            const user = yield User.findById(req.params.userId);
 
-        // get the user with that id
-        .get(co.wrap(function*(req, res) {
-            let user = yield User.findById(req.params.userId);
-
-            // return that user
             return res.json(user);
         }))
 
-        // update the user with this id
-        .put(co.wrap(function*(req, res) {
-            let user = yield User.findById(req.params.userId);
+        .put(co.wrap(function* updateUser(req, res) {
+            const user = yield User.findById(req.params.userId);
 
-            // set the new user information if it exists in the request
             if (req.body.name) {
                 user.name = req.body.name;
             }
@@ -73,12 +57,10 @@ module.exports = function(app, express) {
 
             yield user.save();
 
-            // return a message
             return res.json({message: 'User updated!'});
         }))
 
-        // delete the user with this id
-        .delete(co.wrap(function*(req, res) {
+        .delete(co.wrap(function* deleteUser(req, res) {
             yield User.remove({_id: req.params.userId});
 
             return res.json({message: 'Successfully deleted'});

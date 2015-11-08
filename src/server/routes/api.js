@@ -3,7 +3,9 @@
 const expressJwt = require('express-jwt');
 
 module.exports = (app, express, config) => {
-    const router = express.Router();
+    const router = new express.Router();
+
+    router.use('/setup', require('./setup')(app, express, config));
 
     router.use('/authenticate', require('./authenticate')(app, express, config));
 

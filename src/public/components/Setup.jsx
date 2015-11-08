@@ -10,12 +10,19 @@ class Setup extends React.Component {
         this.state = {
             email: '',
             password: '',
-            fullName: '',
+            name: '',
         };
     }
 
     setup(event) {
         event.preventDefault();
+
+        auth
+            .setup(this.state.email, this.state.password, this.state.name)
+            .catch(function(err) {
+                alert('There\'s an error logging in');
+                console.log('Error logging in', err);
+            });
     }
 
     render() {
@@ -25,7 +32,7 @@ class Setup extends React.Component {
                     <h1>Setup</h1>
 
                     <form onSubmit={this.setup.bind(this)}>
-                        <Input type="text" label="Full Name" placeholder="Enter full name" valueLink={this.linkState('fullName')} required />
+                        <Input type="text" label="Name" placeholder="Enter name" valueLink={this.linkState('name')} required />
 
                         <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} required />
 

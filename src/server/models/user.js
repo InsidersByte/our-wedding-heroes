@@ -8,7 +8,7 @@ const encryption = require('../utilities/encryption');
 // user schema
 const UserSchema = new Schema({
     name: String,
-    username: { type: String, required: true, index: { unique: true }},
+    email: { type: String, required: true, index: { unique: true }},
     password: { type: String, required: true, select: false },
     salt: {type: String, select: false},
 });
