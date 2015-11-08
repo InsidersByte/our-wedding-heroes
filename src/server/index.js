@@ -6,7 +6,7 @@ const app = express();
 
 const config = require('./config/config');
 
-require('./config/express')(app);
+require('./config/express')(app, environment);
 
 require('./config/proxy')(app, environment);
 
