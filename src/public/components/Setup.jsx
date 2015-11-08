@@ -19,9 +19,9 @@ class Setup extends React.Component {
 
         auth
             .setup(this.state.email, this.state.password, this.state.name)
-            .catch(function(err) {
-                alert('There\'s an error logging in');
-                console.log('Error logging in', err);
+            .catch((err) => {
+                alert('There\'s an error logging in'); //eslint-disable-line
+                console.log('Error logging in', err); //eslint-disable-line
             });
     }
 

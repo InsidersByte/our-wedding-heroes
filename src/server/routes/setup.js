@@ -10,6 +10,14 @@ module.exports = (app, express) => {
     router.route('/')
         .post(co.wrap(function* createUser(req, res, next) {
             try {
+                const userCount = yield User.count({});
+
+                if (userCount >= 1) {
+                    return res
+                        .status(400)
+                        .send({success: false, message: 'Setup has already been run'});
+                }
+
                 req.checkBody('name').notEmpty();
                 req.checkBody('email').notEmpty().isEmail();
                 req.checkBody('password').notEmpty();
@@ -32,10 +40,14 @@ module.exports = (app, express) => {
                     yield user.save();
                 } catch (err) {
                     if (err.code === 11000) {
-                        return res.json({success: false, message: 'A user with that username already exists. '});
+                        return res
+                            .status(400)
+                            .json({success: false, message: 'A user with that username already exists.'});
                     }
 
-                    return res.send(err);
+                    return res
+                        .status(400)
+                        .send(err);
                 }
 
                 return res.json({message: 'User created!'});
