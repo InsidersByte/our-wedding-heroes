@@ -31,7 +31,13 @@ class Cover extends React.Component {
         event.preventDefault();
 
         cover
-            .put(this.state);
+            .put(this.state)
+            .catch((error) => {
+                // TODO: use some sort of toastr
+
+                alert('There\'s an getting the cover data'); //eslint-disable-line
+                console.log('Error getting cover data', error); //eslint-disable-line
+            });
     }
 
     render() {
@@ -41,7 +47,7 @@ class Cover extends React.Component {
                     <h1>Cover</h1>
 
                     <form onSubmit={this.update.bind(this)}>
-                        <Input type="text" label="Title" placeholder="Enter title" valueLink={this.linkState('title')} defaulValue={this.state.title} required />
+                        <Input type="text" label="Title" placeholder="Enter title" valueLink={this.linkState('title')} required />
 
                         <Button type="submit" bsStyle="primary" block>Login</Button>
                     </form>

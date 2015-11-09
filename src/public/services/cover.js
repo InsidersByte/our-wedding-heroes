@@ -19,9 +19,22 @@ class Auth {
         });
     }
 
-    put() {
-        // TODO: do this
-        alert('Coming Soon!'); //eslint-disable-line
+    put(cover) {
+        return when(request({
+            url: URL,
+            method: 'PUT',
+            crossOrigin: true,
+            type: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + loginStore.jwt,
+            },
+            data: {
+                ...cover,
+            },
+        }))
+        .then((response) => {
+            return response;
+        });
     }
 }
 
