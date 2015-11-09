@@ -20,6 +20,8 @@ class Login extends React.Component {
         auth
             .login(this.state.email, this.state.password)
             .catch((err) => {
+                // TODO: use some sort of toastr
+
                 alert('There\'s an error logging in'); //eslint-disable-line
                 console.log('Error logging in', err); //eslint-disable-line
             });

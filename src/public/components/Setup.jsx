@@ -21,6 +21,8 @@ class Setup extends React.Component {
         auth
             .setup(this.state.email, this.state.password, this.state.name)
             .catch((err) => {
+                // TODO: use some sort of toastr
+
                 alert('There\'s an error setting up'); //eslint-disable-line
                 console.log('Error setting up', err); //eslint-disable-line
             });
