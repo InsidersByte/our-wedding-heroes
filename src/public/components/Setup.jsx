@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron } from 'react-bootstrap';
 import auth from '../services/auth';
@@ -47,6 +48,6 @@ class Setup extends React.Component {
 }
 
 // We’re using the mixin `LinkStateMixin` to have two-way databinding between our component and the HTML.
-reactMixin(Setup.prototype, React.addons.LinkedStateMixin);
+reactMixin(Setup.prototype, LinkedStateMixin);
 
 export default Setup;

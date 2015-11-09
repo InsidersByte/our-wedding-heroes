@@ -8,7 +8,7 @@
     "lint": "eslint 'src/**/*.js*'",
     "test": "npm run lint",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "start": "nodemon ./src/server"
+    "start": "nodemon ./src/server --watch src/server"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,7 @@
     "jwt-decode": "^1.4.0",
     "mongoose": "^4.2.2",
     "react": "^0.14.2",
+    "react-addons-linked-state-mixin": "^0.14.2",
     "react-bootstrap": "^0.27.3",
     "react-dom": "^0.14.1",
     "react-mixin": "^3.0.3",
