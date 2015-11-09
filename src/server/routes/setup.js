@@ -1,5 +1,3 @@
-'use strict'; //eslint-disable-line
-
 const User = require('../models/user');
 const co = require('co');
 const util = require('util');

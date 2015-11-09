@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line
-
 const httpProxy = require('http-proxy');
 
 module.exports = (app, environment) => {

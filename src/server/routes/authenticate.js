@@ -1,5 +1,3 @@
-'use strict'; //eslint-disable-line
-
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const co = require('co');

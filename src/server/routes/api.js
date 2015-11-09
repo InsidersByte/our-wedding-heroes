@@ -1,5 +1,3 @@
-'use strict'; //eslint-disable-line
-
 const expressJwt = require('express-jwt');
 
 module.exports = (app, express, config) => {

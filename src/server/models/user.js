@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const encryption = require('../utilities/encryption');

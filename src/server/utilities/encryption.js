@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line
-
 const crypto = require('crypto');
 
 exports.createSalt = () => {
