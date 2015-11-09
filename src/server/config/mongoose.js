@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const databaseInitialiser = require('../utilities/databaseInitialiser');
 
 module.exports = (config) => {
     mongoose.connect(config.database);
@@ -10,4 +11,6 @@ module.exports = (config) => {
     db.once('open', () => {
         console.log('db opened'); // eslint-disable-line
     });
+
+    databaseInitialiser();
 };
