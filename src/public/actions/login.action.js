@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/app.dispatcher';
-import constants from '../constants/login.constants';
+import {LOGIN_USER, LOGOUT_USER} from '../constants/login.constants';
 import history from '../services/history';
 
 export default {
@@ -7,7 +7,7 @@ export default {
         const savedJwt = localStorage.getItem('jwt');
 
         AppDispatcher.dispatch({
-            actionType: constants.LOGIN_USER,
+            actionType: LOGIN_USER,
             jwt: jwt,
         });
 
@@ -22,7 +22,7 @@ export default {
         localStorage.removeItem('jwt');
 
         AppDispatcher.dispatch({
-            actionType: constants.LOGOUT_USER,
+            actionType: LOGOUT_USER,
         });
 
         history.replaceState(null, '/admin/login');

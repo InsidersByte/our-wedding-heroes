@@ -1,8 +1,6 @@
-const BASE_URL = 'http://localhost:5000/api/';
+import {BASE_URL} from './api.constants';
 
-export default {
-    LOGIN_URL: BASE_URL + 'authenticate',
-    SETUP_URL: BASE_URL + 'setup',
-    LOGIN_USER: 'LOGIN_USER',
-    LOGOUT_USER: 'LOGOUT_USER',
-};
+export const LOGIN_URL = BASE_URL + 'authenticate';
+export const SETUP_URL = BASE_URL + 'setup';
+export const LOGIN_USER = Symbol('LOGIN_USER');
+export const LOGOUT_USER = Symbol('LOGOUT_USER');

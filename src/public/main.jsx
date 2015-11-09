@@ -14,6 +14,7 @@ import Login from './components/Login.jsx';
 import Setup from './components/Setup.jsx';
 import Admin from './components/Admin.jsx';
 import AuthenticatedLanding from './components/AuthenticatedLanding.jsx';
+import Cover from './components/Cover.jsx';
 import NoMatch from './components/NoMatch.jsx';
 
 const jwt = localStorage.getItem('jwt');
@@ -36,6 +37,7 @@ ReactDOM.render(
                 <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
                 <Route path="login" component={Login} />
                 <Route path="setup" component={Setup} />
+                <Route path="cover" component={Cover} onEnter={requireAuth} />
             </Route>
         </Route>
         <Route path="*" component={NoMatch}/>
