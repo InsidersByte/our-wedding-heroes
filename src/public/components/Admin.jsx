@@ -40,7 +40,7 @@ class App extends React.Component {
 
         if (!this.state.userLoggedIn) {
             headerItems = (
-                <Nav right eventKey={0}>
+                <Nav right>
                     <li>
                         <Link to="/admin/login">Login</Link>
                     </li>
@@ -48,7 +48,7 @@ class App extends React.Component {
             );
         } else {
             headerItems = (
-                <Nav right eventKey={0}>
+                <Nav right>
                     <li>
                         <Link to="/admin/cover">Cover</Link>
                     </li>
@@ -62,7 +62,7 @@ class App extends React.Component {
         return (
             <div>
                 <Navbar inverse toggleNavKey={0}>
-                    <NavBrand><Link to="/">Honeymoon Gift List</Link></NavBrand>
+                    <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
                     {headerItems}
                 </Navbar>
                 <div className="container">
