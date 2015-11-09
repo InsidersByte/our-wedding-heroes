@@ -19,7 +19,7 @@ class Auth {
         });
     }
 
-    post() {
+    put() {
         // TODO: do this
         alert('Coming Soon!'); //eslint-disable-line
     }
