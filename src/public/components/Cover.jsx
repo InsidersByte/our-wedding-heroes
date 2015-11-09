@@ -6,6 +6,8 @@ class Cover extends React.Component {
         cover
             .get()
             .catch((error) => {
+                // TODO: use some sort of toastr
+
                 alert('There\'s an getting the cover data'); //eslint-disable-line
                 console.log('Error getting cover data', error); //eslint-disable-line
             });
