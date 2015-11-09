@@ -17,7 +17,9 @@ class Cover extends React.Component {
         cover
             .get()
             .then((response) => {
-                this.state.title = response.title;
+                this.setState({
+                    title: response.title,
+                });
             })
             .catch((error) => {
                 // TODO: use some sort of toastr
