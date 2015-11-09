@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import loginActions from './actions/login.action';
 import loginStore from './stores/login.store';
-import { createHistory } from 'history';
+import history from './services/history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './main.styl';
@@ -27,8 +27,6 @@ function requireAuth(nextState, replaceState) {
         replaceState({ nextPathname: nextState.location.pathname }, 'admin/login');
     }
 }
-
-const history = createHistory();
 
 ReactDOM.render(
     <Router history={history}>

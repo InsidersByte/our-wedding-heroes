@@ -1,5 +1,6 @@
 import AppDispatcher from '../dispatchers/app.dispatcher';
 import constants from '../constants/login.constants';
+import history from '../services/history';
 
 export default {
     loginUser: (jwt) => {
@@ -12,6 +13,8 @@ export default {
 
         if (savedJwt !== jwt) {
             localStorage.setItem('jwt', jwt);
+
+            history.replaceState(null, '/admin');
         }
     },
 
@@ -21,5 +24,7 @@ export default {
         AppDispatcher.dispatch({
             actionType: constants.LOGOUT_USER,
         });
+
+        history.replaceState(null, '/admin/login');
     },
 };

@@ -59,7 +59,7 @@ class App extends React.Component {
         return (
             <div>
                 <Navbar inverse toggleNavKey={0}>
-                    <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
+                    <NavBrand><Link to="/">Honeymoon Gift List</Link></NavBrand>
                     {headerItems}
                 </Navbar>
                 <div className="container">
