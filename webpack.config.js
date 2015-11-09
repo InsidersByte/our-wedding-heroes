@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -61,11 +60,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Honeymoon Gift List',
-            template: './src/public/index.html', // Load a custom template
-            inject: 'body', // Inject all scripts into the body
-        }),
         new webpack.HotModuleReplacementPlugin(),
     ],
 };
