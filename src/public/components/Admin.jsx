@@ -42,7 +42,7 @@ class App extends React.Component {
             headerItems = (
                 <Nav right eventKey={0}>
                     <li>
-                        <Link to="admin/login">Login</Link>
+                        <Link to="/admin/login">Login</Link>
                     </li>
                 </Nav>
             );
@@ -59,7 +59,7 @@ class App extends React.Component {
         return (
             <div>
                 <Navbar inverse toggleNavKey={0}>
-                    <NavBrand><Link to="admin">Honeymoon Gift List</Link></NavBrand>
+                    <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
                     {headerItems}
                 </Navbar>
                 <div className="container">

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import loginActions from './actions/login.action';
 import loginStore from './stores/login.store';
+import { createHistory } from 'history';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './main.styl';
@@ -27,8 +28,10 @@ function requireAuth(nextState, replaceState) {
     }
 }
 
+const history = createHistory();
+
 ReactDOM.render(
-    <Router>
+    <Router history={history}>
         <Route path="/" component={App}>
             <IndexRoute component={Landing} />
             <Route path="admin" component={Admin}>
