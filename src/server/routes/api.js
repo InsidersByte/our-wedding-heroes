@@ -1,13 +1,13 @@
-const expressJwt = require('express-jwt');
+const jwt = require('express-jwt');
 
 module.exports = (app, express, config) => {
     const router = new express.Router();
 
     router.use('/setup', require('./setup')(app, express, config));
-
     router.use('/authenticate', require('./authenticate')(app, express, config));
+    router.use('/weddingProfile', require('./weddingProfile')(app, express));
 
-    router.use(expressJwt({
+    router.use(jwt({
         secret: config.secret,
     }));
 
