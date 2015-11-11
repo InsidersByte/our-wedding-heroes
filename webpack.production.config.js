@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const Clean = require('clean-webpack-plugin');
 
 const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
@@ -16,6 +17,10 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.css$/,
+                loaders: ['style', 'css'],
+            },
+            {
                 test: /\.styl$/,
                 loaders: ['style', 'css', 'stylus'],
                 exclude: [NODE_MODULES_DIR],
@@ -24,6 +29,26 @@ module.exports = {
                 test: /\.jsx?$/,
                 loaders: ['babel'],
                 exclude: [NODE_MODULES_DIR],
+            },
+            {
+                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/font-woff',
+            },
+            {
+                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/font-woff2',
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/octet-stream',
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file',
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=image/svg+xml',
             },
         ],
     },
@@ -34,5 +59,6 @@ module.exports = {
             inject: 'body', // Inject all scripts into the body
         }),
         new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.[hash].js'),
+        new Clean(['dist', 'build']),
     ],
 };
