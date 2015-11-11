@@ -15,6 +15,7 @@ module.exports = (app, express, config) => {
     router.use('/cover', require('./cover')(app, express));
     router.use('/aboutUs', require('./aboutUs')(app, express));
     router.use('/aboutOurDay', require('./aboutOurDay')(app, express));
+    router.use('/aboutOurHoneymoon', require('./aboutOurHoneymoon')(app, express));
 
     router.all('/*', (req, res) => {
         return res

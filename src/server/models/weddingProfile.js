@@ -7,6 +7,7 @@ const WeddingProfileSchema = new Schema({
     },
     aboutUs: { type: String, required: true },
     aboutOurDay: { type: String, required: true },
+    aboutOurHoneymoon: { type: String, required: true },
 });
 
 module.exports = mongoose.model('WeddingProfile', WeddingProfileSchema);

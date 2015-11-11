@@ -13,6 +13,7 @@ class Landing extends React.Component {
                 cover: {},
                 aboutUs: '',
                 aboutOurDay: '',
+                aboutOurHoneymoon: '',
             },
         };
     }
@@ -95,36 +96,9 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">About our honeymoon</h1>
 
                     <Col md={6} mdOffset={3}>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In imperdiet nulla id risus
-                            venenatis, sed hendrerit ipsum tincidunt. Curabitur et nunc placerat, cursus turpis et,
-                            fermentum ante. Maecenas in egestas metus, ac accumsan ipsum. Pellentesque sit amet
-                            tristique odio. Pellentesque nibh turpis, vulputate a ante in, mattis pretium nunc.
-                            Praesent
-                            volutpat, lorem ut congue tempus, eros justo pretium ex, in auctor purus lacus sed
-                            nulla.
-                            Nam quis viverra quam.
-                        </p>
-                        <p>
-                            Nullam sed tempus felis. Sed mollis risus et odio imperdiet faucibus. Maecenas
-                            vestibulum
-                            diam vitae egestas aliquet. Proin commodo et neque vitae efficitur. Praesent et ante eu
-                            nibh
-                            lacinia faucibus aliquet aliquam nibh. Vivamus a consequat diam. Morbi ornare consequat
-                            quam
-                            a semper. Phasellus ac libero ut mi dignissim convallis eu ac nulla.
-                        </p>
-                        <p>
-                            Duis dictum facilisis nibh, ac aliquet mi convallis ut. Curabitur faucibus venenatis
-                            eros
-                            eget dictum. Sed non fermentum ex. Donec pellentesque condimentum est. Phasellus
-                            porttitor
-                            turpis sed ligula convallis condimentum. Nunc semper ornare enim rutrum gravida. Fusce
-                            id
-                            nibh accumsan, sollicitudin risus vitae, placerat mauris. Vivamus gravida odio a
-                            scelerisque
-                            aliquam. Nunc in sodales justo.
-                        </p>
+                        <span className="landing__section__pre">
+                            {this.state.weddingProfile.aboutOurHoneymoon}
+                        </span>
                     </Col>
                 </section>
                 <section className="landing__section landing__section--primary">

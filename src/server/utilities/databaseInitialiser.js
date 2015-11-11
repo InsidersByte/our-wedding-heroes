@@ -17,6 +17,7 @@ module.exports = co.wrap(function* initialise() {
 
     weddingProfile.aboutUs = 'CHANGE ME';
     weddingProfile.aboutOurDay = 'CHANGE ME';
+    weddingProfile.aboutOurHoneymoon = 'CHANGE ME';
 
     yield weddingProfile.save();
 });
