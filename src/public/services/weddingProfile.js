@@ -1,6 +1,6 @@
 import when from 'when';
 import request from 'reqwest';
-import {URL} from '../constants/cover.constants';
+import {URL} from '../constants/weddingProfile.constants';
 import loginStore from '../stores/login.store';
 
 class Auth {
@@ -11,23 +11,6 @@ class Auth {
             type: 'json',
             headers: {
                 'Authorization': 'Bearer ' + loginStore.jwt,
-            },
-        }))
-        .then((response) => {
-            return response;
-        });
-    }
-
-    put(cover) {
-        return when(request({
-            url: URL,
-            method: 'PUT',
-            type: 'json',
-            headers: {
-                'Authorization': 'Bearer ' + loginStore.jwt,
-            },
-            data: {
-                ...cover,
             },
         }))
         .then((response) => {

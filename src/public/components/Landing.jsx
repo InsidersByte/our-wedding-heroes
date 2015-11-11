@@ -1,15 +1,42 @@
 import React from 'react';
 import {GoogleMap} from 'react-google-maps';
 import {Col, Panel} from 'react-bootstrap';
+import weddingProfile from '../services/weddingProfile';
 import './landing.styl';
 
 class Landing extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            weddingProfile: {
+                cover: {},
+            },
+        };
+    }
+
+    componentDidMount() {
+        weddingProfile
+            .get()
+            .then((response) => {
+                this.setState({
+                    weddingProfile: response,
+                });
+            })
+            .catch((error) => {
+                // TODO: use some sort of toastr
+
+                alert('There\'s an getting the cover data'); //eslint-disable-line
+                console.log('Error getting cover data', error); //eslint-disable-line
+            });
+    }
+
     render() {
         return (
             <div className="landing">
                 <header className="landing__header">
                     <div className="landing__header__content">
-                        <h1 className="landing__header__content__header">Our Wedding</h1>
+                        <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
                     </div>
                 </header>
                 <section className="landing__section">

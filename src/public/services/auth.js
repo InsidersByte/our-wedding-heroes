@@ -9,7 +9,6 @@ class Auth {
         return when(request({
             url: LOGIN_URL,
             method: 'POST',
-            crossOrigin: true,
             type: 'json',
             data: {
                 email, password,
@@ -29,7 +28,6 @@ class Auth {
         return when(request({
             url: SETUP_URL,
             method: 'POST',
-            crossOrigin: true,
             type: 'json',
             data: {
                 email, password, name,
