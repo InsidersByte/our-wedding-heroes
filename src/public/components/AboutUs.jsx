@@ -49,9 +49,9 @@ class Cover extends React.Component {
                     <h1>About Us</h1>
 
                     <form onSubmit={this.update.bind(this)}>
-                        <Input type="area" label="Content" placeholder="Enter title" valueLink={this.linkState('content')} required />
+                        <Input type="textarea" rows="10" label="Content" placeholder="Enter title" valueLink={this.linkState('content')} required />
 
-                        <Button type="submit" bsStyle="primary" block>Login</Button>
+                        <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
                 </Jumbotron>
             </div>

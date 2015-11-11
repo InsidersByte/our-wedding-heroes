@@ -44,7 +44,9 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">A little bit about us</h1>
 
                     <Col md={6} mdOffset={3}>
-                        {this.state.weddingProfile.aboutUs.content}
+                        <span className="landing__section__pre">
+                            {this.state.weddingProfile.aboutUs.content}
+                        </span>
                     </Col>
                 </section>
                 <section className="landing__section landing__section--primary">
