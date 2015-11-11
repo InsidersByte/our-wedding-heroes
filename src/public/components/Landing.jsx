@@ -1,4 +1,5 @@
 import React from 'react';
+import {GoogleMap} from 'react-google-maps';
 import './landing.styl';
 
 class Landing extends React.Component {
@@ -16,15 +17,11 @@ class Landing extends React.Component {
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor lacus arcu, sit amet
                             maximus quam rhoncus et. Aliquam tristique tortor leo, ut sollicitudin justo scelerisque
-                            vel.
-                            Sed sed pretium neque. Curabitur id dui ac orci faucibus rhoncus. Nullam sodales mi vel
-                            euismod
-                            lacinia. Proin ac efficitur quam, eu faucibus nibh. In et arcu a purus semper sollicitudin
-                            ac a
-                            sapien. Sed at sem nunc. Nunc neque ante, pellentesque ut egestas et, facilisis vehicula
-                            eros.
-                            Suspendisse potenti. Vivamus vel ornare ante. Class aptent taciti sociosqu ad litora
-                            torquent
+                            vel. Sed sed pretium neque. Curabitur id dui ac orci faucibus rhoncus. Nullam sodales mi vel
+                            euismod lacinia. Proin ac efficitur quam, eu faucibus nibh. In et arcu a purus semper
+                            sollicitudin ac a sapien. Sed at sem nunc. Nunc neque ante, pellentesque ut egestas et,
+                            facilisis vehicula eros. Suspendisse potenti. Vivamus vel ornare ante. Class aptent taciti
+                            sociosqu ad litora torquent
                             per conubia nostra, per inceptos himenaeos. Pellentesque nec mauris id ante venenatis
                             vulputate.
                             Sed vestibulum ut ante ut imperdiet. Morbi eget mi consequat, pretium urna id, efficitur
@@ -110,6 +107,14 @@ class Landing extends React.Component {
                 </section>
                 <section className="landing__section">
                     <h1 className="landing__section__heading">Where is it</h1>
+
+                    <section className="col-md-6 col-md-offset-3">
+                        <GoogleMap
+                            containerProps={{style: {height: '500px'}}}
+                            ref="map"
+                            defaultZoom={3}
+                            defaultCenter={{lat: -25.363882, lng: 131.044922}}/>
+                    </section>
                 </section>
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">Requests for the day</h1>
