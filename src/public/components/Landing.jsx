@@ -140,20 +140,20 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">Requests for the day</h1>
 
                     <Col md={4}>
-                        <Panel style={{color: 'black'}}>
-                            <h3>Thing</h3>
+                        <Panel className="landing__section__panel">
+                            <h3>Request</h3>
                         </Panel>
                     </Col>
 
                     <Col md={4}>
-                        <Panel style={{color: 'black'}}>
-                            <h3>Thing</h3>
+                        <Panel className="landing__section__panel">
+                            <h3>Request</h3>
                         </Panel>
                     </Col>
 
                     <Col md={4}>
-                        <Panel style={{color: 'black'}}>
-                            <h3>Thing</h3>
+                        <Panel className="landing__section__panel">
+                            <h3>Request</h3>
                         </Panel>
                     </Col>
                 </section>
