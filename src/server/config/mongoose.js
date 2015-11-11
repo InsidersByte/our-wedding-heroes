@@ -12,5 +12,8 @@ module.exports = (config) => {
         console.log('db opened'); // eslint-disable-line
     });
 
-    databaseInitialiser();
+    databaseInitialiser()
+        .catch((err) => {
+            console.log(err);
+        });
 };

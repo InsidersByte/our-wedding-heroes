@@ -11,7 +11,7 @@ class Landing extends React.Component {
         this.state = {
             weddingProfile: {
                 cover: {},
-                aboutUs: {},
+                aboutUs: '',
             },
         };
     }
@@ -27,8 +27,8 @@ class Landing extends React.Component {
             .catch((error) => {
                 // TODO: use some sort of toastr
 
-                alert('There\'s an getting the cover data'); //eslint-disable-line
-                console.log('Error getting cover data', error); //eslint-disable-line
+                alert('There\'s an getting the wedding profile data'); //eslint-disable-line
+                console.log('Error getting wedding profile data', error); //eslint-disable-line
             });
     }
 
@@ -45,7 +45,7 @@ class Landing extends React.Component {
 
                     <Col md={6} mdOffset={3}>
                         <span className="landing__section__pre">
-                            {this.state.weddingProfile.aboutUs.content}
+                            {this.state.weddingProfile.aboutUs}
                         </span>
                     </Col>
                 </section>

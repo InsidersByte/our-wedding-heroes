@@ -15,9 +15,10 @@ module.exports = (app, express) => {
                 next(error);
             }
         }))
+
         .put(co.wrap(function* getWeddingProfile(req, res, next) {
             try {
-                req.checkBody('content').notEmpty();
+                req.checkBody('aboutUs').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -29,7 +30,7 @@ module.exports = (app, express) => {
 
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                weddingProfile.aboutUs.content = req.body.content;
+                weddingProfile.aboutUs = req.body.aboutUs;
 
                 yield weddingProfile.save();
 

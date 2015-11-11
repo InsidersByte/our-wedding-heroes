@@ -11,8 +11,11 @@ module.exports = co.wrap(function* initialise() {
     const weddingProfile = new WeddingProfile();
 
     // set mandatory fields
-    weddingProfile.cover.title = 'Our Wedding';
-    weddingProfile.aboutMe.content = 'CHANGE ME';
+    weddingProfile.cover = {
+        title: 'Our Wedding',
+    };
+
+    weddingProfile.aboutUs = 'CHANGE ME';
 
     yield weddingProfile.save();
 });

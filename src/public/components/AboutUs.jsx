@@ -9,7 +9,7 @@ class Cover extends React.Component {
         super();
 
         this.state = {
-            content: '',
+            aboutUs: '',
         };
     }
 
@@ -18,7 +18,7 @@ class Cover extends React.Component {
             .get()
             .then((response) => {
                 this.setState({
-                    content: response.content,
+                    aboutUs: response,
                 });
             })
             .catch((error) => {
@@ -49,7 +49,7 @@ class Cover extends React.Component {
                     <h1>About Us</h1>
 
                     <form onSubmit={this.update.bind(this)}>
-                        <Input type="textarea" rows="10" label="Content" placeholder="Enter title" valueLink={this.linkState('content')} required />
+                        <Input type="textarea" rows="10" label="Content" placeholder="Enter title" valueLink={this.linkState('aboutUs')} required />
 
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
