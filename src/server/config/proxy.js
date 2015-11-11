@@ -1,7 +1,8 @@
 const httpProxy = require('http-proxy');
+const environmentConstants = require('../constants/environment');
 
 module.exports = (app, environment) => {
-    if (environment === 'production') {
+    if (environment === environmentConstants.production) {
         return;
     }
 

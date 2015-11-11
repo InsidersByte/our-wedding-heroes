@@ -8,7 +8,8 @@
     "lint": "eslint 'src/**/*.js*'",
     "test": "npm run lint",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js",
-    "start": "nodemon ./src/server"
+    "start": "node ./src/server",
+    "start-dev": "nodemon ./src/server"
   },
   "repository": {
     "type": "git",
