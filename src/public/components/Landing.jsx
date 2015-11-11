@@ -1,6 +1,6 @@
 import React from 'react';
 import {GoogleMap} from 'react-google-maps';
-import {Col} from 'react-bootstrap';
+import {Col, Panel} from 'react-bootstrap';
 import './landing.styl';
 
 class Landing extends React.Component {
@@ -14,6 +14,7 @@ class Landing extends React.Component {
                 </header>
                 <section className="landing__section">
                     <h1 className="landing__section__heading">A little bit about us</h1>
+
                     <Col md={6} mdOffset={3}>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor lacus arcu, sit
@@ -75,6 +76,7 @@ class Landing extends React.Component {
                 </section>
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">About our day</h1>
+
                     <Col md={6} mdOffset={3}>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula consectetur
@@ -136,6 +138,24 @@ class Landing extends React.Component {
                 </section>
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">Requests for the day</h1>
+
+                    <Col md={4}>
+                        <Panel style={{color: 'black'}}>
+                            <h3>Thing</h3>
+                        </Panel>
+                    </Col>
+
+                    <Col md={4}>
+                        <Panel style={{color: 'black'}}>
+                            <h3>Thing</h3>
+                        </Panel>
+                    </Col>
+
+                    <Col md={4}>
+                        <Panel style={{color: 'black'}}>
+                            <h3>Thing</h3>
+                        </Panel>
+                    </Col>
                 </section>
                 <section className="landing__section">
                     <h1 className="landing__section__heading">About our honeymoon</h1>
