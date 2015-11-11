@@ -12,6 +12,7 @@ module.exports = co.wrap(function* initialise() {
 
     // set mandatory fields
     weddingProfile.cover.title = 'Our Wedding';
+    weddingProfile.aboutMe.content = 'CHANGE ME';
 
     yield weddingProfile.save();
 });

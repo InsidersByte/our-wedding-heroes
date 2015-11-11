@@ -11,6 +11,7 @@ class Landing extends React.Component {
         this.state = {
             weddingProfile: {
                 cover: {},
+                aboutUs: {},
             },
         };
     }
@@ -43,62 +44,7 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">A little bit about us</h1>
 
                     <Col md={6} mdOffset={3}>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor lacus arcu, sit
-                            amet
-                            maximus quam rhoncus et. Aliquam tristique tortor leo, ut sollicitudin justo scelerisque
-                            vel. Sed sed pretium neque. Curabitur id dui ac orci faucibus rhoncus. Nullam sodales mi
-                            vel
-                            euismod lacinia. Proin ac efficitur quam, eu faucibus nibh. In et arcu a purus semper
-                            sollicitudin ac a sapien. Sed at sem nunc. Nunc neque ante, pellentesque ut egestas et,
-                            facilisis vehicula eros. Suspendisse potenti. Vivamus vel ornare ante. Class aptent
-                            taciti
-                            sociosqu ad litora torquent
-                            per conubia nostra, per inceptos himenaeos. Pellentesque nec mauris id ante venenatis
-                            vulputate.
-                            Sed vestibulum ut ante ut imperdiet. Morbi eget mi consequat, pretium urna id, efficitur
-                            libero.
-                            Nullam odio dui, faucibus nec fringilla at, pellentesque nec magna.
-                        </p>
-                        <p>
-                            Fusce interdum tincidunt ipsum in ornare. Vestibulum finibus turpis ante, sit amet
-                            ornare
-                            est
-                            auctor placerat. Ut vitae blandit quam, eleifend rhoncus metus. Proin hendrerit nunc id
-                            dolor
-                            interdum rutrum. Phasellus faucibus, erat id dapibus facilisis, arcu nisl hendrerit
-                            odio, et
-                            malesuada velit felis ac velit. Nulla eleifend bibendum dolor eu commodo. Aliquam
-                            ullamcorper
-                            volutpat enim, eu eleifend quam rutrum sed. Fusce bibendum finibus mauris a vehicula. In
-                            luctus
-                            ex nec ex dapibus tincidunt. Aliquam sed dolor augue. Donec facilisis eros sed purus
-                            lobortis
-                            bibendum. Nulla ligula est, cursus eu posuere vitae, finibus quis magna. Nullam pulvinar
-                            ultrices felis nec efficitur. Donec lorem erat, fermentum id sollicitudin a, auctor sit
-                            amet
-                            quam. Curabitur elementum, dui in placerat tincidunt, lorem nisi finibus erat, ut
-                            euismod
-                            diam
-                            ipsum sed lectus. Nullam eget ullamcorper est.
-                        </p>
-                        <p>
-                            Phasellus condimentum lacus arcu, at sodales neque semper in. Sed ut enim sed purus
-                            mollis
-                            auctor sit amet blandit quam. In rutrum venenatis aliquam. Sed sed ipsum velit. Aenean
-                            eget
-                            libero lacus. Mauris egestas facilisis magna eget interdum. Etiam urna nulla, viverra
-                            commodo
-                            lorem in, molestie posuere urna. Praesent ante purus, accumsan quis porta id, rhoncus
-                            vitae
-                            urna. Phasellus condimentum ante sed malesuada mattis. Pellentesque habitant morbi
-                            tristique
-                            senectus et netus et malesuada fames ac turpis egestas. Suspendisse tincidunt velit at
-                            vestibulum mollis. In pellentesque metus ac lorem condimentum auctor. Quisque mollis,
-                            lorem
-                            eget
-                            hendrerit tristique, metus nunc rutrum magna, a auctor ante metus in nulla.
-                        </p>
+                        {this.state.weddingProfile.aboutUs.content}
                     </Col>
                 </section>
                 <section className="landing__section landing__section--primary">

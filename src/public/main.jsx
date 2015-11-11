@@ -8,6 +8,7 @@ import history from './services/history';
 import 'bootstrap/dist/css/bootstrap.css';
 import './main.styl';
 
+import NoMatch from './components/NoMatch.jsx';
 import App from './components/App.jsx';
 import Landing from './components/Landing.jsx';
 import Login from './components/Login.jsx';
@@ -15,7 +16,7 @@ import Setup from './components/Setup.jsx';
 import Admin from './components/Admin.jsx';
 import AuthenticatedLanding from './components/AuthenticatedLanding.jsx';
 import Cover from './components/Cover.jsx';
-import NoMatch from './components/NoMatch.jsx';
+import AboutUs from './components/AboutUs.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -38,6 +39,7 @@ ReactDOM.render(
                 <Route path="login" component={Login} />
                 <Route path="setup" component={Setup} />
                 <Route path="cover" component={Cover} onEnter={requireAuth} />
+                <Route path="aboutUs" component={AboutUs} onEnter={requireAuth} />
             </Route>
         </Route>
         <Route path="*" component={NoMatch}/>

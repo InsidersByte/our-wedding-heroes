@@ -3,7 +3,7 @@ import request from 'reqwest';
 import {URL} from '../constants/weddingProfile.constants';
 import loginStore from '../stores/login.store';
 
-class Auth {
+class WeddingProfile {
     get() {
         return when(request({
             url: URL,
@@ -19,4 +19,4 @@ class Auth {
     }
 }
 
-export default new Auth();
+export default new WeddingProfile();

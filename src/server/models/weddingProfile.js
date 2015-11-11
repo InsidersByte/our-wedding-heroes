@@ -5,6 +5,9 @@ const WeddingProfileSchema = new Schema({
     cover: {
         title: { type: String, required: true },
     },
+    aboutUs: {
+        content: { type: String, required: true },
+    },
 });
 
 module.exports = mongoose.model('WeddingProfile', WeddingProfileSchema);
