@@ -56,6 +56,9 @@ class App extends React.Component {
                         <Link to="/admin/aboutUs">About Us</Link>
                     </li>
                     <li>
+                        <Link to="/admin/aboutOurDay">About Our Day</Link>
+                    </li>
+                    <li>
                         <a href="" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>

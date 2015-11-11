@@ -1,9 +1,9 @@
 import when from 'when';
 import request from 'reqwest';
-import {URL} from '../constants/aboutUs.constants';
+import {URL} from '../constants/aboutOurDay.constants';
 import loginStore from '../stores/login.store';
 
-class AboutUs {
+class AboutOurDay {
     get() {
         return when(request({
             url: URL,
@@ -36,4 +36,4 @@ class AboutUs {
     }
 }
 
-export default new AboutUs();
+export default new AboutOurDay();

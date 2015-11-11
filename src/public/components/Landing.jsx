@@ -12,6 +12,7 @@ class Landing extends React.Component {
             weddingProfile: {
                 cover: {},
                 aboutUs: '',
+                aboutOurDay: '',
             },
         };
     }
@@ -53,51 +54,9 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">About our day</h1>
 
                     <Col md={6} mdOffset={3}>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula consectetur
-                            pharetra.
-                            Vivamus consectetur dapibus nibh, eu ullamcorper tellus posuere at. Ut vehicula nec elit
-                            vitae
-                            finibus. Aliquam sit amet nulla sed metus eleifend consequat. In vel tincidunt velit.
-                            Praesent
-                            porttitor viverra gravida. Donec fringilla ante nec lobortis aliquam.
-                        </p>
-                        <p>
-                            Maecenas aliquam gravida aliquam. Cras blandit molestie posuere. Vivamus ornare euismod
-                            euismod.
-                            Cras cursus augue arcu, a vehicula massa maximus et. Aliquam eu turpis ac tortor
-                            eleifend
-                            faucibus.
-                            Nullam imperdiet molestie semper. Morbi porttitor consequat gravida. Integer nibh leo,
-                            aliquam
-                            non
-                            elit sit amet, auctor blandit ligula.
-                        </p>
-                        <p>
-                            Cras justo elit, vulputate vitae ante ac, tempor vehicula justo. Class aptent taciti
-                            sociosqu ad
-                            litora torquent per conubia nostra, per inceptos himenaeos. Curabitur in ligula massa.
-                            Vivamus
-                            consectetur tellus ac mauris elementum, id volutpat tortor fringilla. Aliquam dignissim
-                            nibh
-                            ac
-                            orci
-                            congue, gravida hendrerit purus egestas. Suspendisse potenti. Nullam egestas rutrum
-                            magna at
-                            varius.
-                            Morbi suscipit ex vel neque efficitur, nec rhoncus risus lacinia. Maecenas feugiat ex ut
-                            lorem
-                            accumsan ullamcorper. Aliquam ultricies orci in urna dignissim vulputate. Suspendisse
-                            aliquam
-                            lobortis tempor. Quisque sit amet accumsan lacus, non dictum odio. Phasellus pulvinar
-                            enim a
-                            felis
-                            ullamcorper consequat. Aliquam magna magna, ultrices eu molestie et, facilisis non
-                            turpis.
-                            Duis
-                            at
-                            ultrices nisi, sed aliquet tortor. Donec rhoncus rhoncus gravida.
-                        </p>
+                        <span className="landing__section__pre">
+                            {this.state.weddingProfile.aboutOurDay}
+                        </span>
                     </Col>
                 </section>
                 <section className="landing__section">

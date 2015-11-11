@@ -17,6 +17,7 @@ import Admin from './components/Admin.jsx';
 import AuthenticatedLanding from './components/AuthenticatedLanding.jsx';
 import Cover from './components/Cover.jsx';
 import AboutUs from './components/AboutUs.jsx';
+import AboutOurDay from './components/AboutOurDay.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -40,6 +41,7 @@ ReactDOM.render(
                 <Route path="setup" component={Setup} />
                 <Route path="cover" component={Cover} onEnter={requireAuth} />
                 <Route path="aboutUs" component={AboutUs} onEnter={requireAuth} />
+                <Route path="aboutOurDay" component={AboutOurDay} onEnter={requireAuth} />
             </Route>
         </Route>
         <Route path="*" component={NoMatch}/>
