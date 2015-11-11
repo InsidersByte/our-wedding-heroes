@@ -8,7 +8,20 @@ const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'src/public/main.jsx'),
-        vendors: ['react', 'react-dom'],
+        vendors: [
+            'react',
+            'react-dom',
+            'react-bootstrap',
+            'react-router',
+            'flux',
+            'when',
+            'reqwest',
+            'react-addons-linked-state-mixin',
+            'react-mixin',
+            'react-google-maps',
+            'history',
+            'jwt-decode',
+        ],
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
