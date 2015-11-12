@@ -16,6 +16,7 @@ module.exports = (app, express, config) => {
     router.use('/aboutUs', require('./aboutUs')(app, express));
     router.use('/aboutOurDay', require('./aboutOurDay')(app, express));
     router.use('/aboutOurHoneymoon', require('./aboutOurHoneymoon')(app, express));
+    router.use('/requestForTheDay', require('./requestForTheDay')(app, express));
 
     router.all('/*', (req, res) => {
         return res

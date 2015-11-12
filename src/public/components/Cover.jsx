@@ -32,7 +32,7 @@ class Cover extends React.Component {
     update(event) {
         event.preventDefault();
 
-        //const files = this.refs.photo.getInputDOMNode().files;
+        // const files = this.refs.photo.getInputDOMNode().files;
 
         cover
             .put(this.state)
