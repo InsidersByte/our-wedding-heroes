@@ -32,6 +32,8 @@ class Cover extends React.Component {
     update(event) {
         event.preventDefault();
 
+        //const files = this.refs.photo.getInputDOMNode().files;
+
         cover
             .put(this.state)
             .catch((error) => {
@@ -50,6 +52,8 @@ class Cover extends React.Component {
 
                     <form onSubmit={this.update.bind(this)}>
                         <Input type="text" label="Title" placeholder="Enter title" valueLink={this.linkState('title')} required />
+
+                        <Input type="file" label="Cover Photo" ref="photo" />
 
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
