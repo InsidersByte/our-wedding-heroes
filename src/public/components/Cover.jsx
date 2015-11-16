@@ -53,7 +53,7 @@ class Cover extends React.Component {
                     <form onSubmit={this.update.bind(this)}>
                         <Input type="text" label="Title" placeholder="Enter title" valueLink={this.linkState('title')} required />
 
-                        <Input type="file" label="Cover Photo" ref="photo" />
+                        <Input type="file" label="Cover Image" ref="photo" />
 
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
