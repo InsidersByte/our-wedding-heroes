@@ -1,4 +1,5 @@
 const environmentConstants = require('../constants/environment');
+const path = require('path');
 
 module.exports = (app, express, config, environment) => {
     const apiRoutes = require('./api')(app, express, config);
@@ -7,10 +8,9 @@ module.exports = (app, express, config, environment) => {
 
     if (environment === environmentConstants.production) {
         app.get('*', (req, res) => {
-            res.sendFile('dist/index.html', { root: './'});
+            res.sendFile(path.join(__dirname, '../../', 'dist/index.html'));
         });
     } else {
-        const path = require('path');
         const middleware = app.get('middleware');
 
         app.get('*', function response(req, res) {
