@@ -2,7 +2,7 @@ import React from 'react';
 import requestForTheDay from '../services/requestForTheDay';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
-import { Jumbotron, Button } from 'react-bootstrap';
+import { Jumbotron, Col } from 'react-bootstrap';
 
 class RequestsForTheDay extends React.Component {
     constructor() {
@@ -31,13 +31,13 @@ class RequestsForTheDay extends React.Component {
 
     render() {
         return (
-            <div className="col-md-8 col-md-offset-2">
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Requests For The Day</h1>
 
-                    <Button type="submit" bsStyle="primary" block>Add Request</Button>
+                    <h3>Coming soon!</h3>
                 </Jumbotron>
-            </div>
+            </Col>
         );
     }
 }

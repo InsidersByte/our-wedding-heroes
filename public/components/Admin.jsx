@@ -65,6 +65,9 @@ class App extends React.Component {
                         <Link to="/admin/requestsForTheDay">Requests For The Day</Link>
                     </li>
                     <li>
+                        <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
+                    </li>
+                    <li>
                         <a href="" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>

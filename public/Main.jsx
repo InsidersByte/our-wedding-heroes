@@ -20,6 +20,7 @@ import AboutUs from './components/AboutUs.jsx';
 import AboutOurDay from './components/AboutOurDay.jsx';
 import AboutOurHoneymoon from './components/AboutOurHoneymoon.jsx';
 import RequestsForTheDay from './components/RequestsForTheDay.jsx';
+import HoneymoonGiftList from './components/HoneymoonGiftList.jsx';
 
 const jwt = localStorage.getItem('jwt');
 
@@ -46,6 +47,7 @@ ReactDOM.render(
                 <Route path="aboutOurDay" component={AboutOurDay} onEnter={requireAuth} />
                 <Route path="aboutOurHoneymoon" component={AboutOurHoneymoon} onEnter={requireAuth} />
                 <Route path="requestsForTheDay" component={RequestsForTheDay} onEnter={requireAuth} />
+                <Route path="honeymoonGiftList" component={HoneymoonGiftList} onEnter={requireAuth} />
             </Route>
         </Route>
         <Route path="*" component={NoMatch}/>

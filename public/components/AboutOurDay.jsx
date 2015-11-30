@@ -2,7 +2,7 @@ import React from 'react';
 import aboutOurDay from '../services/aboutOurDay';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron } from 'react-bootstrap';
+import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
 class AboutOurDay extends React.Component {
     constructor() {
@@ -44,7 +44,7 @@ class AboutOurDay extends React.Component {
 
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <Col md={6} mdOffset={3}>
                 <Jumbotron>
                     <h1>About Our Day</h1>
 
@@ -54,7 +54,7 @@ class AboutOurDay extends React.Component {
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
                 </Jumbotron>
-            </div>
+            </Col>
         );
     }
 }

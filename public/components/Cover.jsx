@@ -2,7 +2,7 @@ import React from 'react';
 import cover from '../services/cover';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron } from 'react-bootstrap';
+import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
 class Cover extends React.Component {
     constructor() {
@@ -46,7 +46,7 @@ class Cover extends React.Component {
 
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <Col md={6} mdOffset={3}>
                 <Jumbotron>
                     <h1>Cover</h1>
 
@@ -58,7 +58,7 @@ class Cover extends React.Component {
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
                 </Jumbotron>
-            </div>
+            </Col>
         );
     }
 }

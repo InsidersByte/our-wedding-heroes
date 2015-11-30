@@ -1,7 +1,7 @@
 import React from 'react';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron } from 'react-bootstrap';
+import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 import auth from '../services/auth';
 
 class Setup extends React.Component {
@@ -30,7 +30,7 @@ class Setup extends React.Component {
 
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <Col md={6} mdOffset={3}>
                 <Jumbotron>
                     <h1>Setup</h1>
 
@@ -44,7 +44,7 @@ class Setup extends React.Component {
                         <Button type="submit" bsStyle="primary" block>Setup</Button>
                     </form>
                 </Jumbotron>
-            </div>
+            </Col>
         );
     }
 }
