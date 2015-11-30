@@ -80,7 +80,7 @@ class App extends React.Component {
                     <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
                     {headerItems}
                 </Navbar>
-                <div className="container-fluid">
+                <div className="container">
                     {this.props.children}
                 </div>
             </div>

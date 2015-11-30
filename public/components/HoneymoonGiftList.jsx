@@ -1,9 +1,16 @@
 import React from 'react';
+import { Jumbotron, Col } from 'react-bootstrap';
 
 class HoneymoonGiftList extends React.Component {
     render() {
         return (
-            <h1>Coming Soon!</h1>
+            <Col md={8} mdOffset={2}>
+                <Jumbotron>
+                    <h1>Honeymoon Gift List</h1>
+
+                    <h3>Coming soon!</h3>
+                </Jumbotron>
+            </Col>
         );
     }
 }
