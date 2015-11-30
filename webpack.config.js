@@ -1,22 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
-
-const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    devtool: 'eval',
+    devtool: 'eval-source-map',
     entry: [
-        'webpack/hot/dev-server',
-        'webpack-dev-server/client?http://localhost:8080',
-        path.resolve(__dirname, 'src/public/main.jsx'),
+        'webpack-hot-middleware/client?reload=true',
+        path.resolve(__dirname, 'public/Main.jsx'),
     ],
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js',
-
-        // Everything related to Webpack should go through a build path,
-        // localhost:3000/build. That makes proxying easier to handle
-        publicPath: '/build/',
+        path: path.join(__dirname, '/build/'),
+        filename: '[name].js',
+        publicPath: '/',
     },
     module: {
         loaders: [
@@ -27,12 +22,11 @@ module.exports = {
             {
                 test: /\.styl$/,
                 loaders: ['style', 'css', 'stylus'],
-                exclude: [NODE_MODULES_DIR],
             },
             {
                 test: /\.jsx?$/,
                 loaders: ['react-hot', 'babel'],
-                exclude: [NODE_MODULES_DIR],
+                exclude: /node_modules/,
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -57,6 +51,13 @@ module.exports = {
         ],
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            template: 'public/index.html',
+            inject: 'body',
+            filename: 'index.html',
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
     ],
 };

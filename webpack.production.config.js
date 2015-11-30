@@ -1,32 +1,34 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-const Clean = require('clean-webpack-plugin');
-
-const NODE_MODULES_DIR = path.resolve(__dirname, 'node_modules');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
-    entry: {
-        app: path.resolve(__dirname, 'src/public/main.jsx'),
-        vendors: [
-            'react',
-            'react-dom',
-            'react-bootstrap',
-            'react-router',
-            'flux',
-            'when',
-            'reqwest',
-            'react-addons-linked-state-mixin',
-            'react-mixin',
-            'react-google-maps',
-            'history',
-            'jwt-decode',
-        ],
-    },
+    entry: [
+        path.resolve(__dirname, 'public/Main.jsx'),
+    ],
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.[hash].js',
+        path: path.join(__dirname, '/dist/'),
+        filename: '[name]-[hash].min.js',
     },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'public/index.html',
+            inject: 'body',
+            filename: 'index.html',
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false,
+                screw_ie8: true,
+            },
+        }),
+        new StatsPlugin('webpack.stats.json', {
+            source: false,
+            modules: false,
+        }),
+    ],
     module: {
         loaders: [
             {
@@ -36,12 +38,11 @@ module.exports = {
             {
                 test: /\.styl$/,
                 loaders: ['style', 'css', 'stylus'],
-                exclude: [NODE_MODULES_DIR],
             },
             {
                 test: /\.jsx?$/,
-                loaders: ['babel'],
-                exclude: [NODE_MODULES_DIR],
+                loader: 'babel',
+                exclude: /node_modules/,
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -65,13 +66,4 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Honeymoon Gift List',
-            template: './src/public/index.html', // Load a custom template
-            inject: 'body', // Inject all scripts into the body
-        }),
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.[hash].js'),
-        new Clean(['dist', 'build']),
-    ],
 };
