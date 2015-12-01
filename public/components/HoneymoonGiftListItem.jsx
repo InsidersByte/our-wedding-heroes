@@ -4,8 +4,8 @@ import reactMixin from 'react-mixin';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 class HoneymoonGiftListItem extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {};
     }
@@ -26,13 +26,18 @@ class HoneymoonGiftListItem extends React.Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={this.props.save} bsStyle="primary">Add</Button>
+                    <Button onClick={this.props.onHide} bsStyle="primary">Add</Button>
                     <Button onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );
     }
 }
+
+HoneymoonGiftListItem.propTypes = {
+    show: React.PropTypes.bool.isRequired,
+    onHide: React.PropTypes.func.isRequired,
+};
 
 reactMixin(HoneymoonGiftListItem.prototype, LinkedStateMixin);
 
