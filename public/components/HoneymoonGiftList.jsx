@@ -12,13 +12,10 @@ class HoneymoonGiftList extends React.Component {
         };
     }
 
-    save() {
+    save(item) {
         const items = this.state.items;
-        items.push({});
-
-        this.setState({
-            items,
-        });
+        const itemToAdd = Object.assign({id: items.length}, item);
+        items.push(itemToAdd);
 
         this.close();
     }
@@ -68,7 +65,7 @@ class HoneymoonGiftList extends React.Component {
                     <Button onClick={this.open.bind(this)}>Add Item</Button>
                 </Jumbotron>
 
-                <HoneymoonGiftListItem show={this.state.showModal} onHide={this.close.bind(this)} />
+                <HoneymoonGiftListItem show={this.state.showModal} onHide={this.close.bind(this)} onSave={this.save.bind(this)} />
             </Col>
         );
     }

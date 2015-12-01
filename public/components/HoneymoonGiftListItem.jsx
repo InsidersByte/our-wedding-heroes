@@ -10,6 +10,10 @@ class HoneymoonGiftListItem extends React.Component {
         this.state = {};
     }
 
+    handleSubmit() {
+        this.props.onSave(this.state);
+    }
+
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
@@ -26,7 +30,7 @@ class HoneymoonGiftListItem extends React.Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={this.props.onHide} bsStyle="primary">Add</Button>
+                    <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary" type="submit">Add</Button>
                     <Button onClick={this.props.onHide}>Close</Button>
                 </Modal.Footer>
             </Modal>
@@ -37,6 +41,7 @@ class HoneymoonGiftListItem extends React.Component {
 HoneymoonGiftListItem.propTypes = {
     show: React.PropTypes.bool.isRequired,
     onHide: React.PropTypes.func.isRequired,
+    onSave: React.PropTypes.func.isRequired,
 };
 
 reactMixin(HoneymoonGiftListItem.prototype, LinkedStateMixin);
