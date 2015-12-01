@@ -1,0 +1,39 @@
+import React from 'react';
+import LinkedStateMixin from 'react-addons-linked-state-mixin';
+import reactMixin from 'react-mixin';
+import { Button, Modal, Input } from 'react-bootstrap';
+
+class HoneymoonGiftListItem extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {};
+    }
+
+    render() {
+        return (
+            <Modal show={this.props.show} onHide={this.props.onHide}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Item</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Input type="text" label="Image" placeholder="Enter Image" valueLink={this.linkState('image')} required/>
+                    <Input type="text" label="Name" placeholder="Enter Name" valueLink={this.linkState('name')} required/>
+                    <Input type="textarea" rows="10" label="Description" placeholder="Enter Description" valueLink={this.linkState('description')} required/>
+                    <Input type="number" label="Requested" placeholder="Enter Requested" valueLink={this.linkState('requested')} required/>
+                    <Input type="number" label="Price (£)" placeholder="Enter Price" valueLink={this.linkState('price')} required/>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button onClick={this.props.save} bsStyle="primary">Add</Button>
+                    <Button onClick={this.props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+}
+
+reactMixin(HoneymoonGiftListItem.prototype, LinkedStateMixin);
+
+export default HoneymoonGiftListItem;

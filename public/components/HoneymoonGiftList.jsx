@@ -1,5 +1,6 @@
 import React from 'react';
 import { Jumbotron, Col, Table, Button } from 'react-bootstrap';
+import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
 
 class HoneymoonGiftList extends React.Component {
     constructor() {
@@ -7,16 +8,27 @@ class HoneymoonGiftList extends React.Component {
 
         this.state = {
             items: [],
+            showModal: false,
         };
     }
 
     addItem() {
         const items = this.state.items;
-        items.push({id: this.state.items.length});
+        items.push({});
 
         this.setState({
             items,
         });
+
+        this.close();
+    }
+
+    close() {
+        this.setState({showModal: false});
+    }
+
+    open() {
+        this.setState({showModal: true});
     }
 
     render() {
@@ -34,27 +46,29 @@ class HoneymoonGiftList extends React.Component {
                                 <th>Requested</th>
                                 <th>Remaining</th>
                                 <th>Price (£)</th>
-                                <th>Remove</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                        {this.state.items.map(item => (
-                            <tr key={item.id}>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                                <th>{item.image}</th>
-                            </tr>
-                        ))}
+                            {this.state.items.map(item => (
+                                <tr key={item.id}>
+                                    <th>{item.image}</th>
+                                    <th>{item.name}</th>
+                                    <th>{item.description}</th>
+                                    <th>{item.requested}</th>
+                                    <th>{item.remaining}</th>
+                                    <th>{item.price}</th>
+                                    <th>Coming Soon!</th>
+                                </tr>
+                            ))}
                         </tbody>
                     </Table>
 
-                    <Button onClick={this.addItem.bind(this)}>Add Item</Button>
+                    <Button onClick={this.open.bind(this)}>Add Item</Button>
                 </Jumbotron>
+
+                <HoneymoonGiftListItem show={this.state.showModal} onHide={this.close.bind(this)} save={this.addItem.bind(this)} />
             </Col>
         );
     }
