@@ -72,7 +72,12 @@ class App extends React.Component {
                             <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
                         </li>
                     </NavDropdown>
+
                     <li key={2}>
+                        <Link to="/admin/users">Users</Link>
+                    </li>
+
+                    <li key={3}>
                         <a href="" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>
