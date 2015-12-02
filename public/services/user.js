@@ -74,6 +74,20 @@ class AboutOurDay {
                 return response;
             });
     }
+
+    delete(id) {
+        return when(request({
+            url: `${URL}/${id}`,
+            method: 'Delete',
+            type: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + loginStore.jwt,
+            },
+        }))
+            .then((response) => {
+                return response;
+            });
+    }
 }
 
 export default new AboutOurDay();

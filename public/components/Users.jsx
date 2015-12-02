@@ -1,5 +1,5 @@
 import React from 'react';
-import user from '../services/user';
+import userService from '../services/user';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import User from './User.jsx';
 
@@ -17,9 +17,9 @@ class Users extends React.Component {
         this._loadUsers();
     }
 
-    save(userToCreate) {
-        user
-            .post(userToCreate)
+    save(user) {
+        userService
+            .post(user)
             .then(() => {
                 this.close();
                 this._loadUsers();
@@ -32,6 +32,21 @@ class Users extends React.Component {
             });
     }
 
+    delete(user) {
+        userService
+            .delete(user._id)
+            .then(() => {
+                this.close();
+                this._loadUsers();
+            })
+            .catch((error) => {
+                // TODO: use some sort of toastr
+
+                alert('There\'s an error deleting a user'); //eslint-disable-line
+                console.log('Error deleting a user', error); //eslint-disable-line
+            });
+    }
+
     close() {
         this.setState({showModal: false});
     }
@@ -41,7 +56,7 @@ class Users extends React.Component {
     }
 
     _loadUsers() {
-        user
+        userService
             .get()
             .then((response) => {
                 this.setState({
@@ -72,13 +87,13 @@ class Users extends React.Component {
                         </thead>
 
                         <tbody>
-                            {this.state.users.map(item => (
-                                <tr key={item._id}>
-                                    <th>{item.name}</th>
-                                    <th>{item.username}</th>
+                            {this.state.users.map(user => (
+                                <tr key={user._id}>
+                                    <th>{user.name}</th>
+                                    <th>{user.username}</th>
                                     <th>
                                         <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
-                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}}><Glyphicon glyph="trash" /></Button>
+                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, user)}><Glyphicon glyph="trash" /></Button>
                                     </th>
                                 </tr>
                             ))}
