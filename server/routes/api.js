@@ -11,7 +11,7 @@ module.exports = (app, express, config) => {
         secret: config.secret,
     }));
 
-    router.use('/users', require('./user')(app, express));
+    router.use('/user', require('./user')(app, express));
     router.use('/cover', require('./cover')(app, express));
     router.use('/aboutUs', require('./aboutUs')(app, express));
     router.use('/aboutOurDay', require('./aboutOurDay')(app, express));

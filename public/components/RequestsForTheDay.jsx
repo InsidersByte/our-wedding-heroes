@@ -1,7 +1,5 @@
 import React from 'react';
 import requestForTheDay from '../services/requestForTheDay';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import reactMixin from 'react-mixin';
 import { Jumbotron, Col } from 'react-bootstrap';
 
 class RequestsForTheDay extends React.Component {
@@ -41,7 +39,5 @@ class RequestsForTheDay extends React.Component {
         );
     }
 }
-
-reactMixin(RequestsForTheDay.prototype, LinkedStateMixin);
 
 export default RequestsForTheDay;

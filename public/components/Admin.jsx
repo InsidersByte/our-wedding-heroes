@@ -40,7 +40,7 @@ class App extends React.Component {
 
         if (!this.state.userLoggedIn) {
             headerItems = (
-                <Nav right navbar>
+                <Nav pullRight>
                     <li>
                         <Link to="/admin/login">Login</Link>
                     </li>
@@ -48,8 +48,8 @@ class App extends React.Component {
             );
         } else {
             headerItems = (
-                <Nav right navbar>
-                    <NavDropdown title="Wedding Profile" id="weddingProfileDropdown" key={1}>
+                <Nav pullRight>
+                    <NavDropdown title="Wedding Profile" id="weddingProfileDropdown">
                         <li>
                             <Link to="/admin/cover">Cover</Link>
                         </li>
@@ -73,12 +73,12 @@ class App extends React.Component {
                         </li>
                     </NavDropdown>
 
-                    <li key={2}>
+                    <li>
                         <Link to="/admin/users">Users</Link>
                     </li>
 
-                    <li key={3}>
-                        <a href="" onClick={this.logout}>Logout</a>
+                    <li>
+                        <a href="#" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>
             );
@@ -86,12 +86,17 @@ class App extends React.Component {
 
         return (
             <div>
-                <Navbar toggleNavKey={1}>
-                    <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <Link to="/admin">Honeymoon Gift List</Link>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
 
-                    <CollapsibleNav eventKey={1}>
+                    <Navbar.Collapse>
                         {headerItems}
-                    </CollapsibleNav>
+                    </Navbar.Collapse>
                 </Navbar>
                 <div className="container">
                     {this.props.children}

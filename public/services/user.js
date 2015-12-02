@@ -1,6 +1,6 @@
 import when from 'when';
 import request from 'reqwest';
-import {URL} from '../constants/requestForTheDay.constants.js';
+import {URL} from '../constants/user.constants.js';
 import loginStore from '../stores/login.store.js';
 
 class AboutOurDay {
@@ -13,9 +13,9 @@ class AboutOurDay {
                 'Authorization': 'Bearer ' + loginStore.jwt,
             },
         }))
-        .then((response) => {
-            return response;
-        });
+            .then((response) => {
+                return response;
+            });
     }
 
     getById(id) {
@@ -36,9 +36,9 @@ class AboutOurDay {
                 id,
             },
         }))
-        .then((response) => {
-            return response;
-        });
+            .then((response) => {
+                return response;
+            });
     }
 
     post(state) {
@@ -53,9 +53,9 @@ class AboutOurDay {
                 ...state,
             },
         }))
-        .then((response) => {
-            return response;
-        });
+            .then((response) => {
+                return response;
+            });
     }
 
     put(state) {
@@ -70,9 +70,9 @@ class AboutOurDay {
                 ...state,
             },
         }))
-        .then((response) => {
-            return response;
-        });
+            .then((response) => {
+                return response;
+            });
     }
 }
 
