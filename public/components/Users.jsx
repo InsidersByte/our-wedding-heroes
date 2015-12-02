@@ -1,6 +1,6 @@
 import React from 'react';
 import user from '../services/user';
-import { Jumbotron, Col, Table } from 'react-bootstrap';
+import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 
 class Users extends React.Component {
     constructor() {
@@ -31,23 +31,26 @@ class Users extends React.Component {
         return (
             <Col md={6} mdOffset={3}>
                 <Jumbotron>
-                    <h1>Users</h1>
+                    <h1>Users <Button bsStyle="success" bsSize="small"><Glyphicon glyph="plus" /></Button></h1>
 
                     <Table striped bordered condensed hover>
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Actions</th>
-                        </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Actions</th>
+                            </tr>
                         </thead>
 
                         <tbody>
                             {this.state.users.map(item => (
                                 <tr key={item._id}>
                                     <th>{item.name}</th>
-                                    <th>{item.username}</th>
-                                    <th />
+                                    <th>{item.email}</th>
+                                    <th>
+                                        <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
+                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}}><Glyphicon glyph="trash" /></Button>
+                                    </th>
                                 </tr>
                             ))}
                         </tbody>
