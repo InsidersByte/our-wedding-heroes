@@ -37,7 +37,7 @@
     "mongoose": "^4.2.2",
     "react": "^0.14.2",
     "react-addons-linked-state-mixin": "^0.14.2",
-    "react-bootstrap": "^0.27.3",
+    "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.1",
     "react-google-maps": "^4.2.0",
     "react-mixin": "^3.0.3",

@@ -1,6 +1,6 @@
 import React from 'react';
 import loginStore from '../stores/login.store.js';
-import { Navbar, NavBrand, Nav } from 'react-bootstrap';
+import { Navbar, NavBrand, Nav, NavDropdown, CollapsibleNav } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../services/auth';
 
@@ -40,7 +40,7 @@ class App extends React.Component {
 
         if (!this.state.userLoggedIn) {
             headerItems = (
-                <Nav right>
+                <Nav right navbar>
                     <li>
                         <Link to="/admin/login">Login</Link>
                     </li>
@@ -48,29 +48,31 @@ class App extends React.Component {
             );
         } else {
             headerItems = (
-                <Nav right>
-                    <li>
-                        <Link to="/admin/cover">Cover</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/aboutUs">About Us</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/aboutOurDay">About Our Day</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/whereIsIt">Where Is It</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/requestsForTheDay">Requests For The Day</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
-                    </li>
-                    <li>
+                <Nav right navbar>
+                    <NavDropdown title="Wedding Profile" id="weddingProfileDropdown" key={1}>
+                        <li>
+                            <Link to="/admin/cover">Cover</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/aboutUs">About Us</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/aboutOurDay">About Our Day</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/whereIsIt">Where Is It</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/requestsForTheDay">Requests For The Day</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
+                        </li>
+                    </NavDropdown>
+                    <li key={2}>
                         <a href="" onClick={this.logout}>Logout</a>
                     </li>
                 </Nav>
@@ -79,9 +81,12 @@ class App extends React.Component {
 
         return (
             <div>
-                <Navbar inverse toggleNavKey={0}>
+                <Navbar toggleNavKey={1}>
                     <NavBrand><Link to="/admin">Honeymoon Gift List</Link></NavBrand>
-                    {headerItems}
+
+                    <CollapsibleNav eventKey={1}>
+                        {headerItems}
+                    </CollapsibleNav>
                 </Navbar>
                 <div className="container">
                     {this.props.children}
