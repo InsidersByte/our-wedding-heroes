@@ -1,6 +1,6 @@
 import React from 'react';
 import user from '../services/user';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron, Col, Table } from 'react-bootstrap';
 
 class Users extends React.Component {
     constructor() {
@@ -33,7 +33,25 @@ class Users extends React.Component {
                 <Jumbotron>
                     <h1>Users</h1>
 
-                    <h3>Coming soon!</h3>
+                    <Table striped bordered condensed hover>
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            {this.state.users.map(item => (
+                                <tr key={item._id}>
+                                    <th>{item.name}</th>
+                                    <th>{item.username}</th>
+                                    <th />
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </Jumbotron>
             </Col>
         );
