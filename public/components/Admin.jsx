@@ -1,6 +1,6 @@
 import React from 'react';
 import loginStore from '../stores/login.store.js';
-import { Navbar, NavBrand, Nav, NavDropdown, CollapsibleNav } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../services/auth';
 
