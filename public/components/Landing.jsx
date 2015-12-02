@@ -1,6 +1,5 @@
 import React from 'react';
-import {GoogleMap} from 'react-google-maps';
-import {Col, Panel} from 'react-bootstrap';
+import {Col} from 'react-bootstrap';
 import weddingProfile from '../services/weddingProfile';
 import './Landing.styl';
 
@@ -60,40 +59,6 @@ class Landing extends React.Component {
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.aboutOurDay}
                         </span>
-                    </Col>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">Where is it</h1>
-
-                    <Col md={6} mdOffset={3}>
-                        <GoogleMap
-                            containerProps={{style: {height: '500px'}}}
-                            ref="map"
-                            defaultZoom={3}
-                            defaultCenter={{lat: -25.363882, lng: 131.044922}}/>
-                    </Col>
-                </section>
-
-                <section className="landing__section landing__section--primary">
-                    <h1 className="landing__section__heading">Requests for the day</h1>
-
-                    <Col md={4}>
-                        <Panel className="landing__section__panel">
-                            <h3>Request</h3>
-                        </Panel>
-                    </Col>
-
-                    <Col md={4}>
-                        <Panel className="landing__section__panel">
-                            <h3>Request</h3>
-                        </Panel>
-                    </Col>
-
-                    <Col md={4}>
-                        <Panel className="landing__section__panel">
-                            <h3>Request</h3>
-                        </Panel>
                     </Col>
                 </section>
 
