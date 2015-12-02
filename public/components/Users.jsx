@@ -14,19 +14,7 @@ class Users extends React.Component {
     }
 
     componentDidMount() {
-        user
-            .get()
-            .then((response) => {
-                this.setState({
-                    users: response,
-                });
-            })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an error getting the users data'); //eslint-disable-line
-                console.log('Error getting users data', error); //eslint-disable-line
-            });
+        this._loadUsers();
     }
 
     save(userToCreate) {
@@ -34,6 +22,7 @@ class Users extends React.Component {
             .post(userToCreate)
             .then(() => {
                 this.close();
+                this._loadUsers();
             })
             .catch((error) => {
                 // TODO: use some sort of toastr
@@ -49,6 +38,22 @@ class Users extends React.Component {
 
     open() {
         this.setState({showModal: true});
+    }
+
+    _loadUsers() {
+        user
+            .get()
+            .then((response) => {
+                this.setState({
+                    users: response,
+                });
+            })
+            .catch((error) => {
+                // TODO: use some sort of toastr
+
+                alert('There\'s an error getting the users data'); //eslint-disable-line
+                console.log('Error getting users data', error); //eslint-disable-line
+            });
     }
 
     render() {
