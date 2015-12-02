@@ -1,6 +1,7 @@
 import React from 'react';
 import user from '../services/user';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
+import User from './User.jsx';
 
 class Users extends React.Component {
     constructor() {
@@ -8,6 +9,7 @@ class Users extends React.Component {
 
         this.state = {
             users: [],
+            showModal: false,
         };
     }
 
@@ -22,16 +24,38 @@ class Users extends React.Component {
             .catch((error) => {
                 // TODO: use some sort of toastr
 
-                alert('There\'s an getting the about our day data'); //eslint-disable-line
-                console.log('Error getting about our day data', error); //eslint-disable-line
+                alert('There\'s an error getting the users data'); //eslint-disable-line
+                console.log('Error getting users data', error); //eslint-disable-line
             });
+    }
+
+    save(userToCreate) {
+        user
+            .post(userToCreate)
+            .then(() => {
+                this.close();
+            })
+            .catch((error) => {
+                // TODO: use some sort of toastr
+
+                alert('There\'s an error creating a new user'); //eslint-disable-line
+                console.log('Error creating a user', error); //eslint-disable-line
+            });
+    }
+
+    close() {
+        this.setState({showModal: false});
+    }
+
+    open() {
+        this.setState({showModal: true});
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
                 <Jumbotron>
-                    <h1>Users <Button bsStyle="success" bsSize="small"><Glyphicon glyph="plus" /></Button></h1>
+                    <h1>Users <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
                     <Table striped bordered condensed hover>
                         <thead>
@@ -46,7 +70,7 @@ class Users extends React.Component {
                             {this.state.users.map(item => (
                                 <tr key={item._id}>
                                     <th>{item.name}</th>
-                                    <th>{item.email}</th>
+                                    <th>{item.username}</th>
                                     <th>
                                         <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
                                         <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}}><Glyphicon glyph="trash" /></Button>
@@ -56,6 +80,8 @@ class Users extends React.Component {
                         </tbody>
                     </Table>
                 </Jumbotron>
+
+                <User show={this.state.showModal} onHide={this.close.bind(this)} onSave={this.save.bind(this)} />
             </Col>
         );
     }

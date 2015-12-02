@@ -17,7 +17,7 @@ module.exports = (app, express) => {
                 }
 
                 req.checkBody('name').notEmpty();
-                req.checkBody('email').notEmpty().isEmail();
+                req.checkBody('username').isEmail();
                 req.checkBody('password').notEmpty();
 
                 const errors = req.validationErrors();
@@ -31,7 +31,7 @@ module.exports = (app, express) => {
                 const user = new User();
 
                 user.name = req.body.name;
-                user.email = req.body.email;
+                user.username = req.body.username;
                 user.password = req.body.password;
 
                 try {

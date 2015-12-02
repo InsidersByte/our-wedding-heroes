@@ -4,14 +4,14 @@ import {LOGIN_URL, SETUP_URL} from '../constants/login.constants.js';
 import loginActions from '../actions/login.action.js';
 
 class Auth {
-    login(email, password) {
+    login(username, password) {
         // We call the server to log the user in.
         return when(request({
             url: LOGIN_URL,
             method: 'POST',
             type: 'json',
             data: {
-                email, password,
+                username, password,
             },
         }))
         .then((response) => {
@@ -23,14 +23,14 @@ class Auth {
         });
     }
 
-    setup(email, password, name) {
+    setup(username, password, name) {
         // We call the server to log the user in.
         return when(request({
             url: SETUP_URL,
             method: 'POST',
             type: 'json',
             data: {
-                email, password, name,
+                username, password, name,
             },
         }))
         .then((response) => {

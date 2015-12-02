@@ -9,7 +9,7 @@ class Setup extends React.Component {
         super();
 
         this.state = {
-            email: '',
+            username: '',
             password: '',
             name: '',
         };
@@ -19,7 +19,7 @@ class Setup extends React.Component {
         event.preventDefault();
 
         auth
-            .setup(this.state.email, this.state.password, this.state.name)
+            .setup(this.state.username, this.state.password, this.state.name)
             .catch((err) => {
                 // TODO: use some sort of toastr
 
@@ -37,7 +37,7 @@ class Setup extends React.Component {
                     <form onSubmit={this.setup.bind(this)}>
                         <Input type="text" label="Name" placeholder="Enter name" valueLink={this.linkState('name')} required />
 
-                        <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} required />
+                        <Input type="email" label="Username" placeholder="Enter username" valueLink={this.linkState('username')} required />
 
                         <Input type="password" label="Password" placeholder="Enter password" valueLink={this.linkState('password')} required />
 

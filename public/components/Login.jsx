@@ -9,7 +9,7 @@ class Login extends React.Component {
         super();
 
         this.state = {
-            email: '',
+            username: '',
             password: '',
         };
     }
@@ -18,7 +18,7 @@ class Login extends React.Component {
         event.preventDefault();
 
         auth
-            .login(this.state.email, this.state.password)
+            .login(this.state.username, this.state.password)
             .catch((err) => {
                 // TODO: use some sort of toastr
 
@@ -34,7 +34,7 @@ class Login extends React.Component {
                     <h1>Login</h1>
 
                     <form onSubmit={this.login.bind(this)}>
-                        <Input type="email" label="Email Address" placeholder="Enter email" valueLink={this.linkState('email')} required />
+                        <Input type="email" label="Username" placeholder="Enter username" valueLink={this.linkState('username')} required />
 
                         <Input type="password" label="Password" placeholder="Enter password" valueLink={this.linkState('password')} required />
 

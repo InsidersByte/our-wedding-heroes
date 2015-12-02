@@ -5,24 +5,50 @@ module.exports = (app, express) => {
     const router = new express.Router();
 
     router.route('/')
-        .post(co.wrap(function* createUser(req, res) {
-            const user = new User();
-
-            user.name = req.body.name;
-            user.username = req.body.username;
-            user.password = req.body.password;
-
+        .post(co.wrap(function* createUser(req, res, next) {
             try {
-                yield user.save();
-            } catch (err) {
-                if (err.code === 11000) {
-                    return res.json({success: false, message: 'A user with that username already exists. '});
+                req.checkBody('name').notEmpty();
+                req.checkBody('username').isEmail();
+                req.checkBody('password').notEmpty();
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    return res
+                        .status(400)
+                        .send(errors);
                 }
 
-                return res.send(err);
-            }
+                const user = new User();
 
-            res.json({message: 'User created!'});
+                user.name = req.body.name;
+                user.username = req.body.username;
+                user.password = req.body.password;
+
+                try {
+                    yield user.save();
+                } catch (err) {
+                    if (err.code === 11000) {
+                        return res
+                            .status(400)
+                            .json({success: false, message: 'A user with that username already exists.'});
+                    }
+
+                    return res
+                        .status(400)
+                        .send(err);
+                }
+
+                res.json({message: 'User created!'});
+            } catch (error) {
+                if (error.code === 11000) {
+                    return res
+                        .status(400)
+                        .json({success: false, message: 'A user with that username already exists. '});
+                }
+
+                return next(error);
+            }
         }))
 
         .get(co.wrap(function* getUsers(req, res) {
