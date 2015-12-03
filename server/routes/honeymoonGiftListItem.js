@@ -51,7 +51,7 @@ module.exports = (app, express) => {
         }))
 
         .delete(co.wrap(function* deleteUser(req, res) {
-            yield HoneymoonGiftListItem.remove({id: req.params.honeymoonGiftListItemId});
+            yield HoneymoonGiftListItem.remove({_id: req.params.honeymoonGiftListItemId});
 
             return res.json({message: 'Successfully deleted'});
         }));

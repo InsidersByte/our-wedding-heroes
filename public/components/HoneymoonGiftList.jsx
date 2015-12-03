@@ -92,14 +92,17 @@ class HoneymoonGiftList extends React.Component {
 
                         <tbody>
                             {this.state.items.map(item => (
-                                <tr key={item.id}>
+                                <tr key={item._id}>
                                     <th>Coming Soon</th>
                                     <th>{item.name}</th>
                                     <th>{item.description}</th>
                                     <th>{item.requested}</th>
                                     <th>Coming Soon</th>
                                     <th>{item.price}</th>
-                                    <th>Coming Soon!</th>
+                                    <th>
+                                        <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
+                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
+                                    </th>
                                 </tr>
                             ))}
                         </tbody>
