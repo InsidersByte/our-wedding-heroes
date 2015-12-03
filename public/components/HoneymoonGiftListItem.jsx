@@ -10,29 +10,31 @@ class HoneymoonGiftListItem extends React.Component {
         this.state = {};
     }
 
-    handleSubmit() {
+    handleSubmit(event) {
+        event.preventDefault();
         this.props.onSave(this.state);
     }
 
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add Item</Modal.Title>
-                </Modal.Header>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Item</Modal.Title>
+                    </Modal.Header>
 
-                <Modal.Body>
-                    <Input type="text" label="Image" placeholder="Enter Image" valueLink={this.linkState('image')} required/>
-                    <Input type="text" label="Name" placeholder="Enter Name" valueLink={this.linkState('name')} required/>
-                    <Input type="textarea" rows="10" label="Description" placeholder="Enter Description" valueLink={this.linkState('description')} required/>
-                    <Input type="number" label="Requested" placeholder="Enter Requested" valueLink={this.linkState('requested')} required/>
-                    <Input type="number" label="Price (£)" placeholder="Enter Price" valueLink={this.linkState('price')} required/>
-                </Modal.Body>
+                    <Modal.Body>
+                        <Input type="text" label="Name" placeholder="Enter Name" valueLink={this.linkState('name')} required/>
+                        <Input type="textarea" rows="10" label="Description" placeholder="Enter Description" valueLink={this.linkState('description')} required/>
+                        <Input type="number" label="Requested" placeholder="Enter Requested" valueLink={this.linkState('requested')} required/>
+                        <Input type="number" label="Price (£)" placeholder="Enter Price" valueLink={this.linkState('price')} required/>
+                    </Modal.Body>
 
-                <Modal.Footer>
-                    <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary" type="submit">Add</Button>
-                    <Button onClick={this.props.onHide}>Close</Button>
-                </Modal.Footer>
+                    <Modal.Footer>
+                        <Button bsStyle="primary" type="submit">Add</Button>
+                        <Button onClick={this.props.onHide}>Close</Button>
+                    </Modal.Footer>
+                </form>
             </Modal>
         );
     }

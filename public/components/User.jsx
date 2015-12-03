@@ -26,7 +26,7 @@ class User extends React.Component {
                     <Modal.Body>
                         <Input type="text" label="Name" placeholder="Enter Name" valueLink={this.linkState('name')} required/>
 
-                        <Input type="email" label="Username" placeholder="Enter Username" valueLink={this.linkState('username')} required/>
+                        <Input type="email" label="Username" placeholder="Enter Username" valueLink={this.linkState('email')} required/>
 
                         <Input type="password" label="Password" placeholder="Enter Password" valueLink={this.linkState('password')} required/>
                     </Modal.Body>
