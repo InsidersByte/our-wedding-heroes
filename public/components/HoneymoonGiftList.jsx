@@ -80,6 +80,7 @@ class HoneymoonGiftList extends React.Component {
                     <Table striped bordered condensed hover>
                         <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Requested</th>
@@ -92,10 +93,11 @@ class HoneymoonGiftList extends React.Component {
                         <tbody>
                             {this.state.items.map(item => (
                                 <tr key={item.id}>
+                                    <th>Coming Soon</th>
                                     <th>{item.name}</th>
                                     <th>{item.description}</th>
                                     <th>{item.requested}</th>
-                                    <th>{item.remaining}</th>
+                                    <th>Coming Soon</th>
                                     <th>{item.price}</th>
                                     <th>Coming Soon!</th>
                                 </tr>
