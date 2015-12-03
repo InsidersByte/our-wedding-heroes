@@ -18,6 +18,7 @@ module.exports = (app, express) => {
         .put(co.wrap(function* getWeddingProfile(req, res, next) {
             try {
                 req.checkBody('title').notEmpty();
+                req.checkBody('imageUrl').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -30,6 +31,7 @@ module.exports = (app, express) => {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
                 weddingProfile.cover.title = req.body.title;
+                weddingProfile.cover.imageUrl = req.body.imageUrl;
 
                 yield weddingProfile.save();
 
