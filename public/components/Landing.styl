@@ -13,21 +13,25 @@ maximumSize()
     background-size cover
     maximumSize()
 
-.landing__header__content
+.landing__header__overlay
+    position absolute
     height 100%
     width 100%
     background-color black
-    opacity 0.4
+    opacity 0.1
+    color white
+
+.landing__header__content
+    position relative
+    transform translate(-50%, -50%)
+    top 85%
+    left 50%
     color white
 
 .landing__header__content__header
     font-size 4.5em
     font-weight 700
     text-align center
-    position relative
-    transform translate(-50%, -50%)
-    top 85%
-    left 50%
 
 .landing__section
     padding 50px 0
