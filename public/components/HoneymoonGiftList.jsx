@@ -97,7 +97,7 @@ class HoneymoonGiftList extends React.Component {
                                     <th>{item.name}</th>
                                     <th>{item.description}</th>
                                     <th>{item.requested}</th>
-                                    <th>Coming Soon</th>
+                                    <th>{item.remaining}</th>
                                     <th>{item.price}</th>
                                     <th>
                                         <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
