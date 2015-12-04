@@ -9,7 +9,7 @@ module.exports = (app, express) => {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                return res.json(weddingProfile.requestsForTheDay);
+                return res.json(weddingProfile.requestsForTheDay || []);
             } catch (error) {
                 next(error);
             }

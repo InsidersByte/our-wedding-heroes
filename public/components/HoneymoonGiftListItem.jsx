@@ -24,10 +24,11 @@ class HoneymoonGiftListItem extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Input type="text" label="Name" placeholder="Enter Name" valueLink={this.linkState('name')} required/>
-                        <Input type="textarea" rows="10" label="Description" placeholder="Enter Description" valueLink={this.linkState('description')} required/>
-                        <Input type="number" label="Requested" placeholder="Enter Requested" valueLink={this.linkState('requested')} required/>
-                        <Input type="number" label="Price (£)" placeholder="Enter Price" valueLink={this.linkState('price')} required/>
+                        <Input type="url" label="Image Url" placeholder="Enter url" valueLink={this.linkState('imageUrl')} required/>
+                        <Input type="text" label="Name" placeholder="Enter name" valueLink={this.linkState('name')} required/>
+                        <Input type="textarea" rows="10" label="Description" placeholder="Enter description" valueLink={this.linkState('description')} required/>
+                        <Input type="number" label="Requested" placeholder="Enter requested" valueLink={this.linkState('requested')} required/>
+                        <Input type="number" label="Price (£)" placeholder="Enter price" valueLink={this.linkState('price')} required/>
                     </Modal.Body>
 
                     <Modal.Footer>

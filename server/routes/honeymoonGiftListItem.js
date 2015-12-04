@@ -1,12 +1,23 @@
-const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
+const WeddingProfile = require('../models/weddingProfile');
 const co = require('co');
 
 module.exports = (app, express) => {
     const router = new express.Router();
 
     router.route('/')
+        .get(co.wrap(function* getHoneymoonGiftItems(req, res, next) {
+            try {
+                const weddingProfile = yield WeddingProfile.findOne({});
+
+                return res.json(weddingProfile.honeymoonGiftListItems || []);
+            } catch (error) {
+                next(error);
+            }
+        }))
+
         .post(co.wrap(function* createHoneymoonGiftItem(req, res, next) {
             try {
+                req.checkBody('imageUrl').isURL();
                 req.checkBody('name').notEmpty();
                 req.checkBody('description').notEmpty();
                 req.checkBody('requested').isInt();
@@ -20,14 +31,19 @@ module.exports = (app, express) => {
                         .send(errors);
                 }
 
-                const honeymoonGiftItem = new HoneymoonGiftListItem();
+                const honeymoonGiftItem = {
+                    imageUrl: req.body.imageUrl,
+                    name: req.body.name,
+                    description: req.body.description,
+                    requested: req.body.requested,
+                    price: req.body.price,
+                };
 
-                honeymoonGiftItem.name = req.body.name;
-                honeymoonGiftItem.description = req.body.description;
-                honeymoonGiftItem.requested = req.body.requested;
-                honeymoonGiftItem.price = req.body.price;
+                const weddingProfile = yield WeddingProfile.findOne({});
 
-                yield honeymoonGiftItem.save();
+                weddingProfile.honeymoonGiftListItems.push(honeymoonGiftItem);
+
+                yield weddingProfile.save();
 
                 res
                     .status(201)
@@ -35,23 +51,15 @@ module.exports = (app, express) => {
             } catch (error) {
                 return next(error);
             }
-        }))
-
-        .get(co.wrap(function* getHoneymoonGiftItems(req, res) {
-            const honeymoonGiftItems = yield HoneymoonGiftListItem.find({});
-
-            return res.json(honeymoonGiftItems);
         }));
 
     router.route('/:honeymoonGiftListItemId')
-        .get(co.wrap(function* findHoneymoonGiftItem(req, res) {
-            const honeymoonGiftItem = yield HoneymoonGiftListItem.findById(req.params.honeymoonGiftListItemId);
-
-            return res.json(honeymoonGiftItem);
-        }))
-
         .delete(co.wrap(function* deleteUser(req, res) {
-            yield HoneymoonGiftListItem.remove({_id: req.params.honeymoonGiftListItemId});
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            weddingProfile.honeymoonGiftListItems.id(req.params.honeymoonGiftListItemId).remove();
+
+            yield weddingProfile.save();
 
             return res.json({message: 'Successfully deleted'});
         }));

@@ -1,6 +1,5 @@
 const WeddingProfile = require('../models/weddingProfile');
 const co = require('co');
-const util = require('util');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -15,17 +14,18 @@ module.exports = (app, express) => {
                 next(error);
             }
         }))
+
         .put(co.wrap(function* getWeddingProfile(req, res, next) {
             try {
                 req.checkBody('title').notEmpty();
-                req.checkBody('imageUrl').notEmpty();
+                req.checkBody('imageUrl').isURL();
 
                 const errors = req.validationErrors();
 
                 if (errors) {
                     return res
                         .status(400)
-                        .send('There have been validation errors: ' + util.inspect(errors));
+                        .send(errors);
                 }
 
                 const weddingProfile = yield WeddingProfile.findOne({});

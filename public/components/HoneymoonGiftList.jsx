@@ -73,11 +73,11 @@ class HoneymoonGiftList extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
+            <Col md={12}>
                 <Jumbotron>
                     <h1>Honeymoon Gift List <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
-                    <Table striped bordered condensed hover>
+                    <Table striped bordered condensed hover responsive>
                         <thead>
                             <tr>
                                 <th>Image</th>
@@ -93,7 +93,7 @@ class HoneymoonGiftList extends React.Component {
                         <tbody>
                             {this.state.items.map(item => (
                                 <tr key={item._id}>
-                                    <th>Coming Soon</th>
+                                    <th>{item.imageUrl}</th>
                                     <th>{item.name}</th>
                                     <th>{item.description}</th>
                                     <th>{item.requested}</th>
