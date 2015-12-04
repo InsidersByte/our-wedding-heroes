@@ -36,7 +36,7 @@ class Landing extends React.Component {
     render() {
         return (
             <div className="landing">
-                <header className="landing__header">
+                <header className="landing__header" style={{backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})`}}>
                     <div className="landing__header__content">
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
                     </div>
