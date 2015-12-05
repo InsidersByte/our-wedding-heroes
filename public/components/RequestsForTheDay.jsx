@@ -29,7 +29,7 @@ class RequestsForTheDay extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
+            <Col md={6} mdOffset={3}>
                 <Jumbotron>
                     <h1>Requests For The Day</h1>
 
