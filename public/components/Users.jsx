@@ -3,6 +3,9 @@ import userService from '../services/user';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import User from './User.jsx';
 
+import {ToastContainer, ToastMessage} from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+
 class Users extends React.Component {
     constructor() {
         super();
@@ -23,12 +26,21 @@ class Users extends React.Component {
             .then(() => {
                 this.close();
                 this._loadUsers();
-            })
-            .catch((error) => {
-                // TODO: use some sort of toastr
 
-                alert('There\'s an error creating a new user'); //eslint-disable-line
-                console.log('Error creating a user', error); //eslint-disable-line
+                this.refs.container.success(
+                    'User created',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error creating a user',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
@@ -38,12 +50,21 @@ class Users extends React.Component {
             .then(() => {
                 this.close();
                 this._loadUsers();
-            })
-            .catch((error) => {
-                // TODO: use some sort of toastr
 
-                alert('There\'s an error deleting a user'); //eslint-disable-line
-                console.log('Error deleting a user', error); //eslint-disable-line
+                this.refs.container.success(
+                    'User deleted',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error deleting a user',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
@@ -63,17 +84,21 @@ class Users extends React.Component {
                     users: response,
                 });
             })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an error getting the users data'); //eslint-disable-line
-                console.log('Error getting users data', error); //eslint-disable-line
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error getting users',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
     render() {
         return (
             <Col md={8} mdOffset={2}>
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+
                 <Jumbotron>
                     <h1>Users <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 

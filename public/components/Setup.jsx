@@ -4,6 +4,9 @@ import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 import auth from '../services/auth';
 
+import {ToastContainer, ToastMessage} from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+
 class Setup extends React.Component {
     constructor() {
         super();
@@ -20,17 +23,29 @@ class Setup extends React.Component {
 
         auth
             .setup(this.state.username, this.state.password, this.state.name)
-            .catch((err) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an error setting up'); //eslint-disable-line
-                console.log('Error setting up', err); //eslint-disable-line
+            .then(() => {
+                this.refs.container.success(
+                    'Setup successful',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'Setup failed',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+
                 <Jumbotron>
                     <h1>Setup</h1>
 

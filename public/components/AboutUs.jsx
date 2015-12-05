@@ -4,6 +4,9 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col} from 'react-bootstrap';
 
+import {ToastContainer, ToastMessage} from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+
 class AboutUs extends React.Component {
     constructor() {
         super();
@@ -21,11 +24,13 @@ class AboutUs extends React.Component {
                     aboutUs: response,
                 });
             })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the about us data'); //eslint-disable-line
-                console.log('Error getting about us data', error); //eslint-disable-line
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error getting about us',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
@@ -34,17 +39,29 @@ class AboutUs extends React.Component {
 
         aboutUs
             .put(this.state)
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the about us data'); //eslint-disable-line
-                console.log('Error getting about us data', error); //eslint-disable-line
+            .then(() => {
+                this.refs.container.success(
+                    'About us updated',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error saving about us',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+
                 <Jumbotron>
                     <h1>About Us</h1>
 

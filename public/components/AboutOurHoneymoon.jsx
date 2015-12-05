@@ -4,6 +4,9 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
+import {ToastContainer, ToastMessage} from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+
 class AboutOurHoneymoon extends React.Component {
     constructor() {
         super();
@@ -21,11 +24,13 @@ class AboutOurHoneymoon extends React.Component {
                     aboutOurHoneymoon: response,
                 });
             })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the about our day data'); //eslint-disable-line
-                console.log('Error getting about our day data', error); //eslint-disable-line
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error getting about our honeymoon',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
@@ -34,17 +39,29 @@ class AboutOurHoneymoon extends React.Component {
 
         aboutOurDay
             .put(this.state)
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the about our day data'); //eslint-disable-line
-                console.log('Error getting about our day data', error); //eslint-disable-line
+            .then(() => {
+                this.refs.container.success(
+                    'About our honeymoon updated',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error saving about our honeymoon',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+
                 <Jumbotron>
                     <h1>About Our Honeymoon</h1>
 

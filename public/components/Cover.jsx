@@ -4,6 +4,9 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
+import {ToastContainer, ToastMessage} from 'react-toastr';
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+
 class Cover extends React.Component {
     constructor() {
         super();
@@ -23,11 +26,13 @@ class Cover extends React.Component {
                     imageUrl: response.imageUrl,
                 });
             })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the cover data'); //eslint-disable-line
-                console.log('Error getting cover data', error); //eslint-disable-line
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error getting cover',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
@@ -36,17 +41,29 @@ class Cover extends React.Component {
 
         cover
             .put(this.state)
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the cover data'); //eslint-disable-line
-                console.log('Error getting cover data', error); //eslint-disable-line
+            .then(() => {
+                this.refs.container.success(
+                    'Cover updated',
+                    'Success',
+                    {
+                        closeButton: true,
+                    });
+            })
+            .catch(() => {
+                this.refs.container.error(
+                    'There was an error saving cover',
+                    'Error',
+                    {
+                        closeButton: true,
+                    });
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+
                 <Jumbotron>
                     <h1>Cover</h1>
 
