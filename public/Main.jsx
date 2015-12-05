@@ -6,6 +6,7 @@ import loginStore from './stores/login.store.js';
 import history from './services/history';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/animate.css/animate.css';
 import './main.styl';
 
 import NoMatch from './components/NoMatch.jsx';

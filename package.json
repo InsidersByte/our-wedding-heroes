@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/InsidersByte/honeymoon-gift-list#readme",
   "dependencies": {
+    "animate.css": "^3.4.0",
     "body-parser": "^1.14.1",
     "bootstrap": "^3.3.5",
     "clean-webpack-plugin": "^0.1.4",
@@ -42,6 +43,7 @@
     "react-google-maps": "^4.2.0",
     "react-mixin": "^3.0.3",
     "react-router": "^1.0.0",
+    "react-toastr": "^2.2.2",
     "reqwest": "^2.0.5",
     "when": "^3.7.4"
   },
