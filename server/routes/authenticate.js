@@ -19,7 +19,7 @@ module.exports = (app, express, config) => {
                     .status(400)
                     .json({
                         success: false,
-                        message: 'Authentication failed. User not found.',
+                        message: 'Authentication failed.',
                     });
             }
 
@@ -30,7 +30,7 @@ module.exports = (app, express, config) => {
                     .status(400)
                     .json({
                         success: false,
-                        message: 'Authentication failed. Wrong password.',
+                        message: 'Authentication failed.',
                     });
             }
 

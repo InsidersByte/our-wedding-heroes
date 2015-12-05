@@ -1,6 +1,5 @@
 const WeddingProfile = require('../models/weddingProfile');
 const co = require('co');
-const util = require('util');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -25,7 +24,7 @@ module.exports = (app, express) => {
                 if (errors) {
                     return res
                         .status(400)
-                        .send('There have been validation errors: ' + util.inspect(errors));
+                        .send(errors);
                 }
 
                 const weddingProfile = yield WeddingProfile.findOne({});

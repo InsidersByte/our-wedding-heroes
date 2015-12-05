@@ -5,6 +5,12 @@ module.exports = (app, express) => {
     const router = new express.Router();
 
     router.route('/')
+        .get(co.wrap(function* getUsers(req, res) {
+            const users = yield User.find({});
+
+            return res.json(users);
+        }))
+
         .post(co.wrap(function* createUser(req, res, next) {
             try {
                 req.checkBody('name').notEmpty();
@@ -25,19 +31,7 @@ module.exports = (app, express) => {
                 user.username = req.body.username;
                 user.password = req.body.password;
 
-                try {
-                    yield user.save();
-                } catch (err) {
-                    if (err.code === 11000) {
-                        return res
-                            .status(400)
-                            .json({success: false, message: 'A user with that username already exists.'});
-                    }
-
-                    return res
-                        .status(400)
-                        .send(err);
-                }
+                yield user.save();
 
                 res.json({message: 'User created!'});
             } catch (error) {
@@ -49,41 +43,10 @@ module.exports = (app, express) => {
 
                 return next(error);
             }
-        }))
-
-        .get(co.wrap(function* getUsers(req, res) {
-            const users = yield User.find({});
-
-            return res.json(users);
         }));
 
+
     router.route('/:userId')
-        .get(co.wrap(function* findUser(req, res) {
-            const user = yield User.findById(req.params.userId);
-
-            return res.json(user);
-        }))
-
-        .put(co.wrap(function* updateUser(req, res) {
-            const user = yield User.findById(req.params.userId);
-
-            if (req.body.name) {
-                user.name = req.body.name;
-            }
-
-            if (req.body.username) {
-                user.username = req.body.username;
-            }
-
-            if (req.body.password) {
-                user.password = req.body.password;
-            }
-
-            yield user.save();
-
-            return res.json({message: 'User updated!'});
-        }))
-
         .delete(co.wrap(function* deleteUser(req, res) {
             yield User.remove({_id: req.params.userId});
 
