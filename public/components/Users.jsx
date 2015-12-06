@@ -102,7 +102,7 @@ class Users extends React.Component {
                 <Jumbotron>
                     <h1>Users <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
-                    <Table striped bordered condensed hover>
+                    <Table striped bordered condensed hover responsive>
                         <thead>
                             <tr>
                                 <th>Name</th>

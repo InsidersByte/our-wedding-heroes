@@ -1,6 +1,7 @@
 import React from 'react';
-import {Col} from 'react-bootstrap';
+import {Col, Table, Image} from 'react-bootstrap';
 import weddingProfile from '../services/weddingProfile';
+
 import './Landing.styl';
 
 class Landing extends React.Component {
@@ -13,6 +14,7 @@ class Landing extends React.Component {
                 aboutUs: '',
                 aboutOurDay: '',
                 aboutOurHoneymoon: '',
+                honeymoonGiftListItems: [],
             },
         };
     }
@@ -75,6 +77,36 @@ class Landing extends React.Component {
 
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
+
+                    <Col md={10} mdOffset={1}>
+                        <Table bordered condensed responsive>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Requested</th>
+                                    <th>Remaining</th>
+                                    <th>Price (£)</th>
+                                    <th>Gift</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {this.state.weddingProfile.honeymoonGiftListItems.map(item => (
+                                    <tr key={item._id}>
+                                        <th><Image src={item.imageUrl} circle width="100" height="100"/></th>
+                                        <th>{item.name}</th>
+                                        <th>{item.description}</th>
+                                        <th>{item.requested}</th>
+                                        <th>{item.remaining}</th>
+                                        <th>{item.price}</th>
+                                        <th>Coming Soon!</th>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    </Col>
                 </section>
             </div>
         );
