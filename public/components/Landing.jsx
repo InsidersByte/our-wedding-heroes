@@ -95,7 +95,7 @@ class Landing extends React.Component {
                             <tbody>
                                 {this.state.weddingProfile.honeymoonGiftListItems.map(item => (
                                     <tr key={item._id}>
-                                        <th><Image src={item.imageUrl} circle width="100" height="100"/></th>
+                                        <th style={{maxWidth: '200px'}}><Image src={item.imageUrl} circle responsive /></th>
                                         <th>{item.name}</th>
                                         <th>{item.description}</th>
                                         <th>{item.requested}</th>
