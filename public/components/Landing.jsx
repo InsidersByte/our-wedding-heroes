@@ -79,7 +79,7 @@ class Landing extends React.Component {
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
                     <Col md={10} mdOffset={1}>
-                        <Table bordered condensed responsive>
+                        <Table bordered condensed responsive className="table--vertical-align-middle">
                             <thead>
                                 <tr>
                                     <th>Image</th>
@@ -95,7 +95,7 @@ class Landing extends React.Component {
                             <tbody>
                                 {this.state.weddingProfile.honeymoonGiftListItems.map(item => (
                                     <tr key={item._id}>
-                                        <th style={{maxWidth: '200px'}}><Image src={item.imageUrl} circle responsive /></th>
+                                        <th style={{maxWidth: '200px'}}><Image src={item.imageUrl} rounded responsive /></th>
                                         <th>{item.name}</th>
                                         <th>{item.description}</th>
                                         <th>{item.requested}</th>
