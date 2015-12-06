@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Table, Image} from 'react-bootstrap';
+import {Col, Table, Image, Input} from 'react-bootstrap';
 import weddingProfile from '../services/weddingProfile';
 
 import './Landing.styl';
@@ -101,7 +101,14 @@ class Landing extends React.Component {
                                         <th>{item.requested}</th>
                                         <th>{item.remaining}</th>
                                         <th>{item.price}</th>
-                                        <th>Coming Soon!</th>
+                                        <th>
+                                            <Input type="select" placeholder="select">
+                                                <option value="select" key={0}>select</option>
+                                                {Array.from({length: item.remaining}, (value, index) => index + 1).map(value => (
+                                                    <option value={value} key={value}>{value}</option>
+                                                ))}
+                                            </Input>
+                                        </th>
                                     </tr>
                                 ))}
                             </tbody>
