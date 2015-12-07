@@ -2,13 +2,14 @@
   "name": "honeymoon-gift-list",
   "version": "0.1.0",
   "description": "A Honeymoon Gift List",
-  "main": "./src/server",
+  "main": "./server",
   "scripts": {
     "postinstall": "npm run build",
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx .",
     "test": "npm run lint",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "start-dev": "nodemon --watch server --watch . ./server/index.js"
   },
   "repository": {
     "type": "git",

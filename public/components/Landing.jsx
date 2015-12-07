@@ -103,7 +103,7 @@ class Landing extends React.Component {
                                         <th>{item.price}</th>
                                         <th>
                                             <Input type="select" placeholder="select">
-                                                <option value="select" key={0}>select</option>
+                                                <option value="select" key={0}>...select</option>
                                                 {Array.from({length: item.remaining}, (value, index) => index + 1).map(value => (
                                                     <option value={value} key={value}>{value}</option>
                                                 ))}
