@@ -8,7 +8,7 @@ export default {
 
         AppDispatcher.dispatch({
             actionType: LOGIN_USER,
-            jwt: jwt,
+            jwt,
         });
 
         if (savedJwt !== jwt) {

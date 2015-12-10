@@ -10,6 +10,18 @@ class LoginStore extends BaseStore {
         this._jwt = null;
     }
 
+    get user() {
+        return this._user;
+    }
+
+    get jwt() {
+        return this._jwt;
+    }
+
+    isLoggedIn() {
+        return !!this._user;
+    }
+
     _registerToActions(action) {
         switch (action.actionType) {
             case LOGIN_USER:
@@ -27,18 +39,6 @@ class LoginStore extends BaseStore {
             default:
                 break;
         }
-    }
-
-    get user() {
-        return this._user;
-    }
-
-    get jwt() {
-        return this._jwt;
-    }
-
-    isLoggedIn() {
-        return !!this._user;
     }
 }
 

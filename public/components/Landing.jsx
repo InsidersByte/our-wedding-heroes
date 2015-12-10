@@ -1,6 +1,8 @@
 import React from 'react';
 import {Col, Table, Image, Input} from 'react-bootstrap';
 import weddingProfile from '../services/weddingProfile';
+import basketActions from '../actions/basket.action';
+import basketStore from '../stores/basket.store';
 
 import './Landing.styl';
 
@@ -16,7 +18,10 @@ class Landing extends React.Component {
                 aboutOurHoneymoon: '',
                 honeymoonGiftListItems: [],
             },
+            items: [],
         };
+
+        this._onChange = this._onChange.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +38,22 @@ class Landing extends React.Component {
                 alert('There\'s an getting the wedding profile data'); //eslint-disable-line
                 console.log('Error getting wedding profile data', error); //eslint-disable-line
             });
+
+        basketStore.addChangeListener(this._onChange);
+    }
+
+    componentWillUnmount() {
+        basketStore.removeChangeListener(this._onChange);
+    }
+
+    _onChange() {
+        this.setState({
+            items: basketStore.items,
+        });
+    }
+
+    addToBasket(item, event) {
+        basketActions.addToBasket(item, parseInt(event.target.value));
     }
 
     render() {
@@ -102,8 +123,8 @@ class Landing extends React.Component {
                                         <th>{item.remaining}</th>
                                         <th>{item.price}</th>
                                         <th>
-                                            <Input type="select" placeholder="select">
-                                                <option value="select" key={0}>...select</option>
+                                            <Input type="select" onChange={this.addToBasket.bind(this, item)}>
+                                                <option value="0" key={0}>...select</option>
                                                 {Array.from({length: item.remaining}, (value, index) => index + 1).map(value => (
                                                     <option value={value} key={value}>{value}</option>
                                                 ))}
