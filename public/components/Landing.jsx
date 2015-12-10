@@ -1,8 +1,10 @@
 import React from 'react';
-import {Col, Table, Image, Input} from 'react-bootstrap';
+import {Col, Table} from 'react-bootstrap';
 import weddingProfile from '../services/weddingProfile';
 import basketActions from '../actions/basket.action';
 import basketStore from '../stores/basket.store';
+
+import GiftItem from './GiftItem.jsx';
 
 import './Landing.styl';
 
@@ -53,7 +55,7 @@ class Landing extends React.Component {
     }
 
     addToBasket(item, event) {
-        basketActions.addToBasket(item, parseInt(event.target.value));
+        basketActions.addToBasket(item, parseInt(event.target.value, 10));
     }
 
     render() {
@@ -115,22 +117,7 @@ class Landing extends React.Component {
 
                             <tbody>
                                 {this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                    <tr key={item._id}>
-                                        <th style={{maxWidth: '200px'}}><Image src={item.imageUrl} rounded responsive /></th>
-                                        <th>{item.name}</th>
-                                        <th>{item.description}</th>
-                                        <th>{item.requested}</th>
-                                        <th>{item.remaining}</th>
-                                        <th>{item.price}</th>
-                                        <th>
-                                            <Input type="select" onChange={this.addToBasket.bind(this, item)}>
-                                                <option value="0" key={0}>...select</option>
-                                                {Array.from({length: item.remaining}, (value, index) => index + 1).map(value => (
-                                                    <option value={value} key={value}>{value}</option>
-                                                ))}
-                                            </Input>
-                                        </th>
-                                    </tr>
+                                    <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} />
                                 ))}
                             </tbody>
                         </Table>
