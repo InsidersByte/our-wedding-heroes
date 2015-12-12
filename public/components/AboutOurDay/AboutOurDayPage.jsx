@@ -1,10 +1,9 @@
 import React from 'react';
-import aboutOurDayApi from '../api/aboutOurDay.api';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
+import aboutOurDayApi from '../../api/aboutOurDay.api';
+import { Jumbotron, Col } from 'react-bootstrap';
+import AboutOurDayForm from './AboutOurDayForm.jsx';
 
-class AboutOurDay extends React.Component {
+class AboutOurDayPage extends React.Component {
     constructor() {
         super();
 
@@ -26,7 +25,11 @@ class AboutOurDay extends React.Component {
             });
     }
 
-    update(event) {
+    setAboutOurDayState(event) {
+        this.setState({aboutOurDay: event.target.value});
+    }
+
+    submit(event) {
         event.preventDefault();
 
         aboutOurDayApi
@@ -45,22 +48,16 @@ class AboutOurDay extends React.Component {
                 <Jumbotron>
                     <h1>About Our Day</h1>
 
-                    <form onSubmit={this.update.bind(this)}>
-                        <Input type="textarea" rows="10" label="Content" placeholder="Enter information about your day" valueLink={this.linkState('aboutOurDay')} />
-
-                        <Button type="submit" bsStyle="primary" block>Update</Button>
-                    </form>
+                    <AboutOurDayForm aboutOurDay={this.state.aboutOurDay} onChange={this.setAboutOurDayState.bind(this)} onSubmit={this.submit.bind(this)} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-AboutOurDay.propTypes = {
+AboutOurDayPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-reactMixin(AboutOurDay.prototype, LinkedStateMixin);
-
-export default AboutOurDay;
+export default AboutOurDayPage;

@@ -1,4 +1,3 @@
-// TODO: Do this
 import React from 'react'; //eslint-disable-line
 import { Route, IndexRoute } from 'react-router';
 
@@ -15,7 +14,7 @@ import Admin from '../components/Admin.jsx';
 import AuthenticatedLanding from '../components/AuthenticatedLanding.jsx';
 import Cover from '../components/Cover.jsx';
 import AboutUs from '../components/AboutUs.jsx';
-import AboutOurDay from '../components/AboutOurDay.jsx';
+import AboutOurDay from '../components/AboutOurDay/AboutOurDayPage.jsx';
 import AboutOurHoneymoon from '../components/AboutOurHoneymoon.jsx';
 import RequestsForTheDay from '../components/RequestsForTheDay.jsx';
 import HoneymoonGiftList from '../components/HoneymoonGiftList.jsx';
