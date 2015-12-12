@@ -1,9 +1,10 @@
 import React from 'react';
-import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
+import { Jumbotron, Col, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
 import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api.js';
+import HoneymoonGiftListTable from './HoneymoonGiftListTable.jsx';
 
-class HoneymoonGiftList extends React.Component {
+class HoneymoonGiftListPage extends React.Component {
     constructor() {
         super();
 
@@ -23,7 +24,6 @@ class HoneymoonGiftList extends React.Component {
             .then(() => {
                 this.close();
                 this._loadItems();
-
                 this.props.toastSuccess('Honeymoon gift list item created');
             })
             .catch(() => {
@@ -37,7 +37,6 @@ class HoneymoonGiftList extends React.Component {
             .then(() => {
                 this.close();
                 this._loadItems();
-
                 this.props.toastSuccess('honeymoon gift list item deleted');
             })
             .catch(() => {
@@ -72,36 +71,7 @@ class HoneymoonGiftList extends React.Component {
                 <Jumbotron>
                     <h1>Honeymoon Gift List <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
-                    <Table striped bordered condensed hover responsive>
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Requested</th>
-                                <th>Remaining</th>
-                                <th>Price (£)</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {this.state.items.map(item => (
-                                <tr key={item._id}>
-                                    <th>{item.imageUrl}</th>
-                                    <th>{item.name}</th>
-                                    <th>{item.description}</th>
-                                    <th>{item.requested}</th>
-                                    <th>{item.remaining}</th>
-                                    <th>{item.price}</th>
-                                    <th>
-                                        <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
-                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
-                                    </th>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </Table>
+                    <HoneymoonGiftListTable items={this.state.items} onDelete={this.delete.bind(this)} />
                 </Jumbotron>
 
                 <HoneymoonGiftListItem show={this.state.showModal} onHide={this.close.bind(this)} onSave={this.save.bind(this)} />
@@ -110,9 +80,9 @@ class HoneymoonGiftList extends React.Component {
     }
 }
 
-HoneymoonGiftList.propTypes = {
+HoneymoonGiftListPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-export default HoneymoonGiftList;
+export default HoneymoonGiftListPage;

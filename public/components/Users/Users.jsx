@@ -23,7 +23,6 @@ class Users extends React.Component {
             .then(() => {
                 this.close();
                 this._loadUsers();
-
                 this.props.toastSuccess('User created');
             })
             .catch(() => {
@@ -37,7 +36,6 @@ class Users extends React.Component {
             .then(() => {
                 this.close();
                 this._loadUsers();
-
                 this.props.toastSuccess('User deleted');
             })
             .catch(() => {

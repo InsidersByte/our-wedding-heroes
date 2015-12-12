@@ -17,7 +17,7 @@ import AboutUsPage from '../components/AboutUs/AboutUsPage.jsx';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
 import RequestsForTheDayPage from '../components/RequestsForTheDay/RequestsForTheDayPage.jsx';
-import HoneymoonGiftList from '../components/HoneymoonGiftList/HoneymoonGiftList.jsx';
+import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage.jsx';
 import WhereIsItPage from '../components/WhereIsIt/WhereIsItPage.jsx';
 import Users from '../components/Users/Users.jsx';
 
@@ -39,7 +39,7 @@ export default (
             <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth}/>
             <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth}/>
             <Route path="requestsForTheDay" component={RequestsForTheDayPage} onEnter={requireAuth}/>
-            <Route path="honeymoonGiftList" component={HoneymoonGiftList} onEnter={requireAuth}/>
+            <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth}/>
             <Route path="whereIsIt" component={WhereIsItPage} onEnter={requireAuth}/>
             <Route path="users" component={Users} onEnter={requireAuth}/>
             <Route path="*" component={NoMatchAdmin}/>

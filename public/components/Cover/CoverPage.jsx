@@ -1,6 +1,6 @@
 import React from 'react';
 import CoverApi from '../../api/cover.api';
-import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron, Col } from 'react-bootstrap';
 import CoverForm from './CoverForm.jsx';
 
 class CoverPage extends React.Component {
