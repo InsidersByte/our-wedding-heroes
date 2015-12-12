@@ -1,5 +1,5 @@
 import React from 'react';
-import userService from '../services/user';
+import UserApi from '../api/user.api';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import User from './User.jsx';
 
@@ -21,7 +21,7 @@ class Users extends React.Component {
     }
 
     save(user) {
-        userService
+        UserApi
             .post(user)
             .then(() => {
                 this.close();
@@ -45,7 +45,7 @@ class Users extends React.Component {
     }
 
     delete(user) {
-        userService
+        UserApi
             .delete(user._id)
             .then(() => {
                 this.close();
@@ -77,7 +77,7 @@ class Users extends React.Component {
     }
 
     _loadUsers() {
-        userService
+        UserApi
             .get()
             .then((response) => {
                 this.setState({

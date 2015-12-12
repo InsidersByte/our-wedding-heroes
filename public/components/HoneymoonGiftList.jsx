@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
-import honeymoonGiftListService from '../services/honeymoonGiftList';
+import honeymoonGiftListItemApi from '../api/honeymoonGiftListItem.api';
 
 import {ToastContainer, ToastMessage} from 'react-toastr';
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
@@ -21,7 +21,7 @@ class HoneymoonGiftList extends React.Component {
     }
 
     save(item) {
-        honeymoonGiftListService
+        honeymoonGiftListItemApi
             .post(item)
             .then(() => {
                 this.close();
@@ -45,7 +45,7 @@ class HoneymoonGiftList extends React.Component {
     }
 
     delete(item) {
-        honeymoonGiftListService
+        honeymoonGiftListItemApi
             .delete(item._id)
             .then(() => {
                 this.close();
@@ -69,7 +69,7 @@ class HoneymoonGiftList extends React.Component {
     }
 
     _loadItems() {
-        honeymoonGiftListService
+        honeymoonGiftListItemApi
             .get()
             .then((response) => {
                 this.setState({

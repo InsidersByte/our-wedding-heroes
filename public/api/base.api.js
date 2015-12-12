@@ -23,12 +23,45 @@ export default class {
         });
     }
 
+    post(data) {
+        return new Promise((resolve, reject) => {
+            request
+                .post(this._baseUrl)
+                .set('Authorization', `Bearer ${loginStore.jwt}`)
+                .send(data)
+                .end((err, res) => {
+                    if (err) {
+                        reject();
+                        return;
+                    }
+
+                    resolve(JSON.parse(res.text));
+                });
+        });
+    }
+
     put(data) {
         return new Promise((resolve, reject) => {
             request
                 .put(this._baseUrl)
                 .set('Authorization', `Bearer ${loginStore.jwt}`)
                 .send(data)
+                .end((err, res) => {
+                    if (err) {
+                        reject();
+                        return;
+                    }
+
+                    resolve(JSON.parse(res.text));
+                });
+        });
+    }
+
+    delete(id) {
+        return new Promise((resolve, reject) => {
+            request
+                .delete(`${this._baseUrl}/${id}`)
+                .set('Authorization', `Bearer ${loginStore.jwt}`)
                 .end((err, res) => {
                     if (err) {
                         reject();
