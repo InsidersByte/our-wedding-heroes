@@ -1,4 +1,4 @@
-import {ADD_TO_BASKET} from '../constants/basket.constants';
+import {ADD_TO_BASKET} from '../constants/actionTypes.constants';
 import BaseStore from './base.store.js';
 
 class BasketStore extends BaseStore {

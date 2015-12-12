@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/app.dispatcher.js';
-import {LOGIN_USER, LOGOUT_USER} from '../constants/login.constants.js';
+import {LOGIN_USER, LOGOUT_USER} from '../constants/actionTypes.constants';
 import history from '../services/history';
 
 export default {

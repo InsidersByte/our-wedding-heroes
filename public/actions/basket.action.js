@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/app.dispatcher.js';
-import {ADD_TO_BASKET} from '../constants/basket.constants';
+import {ADD_TO_BASKET} from '../constants/actionTypes.constants';
 
 export default {
     addToBasket: (item, quantity) => {
