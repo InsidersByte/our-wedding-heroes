@@ -1,5 +1,4 @@
 import React from 'react';
-import aboutOurDay from '../services/aboutOurDay';
 import aboutOurDayApi from '../api/aboutOurDay.api';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
