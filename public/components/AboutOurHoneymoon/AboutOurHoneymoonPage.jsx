@@ -1,10 +1,9 @@
 import React from 'react';
-import aboutOurHoneymoonApi from '../api/aboutOurHoneymoon.api';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
+import aboutOurHoneymoonApi from '../../api/aboutOurHoneymoon.api';
+import { Jumbotron, Col } from 'react-bootstrap';
+import AboutOurHoneymoonForm from './AboutOurHoneymoonForm.jsx';
 
-class AboutOurHoneymoon extends React.Component {
+class AboutOurHoneymoonPage extends React.Component {
     constructor() {
         super();
 
@@ -26,7 +25,11 @@ class AboutOurHoneymoon extends React.Component {
             });
     }
 
-    update(event) {
+    setAboutOurHoneymoonState(event) {
+        this.setState({aboutOurHoneymoon: event.target.value});
+    }
+
+    submit(event) {
         event.preventDefault();
 
         aboutOurHoneymoonApi
@@ -45,22 +48,16 @@ class AboutOurHoneymoon extends React.Component {
                 <Jumbotron>
                     <h1>About Our Honeymoon</h1>
 
-                    <form onSubmit={this.update.bind(this)}>
-                        <Input type="textarea" rows="10" label="Content" placeholder="Enter information about your honeymoon" valueLink={this.linkState('aboutOurHoneymoon')} required />
-
-                        <Button type="submit" bsStyle="primary" block>Update</Button>
-                    </form>
+                    <AboutOurHoneymoonForm aboutOurHoneymoon={this.state.aboutOurHoneymoon} onChange={this.setAboutOurHoneymoonState.bind(this)} onSubmit={this.submit.bind(this)} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-AboutOurHoneymoon.propTypes = {
+AboutOurHoneymoonPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-reactMixin(AboutOurHoneymoon.prototype, LinkedStateMixin);
-
-export default AboutOurHoneymoon;
+export default AboutOurHoneymoonPage;

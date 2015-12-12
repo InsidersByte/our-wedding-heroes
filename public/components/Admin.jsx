@@ -123,7 +123,7 @@ class App extends React.Component {
                 <div className="container">
                     {this.props.children && React.cloneElement(this.props.children, {
                         toastSuccess: this.toastSuccess.bind(this),
-                        toastError: this.toastError.bin,
+                        toastError: this.toastError.bind(this),
                     })}
                 </div>
 

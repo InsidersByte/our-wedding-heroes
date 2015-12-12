@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button } from 'react-bootstrap';
 
-class AboutOurDayForm extends React.Component {
+class AboutOurHoneymoonForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.props.onSubmit}>
@@ -9,8 +9,8 @@ class AboutOurDayForm extends React.Component {
                     type="textarea"
                     rows="10"
                     label="Content"
-                    placeholder="Enter information about your day"
-                    value={this.props.aboutOurDay}
+                    placeholder="Enter information about your honeymoon"
+                    value={this.props.aboutOurHoneymoon}
                     onChange={this.props.onChange}
                     required />
 
@@ -20,10 +20,10 @@ class AboutOurDayForm extends React.Component {
     }
 }
 
-AboutOurDayForm.propTypes = {
-    aboutOurDay: React.PropTypes.string.isRequired,
+AboutOurHoneymoonForm.propTypes = {
+    aboutOurHoneymoon: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
 
-export default AboutOurDayForm;
+export default AboutOurHoneymoonForm;

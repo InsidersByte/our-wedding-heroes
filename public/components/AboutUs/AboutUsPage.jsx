@@ -1,10 +1,9 @@
 import React from 'react';
-import aboutUsApi from '../api/aboutUs.api';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import reactMixin from 'react-mixin';
-import { Input, Button, Jumbotron, Col} from 'react-bootstrap';
+import aboutUsApi from '../../api/aboutUs.api';
+import { Jumbotron, Col} from 'react-bootstrap';
+import AboutUsForm from './AboutUsForm.jsx';
 
-class AboutUs extends React.Component {
+class AboutUsPage extends React.Component {
     constructor() {
         super();
 
@@ -26,7 +25,11 @@ class AboutUs extends React.Component {
             });
     }
 
-    update(event) {
+    setAboutUsState(event) {
+        this.setState({aboutUs: event.target.value});
+    }
+
+    submit(event) {
         event.preventDefault();
 
         aboutUsApi
@@ -45,22 +48,16 @@ class AboutUs extends React.Component {
                 <Jumbotron>
                     <h1>About Us</h1>
 
-                    <form onSubmit={this.update.bind(this)}>
-                        <Input type="textarea" rows="10" label="Content" placeholder="Enter information about you" valueLink={this.linkState('aboutUs')} required />
-
-                        <Button type="submit" bsStyle="primary" block>Update</Button>
-                    </form>
+                    <AboutUsForm aboutUs={this.state.aboutUs} onChange={this.setAboutUsState.bind(this)} onSubmit={this.submit.bind(this)} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-AboutUs.propTypes = {
+AboutUsPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-reactMixin(AboutUs.prototype, LinkedStateMixin);
-
-export default AboutUs;
+export default AboutUsPage;

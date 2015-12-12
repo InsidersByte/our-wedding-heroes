@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 
-class WhereIsIt extends React.Component {
+class WhereIsItPage extends React.Component {
     render() {
         return (
             <Col md={6} mdOffset={3}>
@@ -15,4 +15,4 @@ class WhereIsIt extends React.Component {
     }
 }
 
-export default WhereIsIt;
+export default WhereIsItPage;

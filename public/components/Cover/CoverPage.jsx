@@ -1,16 +1,14 @@
 import React from 'react';
-import CoverApi from '../api/cover.api';
-import LinkedStateMixin from 'react-addons-linked-state-mixin';
-import reactMixin from 'react-mixin';
+import CoverApi from '../../api/cover.api';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
+import CoverForm from './CoverForm.jsx';
 
-class Cover extends React.Component {
+class CoverPage extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            title: '',
-            imageUrl: '',
+            cover: {},
         };
     }
 
@@ -19,8 +17,7 @@ class Cover extends React.Component {
             .get()
             .then((response) => {
                 this.setState({
-                    title: response.title,
-                    imageUrl: response.imageUrl,
+                    cover: response,
                 });
             })
             .catch(() => {
@@ -28,11 +25,18 @@ class Cover extends React.Component {
             });
     }
 
-    update(event) {
+    setCoverState(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+        this.state.cover[field] = value;
+        return this.setState({cover: this.state.cover});
+    }
+
+    submit(event) {
         event.preventDefault();
 
         CoverApi
-            .put(this.state)
+            .put(this.state.cover)
             .then(() => {
                 this.props.toastSuccess('Cover updated');
             })
@@ -47,24 +51,16 @@ class Cover extends React.Component {
                 <Jumbotron>
                     <h1>Cover</h1>
 
-                    <form onSubmit={this.update.bind(this)}>
-                        <Input type="text" label="Title" placeholder="Enter title" valueLink={this.linkState('title')} required />
-
-                        <Input type="url" label="Cover Image Url" placeholder="Enter url" valueLink={this.linkState('imageUrl')} required />
-
-                        <Button type="submit" bsStyle="primary" block>Update</Button>
-                    </form>
+                    <CoverForm cover={this.state.cover} onChange={this.setCoverState.bind(this)} onSubmit={this.submit.bind(this)} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-Cover.propTypes = {
+CoverPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-reactMixin(Cover.prototype, LinkedStateMixin);
-
-export default Cover;
+export default CoverPage;

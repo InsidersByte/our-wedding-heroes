@@ -1,15 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 
-class RequestsForTheDay extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            requestsForTheDay: [],
-        };
-    }
-
+class RequestsForTheDayPage extends React.Component {
     render() {
         return (
             <Col md={6} mdOffset={3}>
@@ -23,4 +15,4 @@ class RequestsForTheDay extends React.Component {
     }
 }
 
-export default RequestsForTheDay;
+export default RequestsForTheDayPage;
