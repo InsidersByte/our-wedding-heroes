@@ -3,6 +3,9 @@ import loginStore from '../stores/login.store.js';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../services/auth';
+import {ToastContainer, ToastMessage} from 'react-toastr';
+
+const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 class App extends React.Component {
     constructor() {
@@ -19,6 +22,30 @@ class App extends React.Component {
         loginStore.removeChangeListener(this.changeListener);
     }
 
+    toastSuccess(message) {
+        this.refs.container.success(
+            message,
+            'Success',
+            {
+                closeButton: true,
+            });
+    }
+
+    toastError(message) {
+        this.refs.container.error(
+            message,
+            'Error',
+            {
+                closeButton: true,
+            });
+    }
+
+    logout(event) {
+        event.preventDefault();
+
+        auth.logout();
+    }
+
     _getLoginState() {
         return {
             userLoggedIn: loginStore.isLoggedIn(),
@@ -27,12 +54,6 @@ class App extends React.Component {
 
     _onChange() {
         this.setState(this._getLoginState());
-    }
-
-    logout(event) {
-        event.preventDefault();
-
-        auth.logout();
     }
 
     render() {
@@ -98,9 +119,15 @@ class App extends React.Component {
                         {headerItems}
                     </Navbar.Collapse>
                 </Navbar>
+
                 <div className="container">
-                    {this.props.children}
+                    {this.props.children && React.cloneElement(this.props.children, {
+                        toastSuccess: this.toastSuccess.bind(this),
+                        toastError: this.toastError.bind(this),
+                    })}
                 </div>
+
+                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
             </div>
         );
     }

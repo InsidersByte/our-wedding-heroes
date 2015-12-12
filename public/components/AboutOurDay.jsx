@@ -4,9 +4,6 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class AboutOurDay extends React.Component {
     constructor() {
         super();
@@ -25,12 +22,7 @@ class AboutOurDay extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error loading the about our day data',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error loading the about our day data');
             });
     }
 
@@ -40,33 +32,21 @@ class AboutOurDay extends React.Component {
         aboutOurDayApi
             .put(this.state)
             .then(() => {
-                this.refs.container.success(
-                    'About our day updated',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('About our day updated');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error saving about our day',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error saving about our day');
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>About Our Day</h1>
 
                     <form onSubmit={this.update.bind(this)}>
-                        <Input type="textarea" rows="10" label="Content" placeholder="Enter information about your day" valueLink={this.linkState('aboutOurDay')} required />
+                        <Input type="textarea" rows="10" label="Content" placeholder="Enter information about your day" valueLink={this.linkState('aboutOurDay')} />
 
                         <Button type="submit" bsStyle="primary" block>Update</Button>
                     </form>
@@ -75,6 +55,11 @@ class AboutOurDay extends React.Component {
         );
     }
 }
+
+AboutOurDay.propTypes = {
+    toastSuccess: React.PropTypes.func.isRequired,
+    toastError: React.PropTypes.func.isRequired,
+};
 
 reactMixin(AboutOurDay.prototype, LinkedStateMixin);
 
