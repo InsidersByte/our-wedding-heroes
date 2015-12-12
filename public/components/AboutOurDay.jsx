@@ -1,5 +1,6 @@
 import React from 'react';
 import aboutOurDay from '../services/aboutOurDay';
+import aboutOurDayApi from '../api/aboutOurDay.api';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
@@ -17,7 +18,7 @@ class AboutOurDay extends React.Component {
     }
 
     componentDidMount() {
-        aboutOurDay
+        aboutOurDayApi
             .get()
             .then((response) => {
                 this.setState({
@@ -37,7 +38,7 @@ class AboutOurDay extends React.Component {
     update(event) {
         event.preventDefault();
 
-        aboutOurDay
+        aboutOurDayApi
             .put(this.state)
             .then(() => {
                 this.refs.container.success(

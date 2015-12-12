@@ -46,6 +46,7 @@
     "react-router": "^1.0.0",
     "react-toastr": "^2.2.2",
     "reqwest": "^2.0.5",
+    "superagent": "^1.5.0",
     "when": "^3.7.4"
   },
   "devDependencies": {
