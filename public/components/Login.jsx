@@ -19,11 +19,11 @@ class Login extends React.Component {
 
         auth
             .login(this.state.username, this.state.password)
+            .then(() => {
+                this.props.toastSuccess('Logged in');
+            })
             .catch((err) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an error logging in'); //eslint-disable-line
-                console.log('Error logging in', err); //eslint-disable-line
+                this.props.toastError('There was an error loggin in');
             });
     }
 
@@ -45,6 +45,11 @@ class Login extends React.Component {
         );
     }
 }
+
+Login.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 reactMixin(Login.prototype, LinkedStateMixin);
 

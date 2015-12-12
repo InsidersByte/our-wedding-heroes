@@ -3,9 +3,6 @@ import UserApi from '../api/user.api';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import User from './User.jsx';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class Users extends React.Component {
     constructor() {
         super();
@@ -27,20 +24,10 @@ class Users extends React.Component {
                 this.close();
                 this._loadUsers();
 
-                this.refs.container.success(
-                    'User created',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('User created');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error creating a user',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error creating a user');
             });
     }
 
@@ -51,20 +38,10 @@ class Users extends React.Component {
                 this.close();
                 this._loadUsers();
 
-                this.refs.container.success(
-                    'User deleted',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('User deleted');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error deleting a user',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error deleting a user');
             });
     }
 
@@ -85,20 +62,13 @@ class Users extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error getting users',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error getting users');
             });
     }
 
     render() {
         return (
             <Col md={8} mdOffset={2}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>Users <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
@@ -131,5 +101,10 @@ class Users extends React.Component {
         );
     }
 }
+
+Users.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 export default Users;

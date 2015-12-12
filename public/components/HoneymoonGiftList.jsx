@@ -3,9 +3,6 @@ import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
 import honeymoonGiftListItemApi from '../api/honeymoonGiftListItem.api';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class HoneymoonGiftList extends React.Component {
     constructor() {
         super();
@@ -27,20 +24,10 @@ class HoneymoonGiftList extends React.Component {
                 this.close();
                 this._loadItems();
 
-                this.refs.container.success(
-                    'Honeymoon gift list item created',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('Honeymoon gift list item created');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error creating honeymoon gift list item',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error creating honeymoon gift list item');
             });
     }
 
@@ -51,20 +38,10 @@ class HoneymoonGiftList extends React.Component {
                 this.close();
                 this._loadItems();
 
-                this.refs.container.success(
-                    'honeymoon gift list item deleted',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('honeymoon gift list item deleted');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error deleting honeymoon gift list item',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error deleting honeymoon gift list item');
             });
     }
 
@@ -77,12 +54,7 @@ class HoneymoonGiftList extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error getting honeymoon gift list items',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error getting honeymoon gift list items');
             });
     }
 
@@ -97,8 +69,6 @@ class HoneymoonGiftList extends React.Component {
     render() {
         return (
             <Col md={12}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>Honeymoon Gift List <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this)}><Glyphicon glyph="plus" /></Button></h1>
 
@@ -139,5 +109,10 @@ class HoneymoonGiftList extends React.Component {
         );
     }
 }
+
+HoneymoonGiftList.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 export default HoneymoonGiftList;

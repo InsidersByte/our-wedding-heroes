@@ -4,9 +4,6 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class Cover extends React.Component {
     constructor() {
         super();
@@ -27,12 +24,7 @@ class Cover extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error getting cover',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error saving getting cover');
             });
     }
 
@@ -42,28 +34,16 @@ class Cover extends React.Component {
         CoverApi
             .put(this.state)
             .then(() => {
-                this.refs.container.success(
-                    'Cover updated',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('Cover updated');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error saving cover',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error saving cover');
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>Cover</h1>
 
@@ -79,6 +59,11 @@ class Cover extends React.Component {
         );
     }
 }
+
+Cover.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 reactMixin(Cover.prototype, LinkedStateMixin);
 

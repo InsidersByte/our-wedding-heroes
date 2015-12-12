@@ -4,9 +4,6 @@ import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 import auth from '../services/auth';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class Setup extends React.Component {
     constructor() {
         super();
@@ -24,28 +21,16 @@ class Setup extends React.Component {
         auth
             .setup(this.state.username, this.state.password, this.state.name)
             .then(() => {
-                this.refs.container.success(
-                    'Setup successful',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('Setup successful');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'Setup failed',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error setting up');
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>Setup</h1>
 
@@ -64,7 +49,11 @@ class Setup extends React.Component {
     }
 }
 
-// We’re using the mixin `LinkStateMixin` to have two-way databinding between our component and the HTML.
+Setup.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
+
 reactMixin(Setup.prototype, LinkedStateMixin);
 
 export default Setup;

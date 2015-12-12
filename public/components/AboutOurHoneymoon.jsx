@@ -4,9 +4,6 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class AboutOurHoneymoon extends React.Component {
     constructor() {
         super();
@@ -25,12 +22,7 @@ class AboutOurHoneymoon extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error getting about our honeymoon',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error getting about our honeymoon');
             });
     }
 
@@ -40,28 +32,16 @@ class AboutOurHoneymoon extends React.Component {
         aboutOurHoneymoonApi
             .put(this.state)
             .then(() => {
-                this.refs.container.success(
-                    'About our honeymoon updated',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('About our honeymoon updated');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error saving about our honeymoon',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error saving about our honeymoon');
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>About Our Honeymoon</h1>
 
@@ -75,6 +55,11 @@ class AboutOurHoneymoon extends React.Component {
         );
     }
 }
+
+AboutOurHoneymoon.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 reactMixin(AboutOurHoneymoon.prototype, LinkedStateMixin);
 

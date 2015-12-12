@@ -57,8 +57,8 @@ class AboutOurDay extends React.Component {
 }
 
 AboutOurDay.propTypes = {
-    toastSuccess: React.PropTypes.func.isRequired,
-    toastError: React.PropTypes.func.isRequired,
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
 };
 
 reactMixin(AboutOurDay.prototype, LinkedStateMixin);

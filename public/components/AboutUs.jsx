@@ -4,9 +4,6 @@ import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col} from 'react-bootstrap';
 
-import {ToastContainer, ToastMessage} from 'react-toastr';
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
-
 class AboutUs extends React.Component {
     constructor() {
         super();
@@ -25,12 +22,7 @@ class AboutUs extends React.Component {
                 });
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error getting about us',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error getting about us');
             });
     }
 
@@ -40,28 +32,16 @@ class AboutUs extends React.Component {
         aboutUsApi
             .put(this.state)
             .then(() => {
-                this.refs.container.success(
-                    'About us updated',
-                    'Success',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastSuccess('About us updated');
             })
             .catch(() => {
-                this.refs.container.error(
-                    'There was an error saving about us',
-                    'Error',
-                    {
-                        closeButton: true,
-                    });
+                this.props.toastError('There was an error saving about us');
             });
     }
 
     render() {
         return (
             <Col md={6} mdOffset={3}>
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
-
                 <Jumbotron>
                     <h1>About Us</h1>
 
@@ -75,6 +55,11 @@ class AboutUs extends React.Component {
         );
     }
 }
+
+AboutUs.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 reactMixin(AboutUs.prototype, LinkedStateMixin);
 
