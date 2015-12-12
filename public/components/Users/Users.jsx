@@ -1,5 +1,5 @@
 import React from 'react';
-import UserApi from '../api/user.api';
+import UserApi from '../../api/user.api.js';
 import { Jumbotron, Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import User from './User.jsx';
 

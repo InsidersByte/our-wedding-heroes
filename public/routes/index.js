@@ -7,9 +7,9 @@ import NoMatch from '../components/NoMatch.jsx';
 import NoMatchAdmin from '../components/NoMatchAdmin.jsx';
 
 import App from '../components/App.jsx';
-import Landing from '../components/Landing.jsx';
-import Login from '../components/Login.jsx';
-import Setup from '../components/Setup/SetupPage.jsx';
+import LandingPage from '../components/Landing/LandingPage.jsx';
+import LoginPage from '../components/Login/LoginPage.jsx';
+import SetupPage from '../components/Setup/SetupPage.jsx';
 import Admin from '../components/Admin.jsx';
 import AuthenticatedLanding from '../components/AuthenticatedLanding.jsx';
 import CoverPage from '../components/Cover/CoverPage.jsx';
@@ -17,9 +17,9 @@ import AboutUsPage from '../components/AboutUs/AboutUsPage.jsx';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
 import RequestsForTheDayPage from '../components/RequestsForTheDay/RequestsForTheDayPage.jsx';
-import HoneymoonGiftList from '../components/HoneymoonGiftList.jsx';
+import HoneymoonGiftList from '../components/HoneymoonGiftList/HoneymoonGiftList.jsx';
 import WhereIsItPage from '../components/WhereIsIt/WhereIsItPage.jsx';
-import Users from '../components/Users.jsx';
+import Users from '../components/Users/Users.jsx';
 
 function requireAuth(nextState, replaceState) {
     if (!loginStore.isLoggedIn()) {
@@ -29,11 +29,11 @@ function requireAuth(nextState, replaceState) {
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={Landing}/>
+        <IndexRoute component={LandingPage}/>
         <Route path="admin" component={Admin}>
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth}/>
-            <Route path="login" component={Login}/>
-            <Route path="setup" component={Setup}/>
+            <Route path="login" component={LoginPage}/>
+            <Route path="setup" component={SetupPage}/>
             <Route path="cover" component={CoverPage} onEnter={requireAuth}/>
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth}/>
             <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth}/>

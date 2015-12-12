@@ -1,14 +1,13 @@
 import React from 'react';
 import {Col, Table} from 'react-bootstrap';
-import WeddingProfileApi from '../api/weddingProfile.api';
-import basketActions from '../actions/basket.action';
-import basketStore from '../stores/basket.store';
-
+import WeddingProfileApi from '../../api/weddingProfile.api.js';
+import basketActions from '../../actions/basket.action.js';
+import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 
 import './Landing.styl';
 
-class Landing extends React.Component {
+class LandingPage extends React.Component {
     constructor() {
         super();
 
@@ -158,4 +157,4 @@ class Landing extends React.Component {
     }
 }
 
-export default Landing;
+export default LandingPage;

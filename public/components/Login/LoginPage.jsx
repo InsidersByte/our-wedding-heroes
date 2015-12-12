@@ -1,9 +1,9 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import auth from '../../services/auth';
-import SetupForm from './SetupForm.jsx';
+import LoginForm from './LoginForm.jsx';
 
-class SetupPage extends React.Component {
+class Login extends React.Component {
     constructor() {
         super();
 
@@ -23,12 +23,12 @@ class SetupPage extends React.Component {
         event.preventDefault();
 
         auth
-            .setup(this.state.user)
+            .login(this.state.user)
             .then(() => {
-                this.props.toastSuccess('Setup successful');
+                this.props.toastSuccess('Logged in');
             })
             .catch(() => {
-                this.props.toastError('There was an error setting up');
+                this.props.toastError('There was an error logging in');
             });
     }
 
@@ -36,18 +36,18 @@ class SetupPage extends React.Component {
         return (
             <Col md={6} mdOffset={3}>
                 <Jumbotron>
-                    <h1>Setup</h1>
+                    <h1>Login</h1>
 
-                    <SetupForm user={this.state.user} onChange={this.setUserState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <LoginForm user={this.state.user} onChange={this.setUserState.bind(this)} onSubmit={this.submit.bind(this)} />
                 </Jumbotron>
             </Col>
         );
     }
 }
 
-SetupPage.propTypes = {
+Login.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-export default SetupPage;
+export default Login;
