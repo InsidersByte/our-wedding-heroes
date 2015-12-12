@@ -123,6 +123,36 @@ class Landing extends React.Component {
                         </Table>
                     </Col>
                 </section>
+
+                <section className="landing__section">
+                    <h1 className="landing__section__heading">Basket</h1>
+
+                    <Col md={8} mdOffset={2}>
+                        <Table condensed responsive>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price (£)</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {
+                                    this.state.items.map(item => (
+                                        <tr key={item._id}>
+                                            <th>{item.name}</th>
+                                            <th>{item.quantity}</th>
+                                            <th>{item.price}</th>
+                                            <th>Coming Soon!</th>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </Table>
+                    </Col>
+                </section>
             </div>
         );
     }
