@@ -1,5 +1,5 @@
 import React from 'react';
-import cover from '../services/cover';
+import CoverApi from '../api/cover.api';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col } from 'react-bootstrap';
@@ -18,7 +18,7 @@ class Cover extends React.Component {
     }
 
     componentDidMount() {
-        cover
+        CoverApi
             .get()
             .then((response) => {
                 this.setState({
@@ -39,7 +39,7 @@ class Cover extends React.Component {
     update(event) {
         event.preventDefault();
 
-        cover
+        CoverApi
             .put(this.state)
             .then(() => {
                 this.refs.container.success(

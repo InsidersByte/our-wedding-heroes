@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Table} from 'react-bootstrap';
-import weddingProfile from '../services/weddingProfile';
+import WeddingProfileApi from '../api/weddingProfile.api';
 import basketActions from '../actions/basket.action';
 import basketStore from '../stores/basket.store';
 
@@ -27,7 +27,7 @@ class Landing extends React.Component {
     }
 
     componentDidMount() {
-        weddingProfile
+        WeddingProfileApi
             .get()
             .then((response) => {
                 this.setState({

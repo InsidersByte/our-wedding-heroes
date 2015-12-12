@@ -1,5 +1,5 @@
 import React from 'react';
-import aboutUs from '../services/aboutUs';
+import aboutUsApi from '../api/aboutUs.api';
 import LinkedStateMixin from 'react-addons-linked-state-mixin';
 import reactMixin from 'react-mixin';
 import { Input, Button, Jumbotron, Col} from 'react-bootstrap';
@@ -17,7 +17,7 @@ class AboutUs extends React.Component {
     }
 
     componentDidMount() {
-        aboutUs
+        aboutUsApi
             .get()
             .then((response) => {
                 this.setState({
@@ -37,7 +37,7 @@ class AboutUs extends React.Component {
     update(event) {
         event.preventDefault();
 
-        aboutUs
+        aboutUsApi
             .put(this.state)
             .then(() => {
                 this.refs.container.success(

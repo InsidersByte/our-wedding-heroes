@@ -1,13 +1,11 @@
-import baseApi from './base.api';
+import BaseApi from './base.api';
 
 const apiUrl = 'aboutOurDay';
 
-export default {
-    get() {
-        return baseApi.get(apiUrl);
-    },
+class AboutOurDayApi extends BaseApi {
+    constructor() {
+        super(apiUrl);
+    }
+}
 
-    put(data) {
-        return baseApi.put(apiUrl, data);
-    },
-};
+export default new AboutOurDayApi;
