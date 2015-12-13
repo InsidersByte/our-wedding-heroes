@@ -19,6 +19,13 @@ class HoneymoonGiftListPage extends React.Component {
         this._loadItems();
     }
 
+    setItemState(event) {
+        const field = event.target.name;
+        const value = event.target.value;
+        this.state.item[field] = value;
+        return this.setState({item: this.state.item});
+    }
+
     save(item) {
         if (item._id) {
             honeymoonGiftListItemApi
@@ -77,13 +84,6 @@ class HoneymoonGiftListPage extends React.Component {
 
     open(item) {
         this.setState({showModal: true, item});
-    }
-
-    setItemState(event) {
-        const field = event.target.name;
-        const value = event.target.value;
-        this.state.item[field] = value;
-        return this.setState({item: this.state.item});
     }
 
     render() {
