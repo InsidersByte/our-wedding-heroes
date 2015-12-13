@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Table} from 'react-bootstrap';
+import {Col, Table, Button, Glyphicon} from 'react-bootstrap';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
@@ -55,6 +55,10 @@ class LandingPage extends React.Component {
 
     addToBasket(item, event) {
         basketActions.addToBasket(item, parseInt(event.target.value, 10));
+    }
+
+    removeFromBasket(item) {
+        basketActions.removeFromBasket(item);
     }
 
     render() {
@@ -131,8 +135,8 @@ class LandingPage extends React.Component {
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Quantity</th>
                                     <th>Price (£)</th>
+                                    <th>Quantity</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
@@ -142,9 +146,9 @@ class LandingPage extends React.Component {
                                     this.state.items.map(item => (
                                         <tr key={item._id}>
                                             <th>{item.name}</th>
-                                            <th>{item.quantity}</th>
                                             <th>{item.price}</th>
-                                            <th>Coming Soon!</th>
+                                            <th>{item.quantity}</th>
+                                            <th><Button bsSize="xsmall" bsStyle="danger" onClick={this.removeFromBasket.bind(this, item)}><Glyphicon glyph="trash" /></Button></th>
                                         </tr>
                                     ))
                                 }

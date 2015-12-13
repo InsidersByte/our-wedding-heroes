@@ -1,4 +1,4 @@
-import {ADD_TO_BASKET} from '../constants/actionTypes.constants';
+import {ADD_TO_BASKET, REMOVE_FROM_BASKET} from '../constants/actionTypes.constants';
 import BaseStore from './base.store.js';
 
 class BasketStore extends BaseStore {
@@ -26,6 +26,12 @@ class BasketStore extends BaseStore {
                     existingItem.quantity = action.quantity;
                 }
 
+                this.emitChange();
+                break;
+
+            case REMOVE_FROM_BASKET:
+                const index = this._items.findIndex(item => item._id === action.item._id);
+                this._items.splice(index, 1);
                 this.emitChange();
                 break;
 
