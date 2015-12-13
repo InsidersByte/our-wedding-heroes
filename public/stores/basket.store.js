@@ -15,10 +15,15 @@ class BasketStore extends BaseStore {
     _registerToActions(action) {
         switch (action.actionType) {
             case ADD_TO_BASKET:
-                const existingItem = this._items.find(item => item._id === action.item._id);
+                const existingItemIndex = this._items.findIndex(item => item._id === action.item._id);
 
-                if (existingItem === undefined) {
+                if (existingItemIndex === -1) {
                     this._items.push(Object.assign({}, action.item, {quantity: action.quantity}));
+                } else if (action.quantity === 0) {
+                    this._items.splice(existingItemIndex, 1);
+                } else {
+                    const existingItem = this._items[existingItemIndex];
+                    existingItem.quantity = action.quantity;
                 }
 
                 this.emitChange();
