@@ -40,10 +40,16 @@ export default class {
         });
     }
 
-    put(data) {
+    put(data, id) {
+        let url = this._baseUrl;
+
+        if (id) {
+            url += `/${id}`;
+        }
+
         return new Promise((resolve, reject) => {
             request
-                .put(this._baseUrl)
+                .put(url)
                 .set('Authorization', `Bearer ${loginStore.jwt}`)
                 .send(data)
                 .end((err, res) => {

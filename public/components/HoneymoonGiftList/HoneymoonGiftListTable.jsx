@@ -6,6 +6,10 @@ class HoneymoonGiftListTable extends React.Component {
         this.props.onDelete(item);
     }
 
+    edit(item) {
+        this.props.onEdit(item);
+    }
+
     render() {
         return (
             <Table striped bordered condensed hover responsive>
@@ -32,7 +36,7 @@ class HoneymoonGiftListTable extends React.Component {
                             <th>{item.remaining}</th>
                             <th>{item.price}</th>
                             <th>
-                                <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
+                                <Button bsSize="xsmall" bsStyle="primary" onClick={this.edit.bind(this, item)}><Glyphicon glyph="pencil" /></Button>
                                 <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
                             </th>
                         </tr>
@@ -46,6 +50,7 @@ class HoneymoonGiftListTable extends React.Component {
 
 HoneymoonGiftListTable.propTypes = {
     items: React.PropTypes.array.isRequired,
+    onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
 
