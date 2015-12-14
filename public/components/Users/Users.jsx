@@ -44,11 +44,11 @@ class Users extends React.Component {
     }
 
     close() {
-        this.setState({showModal: false});
+        this.setState({ showModal: false });
     }
 
     open() {
-        this.setState({showModal: true});
+        this.setState({ showModal: true });
     }
 
     _loadUsers() {
@@ -86,7 +86,7 @@ class Users extends React.Component {
                                     <th>{user.username}</th>
                                     <th>
                                         <Button bsSize="xsmall" bsStyle="primary"><Glyphicon glyph="pencil" /></Button>
-                                        <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, user)}><Glyphicon glyph="trash" /></Button>
+                                        <Button bsSize="xsmall" bsStyle="danger" style={{ marginLeft: '5px' }} onClick={this.delete.bind(this, user)}><Glyphicon glyph="trash" /></Button>
                                     </th>
                                 </tr>
                             ))}

@@ -1,4 +1,4 @@
-import {LOGIN_USER, LOGOUT_USER} from '../constants/actionTypes.constants';
+import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.constants';
 import BaseStore from './base.store.js';
 import jwtDecode from 'jwt-decode';
 

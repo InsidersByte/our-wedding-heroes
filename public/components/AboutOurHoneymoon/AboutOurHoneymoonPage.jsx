@@ -26,7 +26,7 @@ class AboutOurHoneymoonPage extends React.Component {
     }
 
     setAboutOurHoneymoonState(event) {
-        this.setState({aboutOurHoneymoon: event.target.value});
+        this.setState({ aboutOurHoneymoon: event.target.value });
     }
 
     submit(event) {

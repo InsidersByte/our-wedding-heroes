@@ -4,9 +4,9 @@ const encryption = require('../utilities/encryption');
 
 const UserSchema = new Schema({
     name: String,
-    username: { type: String, required: true, index: { unique: true }},
+    username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true, select: false },
-    salt: {type: String, select: false},
+    salt: { type: String, select: false },
 });
 
 UserSchema.pre('save', function preSave(next) {

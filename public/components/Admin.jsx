@@ -3,7 +3,7 @@ import loginStore from '../stores/login.store.js';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../services/auth';
-import {ToastContainer, ToastMessage} from 'react-toastr';
+import { ToastContainer, ToastMessage } from 'react-toastr';
 
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
@@ -133,6 +133,8 @@ class App extends React.Component {
     }
 }
 
-App.propTypes = {children: React.PropTypes.element.isRequired};
+App.propTypes = {
+    children: React.PropTypes.element.isRequired,
+};
 
 export default App;

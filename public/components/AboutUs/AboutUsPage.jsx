@@ -1,6 +1,6 @@
 import React from 'react';
 import aboutUsApi from '../../api/aboutUs.api';
-import { Jumbotron, Col} from 'react-bootstrap';
+import { Jumbotron, Col } from 'react-bootstrap';
 import AboutUsForm from './AboutUsForm.jsx';
 
 class AboutUsPage extends React.Component {
@@ -26,7 +26,7 @@ class AboutUsPage extends React.Component {
     }
 
     setAboutUsState(event) {
-        this.setState({aboutUs: event.target.value});
+        this.setState({ aboutUs: event.target.value });
     }
 
     submit(event) {

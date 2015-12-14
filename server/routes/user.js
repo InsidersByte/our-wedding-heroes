@@ -33,12 +33,12 @@ module.exports = (app, express) => {
 
                 yield user.save();
 
-                res.json({message: 'User created!'});
+                res.json({ message: 'User created!' });
             } catch (error) {
                 if (error.code === 11000) {
                     return res
                         .status(400)
-                        .json({success: false, message: 'A user with that username already exists. '});
+                        .json({ success: false, message: 'A user with that username already exists. ' });
                 }
 
                 return next(error);
@@ -48,9 +48,9 @@ module.exports = (app, express) => {
 
     router.route('/:userId')
         .delete(co.wrap(function* deleteUser(req, res) {
-            yield User.remove({_id: req.params.userId});
+            yield User.remove({ _id: req.params.userId });
 
-            return res.json({message: 'Successfully deleted'});
+            return res.json({ message: 'Successfully deleted' });
         }));
 
     return router;

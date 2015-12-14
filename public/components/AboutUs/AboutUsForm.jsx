@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button} from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
 
 class AboutUsForm extends React.Component {
     render() {

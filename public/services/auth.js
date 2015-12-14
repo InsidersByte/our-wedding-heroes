@@ -1,6 +1,6 @@
 import when from 'when';
 import request from 'reqwest';
-import {LOGIN_URL, SETUP_URL} from '../constants/login.constants.js';
+import { LOGIN_URL, SETUP_URL } from '../constants/login.constants.js';
 import loginActions from '../actions/login.action.js';
 
 class Auth {
@@ -10,9 +10,7 @@ class Auth {
             url: LOGIN_URL,
             method: 'POST',
             type: 'json',
-            data: {
-                ...user,
-            },
+            data: user,
         }))
         .then((response) => {
             const jwt = response.token;
@@ -29,9 +27,7 @@ class Auth {
             url: SETUP_URL,
             method: 'POST',
             type: 'json',
-            data: {
-                ...user,
-            },
+            data: user,
         }))
         .then((response) => {
             const jwt = response.token;

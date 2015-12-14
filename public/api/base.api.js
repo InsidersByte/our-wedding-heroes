@@ -1,6 +1,6 @@
 import request from 'superagent';
 import loginStore from '../stores/login.store';
-import {BASE_URL} from '../constants/api.constants';
+import { BASE_URL } from '../constants/api.constants';
 
 export default class {
     constructor(baseUrl) {

@@ -47,7 +47,7 @@ module.exports = (app, express) => {
 
                 res
                     .status(201)
-                    .json({message: 'Honeymoon Gift Item Created!'});
+                    .json({ message: 'Honeymoon Gift Item Created!' });
             } catch (error) {
                 return next(error);
             }
@@ -78,7 +78,7 @@ module.exports = (app, express) => {
                 if (!honeymoonGiftItem) {
                     return res
                         .status(400)
-                        .send({message: 'Cannot find honeymoon gift item'});
+                        .send({ message: 'Cannot find honeymoon gift item' });
                 }
 
                 honeymoonGiftItem.imageUrl = req.body.imageUrl;
@@ -89,7 +89,7 @@ module.exports = (app, express) => {
 
                 yield weddingProfile.save();
 
-                return res.json({message: 'Honeymoon Gift Item Updated!'});
+                return res.json({ message: 'Honeymoon Gift Item Updated!' });
             } catch (error) {
                 next(error);
             }
@@ -113,7 +113,7 @@ module.exports = (app, express) => {
 
                 yield weddingProfile.save();
 
-                return res.json({message: 'Successfully deleted'});
+                return res.json({ message: 'Successfully deleted' });
             } catch (error) {
                 return next(error);
             }

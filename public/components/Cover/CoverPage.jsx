@@ -29,7 +29,7 @@ class CoverPage extends React.Component {
         const field = event.target.name;
         const value = event.target.value;
         this.state.cover[field] = value;
-        return this.setState({cover: this.state.cover});
+        return this.setState({ cover: this.state.cover });
     }
 
     submit(event) {

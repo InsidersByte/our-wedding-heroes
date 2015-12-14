@@ -11,7 +11,7 @@ const honeymoonGiftListItemSchema = new Schema(
         imageUrl: { type: String, required: true },
         name: { type: String, required: true },
         description: { type: String, required: true },
-        requested: {type: Number, min: 1, required: true},
+        requested: { type: Number, min: 1, required: true },
         price: { type: Number, required: true, min: 0 },
     },
     {

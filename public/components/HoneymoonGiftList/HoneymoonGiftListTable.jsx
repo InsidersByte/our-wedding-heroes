@@ -37,7 +37,7 @@ class HoneymoonGiftListTable extends React.Component {
                             <th>{item.price}</th>
                             <th>
                                 <Button bsSize="xsmall" bsStyle="primary" onClick={this.edit.bind(this, item)}><Glyphicon glyph="pencil" /></Button>
-                                <Button bsSize="xsmall" bsStyle="danger" style={{marginLeft: '5px'}} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
+                                <Button bsSize="xsmall" bsStyle="danger" style={{ marginLeft: '5px' }} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
                             </th>
                         </tr>
                     ))

@@ -26,7 +26,7 @@ class AboutOurDayPage extends React.Component {
     }
 
     setAboutOurDayState(event) {
-        this.setState({aboutOurDay: event.target.value});
+        this.setState({ aboutOurDay: event.target.value });
     }
 
     submit(event) {

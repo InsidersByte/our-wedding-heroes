@@ -16,7 +16,7 @@ class SetupPage extends React.Component {
         const field = event.target.name;
         const value = event.target.value;
         this.state.user[field] = value;
-        return this.setState({user: this.state.user});
+        return this.setState({ user: this.state.user });
     }
 
     submit(event) {

@@ -12,7 +12,7 @@ module.exports = (app, express) => {
                 if (userCount >= 1) {
                     return res
                         .status(400)
-                        .send({success: false, message: 'Setup has already been run'});
+                        .send({ success: false, message: 'Setup has already been run' });
                 }
 
                 req.checkBody('name').notEmpty();
@@ -39,7 +39,7 @@ module.exports = (app, express) => {
                     if (err.code === 11000) {
                         return res
                             .status(400)
-                            .json({success: false, message: 'A user with that username already exists.'});
+                            .json({ success: false, message: 'A user with that username already exists.' });
                     }
 
                     return res
@@ -47,7 +47,7 @@ module.exports = (app, express) => {
                         .send(err);
                 }
 
-                return res.json({message: 'User created!'});
+                return res.json({ message: 'User created!' });
             } catch (error) {
                 next(error);
             }

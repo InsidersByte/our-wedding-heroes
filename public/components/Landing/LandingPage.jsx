@@ -1,9 +1,10 @@
 import React from 'react';
-import {Col, Table, Button, Glyphicon} from 'react-bootstrap';
+import { Col, Table } from 'react-bootstrap';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
+import Basket from './Basket.jsx';
 
 import './Landing.styl';
 
@@ -19,7 +20,9 @@ class LandingPage extends React.Component {
                 aboutOurHoneymoon: '',
                 honeymoonGiftListItems: [],
             },
-            items: [],
+            items: {},
+            total: 0,
+            basketCount: 0,
         };
 
         this._onChange = this._onChange.bind(this);
@@ -50,6 +53,8 @@ class LandingPage extends React.Component {
     _onChange() {
         this.setState({
             items: basketStore.items,
+            total: basketStore.total,
+            basketCount: basketStore.count,
         });
     }
 
@@ -64,7 +69,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="landing">
-                <header className="landing__header" style={{backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})`}}>
+                <header className="landing__header" style={{ backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` }}>
                     <div className="landing__header__overlay"></div>
                     <div className="landing__header__content">
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
@@ -119,43 +124,17 @@ class LandingPage extends React.Component {
                             </thead>
 
                             <tbody>
-                                {this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                    <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} />
-                                ))}
-                            </tbody>
-                        </Table>
-                    </Col>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">Basket</h1>
-
-                    <Col md={8} mdOffset={2}>
-                        <Table condensed responsive className="table--vertical-align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Price (£)</th>
-                                    <th>Quantity</th>
-                                    <th>Remove</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
                                 {
-                                    this.state.items.map(item => (
-                                        <tr key={item._id}>
-                                            <th>{item.name}</th>
-                                            <th>{item.price}</th>
-                                            <th>{item.quantity}</th>
-                                            <th><Button bsSize="xsmall" bsStyle="danger" onClick={this.removeFromBasket.bind(this, item)}><Glyphicon glyph="trash" /></Button></th>
-                                        </tr>
+                                    this.state.weddingProfile.honeymoonGiftListItems.map(item => (
+                                        <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
                                     ))
                                 }
                             </tbody>
                         </Table>
                     </Col>
                 </section>
+
+                { this.state.basketCount > 0 ? <Basket items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} /> : null }
             </div>
         );
     }

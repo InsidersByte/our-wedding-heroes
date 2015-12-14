@@ -23,7 +23,7 @@ class HoneymoonGiftListPage extends React.Component {
         const field = event.target.name;
         const value = event.target.value;
         this.state.item[field] = value;
-        return this.setState({item: this.state.item});
+        return this.setState({ item: this.state.item });
     }
 
     save(item) {
@@ -79,11 +79,11 @@ class HoneymoonGiftListPage extends React.Component {
     }
 
     close() {
-        this.setState({showModal: false});
+        this.setState({ showModal: false });
     }
 
     open(item) {
-        this.setState({showModal: true, item});
+        this.setState({ showModal: true, item });
     }
 
     render() {
