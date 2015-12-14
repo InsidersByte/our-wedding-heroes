@@ -131,7 +131,7 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">Basket</h1>
 
                     <Col md={8} mdOffset={2}>
-                        <Table condensed responsive>
+                        <Table condensed responsive className="table--vertical-align-middle">
                             <thead>
                                 <tr>
                                     <th>Name</th>

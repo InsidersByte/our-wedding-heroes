@@ -18,12 +18,10 @@ class BasketStore extends BaseStore {
                 const existingItemIndex = this._items.findIndex(item => item._id === action.item._id);
 
                 if (existingItemIndex === -1) {
-                    this._items.push(Object.assign({}, action.item, {quantity: action.quantity}));
-                } else if (action.quantity === 0) {
-                    this._items.splice(existingItemIndex, 1);
+                    this._items.push(Object.assign({}, action.item, {quantity: 1}));
                 } else {
                     const existingItem = this._items[existingItemIndex];
-                    existingItem.quantity = action.quantity;
+                    existingItem.quantity += 1;
                 }
 
                 this.emitChange();

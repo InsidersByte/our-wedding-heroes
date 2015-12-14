@@ -1,7 +1,11 @@
 import React from 'react';
-import {Image, Input} from 'react-bootstrap';
+import {Image, Input, Button} from 'react-bootstrap';
 
 class GiftItem extends React.Component {
+    addToBasket() {
+        console.log(this.refs.quantity.val);
+    }
+
     render() {
         return (
             <tr key={this.props.item._id}>
@@ -12,14 +16,7 @@ class GiftItem extends React.Component {
                 <th>{this.props.item.remaining}</th>
                 <th>{this.props.item.price}</th>
                 <th>
-                    <Input type="select" onChange={this.props.addToBasket}>
-                        <option value="0" key={0}>...select</option>
-                        {
-                            Array.from({length: this.props.item.remaining}, (value, index) => index + 1).map(value => (
-                                <option value={value} key={value}>{value}</option>
-                            ))
-                        }
-                    </Input>
+                    <Button onClick={this.props.addToBasket}>Add to Basket</Button>
                 </th>
             </tr>
         );
