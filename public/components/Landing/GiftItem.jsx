@@ -1,11 +1,7 @@
 import React from 'react';
-import {Image, Input, Button} from 'react-bootstrap';
+import {Image, Button} from 'react-bootstrap';
 
 class GiftItem extends React.Component {
-    addToBasket() {
-        console.log(this.refs.quantity.val);
-    }
-
     render() {
         return (
             <tr key={this.props.item._id}>
