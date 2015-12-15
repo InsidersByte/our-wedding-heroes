@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Button } from 'react-bootstrap';
+import { Image, Button, Glyphicon } from 'react-bootstrap';
 
 class GiftItem extends React.Component {
     render() {
@@ -8,6 +8,14 @@ class GiftItem extends React.Component {
 
         const basketItem = this.props.basketItems[id] || {};
         const outOfStock = item.remaining - basketItem.quantity <= 0;
+
+        let button;
+
+        if (outOfStock) {
+            button = <Button disabled>Out of Stock</Button>;
+        } else {
+            button = <Button onClick={this.props.addToBasket}><Glyphicon glyph="shopping-cart"/> Add to Basket</Button>;
+        }
 
         return (
             <tr key={this.props.item._id}>
@@ -18,7 +26,7 @@ class GiftItem extends React.Component {
                 <th>{this.props.item.remaining}</th>
                 <th>{this.props.item.price}</th>
                 <th>
-                    <Button disabled={outOfStock} onClick={this.props.addToBasket}>{ outOfStock ? 'Out of Stock' : 'Add to Basket' }</Button>
+                    {button}
                 </th>
             </tr>
         );

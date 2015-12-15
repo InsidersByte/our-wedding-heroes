@@ -1,10 +1,9 @@
 import React from 'react';
-import { Col, Table } from 'react-bootstrap';
+import { Col, Table, Button, Glyphicon } from 'react-bootstrap';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
-import Basket from './Basket.jsx';
 
 import './Landing.styl';
 
@@ -134,7 +133,28 @@ class LandingPage extends React.Component {
                     </Col>
                 </section>
 
-                { this.state.basketCount > 0 ? <Basket items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} /> : null }
+                { this.state.basketCount > 0 ?
+                    <section className="basket">
+                        <h3>Basket</h3>
+
+                        <hr />
+
+                        <ul className="basket__summary">
+                            {
+                                Object.keys(this.state.items).map(key => (
+                                    <li key={key}>{this.state.items[key].name} X {this.state.items[key].quantity}</li>
+                                ))
+                            }
+                        </ul>
+
+                        <hr />
+
+                        <p>Total: £{this.state.total}</p>
+
+                        <Button bsSize="small" block><Glyphicon glyph="shopping-cart"/> Go to Basket</Button>
+                    </section>
+                    : null
+                }
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Table, Button, Glyphicon } from 'react-bootstrap';
 
-class Basket extends React.Component {
+class BasketSummary extends React.Component {
     removeFromBasket(item) {
         this.props.onRemoveFromBasket(item);
     }
@@ -43,10 +43,10 @@ class Basket extends React.Component {
     }
 }
 
-Basket.propTypes = {
+BasketSummary.propTypes = {
     items: React.PropTypes.object.isRequired,
     total: React.PropTypes.number.isRequired,
     onRemoveFromBasket: React.PropTypes.func.isRequired,
 };
 
-export default Basket;
+export default BasketSummary;
