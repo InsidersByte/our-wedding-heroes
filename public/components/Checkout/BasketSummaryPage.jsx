@@ -44,9 +44,9 @@ class BasketSummaryPage extends React.Component {
                 <BasketSummary items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} />
 
                 <div>
-                    <Link to="/"><Button>Back</Button></Link>
+                    <Link to="gifter"><Button bsStyle="primary">Continue</Button></Link>
 
-                    <Link to="gifter"><Button>Continue</Button></Link>
+                    <Link to="/"><Button>Back</Button></Link>
                 </div>
             </div>
         );
