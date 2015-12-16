@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import BasketSummary from './BasketSummary.jsx';
@@ -42,7 +43,11 @@ class BasketSummaryPage extends React.Component {
             <div style={{ textAlign: 'center' }}>
                 <BasketSummary items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} />
 
-                <Button>Continue</Button>
+                <div>
+                    <Link to="/"><Button>Back</Button></Link>
+
+                    <Link to="gifter"><Button>Continue</Button></Link>
+                </div>
             </div>
         );
     }

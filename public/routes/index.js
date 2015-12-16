@@ -10,6 +10,7 @@ import App from '../components/App.jsx';
 
 import LandingPage from '../components/Landing/LandingPage.jsx';
 import BasketSummaryPage from '../components/Checkout/BasketSummaryPage.jsx';
+import GifterDetailsPage from '../components/Checkout/GifterDetailsPage.jsx';
 
 import LoginPage from '../components/Login/LoginPage.jsx';
 import SetupPage from '../components/Setup/SetupPage.jsx';
@@ -34,6 +35,7 @@ export default (
     <Route path="/" component={App}>
         <IndexRoute component={LandingPage}/>
         <Route path="basket" component={BasketSummaryPage} />
+        <Route path="gifter" component={GifterDetailsPage} />
         <Route path="admin" component={Admin}>
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth}/>
             <Route path="login" component={LoginPage}/>
