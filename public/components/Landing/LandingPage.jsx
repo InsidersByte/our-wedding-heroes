@@ -1,5 +1,6 @@
 import React from 'react';
-import { Col, Table, Button, Glyphicon } from 'react-bootstrap';
+import { Col, Button, Glyphicon } from 'react-bootstrap';
+import { Link } from 'react-router';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
@@ -19,9 +20,9 @@ class LandingPage extends React.Component {
                 aboutOurHoneymoon: '',
                 honeymoonGiftListItems: [],
             },
-            items: {},
-            total: 0,
-            basketCount: 0,
+            items: basketStore.items,
+            total: basketStore.total,
+            basketCount: basketStore.count,
         };
 
         this._onChange = this._onChange.bind(this);
@@ -109,27 +110,13 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
                     <Col md={10} mdOffset={1}>
-                        <Table condensed responsive className="table--vertical-align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Requested</th>
-                                    <th>Remaining</th>
-                                    <th>Price (£)</th>
-                                    <th>Gift</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {
-                                    this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                        <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
-                                    ))
-                                }
-                            </tbody>
-                        </Table>
+                        {
+                            this.state.weddingProfile.honeymoonGiftListItems.map(item => (
+                                <Col md={4} key={item._id}>
+                                    <GiftItem item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
+                                </Col>
+                            ))
+                        }
                     </Col>
                 </section>
 
@@ -142,7 +129,7 @@ class LandingPage extends React.Component {
                         <ul className="basket__summary">
                             {
                                 Object.keys(this.state.items).map(key => (
-                                    <li key={key}>{this.state.items[key].name} X {this.state.items[key].quantity}</li>
+                                    <li key={key}>{this.state.items[key].name} x {this.state.items[key].quantity}</li>
                                 ))
                             }
                         </ul>
@@ -151,7 +138,7 @@ class LandingPage extends React.Component {
 
                         <p>Total: £{this.state.total}</p>
 
-                        <Button bsSize="small" block><Glyphicon glyph="shopping-cart"/> Go to Basket</Button>
+                        <Link to="basket"><Button bsSize="small" block><Glyphicon glyph="shopping-cart"/> Go to Basket</Button></Link>
                     </section>
                     : null
                 }

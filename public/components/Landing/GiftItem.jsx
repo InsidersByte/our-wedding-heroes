@@ -14,21 +14,22 @@ class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Out of Stock</Button>;
         } else {
-            button = <Button onClick={this.props.addToBasket}><Glyphicon glyph="shopping-cart"/> Add to Basket</Button>;
+            button = <Button onClick={this.props.addToBasket}><Glyphicon glyph="shopping-cart"/> Add to Basket £ {item.price}</Button>;
         }
 
         return (
-            <tr key={this.props.item._id}>
-                <th style={{ maxWidth: '200px' }}><Image src={this.props.item.imageUrl} rounded responsive /></th>
-                <th>{this.props.item.name}</th>
-                <th>{this.props.item.description}</th>
-                <th>{this.props.item.requested}</th>
-                <th>{this.props.item.remaining}</th>
-                <th>{this.props.item.price}</th>
-                <th>
+            <div style={{ display: 'flex', alignItems: 'center', alignContent: 'center', flexDirection: 'column' }}>
+                <div style={{ padding: '8px' }}>
+                    <Image src={item.imageUrl} rounded responsive />
+                </div>
+
+                <div style={{ padding: '8px' }}>
+                    <h4>{item.name}</h4>
+                    <p>Remaining: {item.remaining}</p>
+
                     {button}
-                </th>
-            </tr>
+                </div>
+            </div>
         );
     }
 }

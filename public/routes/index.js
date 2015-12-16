@@ -7,7 +7,10 @@ import NoMatch from '../components/NoMatch.jsx';
 import NoMatchAdmin from '../components/NoMatchAdmin.jsx';
 
 import App from '../components/App.jsx';
+
 import LandingPage from '../components/Landing/LandingPage.jsx';
+import BasketSummaryPage from '../components/Checkout/BasketSummaryPage.jsx';
+
 import LoginPage from '../components/Login/LoginPage.jsx';
 import SetupPage from '../components/Setup/SetupPage.jsx';
 import Admin from '../components/Admin.jsx';
@@ -30,6 +33,7 @@ function requireAuth(nextState, replaceState) {
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={LandingPage}/>
+        <Route path="basket" component={BasketSummaryPage} />
         <Route path="admin" component={Admin}>
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth}/>
             <Route path="login" component={LoginPage}/>
