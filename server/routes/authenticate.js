@@ -44,7 +44,7 @@ module.exports = (app, express, config) => {
             return res.json({
                 success: true,
                 message: 'Enjoy your token!',
-                token: token,
+                token,
             });
         } catch (error) {
             next(error);

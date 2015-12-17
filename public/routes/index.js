@@ -23,7 +23,7 @@ import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoney
 import RequestsForTheDayPage from '../components/RequestsForTheDay/RequestsForTheDayPage.jsx';
 import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage.jsx';
 import WhereIsItPage from '../components/WhereIsIt/WhereIsItPage.jsx';
-import Users from '../components/Users/Users.jsx';
+import UsersPage from '../components/Users/UsersPage.jsx';
 
 function requireAuth(nextState, replaceState) {
     if (!loginStore.isLoggedIn()) {
@@ -47,7 +47,7 @@ export default (
             <Route path="requestsForTheDay" component={RequestsForTheDayPage} onEnter={requireAuth}/>
             <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth}/>
             <Route path="whereIsIt" component={WhereIsItPage} onEnter={requireAuth}/>
-            <Route path="users" component={Users} onEnter={requireAuth}/>
+            <Route path="users" component={UsersPage} onEnter={requireAuth}/>
             <Route path="*" component={NoMatchAdmin}/>
         </Route>
         <Route path="*" component={NoMatch}/>

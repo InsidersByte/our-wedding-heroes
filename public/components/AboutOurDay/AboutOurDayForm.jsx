@@ -12,7 +12,8 @@ class AboutOurDayForm extends React.Component {
                     placeholder="Enter information about your day"
                     value={this.props.aboutOurDay}
                     onChange={this.props.onChange}
-                    required />
+                    required
+                />
 
                 <Button type="submit" bsStyle="primary" block>Update</Button>
             </form>

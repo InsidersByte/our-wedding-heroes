@@ -12,7 +12,8 @@ class AboutUsForm extends React.Component {
                     placeholder="Enter information about you"
                     value={this.props.aboutUs}
                     onChange={this.props.onChange}
-                    required />
+                    required
+                />
 
                 <Button type="submit" bsStyle="primary" block>Update</Button>
             </form>

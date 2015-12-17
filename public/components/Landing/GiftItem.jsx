@@ -12,7 +12,7 @@ class GiftItem extends React.Component {
         let button;
 
         if (outOfStock) {
-            button = <Button disabled>Out of Stock</Button>;
+            button = <Button disabled>Fully Gifted!</Button>;
         } else {
             button = <Button onClick={this.props.addToBasket}><Glyphicon glyph="shopping-cart"/> Add to Basket £ {item.price}</Button>;
         }

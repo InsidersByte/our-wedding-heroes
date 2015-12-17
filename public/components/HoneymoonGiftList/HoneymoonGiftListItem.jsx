@@ -2,12 +2,6 @@ import React from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 class HoneymoonGiftListItem extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
-
     handleSubmit(event) {
         event.preventDefault();
         this.props.onSubmit(this.props.item);
@@ -22,46 +16,56 @@ class HoneymoonGiftListItem extends React.Component {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Input name="imageUrl"
-                               type="url"
-                               label="Image Url"
-                               placeholder="Enter url"
-                               value={this.props.item.imageUrl}
-                               onChange={this.props.onChange}
-                               required />
+                        <Input
+                            name="imageUrl"
+                            type="url"
+                            label="Image Url"
+                            placeholder="Enter url"
+                            value={this.props.item.imageUrl}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="name"
-                               type="text"
-                               label="Name"
-                               placeholder="Enter name"
-                               value={this.props.item.name}
-                               onChange={this.props.onChange}
-                               required />
+                        <Input
+                            name="name"
+                            type="text"
+                            label="Name"
+                            placeholder="Enter name"
+                            value={this.props.item.name}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="description"
-                               type="textarea"
-                               rows="10"
-                               label="Description"
-                               placeholder="Enter description"
-                               value={this.props.item.description}
-                               onChange={this.props.onChange}
-                               required />
+                        <Input
+                            name="description"
+                            type="textarea"
+                            rows="10"
+                            label="Description"
+                            placeholder="Enter description"
+                            value={this.props.item.description}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="requested"
-                               type="number"
-                               label="Requested"
-                               placeholder="Enter requested"
-                               value={this.props.item.requested}
-                               onChange={this.props.onChange}
-                               required />
+                        <Input
+                            name="requested"
+                            type="number"
+                            label="Requested"
+                            placeholder="Enter requested"
+                            value={this.props.item.requested}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="price"
-                               type="number"
-                               label="Price (£)"
-                               placeholder="Enter price"
-                               value={this.props.item.price}
-                               onChange={this.props.onChange}
-                               required />
+                        <Input
+                            name="price"
+                            type="number"
+                            label="Price (£)"
+                            placeholder="Enter price"
+                            value={this.props.item.price}
+                            onChange={this.props.onChange}
+                            required
+                        />
                     </Modal.Body>
 
                     <Modal.Footer>

@@ -12,7 +12,8 @@ class AboutOurHoneymoonForm extends React.Component {
                     placeholder="Enter information about your honeymoon"
                     value={this.props.aboutOurHoneymoon}
                     onChange={this.props.onChange}
-                    required />
+                    required
+                />
 
                 <Button type="submit" bsStyle="primary" block>Update</Button>
             </form>

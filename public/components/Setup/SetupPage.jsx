@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import auth from '../../services/auth';
+import setupApi from '../../api/setup.api';
 import SetupForm from './SetupForm.jsx';
 
 class SetupPage extends React.Component {
@@ -22,8 +22,8 @@ class SetupPage extends React.Component {
     submit(event) {
         event.preventDefault();
 
-        auth
-            .setup(this.state.user)
+        setupApi
+            .post(this.state.user)
             .then(() => {
                 this.props.toastSuccess('Setup successful');
             })
