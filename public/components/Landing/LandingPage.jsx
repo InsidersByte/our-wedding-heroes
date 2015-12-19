@@ -1,6 +1,7 @@
 import React from 'react';
-import { Col, Button, Glyphicon } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import Icon from '../common/Icon.jsx';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
@@ -62,10 +63,6 @@ class LandingPage extends React.Component {
         basketActions.addToBasket(item, parseInt(event.target.value, 10));
     }
 
-    removeFromBasket(item) {
-        basketActions.removeFromBasket(item);
-    }
-
     render() {
         return (
             <div className="landing">
@@ -79,45 +76,45 @@ class LandingPage extends React.Component {
                 <section className="landing__section">
                     <h1 className="landing__section__heading">A little bit about us</h1>
 
-                    <Col md={8} mdOffset={2}>
+                    <div className="landing__section__content">
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.aboutUs}
                         </span>
-                    </Col>
+                    </div>
                 </section>
 
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">About our day</h1>
 
-                    <Col md={8} mdOffset={2}>
+                    <div className="landing__section__content">
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.aboutOurDay}
                         </span>
-                    </Col>
+                    </div>
                 </section>
 
                 <section className="landing__section">
                     <h1 className="landing__section__heading">About our honeymoon</h1>
 
-                    <Col md={8} mdOffset={2}>
+                    <div className="landing__section__content">
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.aboutOurHoneymoon}
                         </span>
-                    </Col>
+                    </div>
                 </section>
 
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
-                    <Col md={10} mdOffset={1}>
+                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {
                             this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                <Col md={4} key={item._id}>
+                                <div className="gift-item" key={item._id}>
                                     <GiftItem item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
-                                </Col>
+                                </div>
                             ))
                         }
-                    </Col>
+                    </div>
                 </section>
 
                 { this.state.basketCount > 0 ?
@@ -138,7 +135,7 @@ class LandingPage extends React.Component {
 
                         <p>Total: £{this.state.total}</p>
 
-                        <Link to="basket"><Button bsSize="small" block><Glyphicon glyph="shopping-cart"/> Go to Basket</Button></Link>
+                        <Link to="basket"><Button bsSize="small" block><Icon icon="shopping-basket" /> Go to Basket</Button></Link>
                     </section>
                     : null
                 }

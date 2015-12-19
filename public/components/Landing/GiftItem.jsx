@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, Button, Glyphicon } from 'react-bootstrap';
+import { Image, Button } from 'react-bootstrap';
+import Icon from '../common/Icon.jsx';
 
 class GiftItem extends React.Component {
     render() {
@@ -14,13 +15,13 @@ class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
-            button = <Button onClick={this.props.addToBasket}><Glyphicon glyph="shopping-cart"/> Add to Basket £ {item.price}</Button>;
+            button = <Button onClick={this.props.addToBasket}><Icon icon="shopping-basket" /> Add to Basket £ {item.price}</Button>;
         }
 
         return (
             <div style={{ display: 'flex', alignItems: 'center', alignContent: 'center', flexDirection: 'column' }}>
-                <div style={{ padding: '8px' }}>
-                    <Image src={item.imageUrl} rounded responsive />
+                <div style={{ padding: '8px', flex: '1 1 0%' }}>
+                    <Image src={item.imageUrl} rounded responsive style={{ maxHeight: '100%' }} />
                 </div>
 
                 <div style={{ padding: '8px' }}>
