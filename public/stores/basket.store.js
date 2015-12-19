@@ -13,7 +13,16 @@ class BasketStore extends BaseStore {
     }
 
     get count() {
-        return Object.keys(this._items).length;
+        let count = 0;
+
+        for (const key in this._items) {
+            if (this._items.hasOwnProperty(key)) {
+                const item = this._items[key];
+                count += item.quantity;
+            }
+        }
+
+        return count;
     }
 
     get total() {

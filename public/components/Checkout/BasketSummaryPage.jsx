@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
-import BasketSummary from './BasketSummary.jsx';
+import BasketSummaryTable from './BasketSummaryTable.jsx';
 
 class BasketSummaryPage extends React.Component {
     constructor() {
@@ -39,15 +39,19 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <BasketSummary items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} />
+            <section className="landing__section">
+                <h1 className="landing__section__heading">Subtotal ({this.state.basketCount} items): £{this.state.total}</h1>
+
+                <div className="landing__section__content">
+                    <BasketSummaryTable items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} />
+                </div>
 
                 <div style={{ textAlign: 'center' }}>
                     <Link to="gifter" className="btn btn-primary" role="button">Continue</Link>
 
                     <Link to="/" className="btn btn-default" role="button" style={{ marginLeft: '5px' }}>Back</Link>
                 </div>
-            </div>
+            </section>
         );
     }
 }
