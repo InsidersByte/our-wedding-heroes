@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';

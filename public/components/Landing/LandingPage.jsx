@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
-import Icon from '../common/Icon.jsx';
+import FontAwesome from '../common/FontAwesome.jsx';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
@@ -135,7 +135,7 @@ class LandingPage extends React.Component {
 
                         <p>Total: £{this.state.total}</p>
 
-                        <Link to="basket"><Button bsSize="small" block><Icon icon="shopping-basket" /> Go to Basket</Button></Link>
+                        <Link to="basket"><Button bsSize="small" block><FontAwesome icon="shopping-basket" /> Go to Basket</Button></Link>
                     </section>
                     : null
                 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Button } from 'react-bootstrap';
-import Icon from '../common/Icon.jsx';
+import FontAwesome from '../common/FontAwesome.jsx';
 
 class GiftItem extends React.Component {
     render() {
@@ -15,7 +15,7 @@ class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
-            button = <Button onClick={this.props.addToBasket}><Icon icon="shopping-basket" /> Add to Basket £ {item.price}</Button>;
+            button = <Button onClick={this.props.addToBasket}><FontAwesome icon="shopping-basket" /> Add to Basket £ {item.price}</Button>;
         }
 
         return (

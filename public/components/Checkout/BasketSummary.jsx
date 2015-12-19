@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Button, Glyphicon } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+import FontAwesome from '../common/FontAwesome.jsx';
 
 class BasketSummary extends React.Component {
     removeFromBasket(item) {
@@ -29,7 +30,7 @@ class BasketSummary extends React.Component {
                                     <th>{this.props.items[key].name}</th>
                                     <th>{this.props.items[key].price}</th>
                                     <th>{this.props.items[key].quantity}</th>
-                                    <th><Button bsSize="xsmall" bsStyle="danger" onClick={this.removeFromBasket.bind(this, this.props.items[key])}><Glyphicon glyph="trash" /></Button></th>
+                                    <th><Button bsSize="xsmall" bsStyle="danger" onClick={this.removeFromBasket.bind(this, this.props.items[key])}><FontAwesome icon="minus" /></Button></th>
                                 </tr>
                             ))
                         }
