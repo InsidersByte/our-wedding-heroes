@@ -21,7 +21,7 @@ class GiftItem extends React.Component {
         return (
             <div style={{ display: 'flex', alignItems: 'center', alignContent: 'center', flexDirection: 'column' }}>
                 <div style={{ padding: '8px', flex: '1 1 0%' }}>
-                    <Image src={item.imageUrl} rounded responsive style={{ maxHeight: '100%' }} />
+                    <Image src={item.imageUrl} rounded style={{ width: '100%', height: '300px' }} />
                 </div>
 
                 <div style={{ padding: '8px' }}>
