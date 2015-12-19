@@ -40,13 +40,13 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div>
                 <BasketSummary items={this.state.items} total={this.state.total} onRemoveFromBasket={this.removeFromBasket.bind(this)} />
 
-                <div>
-                    <Link to="gifter"><Button bsStyle="primary">Continue</Button></Link>
+                <div style={{ textAlign: 'center' }}>
+                    <Link to="gifter" className="btn btn-primary" role="button">Continue</Link>
 
-                    <Link to="/"><Button>Back</Button></Link>
+                    <Link to="/" className="btn btn-default" role="button" style={{ marginLeft: '5px' }}>Back</Link>
                 </div>
             </div>
         );

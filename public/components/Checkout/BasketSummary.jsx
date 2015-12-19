@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Table, Button, Glyphicon } from 'react-bootstrap';
+import { Table, Button, Glyphicon } from 'react-bootstrap';
 
 class BasketSummary extends React.Component {
     removeFromBasket(item) {
@@ -11,7 +11,7 @@ class BasketSummary extends React.Component {
             <section className="landing__section">
                 <h1 className="landing__section__heading">Basket</h1>
 
-                <Col md={8} mdOffset={2}>
+                <div className="landing__section__content">
                     <Table condensed responsive className="table--vertical-align-middle">
                         <thead>
                         <tr>
@@ -37,7 +37,7 @@ class BasketSummary extends React.Component {
                     </Table>
 
                     <h3>Total: £{this.props.total}</h3>
-                </Col>
+                </div>
             </section>
         );
     }
