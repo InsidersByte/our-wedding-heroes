@@ -109,9 +109,7 @@ class LandingPage extends React.Component {
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {
                             this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                <div className="gift-item" key={item._id}>
-                                    <GiftItem item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
-                                </div>
+                                <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
                             ))
                         }
                     </div>
