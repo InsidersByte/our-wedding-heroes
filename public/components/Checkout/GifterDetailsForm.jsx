@@ -36,9 +36,11 @@ class GifterDetailsForm extends React.Component {
                     required
                 />
 
-                <Button type="submit" bsStyle="primary">Gift</Button>
+                <div style={{ textAlign: 'center' }}>
+                    <Button type="submit" bsStyle="primary">Gift</Button>
 
-                <Link to="/basket" className="btn btn-default" role="button" style={{ marginLeft: '5px' }}>Back</Link>
+                    <Link to="/basket" className="btn btn-default" role="button" style={{ marginLeft: '5px' }}>Back</Link>
+                </div>
             </form>
         );
     }
