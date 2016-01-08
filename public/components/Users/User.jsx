@@ -2,6 +2,12 @@ import React from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 class User extends React.Component {
+    constructor() {
+        super();
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         this.props.onSubmit(this.props.user);
@@ -10,17 +16,41 @@ class User extends React.Component {
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <form onSubmit={this.handleSubmit.bind(this)}>
+                <form onSubmit={this.handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>Create User</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Input name="name" type="text" label="Name" placeholder="Enter Name" value={this.props.user.name} onChange={this.props.onChange} required/>
+                        <Input
+                            name="name"
+                            type="text"
+                            label="Name"
+                            placeholder="Enter Name"
+                            value={this.props.user.name}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="username" type="email" label="Username" placeholder="Enter Username" value={this.props.user.username} onChange={this.props.onChange} required/>
+                        <Input
+                            name="username"
+                            type="email"
+                            label="Username"
+                            placeholder="Enter Username"
+                            value={this.props.user.username}
+                            onChange={this.props.onChange}
+                            required
+                        />
 
-                        <Input name="password" type="password" label="Password" placeholder="Enter Password" value={this.props.user.password} onChange={this.props.onChange} required/>
+                        <Input
+                            name="password"
+                            type="password"
+                            label="Password"
+                            placeholder="Enter Password"
+                            value={this.props.user.password}
+                            onChange={this.props.onChange}
+                            required
+                        />
                     </Modal.Body>
 
                     <Modal.Footer>

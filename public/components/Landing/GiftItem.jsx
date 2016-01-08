@@ -3,6 +3,16 @@ import { Image, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
 class GiftItem extends React.Component {
+    constructor() {
+        super();
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(event) {
+        this.props.addToBasket(this.props.item, event);
+    }
+
     render() {
         const item = this.props.item;
         const id = item._id;
@@ -15,11 +25,22 @@ class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
-            button = <Button onClick={this.props.addToBasket}><FontAwesome icon="shopping-basket" /> Add to Basket £ {item.price}</Button>;
+            button = (
+                <Button onClick={this.onClick}>
+                    <FontAwesome icon="shopping-basket" /> Add to Basket £ {item.price}
+                </Button>
+            );
         }
 
+        const giftItemStyle = {
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+            flexDirection: 'column',
+        };
+
         return (
-            <div className="gift-item" style={{ display: 'flex', alignItems: 'center', alignContent: 'center', flexDirection: 'column' }}>
+            <div className="gift-item" style={giftItemStyle}>
                 <div style={{ flex: '1 1 0%', width: '100%' }}>
                     <Image src={item.imageUrl} rounded style={{ width: '100%', height: '300px' }} />
                 </div>

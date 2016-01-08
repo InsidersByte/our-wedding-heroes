@@ -10,6 +10,9 @@ class AboutUsPage extends React.Component {
         this.state = {
             aboutUs: '',
         };
+
+        this.setAboutUsState = this.setAboutUsState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +51,11 @@ class AboutUsPage extends React.Component {
                 <Jumbotron>
                     <h1>About Us</h1>
 
-                    <AboutUsForm aboutUs={this.state.aboutUs} onChange={this.setAboutUsState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <AboutUsForm
+                        aboutUs={this.state.aboutUs}
+                        onChange={this.setAboutUsState}
+                        onSubmit={this.submit}
+                    />
                 </Jumbotron>
             </Col>
         );

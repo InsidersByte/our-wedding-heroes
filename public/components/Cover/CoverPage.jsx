@@ -10,6 +10,9 @@ class CoverPage extends React.Component {
         this.state = {
             cover: {},
         };
+
+        this.setCoverState = this.setCoverState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -51,7 +54,7 @@ class CoverPage extends React.Component {
                 <Jumbotron>
                     <h1>Cover</h1>
 
-                    <CoverForm cover={this.state.cover} onChange={this.setCoverState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <CoverForm cover={this.state.cover} onChange={this.setCoverState} onSubmit={this.submit} />
                 </Jumbotron>
             </Col>
         );

@@ -10,6 +10,9 @@ class Login extends React.Component {
         this.state = {
             user: {},
         };
+
+        this.setUserState = this.setUserState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     setUserState(event) {
@@ -38,7 +41,7 @@ class Login extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <LoginForm user={this.state.user} onChange={this.setUserState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
                 </Jumbotron>
             </Col>
         );

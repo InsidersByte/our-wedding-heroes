@@ -13,6 +13,12 @@ class Users extends React.Component {
             showModal: false,
             user: {},
         };
+
+        this.open = this.open.bind(this);
+        this.delete = this.delete.bind(this);
+        this.close = this.close.bind(this);
+        this.save = this.save.bind(this);
+        this.setUserState = this.setUserState.bind(this);
     }
 
     componentDidMount() {
@@ -90,12 +96,20 @@ class Users extends React.Component {
         return (
             <Col md={8} mdOffset={2}>
                 <Jumbotron>
-                    <h1>Users <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this, {})}><Glyphicon glyph="plus" /></Button></h1>
+                    <h1>Users&nbsp;
+                        <Button bsStyle="success" bsSize="small" onClick={this.open}><Glyphicon glyph="plus" /></Button>
+                    </h1>
 
-                    <UserTable users={this.state.users} onEdit={this.open.bind(this)} onDelete={this.delete.bind(this)} />
+                    <UserTable users={this.state.users} onEdit={this.open} onDelete={this.delete} />
                 </Jumbotron>
 
-                <User user={this.state.user} show={this.state.showModal} onHide={this.close.bind(this)} onSubmit={this.save.bind(this)} onChange={this.setUserState.bind(this)} />
+                <User
+                    user={this.state.user}
+                    show={this.state.showModal}
+                    onHide={this.close}
+                    onSubmit={this.save}
+                    onChange={this.setUserState}
+                />
             </Col>
         );
     }

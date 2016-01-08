@@ -8,6 +8,9 @@ class GifterDetailsPage extends React.Component {
         this.state = {
             gifter: {},
         };
+
+        this.setGifterState = this.setGifterState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     setGifterState(event) {
@@ -26,7 +29,11 @@ class GifterDetailsPage extends React.Component {
             <section style={{ width: '50%', margin: 'auto' }}>
                 <h1>Your Details</h1>
 
-                <GifterDetailsForm gifter={this.state.gifter} onChange={this.setGifterState.bind(this)} onSubmit={this.submit.bind(this)} />
+                <GifterDetailsForm
+                    gifter={this.state.gifter}
+                    onChange={this.setGifterState}
+                    onSubmit={this.submit}
+                />
             </section>
         );
     }

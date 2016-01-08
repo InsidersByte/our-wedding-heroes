@@ -10,6 +10,9 @@ class AboutOurHoneymoonPage extends React.Component {
         this.state = {
             aboutOurHoneymoon: '',
         };
+
+        this.setAboutOurHoneymoonState = this.setAboutOurHoneymoonState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +51,11 @@ class AboutOurHoneymoonPage extends React.Component {
                 <Jumbotron>
                     <h1>About Our Honeymoon</h1>
 
-                    <AboutOurHoneymoonForm aboutOurHoneymoon={this.state.aboutOurHoneymoon} onChange={this.setAboutOurHoneymoonState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <AboutOurHoneymoonForm
+                        aboutOurHoneymoon={this.state.aboutOurHoneymoon}
+                        onChange={this.setAboutOurHoneymoonState}
+                        onSubmit={this.submit}
+                    />
                 </Jumbotron>
             </Col>
         );

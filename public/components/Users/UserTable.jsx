@@ -1,12 +1,20 @@
 import React from 'react';
-import { Table, Button, Glyphicon } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+import UserRow from './UserRow.jsx';
 
 class UserTable extends React.Component {
-    delete(user) {
+    constructor() {
+        super();
+
+        this.onDelete = this.onDelete.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+    }
+
+    onDelete(user) {
         this.props.onDelete(user);
     }
 
-    edit(user) {
+    onEdit(user) {
         this.props.onEdit(user);
     }
 
@@ -23,14 +31,7 @@ class UserTable extends React.Component {
 
                 <tbody>
                     {this.props.users.map(user => (
-                        <tr key={user._id}>
-                            <th>{user.name}</th>
-                            <th>{user.username}</th>
-                            <th>
-                                <Button bsSize="xsmall" bsStyle="primary" onClick={this.edit.bind(this, user)}><Glyphicon glyph="pencil" /></Button>
-                                <Button bsSize="xsmall" bsStyle="danger" style={{ marginLeft: '5px' }} onClick={this.delete.bind(this, user)}><Glyphicon glyph="trash" /></Button>
-                            </th>
-                        </tr>
+                        <UserRow key={user._id} user={user} onEdit={this.onEdit} onDelete={this.onDelete} />
                     ))}
                 </tbody>
             </Table>

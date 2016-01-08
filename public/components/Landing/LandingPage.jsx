@@ -64,9 +64,11 @@ class LandingPage extends React.Component {
     }
 
     render() {
+        const backgroundImageStyle = { backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` };
+
         return (
             <div className="landing">
-                <header className="landing__header" style={{ backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` }}>
+                <header className="landing__header" style={backgroundImageStyle}>
                     <div className="landing__header__overlay"></div>
                     <div className="landing__header__content">
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
@@ -109,7 +111,12 @@ class LandingPage extends React.Component {
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {
                             this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                <GiftItem key={item._id} item={item} addToBasket={this.addToBasket.bind(this, item)} basketItems={this.state.items} />
+                                <GiftItem
+                                    key={item._id}
+                                    item={item}
+                                    addToBasket={this.addToBasket}
+                                    basketItems={this.state.items}
+                                />
                             ))
                         }
                     </div>
@@ -133,7 +140,9 @@ class LandingPage extends React.Component {
 
                         <p>Total: £{this.state.total}</p>
 
-                        <Link to="basket"><Button bsSize="small" block><FontAwesome icon="shopping-basket" /> Go to Basket</Button></Link>
+                        <Link to="basket">
+                            <Button bsSize="small" block><FontAwesome icon="shopping-basket" /> Go to Basket</Button>
+                        </Link>
                     </section>
                     : null
                 }

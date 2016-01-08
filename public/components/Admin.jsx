@@ -127,7 +127,11 @@ class App extends React.Component {
                     })}
                 </div>
 
-                <ToastContainer ref="container" toastMessageFactory={ToastMessageFactory} className="toast-bottom-left" />
+                <ToastContainer
+                    ref="container"
+                    toastMessageFactory={ToastMessageFactory}
+                    className="toast-bottom-left"
+                />
             </div>
         );
     }

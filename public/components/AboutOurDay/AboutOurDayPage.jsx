@@ -10,6 +10,9 @@ class AboutOurDayPage extends React.Component {
         this.state = {
             aboutOurDay: '',
         };
+
+        this.setAboutOurDayState = this.setAboutOurDayState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +51,11 @@ class AboutOurDayPage extends React.Component {
                 <Jumbotron>
                     <h1>About Our Day</h1>
 
-                    <AboutOurDayForm aboutOurDay={this.state.aboutOurDay} onChange={this.setAboutOurDayState.bind(this)} onSubmit={this.submit.bind(this)} />
+                    <AboutOurDayForm
+                        aboutOurDay={this.state.aboutOurDay}
+                        onChange={this.setAboutOurDayState}
+                        onSubmit={this.submit}
+                    />
                 </Jumbotron>
             </Col>
         );

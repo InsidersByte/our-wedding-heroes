@@ -2,6 +2,12 @@ import React from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 class HoneymoonGiftListItem extends React.Component {
+    constructor() {
+        super();
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         this.props.onSubmit(this.props.item);
@@ -10,7 +16,7 @@ class HoneymoonGiftListItem extends React.Component {
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <form onSubmit={this.handleSubmit.bind(this)}>
+                <form onSubmit={this.handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title>Add Item</Modal.Title>
                     </Modal.Header>

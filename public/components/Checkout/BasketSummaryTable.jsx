@@ -1,6 +1,6 @@
 import React from 'react';
-import { Table, Button } from 'react-bootstrap';
-import FontAwesome from '../common/FontAwesome.jsx';
+import { Table } from 'react-bootstrap';
+import BasketSummaryRow from './BasketSummaryRow.jsx';
 
 class BasketSummaryTable extends React.Component {
     removeFromBasket(item) {
@@ -22,12 +22,7 @@ class BasketSummaryTable extends React.Component {
                 <tbody>
                 {
                     Object.keys(this.props.items).map(key => (
-                        <tr key={key}>
-                            <th>{this.props.items[key].name}</th>
-                            <th>{this.props.items[key].price}</th>
-                            <th>{this.props.items[key].quantity}</th>
-                            <th><Button bsSize="xsmall" bsStyle="danger" onClick={this.removeFromBasket.bind(this, this.props.items[key])}><FontAwesome icon="minus" /></Button></th>
-                        </tr>
+                        <BasketSummaryRow key={key} item={this.props.items[key]} onRemove={this.removeFromBasket} />
                     ))
                 }
                 </tbody>

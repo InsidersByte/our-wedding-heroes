@@ -13,6 +13,12 @@ class HoneymoonGiftListPage extends React.Component {
             showModal: false,
             item: {},
         };
+
+        this.open = this.open.bind(this);
+        this.delete = this.delete.bind(this);
+        this.close = this.close.bind(this);
+        this.save = this.save.bind(this);
+        this.setItemState = this.setItemState.bind(this);
     }
 
     componentDidMount() {
@@ -90,12 +96,23 @@ class HoneymoonGiftListPage extends React.Component {
         return (
             <Col md={12}>
                 <Jumbotron>
-                    <h1>Honeymoon Gift List <Button bsStyle="success" bsSize="small" onClick={this.open.bind(this, {})}><Glyphicon glyph="plus" /></Button></h1>
+                    <h1>
+                        Honeymoon Gift List&nbsp;
+                        <Button bsStyle="success" bsSize="small" onClick={this.open}>
+                            <Glyphicon glyph="plus" />
+                        </Button>
+                    </h1>
 
-                    <HoneymoonGiftListTable items={this.state.items} onEdit={this.open.bind(this)} onDelete={this.delete.bind(this)} />
+                    <HoneymoonGiftListTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
                 </Jumbotron>
 
-                <HoneymoonGiftListItem item={this.state.item} show={this.state.showModal} onHide={this.close.bind(this)} onSubmit={this.save.bind(this)} onChange={this.setItemState.bind(this)} />
+                <HoneymoonGiftListItem
+                    item={this.state.item}
+                    show={this.state.showModal}
+                    onHide={this.close}
+                    onSubmit={this.save}
+                    onChange={this.setItemState}
+                />
             </Col>
         );
     }

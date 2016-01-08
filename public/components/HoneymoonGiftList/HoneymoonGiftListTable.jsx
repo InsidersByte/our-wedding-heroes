@@ -1,12 +1,20 @@
 import React from 'react';
-import { Table, Button, Glyphicon } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
+import HoneymoonGiftListRow from './HoneymoonGiftListRow.jsx';
 
 class HoneymoonGiftListTable extends React.Component {
-    delete(item) {
+    constructor() {
+        super();
+
+        this.onDelete = this.onDelete.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+    }
+
+    onDelete(item) {
         this.props.onDelete(item);
     }
 
-    edit(item) {
+    onEdit(item) {
         this.props.onEdit(item);
     }
 
@@ -28,18 +36,12 @@ class HoneymoonGiftListTable extends React.Component {
                 <tbody>
                 {
                     this.props.items.map(item => (
-                        <tr key={item._id}>
-                            <th>{item.imageUrl}</th>
-                            <th>{item.name}</th>
-                            <th>{item.description}</th>
-                            <th>{item.requested}</th>
-                            <th>{item.remaining}</th>
-                            <th>{item.price}</th>
-                            <th>
-                                <Button bsSize="xsmall" bsStyle="primary" onClick={this.edit.bind(this, item)}><Glyphicon glyph="pencil" /></Button>
-                                <Button bsSize="xsmall" bsStyle="danger" style={{ marginLeft: '5px' }} onClick={this.delete.bind(this, item)}><Glyphicon glyph="trash" /></Button>
-                            </th>
-                        </tr>
+                        <HoneymoonGiftListRow
+                            key={item._id}
+                            item={item}
+                            onEdit={this.onEdit}
+                            onDelete={this.onDelete}
+                        />
                     ))
                 }
                 </tbody>
