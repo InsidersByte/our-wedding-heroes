@@ -24,7 +24,7 @@ class CoverPage extends React.Component {
                 });
             })
             .catch(() => {
-                this.props.toastError('There was an error saving getting cover');
+                this.props.toastError('There was an error loading the cover data');
             });
     }
 

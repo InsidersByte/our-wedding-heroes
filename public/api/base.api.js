@@ -1,6 +1,7 @@
 import request from 'superagent';
 import loginStore from '../stores/login.store';
 import { BASE_URL } from '../constants/api.constants';
+import loginActions from '../actions/login.action.js';
 
 export default class {
     constructor(baseUrl) {
@@ -14,6 +15,7 @@ export default class {
                 .set('Authorization', `Bearer ${loginStore.jwt}`)
                 .end((err, res) => {
                     if (err) {
+                        this._logoutIfUnauthorised(res);
                         reject();
                         return;
                     }
@@ -31,6 +33,7 @@ export default class {
                 .send(data)
                 .end((err, res) => {
                     if (err) {
+                        this._logoutIfUnauthorised(res);
                         reject();
                         return;
                     }
@@ -54,6 +57,7 @@ export default class {
                 .send(data)
                 .end((err, res) => {
                     if (err) {
+                        this._logoutIfUnauthorised(res);
                         reject();
                         return;
                     }
@@ -70,6 +74,7 @@ export default class {
                 .set('Authorization', `Bearer ${loginStore.jwt}`)
                 .end((err, res) => {
                     if (err) {
+                        this._logoutIfUnauthorised(res);
                         reject();
                         return;
                     }
@@ -77,5 +82,11 @@ export default class {
                     resolve(JSON.parse(res.text));
                 });
         });
+    }
+
+    _logoutIfUnauthorised(res) {
+        if (res.status === 401) {
+            loginActions.logoutUser();
+        }
     }
 }
