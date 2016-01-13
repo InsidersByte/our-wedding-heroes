@@ -1,4 +1,4 @@
-const WeddingProfile = require('../models/weddingProfile');
+const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
 
 module.exports = (app, express) => {
@@ -7,9 +7,9 @@ module.exports = (app, express) => {
     router.route('/')
         .get(co.wrap(function* getHoneymoonGiftItems(req, res, next) {
             try {
-                const weddingProfile = yield WeddingProfile.findOne({});
+                const honeymoonGiftLists = yield HoneymoonGiftListItem.find({});
 
-                return res.json(weddingProfile.honeymoonGiftListItems || []);
+                return res.json(honeymoonGiftLists);
             } catch (error) {
                 next(error);
             }
@@ -31,19 +31,15 @@ module.exports = (app, express) => {
                         .send(errors);
                 }
 
-                const honeymoonGiftItem = {
+                const honeymoonGiftItem = new HoneymoonGiftListItem({
                     imageUrl: req.body.imageUrl,
                     name: req.body.name,
                     description: req.body.description,
                     requested: req.body.requested,
                     price: req.body.price,
-                };
+                });
 
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                weddingProfile.honeymoonGiftListItems.push(honeymoonGiftItem);
-
-                yield weddingProfile.save();
+                yield honeymoonGiftItem.save();
 
                 res
                     .status(201)
@@ -71,15 +67,7 @@ module.exports = (app, express) => {
                         .send(errors);
                 }
 
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                const honeymoonGiftItem = weddingProfile.honeymoonGiftListItems.id(req.params.id);
-
-                if (!honeymoonGiftItem) {
-                    return res
-                        .status(400)
-                        .send({ message: 'Cannot find honeymoon gift item' });
-                }
+                const honeymoonGiftItem = yield HoneymoonGiftListItem.findById(req.params.id);
 
                 honeymoonGiftItem.imageUrl = req.body.imageUrl;
                 honeymoonGiftItem.name = req.body.name;
@@ -87,7 +75,7 @@ module.exports = (app, express) => {
                 honeymoonGiftItem.requested = req.body.requested;
                 honeymoonGiftItem.price = req.body.price;
 
-                yield weddingProfile.save();
+                yield honeymoonGiftItem.save();
 
                 return res.json({ message: 'Honeymoon Gift Item Updated!' });
             } catch (error) {
@@ -95,7 +83,7 @@ module.exports = (app, express) => {
             }
         }))
 
-        .delete(co.wrap(function* deleteUser(req, res, next) {
+        .delete(co.wrap(function* deleteHoneymoonGiftItem(req, res, next) {
             try {
                 req.checkParams('id').notEmpty();
 
@@ -107,11 +95,11 @@ module.exports = (app, express) => {
                         .send(errors);
                 }
 
-                const weddingProfile = yield WeddingProfile.findOne({});
+                const honeymoonGiftList = yield HoneymoonGiftListItem.findOne({ _id: req.params.id });
 
-                weddingProfile.honeymoonGiftListItems.id(req.params.id).remove();
+                honeymoonGiftList.remove();
 
-                yield weddingProfile.save();
+                yield honeymoonGiftList.save();
 
                 return res.json({ message: 'Successfully deleted' });
             } catch (error) {
