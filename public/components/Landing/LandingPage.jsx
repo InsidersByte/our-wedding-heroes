@@ -37,11 +37,8 @@ class LandingPage extends React.Component {
                     weddingProfile: response,
                 });
             })
-            .catch((error) => {
-                // TODO: use some sort of toastr
-
-                alert('There\'s an getting the wedding profile data'); //eslint-disable-line
-                console.log('Error getting wedding profile data', error); //eslint-disable-line
+            .catch(() => {
+                this.props.toastError('There was an error loading the profile data');
             });
 
         basketStore.addChangeListener(this._onChange);
@@ -150,5 +147,10 @@ class LandingPage extends React.Component {
         );
     }
 }
+
+LandingPage.propTypes = {
+    toastSuccess: React.PropTypes.func,
+    toastError: React.PropTypes.func,
+};
 
 export default LandingPage;
