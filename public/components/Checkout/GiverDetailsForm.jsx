@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-class GifterDetailsForm extends React.Component {
+class GiverDetailsForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.props.onSubmit}>
@@ -11,7 +11,7 @@ class GifterDetailsForm extends React.Component {
                     type="text"
                     label="Name"
                     placeholder="Enter your name"
-                    value={this.props.gifter.name}
+                    value={this.props.giver.name}
                     onChange={this.props.onChange}
                     required
                 />
@@ -21,7 +21,7 @@ class GifterDetailsForm extends React.Component {
                     type="email"
                     label="Email"
                     placeholder="Enter your email address"
-                    value={this.props.gifter.email}
+                    value={this.props.giver.email}
                     onChange={this.props.onChange}
                     required
                 />
@@ -31,7 +31,7 @@ class GifterDetailsForm extends React.Component {
                     type="text"
                     label="Telephone Number"
                     placeholder="Enter your telephone number"
-                    value={this.props.gifter.telephoneNumber}
+                    value={this.props.giver.telephoneNumber}
                     onChange={this.props.onChange}
                     required
                 />
@@ -53,10 +53,10 @@ class GifterDetailsForm extends React.Component {
     }
 }
 
-GifterDetailsForm.propTypes = {
-    gifter: React.PropTypes.object.isRequired,
+GiverDetailsForm.propTypes = {
+    giver: React.PropTypes.object.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
 
-export default GifterDetailsForm;
+export default GiverDetailsForm;

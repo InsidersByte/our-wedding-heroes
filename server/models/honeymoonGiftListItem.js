@@ -8,14 +8,11 @@ const HoneymoonGiftListItemSchema = new Schema(
         description: { type: String, required: true },
         requested: { type: Number, min: 1, required: true },
         price: { type: Number, required: true, min: 0 },
+        gifts: [{ type: Schema.Types.ObjectId, ref: 'Gift' }],
     },
     {
-        toObject: {
-            virtuals: true,
-        },
-        toJSON: {
-            virtuals: true,
-        },
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
     });
 
 HoneymoonGiftListItemSchema
