@@ -9,7 +9,7 @@ module.exports = (app, express) => {
         .get(co.wrap(function* getWeddingProfile(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({}).lean().exec();
-                const honeymoonGiftList = yield HoneymoonGiftListItem.find({}).lean().exec();
+                const honeymoonGiftList = yield HoneymoonGiftListItem.find({});
 
                 weddingProfile.honeymoonGiftListItems = honeymoonGiftList;
 
