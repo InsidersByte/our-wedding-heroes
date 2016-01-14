@@ -6,6 +6,7 @@ module.exports = (app, express, config) => {
     router.use('/setup', require('./setup')(app, express, config));
     router.use('/authenticate', require('./authenticate')(app, express, config));
     router.use('/weddingProfile', require('./weddingProfile')(app, express));
+    router.use('/gift', require('./gift')(app, express));
 
     router.use(jwt({
         secret: config.secret,
