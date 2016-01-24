@@ -37,7 +37,7 @@ class GiverDetailsForm extends React.Component {
                 />
 
                 <div style={{ textAlign: 'center' }}>
-                    <Button type="submit" bsStyle="primary">Gift</Button>
+                    <Button type="submit" bsStyle="success">Gift</Button>
 
                     <Link
                         to="/basket"

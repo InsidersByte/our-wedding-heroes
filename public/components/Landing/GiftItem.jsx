@@ -28,7 +28,7 @@ class GiftItem extends React.Component {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
             button = (
-                <Button onClick={this.onClick}>
+                <Button bsStyle="success" onClick={this.onClick}>
                     <FontAwesome icon="shopping-basket" /> Add to Basket £ {item.price}
                 </Button>
             );

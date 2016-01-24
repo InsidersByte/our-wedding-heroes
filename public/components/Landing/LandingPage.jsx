@@ -155,7 +155,7 @@ class LandingPage extends React.Component {
                         <p>Total: £{this.state.total}</p>
 
                         <Link to="basket">
-                            <Button bsSize="small" block><FontAwesome icon="shopping-basket" /> Go to Basket</Button>
+                            <Button bsStyle="success" bsSize="small" block><FontAwesome icon="shopping-basket" /> Go to Basket</Button>
                         </Link>
                     </section>
                     : null
