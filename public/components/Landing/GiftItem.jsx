@@ -2,6 +2,8 @@ import React from 'react';
 import { Image, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
+import './GiftItem.styl';
+
 class GiftItem extends React.Component {
     constructor() {
         super();
@@ -42,7 +44,7 @@ class GiftItem extends React.Component {
         return (
             <div className="gift-item" style={giftItemStyle}>
                 <div style={{ flex: '1 1 0%', width: '100%' }}>
-                    <Image src={item.imageUrl} rounded style={{ width: '100%', height: '300px' }} />
+                    <Image src={item.imageUrl} className="gift-item--avatar" rounded />
                 </div>
 
                 <div style={{ padding: '8px' }}>
