@@ -106,6 +106,11 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
                     <div className="landing__section__content">
+                        <FontAwesome icon="info-circle" /> all payments at the moment are offline (via bank transfer or cash).
+                        We will send you our payment details after you have confirmed your gift.
+
+                        <br /><br />
+
                         <FontAwesome icon="info-circle" /> these items might change slightly when we finalise our plans.
                     </div>
 
