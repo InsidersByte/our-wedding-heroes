@@ -105,6 +105,10 @@ class LandingPage extends React.Component {
                 <section className="landing__section landing__section--primary">
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
+                    <div className="landing__section__content">
+                        <FontAwesome icon="info-circle" /> these items might change slightly when we finalise our plans.
+                    </div>
+
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                         {
                             this.state.weddingProfile.honeymoonGiftListItems.map(item => (
