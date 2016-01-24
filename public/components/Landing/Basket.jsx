@@ -39,7 +39,7 @@ class Basket extends React.Component {
 }
 
 Basket.propTypes = {
-    items: React.PropTypes.array.isRequired,
+    items: React.PropTypes.object.isRequired,
     basketCount: React.PropTypes.number.isRequired,
     total: React.PropTypes.number.isRequired,
 };

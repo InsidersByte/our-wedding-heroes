@@ -3,6 +3,12 @@ import { Table } from 'react-bootstrap';
 import BasketSummaryRow from './BasketSummaryRow.jsx';
 
 class BasketSummaryTable extends React.Component {
+    constructor() {
+        super();
+
+        this.removeFromBasket = this.removeFromBasket.bind(this);
+    }
+
     removeFromBasket(item) {
         this.props.onRemoveFromBasket(item);
     }
