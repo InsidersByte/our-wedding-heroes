@@ -4,7 +4,7 @@
 
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
-        "max-len": [2, 120, 2],
+        "max-len": [2, 140, 2],
         "react/jsx-indent-props": [2, 4]
     }
 }

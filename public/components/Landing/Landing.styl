@@ -39,6 +39,9 @@ maximumSize()
     margin-right auto
     text-align center
 
+.landing .landing__section:last-of-type
+    padding-bottom 0
+
 .landing__section:before
     display table
     content ' '
@@ -88,16 +91,3 @@ maximumSize()
 
         li
             text-transform capitalize
-
-.gift-item
-    width calc(100% / 3)
-    padding 12px
-    display flex
-
-@media (max-width 1279px)
-    .gift-item
-        width calc(100% / 2)
-
-@media (max-width 599px)
-    .gift-item
-        width calc(100%)

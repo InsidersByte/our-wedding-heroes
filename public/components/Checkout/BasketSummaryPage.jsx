@@ -54,7 +54,7 @@ class BasketSummaryPage extends React.Component {
                 </div>
 
                 <div style={{ textAlign: 'center' }}>
-                    <Link to="giver" className="btn btn-primary" role="button">Continue</Link>
+                    <Link to="giver" className="btn btn-success" role="button">Continue</Link>
 
                     <Link
                         to="/"
