@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 
-exports.createSalt = () => {
+exports.createSalt = () => { // eslint-disable-line
     return crypto.randomBytes(128).toString('base64');
 };
 

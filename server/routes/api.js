@@ -6,6 +6,7 @@ module.exports = (app, express, config) => {
     router.use('/setup', require('./setup')(app, express, config));
     router.use('/authenticate', require('./authenticate')(app, express, config));
     router.use('/weddingProfile', require('./weddingProfile')(app, express));
+    router.use('/gift', require('./gift')(app, express));
 
     router.use(jwt({
         secret: config.secret,
@@ -19,7 +20,7 @@ module.exports = (app, express, config) => {
     router.use('/requestForTheDay', require('./requestForTheDay')(app, express));
     router.use('/honeymoonGiftListItem', require('./honeymoonGiftListItem')(app, express));
 
-    router.all('/*', (req, res) => {
+    router.all('/*', (req, res) => { // eslint-disable-line
         return res
             .sendStatus(404);
     });
