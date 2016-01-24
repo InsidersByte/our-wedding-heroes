@@ -20,7 +20,7 @@ module.exports = (app, express, config) => {
     router.use('/requestForTheDay', require('./requestForTheDay')(app, express));
     router.use('/honeymoonGiftListItem', require('./honeymoonGiftListItem')(app, express));
 
-    router.all('/*', (req, res) => {
+    router.all('/*', (req, res) => { // eslint-disable-line
         return res
             .sendStatus(404);
     });

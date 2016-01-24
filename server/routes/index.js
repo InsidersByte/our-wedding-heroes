@@ -13,7 +13,7 @@ module.exports = (app, express, config, environment) => {
     } else {
         const middleware = app.get('middleware');
 
-        app.get('*', function response(req, res) {
+        app.get('*', (req, res) => {
             res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../../', 'build/index.html')));
             res.end();
         });
