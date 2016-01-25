@@ -29,6 +29,10 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/font-woff',
+            },
+            {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/font-woff',
             },
