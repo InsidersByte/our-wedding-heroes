@@ -105,20 +105,20 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
                     <div className="landing__section__content">
-                        the idea behind this was that we didn't want to do a traditional wedding list as you may know we
-                        have been living together for a few years now, so we don't really need anything for the house. we
+                        The idea behind this was that we didn't want to do a traditional wedding list as you may know we
+                        have been living together for a few years now, so we don't really need anything for the house. We
                         didn't want to just ask for money or vouchers, so we thought we would setup this website so that
                         if you do decide to give us a wedding gift, then you can give us a gift towards our honeymoon.
                         we are then going to send photos after our honeymoon matching the gifts you gave us.
 
                         <br /><br />
 
-                        <FontAwesome icon="info-circle" /> all payments at the moment are offline (via bank transfer or cash).
+                        <FontAwesome icon="info-circle" /> All payments at the moment are offline (via bank transfer or cash).
                         We will send you our payment details after you have confirmed your gift.
 
                         <br /><br />
 
-                        <FontAwesome icon="info-circle" /> these items might change slightly when we finalise our plans.
+                        <FontAwesome icon="info-circle" /> These items might change slightly when we finalise our plans.
                     </div>
 
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>

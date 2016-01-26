@@ -34,7 +34,6 @@ class UserRow extends React.Component {
                     <Button
                         bsSize="xsmall"
                         bsStyle="danger"
-                        style={{ marginLeft: '5px' }}
                         onClick={this.onDelete}
                     >
                         <Glyphicon glyph="trash" />

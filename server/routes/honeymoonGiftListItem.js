@@ -1,3 +1,5 @@
+'use strict';
+
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
 
@@ -7,9 +9,29 @@ module.exports = (app, express) => {
     router.route('/')
         .get(co.wrap(function* getHoneymoonGiftItems(req, res, next) {
             try {
-                const honeymoonGiftLists = yield HoneymoonGiftListItem.find({});
+                const honeymoonGiftList = yield HoneymoonGiftListItem
+                    .find({})
+                    .populate('gifts', 'quantity')
+                    .lean()
+                    .exec();
 
-                return res.json(honeymoonGiftLists);
+                for (const honeymoonGiftListItem of honeymoonGiftList) {
+                    honeymoonGiftListItem.remaining = honeymoonGiftListItem.requested;
+
+                    if (!honeymoonGiftListItem.gifts) {
+                        continue;
+                    }
+
+                    let bought = 0;
+
+                    for (const gift of honeymoonGiftListItem.gifts) {
+                        bought += gift.quantity;
+                    }
+
+                    honeymoonGiftListItem.remaining -= bought;
+                }
+
+                return res.json(honeymoonGiftList);
             } catch (error) {
                 next(error);
             }
