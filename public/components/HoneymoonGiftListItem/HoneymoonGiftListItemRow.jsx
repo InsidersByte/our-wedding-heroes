@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 
-class HoneymoonGiftListRow extends React.Component {
+class HoneymoonGiftListItemRow extends React.Component {
     constructor() {
         super();
 
@@ -48,10 +48,10 @@ class HoneymoonGiftListRow extends React.Component {
     }
 }
 
-HoneymoonGiftListRow.propTypes = {
+HoneymoonGiftListItemRow.propTypes = {
     item: React.PropTypes.object.isRequired,
     onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
 
-export default HoneymoonGiftListRow;
+export default HoneymoonGiftListItemRow;

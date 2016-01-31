@@ -69,7 +69,7 @@ class App extends React.Component {
                             <Link to="/admin/requestsForTheDay">Requests For The Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
+                            <Link to="/admin/honeymoonGiftListItem">Honeymoon Gift List Items</Link>
                         </li>
                     </NavDropdown>
 

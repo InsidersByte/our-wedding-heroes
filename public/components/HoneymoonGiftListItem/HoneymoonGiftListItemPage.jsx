@@ -2,9 +2,9 @@ import React from 'react';
 import { Jumbotron, Col, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
 import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api';
-import HoneymoonGiftListTable from './HoneymoonGiftListTable.jsx';
+import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable.jsx';
 
-class HoneymoonGiftListPage extends React.Component {
+class HoneymoonGiftListItemPage extends React.Component {
     constructor() {
         super();
 
@@ -97,13 +97,13 @@ class HoneymoonGiftListPage extends React.Component {
             <Col md={12}>
                 <Jumbotron>
                     <h1>
-                        Honeymoon Gift List&nbsp;
+                        Honeymoon Gift List Items&nbsp;
                         <Button bsStyle="success" bsSize="small" onClick={this.open}>
                             <Glyphicon glyph="plus" />
                         </Button>
                     </h1>
 
-                    <HoneymoonGiftListTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
+                    <HoneymoonGiftListItemTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
                 </Jumbotron>
 
                 <HoneymoonGiftListItem
@@ -118,9 +118,9 @@ class HoneymoonGiftListPage extends React.Component {
     }
 }
 
-HoneymoonGiftListPage.propTypes = {
+HoneymoonGiftListItemPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-export default HoneymoonGiftListPage;
+export default HoneymoonGiftListItemPage;
