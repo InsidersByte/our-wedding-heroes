@@ -35,7 +35,6 @@
     "flux": "^2.1.1",
     "font-awesome": "^4.5.0",
     "history": "^1.17.0",
-    "http-proxy": "^1.12.0",
     "jsonwebtoken": "^5.5.4",
     "jwt-decode": "^1.5.0",
     "mongoose": "^4.3.4",
@@ -45,7 +44,8 @@
     "react-google-maps": "^4.7.2",
     "react-router": "^1.0.3",
     "react-toastr": "^2.3.0",
-    "superagent": "^1.6.1"
+    "superagent": "^1.6.1",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
@@ -72,6 +72,6 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "engines": {
-    "node": "5.4.0"
+    "node": "5.5.0"
   }
 }
