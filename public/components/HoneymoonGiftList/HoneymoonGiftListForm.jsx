@@ -54,8 +54,8 @@ class HoneymoonGiftListForm extends React.Component {
                     name="showOfflinePaymentMessage"
                     label="Show Offline Payment Message"
                     value={this.props.honeymoonGiftList.showOfflinePaymentMessage}
+                    checked={this.props.honeymoonGiftList.showOfflinePaymentMessage}
                     onChange={this.props.onChange}
-                    required
                 />
 
                 {offlinePaymentMessageInput}
@@ -64,9 +64,9 @@ class HoneymoonGiftListForm extends React.Component {
                     type="checkbox"
                     name="showDisclaimerMessage"
                     label="Show Disclaimer"
+                    checked={this.props.honeymoonGiftList.showDisclaimerMessage}
                     value={this.props.honeymoonGiftList.showDisclaimerMessage}
                     onChange={this.props.onChange}
-                    required
                 />
 
                 {disclaimerMessageInput}
