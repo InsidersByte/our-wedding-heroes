@@ -47,7 +47,7 @@ class AboutUsPage extends React.Component {
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>About Us</h1>
 
