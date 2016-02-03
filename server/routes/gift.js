@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
 const Giver = require('../models/giver');
 const Gift = require('../models/gift');
