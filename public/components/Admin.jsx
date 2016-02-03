@@ -60,9 +60,6 @@ class App extends React.Component {
                             <Link to="/admin/aboutOurDay">About Our Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/whereIsIt">Where Is It</Link>
-                        </li>
-                        <li>
                             <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
                         </li>
                         <li>
@@ -70,6 +67,9 @@ class App extends React.Component {
                         </li>
                         <li>
                             <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/honeymoonGiftListItem">Honeymoon Gift List Items</Link>
                         </li>
                     </NavDropdown>
 

@@ -19,6 +19,7 @@ class LandingPage extends React.Component {
                 aboutOurDay: '',
                 aboutOurHoneymoon: '',
                 honeymoonGiftListItems: [],
+                honeymoonGiftList: {},
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -61,6 +62,30 @@ class LandingPage extends React.Component {
 
     render() {
         const backgroundImageStyle = { backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` };
+        let offlinePaymentMessage = null;
+        let disclaimerMessage = null;
+
+        if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
+            offlinePaymentMessage = (
+                <span>
+                    <br />
+                    <br />
+
+                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.offlinePaymentMessage}
+                </span>
+            );
+        }
+
+        if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
+            disclaimerMessage = (
+                <span>
+                    <br />
+                    <br />
+
+                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.disclaimerMessage}
+                </span>
+            );
+        }
 
         return (
             <div className="landing">
@@ -105,20 +130,13 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">Honeymoon Gift List</h1>
 
                     <div className="landing__section__content">
-                        The idea behind this was that we didn't want to do a traditional wedding list as you may know we
-                        have been living together for a few years now, so we don't really need anything for the house. We
-                        didn't want to just ask for money or vouchers, so we thought we would setup this website so that
-                        if you do decide to give us a wedding gift, then you can give us a gift towards our honeymoon.
-                        we are then going to send photos after our honeymoon matching the gifts you gave us.
+                        <span className="landing__section__pre">
+                            {this.state.weddingProfile.honeymoonGiftList.content}
+                        </span>
 
-                        <br /><br />
+                        {offlinePaymentMessage}
 
-                        <FontAwesome icon="info-circle" /> All payments at the moment are offline (via bank transfer or cash).
-                        We will send you our payment details after you have confirmed your gift.
-
-                        <br /><br />
-
-                        <FontAwesome icon="info-circle" /> These items might change slightly when we finalise our plans.
+                        {disclaimerMessage}
                     </div>
 
                     <div style={{ display: 'flex', flexWrap: 'wrap' }}>

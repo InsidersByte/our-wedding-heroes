@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import HoneymoonGiftListRow from './HoneymoonGiftListRow.jsx';
+import HoneymoonGiftListItemRow from './HoneymoonGiftListItemRow.jsx';
 
-class HoneymoonGiftListTable extends React.Component {
+class HoneymoonGiftListItemTable extends React.Component {
     constructor() {
         super();
 
@@ -36,7 +36,7 @@ class HoneymoonGiftListTable extends React.Component {
                 <tbody>
                 {
                     this.props.items.map(item => (
-                        <HoneymoonGiftListRow
+                        <HoneymoonGiftListItemRow
                             key={item._id}
                             item={item}
                             onEdit={this.onEdit}
@@ -50,10 +50,10 @@ class HoneymoonGiftListTable extends React.Component {
     }
 }
 
-HoneymoonGiftListTable.propTypes = {
+HoneymoonGiftListItemTable.propTypes = {
     items: React.PropTypes.array.isRequired,
     onEdit: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };
 
-export default HoneymoonGiftListTable;
+export default HoneymoonGiftListItemTable;

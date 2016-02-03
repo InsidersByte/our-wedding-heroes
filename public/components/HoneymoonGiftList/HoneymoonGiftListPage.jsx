@@ -1,118 +1,70 @@
 import React from 'react';
-import { Jumbotron, Col, Button, Glyphicon } from 'react-bootstrap';
-import HoneymoonGiftListItem from './HoneymoonGiftListItem.jsx';
-import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api';
-import HoneymoonGiftListTable from './HoneymoonGiftListTable.jsx';
+import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
+import { Jumbotron, Col } from 'react-bootstrap';
+import HoneymoonGiftListForm from './HoneymoonGiftListForm.jsx';
 
 class HoneymoonGiftListPage extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            items: [],
-            showModal: false,
-            item: {},
+            honeymoonGiftList: {},
         };
 
-        this.open = this.open.bind(this);
-        this.delete = this.delete.bind(this);
-        this.close = this.close.bind(this);
-        this.save = this.save.bind(this);
-        this.setItemState = this.setItemState.bind(this);
+        this.setHoneymoonGiftListState = this.setHoneymoonGiftListState.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
-        this._loadItems();
-    }
-
-    setItemState(event) {
-        const field = event.target.name;
-        const value = event.target.value;
-        this.state.item[field] = value;
-        return this.setState({ item: this.state.item });
-    }
-
-    save(item) {
-        if (item._id) {
-            honeymoonGiftListItemApi
-                .put(item, item._id)
-                .then(() => {
-                    this.close();
-                    this._loadItems();
-                    this.props.toastSuccess('Honeymoon gift list item saved');
-                })
-                .catch(() => {
-                    this.props.toastError('There was an error saving honeymoon gift list item');
-                });
-        } else {
-            honeymoonGiftListItemApi
-                .post(item)
-                .then(() => {
-                    this.close();
-                    this._loadItems();
-                    this.props.toastSuccess('Honeymoon gift list item saved');
-                })
-                .catch(() => {
-                    this.props.toastError('There was an error saving honeymoon gift list item');
-                });
-        }
-    }
-
-    delete(item) {
-        honeymoonGiftListItemApi
-            .delete(item._id)
-            .then(() => {
-                this.close();
-                this._loadItems();
-                this.props.toastSuccess('honeymoon gift list item deleted');
-            })
-            .catch(() => {
-                this.props.toastError('There was an error deleting honeymoon gift list item');
-            });
-    }
-
-    _loadItems() {
-        honeymoonGiftListItemApi
+        HoneymoonGiftListApi
             .get()
             .then((response) => {
                 this.setState({
-                    items: response,
+                    honeymoonGiftList: response,
                 });
             })
             .catch(() => {
-                this.props.toastError('There was an error getting honeymoon gift list items');
+                this.props.toastError('There was an error loading the honeymoonGiftList data');
             });
     }
 
-    close() {
-        this.setState({ showModal: false });
+    setHoneymoonGiftListState(event) {
+        const field = event.target.name;
+        let value = event.target.value;
+
+        if (event.target.checked !== undefined) {
+            value = event.target.checked;
+        }
+
+        this.state.honeymoonGiftList[field] = value;
+        return this.setState({ honeymoonGiftList: this.state.honeymoonGiftList });
     }
 
-    open(item) {
-        this.setState({ showModal: true, item });
+    submit(event) {
+        event.preventDefault();
+
+        HoneymoonGiftListApi
+            .put(this.state.honeymoonGiftList)
+            .then(() => {
+                this.props.toastSuccess('HoneymoonGiftList updated');
+            })
+            .catch(() => {
+                this.props.toastError('There was an error saving honeymoonGiftList');
+            });
     }
 
     render() {
         return (
-            <Col md={12}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
-                    <h1>
-                        Honeymoon Gift List&nbsp;
-                        <Button bsStyle="success" bsSize="small" onClick={this.open}>
-                            <Glyphicon glyph="plus" />
-                        </Button>
-                    </h1>
+                    <h1>Honeymoon Gift List</h1>
 
-                    <HoneymoonGiftListTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
+                    <HoneymoonGiftListForm
+                        honeymoonGiftList={this.state.honeymoonGiftList}
+                        onChange={this.setHoneymoonGiftListState}
+                        onSubmit={this.submit}
+                    />
                 </Jumbotron>
-
-                <HoneymoonGiftListItem
-                    item={this.state.item}
-                    show={this.state.showModal}
-                    onHide={this.close}
-                    onSubmit={this.save}
-                    onChange={this.setItemState}
-                />
             </Col>
         );
     }

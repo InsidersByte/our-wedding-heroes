@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
 const WeddingProfile = require('../models/weddingProfile');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');

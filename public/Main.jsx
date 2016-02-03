@@ -9,6 +9,7 @@ import routes from './routes';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/animate.css/animate.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
+import '../node_modules/toastr/build/toastr.css';
 import './main.styl';
 
 const jwt = localStorage.getItem('jwt');
