@@ -5,7 +5,7 @@ module.exports = (app, express) => {
     const router = new express.Router();
 
     router.route('/')
-        .get(co.wrap(function* getWeddingProfile(req, res, next) {
+        .get(co.wrap(function* getCover(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
@@ -15,7 +15,7 @@ module.exports = (app, express) => {
             }
         }))
 
-        .put(co.wrap(function* getWeddingProfile(req, res, next) {
+        .put(co.wrap(function* updateCover(req, res, next) {
             try {
                 req.checkBody('title').notEmpty();
                 req.checkBody('imageUrl').isURL();

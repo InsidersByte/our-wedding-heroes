@@ -60,13 +60,13 @@ class App extends React.Component {
                             <Link to="/admin/aboutOurDay">About Our Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/whereIsIt">Where Is It</Link>
-                        </li>
-                        <li>
                             <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
                         </li>
                         <li>
                             <Link to="/admin/requestsForTheDay">Requests For The Day</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
                         </li>
                         <li>
                             <Link to="/admin/honeymoonGiftListItem">Honeymoon Gift List Items</Link>
