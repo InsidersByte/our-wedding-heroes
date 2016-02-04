@@ -106,7 +106,17 @@ class LandingPage extends React.Component {
                     </div>
                 </section>
 
-                <section className="landing__section landing__section--primary">
+                <section className="landing__section">
+                    <h1 className="landing__section__heading">RSVP</h1>
+
+                    <div className="landing__section__content">
+                        <span className="landing__section__pre">
+                            {this.state.weddingProfile.rsvp}
+                        </span>
+                    </div>
+                </section>
+
+                <section className="landing__section">
                     <h1 className="landing__section__heading">About our day</h1>
 
                     <div className="landing__section__content">
@@ -126,7 +136,7 @@ class LandingPage extends React.Component {
                     </div>
                 </section>
 
-                <section className="landing__section landing__section--primary">
+                <section className="landing__section">
                     <h1 className="landing__section__heading">Gift List</h1>
 
                     <div className="landing__section__content">
