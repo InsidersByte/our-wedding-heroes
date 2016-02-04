@@ -127,7 +127,7 @@ class LandingPage extends React.Component {
                 </section>
 
                 <section className="landing__section landing__section--primary">
-                    <h1 className="landing__section__heading">Honeymoon Gift List</h1>
+                    <h1 className="landing__section__heading">Gift List</h1>
 
                     <div className="landing__section__content">
                         <span className="landing__section__pre">

@@ -18,10 +18,8 @@ module.exports = (app, express) => {
         .put(co.wrap(function* updateHoneymoonGiftList(req, res, next) {
             try {
                 req.checkBody('content').notEmpty();
-                req.checkBody('showOfflinePaymentMessage').notEmpty();
-                req.checkBody('offlinePaymentMessage').notEmpty();
-                req.checkBody('showDisclaimerMessage').notEmpty();
-                req.checkBody('disclaimerMessage').notEmpty();
+                req.sanitizeBody('showOfflinePaymentMessage').toBoolean();
+                req.sanitizeBody('showDisclaimerMessage').toBoolean();
 
                 const errors = req.validationErrors();
 
