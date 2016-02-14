@@ -91,7 +91,7 @@ class LandingPage extends React.Component {
         }
 
         const rsvpHtml = markdown.parse(this.state.weddingProfile.rsvp || '');
-        const songSuggestionHtml = markdown.parse(this.state.weddingProfile.songSuggestion || '');
+        const songSuggestionHtml = markdown.parse(this.state.weddingProfile.songSuggestions || '');
 
         return (
             <div className="landing">
@@ -132,7 +132,7 @@ class LandingPage extends React.Component {
                 </section>
 
                 <section className="landing__section">
-                    <h1 className="landing__section__heading">Song Suggestions</h1>
+                    <h1 className="landing__section__heading">The wedding playlist</h1>
 
                     <div className="landing__section__content">
                         <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
