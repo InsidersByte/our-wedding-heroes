@@ -5,6 +5,7 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
+import markdown from 'markdown';
 
 import './Landing.styl';
 
@@ -20,6 +21,7 @@ class LandingPage extends React.Component {
                 aboutOurHoneymoon: '',
                 honeymoonGiftListItems: [],
                 honeymoonGiftList: {},
+                rsvp: '',
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -87,6 +89,8 @@ class LandingPage extends React.Component {
             );
         }
 
+        const rsvpHtml = markdown.parse(this.state.weddingProfile.rsvp);
+
         return (
             <div className="landing">
                 <header className="landing__header" style={backgroundImageStyle}>
@@ -110,8 +114,7 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">RSVP</h1>
 
                     <div className="landing__section__content">
-                        <span className="landing__section__pre">
-                            {this.state.weddingProfile.rsvp}
+                        <span className="landing__section__pre" dangerouslySetInnerHTML={{ __html: rsvpHtml }}>
                         </span>
                     </div>
                 </section>
