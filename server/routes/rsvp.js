@@ -5,19 +5,19 @@ module.exports = (app, express) => {
     const router = new express.Router();
 
     router.route('/')
-        .get(co.wrap(function* getAboutOurDay(req, res, next) {
+        .get(co.wrap(function* getRsvp(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                return res.json(weddingProfile.aboutOurDay);
+                return res.json(weddingProfile.rsvp || '');
             } catch (error) {
                 next(error);
             }
         }))
 
-        .put(co.wrap(function* updateAboutOurDay(req, res, next) {
+        .put(co.wrap(function* updateRsvp(req, res, next) {
             try {
-                req.checkBody('aboutOurDay').notEmpty();
+                req.checkBody('rsvp').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -29,11 +29,11 @@ module.exports = (app, express) => {
 
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                weddingProfile.aboutOurDay = req.body.aboutOurDay;
+                weddingProfile.rsvp = req.body.rsvp;
 
                 yield weddingProfile.save();
 
-                return res.json(weddingProfile.aboutOurDay);
+                return res.json(weddingProfile.rsvp);
             } catch (error) {
                 next(error);
             }

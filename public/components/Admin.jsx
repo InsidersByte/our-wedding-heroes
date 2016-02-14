@@ -57,6 +57,9 @@ class App extends React.Component {
                             <Link to="/admin/aboutUs">About Us</Link>
                         </li>
                         <li>
+                            <Link to="/admin/rsvp">RSVP</Link>
+                        </li>
+                        <li>
                             <Link to="/admin/aboutOurDay">About Our Day</Link>
                         </li>
                         <li>
