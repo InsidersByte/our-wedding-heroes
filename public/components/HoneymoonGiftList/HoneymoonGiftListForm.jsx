@@ -64,8 +64,8 @@ class HoneymoonGiftListForm extends React.Component {
                     type="checkbox"
                     name="showDisclaimerMessage"
                     label="Show Disclaimer"
-                    checked={this.props.honeymoonGiftList.showDisclaimerMessage}
                     value={this.props.honeymoonGiftList.showDisclaimerMessage}
+                    checked={this.props.honeymoonGiftList.showDisclaimerMessage}
                     onChange={this.props.onChange}
                 />
 
