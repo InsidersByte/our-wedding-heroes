@@ -22,6 +22,7 @@ class LandingPage extends React.Component {
                 honeymoonGiftListItems: [],
                 honeymoonGiftList: {},
                 rsvp: '',
+                songSuggestion: '',
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -89,7 +90,8 @@ class LandingPage extends React.Component {
             );
         }
 
-        const rsvpHtml = markdown.parse(this.state.weddingProfile.rsvp);
+        const rsvpHtml = markdown.parse(this.state.weddingProfile.rsvp || '');
+        const songSuggestionHtml = markdown.parse(this.state.weddingProfile.songSuggestion || '');
 
         return (
             <div className="landing">
@@ -125,6 +127,15 @@ class LandingPage extends React.Component {
                     <div className="landing__section__content">
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.aboutOurDay}
+                        </span>
+                    </div>
+                </section>
+
+                <section className="landing__section">
+                    <h1 className="landing__section__heading">Song Suggestions</h1>
+
+                    <div className="landing__section__content">
+                        <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
                         </span>
                     </div>
                 </section>
