@@ -7,6 +7,9 @@ maximumSize()
     margin-top -20px
     font-size large
 
+    .landing__section:last-of-type
+        padding-bottom 0
+
 .landing__header
     background-position center center
     background-attachment fixed
@@ -40,21 +43,18 @@ maximumSize()
     margin-right auto
     text-align center
 
-.landing .landing__section:last-of-type
-    padding-bottom 0
+    &:nth-child(even)
+          color white
+          background rgba(31, 119, 180, 0.85)
 
-.landing__section:before
-    display table
-    content ' '
+    &:before
+        display table
+        content ' '
 
-.landing__section:after
-    display table
-    content ' '
-    clear both
-
-.landing__section--primary
-    color white
-    background rgba(31, 119, 180, 0.85)
+    &:after
+        display table
+        content ' '
+        clear both
 
 .landing__section__heading
     text-transform capitalize

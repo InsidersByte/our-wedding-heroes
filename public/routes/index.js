@@ -18,6 +18,7 @@ import Admin from '../components/Admin.jsx';
 import AuthenticatedLanding from '../components/AuthenticatedLanding.jsx';
 import CoverPage from '../components/Cover/CoverPage.jsx';
 import AboutUsPage from '../components/AboutUs/AboutUsPage.jsx';
+import RsvpPage from '../components/Rsvp/RsvpPage.jsx';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
 import RequestsForTheDayPage from '../components/RequestsForTheDay/RequestsForTheDayPage.jsx';
@@ -42,6 +43,7 @@ export default (
             <Route path="setup" component={SetupPage}/>
             <Route path="cover" component={CoverPage} onEnter={requireAuth}/>
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth}/>
+            <Route path="rsvp" component={RsvpPage} onEnter={requireAuth}/>
             <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth}/>
             <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth}/>
             <Route path="requestsForTheDay" component={RequestsForTheDayPage} onEnter={requireAuth}/>
