@@ -6,6 +6,7 @@ import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
 import markdown from 'markdown';
+import moment from 'moment';
 
 import './Landing.styl';
 
@@ -36,8 +37,19 @@ class LandingPage extends React.Component {
         WeddingProfileApi
             .get()
             .then((response) => {
+                const weddingProfile = response;
+
+                if (weddingProfile.cover && weddingProfile.cover.weddingDate) {
+                    const weddingDate = moment(weddingProfile.cover.weddingDate);
+                    const now = moment.now();
+
+                    const daysToGo = weddingDate.diff(now, 'days');
+
+                    weddingProfile.cover.daysToGo = daysToGo;
+                }
+
                 this.setState({
-                    weddingProfile: response,
+                    weddingProfile,
                 });
             })
             .catch(() => {
@@ -67,6 +79,15 @@ class LandingPage extends React.Component {
         const backgroundImageStyle = { backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` };
         let offlinePaymentMessage = null;
         let disclaimerMessage = null;
+        let daysTillIDoCountdown = null;
+
+        if (this.state.weddingProfile.cover.weddingDate) {
+            daysTillIDoCountdown = (
+                <h3 style={{ textAlign: 'center' }}>
+                    {this.state.weddingProfile.cover.daysToGo} Days till I Do
+                </h3>
+            );
+        }
 
         if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
             offlinePaymentMessage = (
@@ -99,6 +120,10 @@ class LandingPage extends React.Component {
                     <div className="landing__header__overlay"></div>
                     <div className="landing__header__content">
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
+
+                        {daysTillIDoCountdown}
+
+                        <div style={{ flex: '1 1 10%', maxHeight: '10%' }}></div>
                     </div>
                 </header>
 
