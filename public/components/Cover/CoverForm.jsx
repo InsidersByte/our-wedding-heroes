@@ -25,6 +25,16 @@ class CoverForm extends React.Component {
                     required
                 />
 
+                <Input
+                    name="weddingDate"
+                    type="date"
+                    label="Wedding Date"
+                    placeholder="Enter wedding date"
+                    value={this.props.cover.weddingDate}
+                    onChange={this.props.onChange}
+                    required
+                />
+
                 <Button type="submit" bsStyle="primary" block>Update</Button>
             </form>
         );

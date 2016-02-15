@@ -2,6 +2,7 @@ import React from 'react';
 import CoverApi from '../../api/cover.api';
 import { Jumbotron, Col } from 'react-bootstrap';
 import CoverForm from './CoverForm.jsx';
+import moment from 'moment';
 
 class CoverPage extends React.Component {
     constructor() {
@@ -19,8 +20,15 @@ class CoverPage extends React.Component {
         CoverApi
             .get()
             .then((response) => {
+                const cover = response;
+
+                if (cover.weddingDate) {
+                    const weddingDate = moment(cover.weddingDate);
+                    cover.weddingDate = weddingDate.format('YYYY-MM-DD');
+                }
+
                 this.setState({
-                    cover: response,
+                    cover,
                 });
             })
             .catch(() => {
