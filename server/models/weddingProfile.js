@@ -10,6 +10,7 @@ const WeddingProfileSchema = new Schema({
     cover: {
         title: { type: String, required: true },
         imageUrl: { type: String, required: true },
+        weddingDate: { type: Date, required: true },
     },
     aboutUs: { type: String, required: true },
     aboutOurDay: { type: String, required: true },
