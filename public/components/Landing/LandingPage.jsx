@@ -83,7 +83,7 @@ class LandingPage extends React.Component {
 
         if (this.state.weddingProfile.cover.weddingDate) {
             daysTillIDoCountdown = (
-                <h3 style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <h3 style={{ textAlign: 'center' }}>
                     {this.state.weddingProfile.cover.daysToGo} Days till I Do
                 </h3>
             );
@@ -122,6 +122,8 @@ class LandingPage extends React.Component {
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
 
                         {daysTillIDoCountdown}
+
+                        <div style={{ flex: '1 1 10%', maxHeight: '10%' }}></div>
                     </div>
                 </header>
 
