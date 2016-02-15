@@ -4,7 +4,6 @@ maximumSize()
 
 .landing
     maximumSize()
-    margin-top -20px
     font-size large
 
     .landing__section:last-of-type
@@ -26,11 +25,11 @@ maximumSize()
     color white
 
 .landing__header__content
-    position relative
-    transform translate(-50%, -50%)
-    top 85%
-    left 50%
     color white
+    display flex
+    flex-direction column
+    justify-content flex-end
+    maximumSize()
 
 .landing__header__content__header
     font-size 4.5em
@@ -94,3 +93,7 @@ maximumSize()
 
         li
             text-transform capitalize
+
+@media (max-width 599px)
+    .landing__header__content__header
+        font-size 3em
