@@ -79,6 +79,15 @@ class LandingPage extends React.Component {
         const backgroundImageStyle = { backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` };
         let offlinePaymentMessage = null;
         let disclaimerMessage = null;
+        let daysTillIDoCountdown = null;
+
+        if (this.state.weddingProfile.cover.weddingDate) {
+            daysTillIDoCountdown = (
+                <h3 style={{ textAlign: 'center', marginBottom: '30px' }}>
+                    {this.state.weddingProfile.cover.daysToGo} Days till I Do
+                </h3>
+            );
+        }
 
         if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
             offlinePaymentMessage = (
@@ -112,7 +121,7 @@ class LandingPage extends React.Component {
                     <div className="landing__header__content">
                         <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
 
-                        <h3 style={{ textAlign: 'center', marginBottom: '30px' }}>{this.state.weddingProfile.cover.daysToGo} Days till I Do</h3>
+                        {daysTillIDoCountdown}
                     </div>
                 </header>
 
