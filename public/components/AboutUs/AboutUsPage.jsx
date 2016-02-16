@@ -1,6 +1,6 @@
 import React from 'react';
 import aboutUsApi from '../../api/aboutUs.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import AboutUsForm from './AboutUsForm.jsx';
 
 class AboutUsPage extends React.Component {

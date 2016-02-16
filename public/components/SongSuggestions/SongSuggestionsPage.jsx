@@ -1,6 +1,6 @@
 import React from 'react';
 import songSuggestions from '../../api/songSuggestions.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import SongSuggestionsForm from './SongSuggestionsForm.jsx';
 
 class SongSuggestionsPage extends React.Component {

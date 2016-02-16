@@ -1,6 +1,6 @@
 import React from 'react';
 import aboutOurDayApi from '../../api/aboutOurDay.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import AboutOurDayForm from './AboutOurDayForm.jsx';
 
 class AboutOurDayPage extends React.Component {
