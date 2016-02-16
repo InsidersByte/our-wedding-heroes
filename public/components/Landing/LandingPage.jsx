@@ -5,6 +5,7 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
+import LandingSection from './LandingSection.jsx';
 import marked from 'marked';
 import moment from 'moment';
 
@@ -130,50 +131,30 @@ class LandingPage extends React.Component {
                     </div>
                 </header>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">A little bit about us</h1>
+                <LandingSection>
+                    <span dangerouslySetInnerHTML={{ __html: aboutUsHtml }}>
+                    </span>
+                </LandingSection>
 
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutUsHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection>
+                    <span dangerouslySetInnerHTML={{ __html: rsvpHtml }}>
+                    </span>
+                </LandingSection>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">RSVP</h1>
+                <LandingSection>
+                    <span dangerouslySetInnerHTML={{ __html: aboutOurDayHtml }}>
+                    </span>
+                </LandingSection>
 
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: rsvpHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection>
+                    <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
+                    </span>
+                </LandingSection>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">About our day</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutOurDayHtml }}>
-                        </span>
-                    </div>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">The wedding playlist</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
-                        </span>
-                    </div>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">About our honeymoon</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutOurHoneymoonHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection>
+                    <span dangerouslySetInnerHTML={{ __html: aboutOurHoneymoonHtml }}>
+                    </span>
+                </LandingSection>
 
                 <section className="landing__section">
                     <h1 className="landing__section__heading">Gift List</h1>
