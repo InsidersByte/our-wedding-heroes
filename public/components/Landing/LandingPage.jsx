@@ -83,9 +83,9 @@ class LandingPage extends React.Component {
 
         if (this.state.weddingProfile.cover.weddingDate) {
             daysTillIDoCountdown = (
-                <h3 style={{ textAlign: 'center' }}>
-                    {this.state.weddingProfile.cover.daysToGo} Days till I Do
-                </h3>
+                <h2>
+                    {this.state.weddingProfile.cover.daysToGo} Days until I Do
+                </h2>
             );
         }
 
