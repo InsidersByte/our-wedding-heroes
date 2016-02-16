@@ -6,7 +6,7 @@ import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
 import LandingSection from './LandingSection.jsx';
-import marked from 'marked';
+import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
 import moment from 'moment';
 
 import './Landing.styl';
@@ -112,12 +112,6 @@ class LandingPage extends React.Component {
             );
         }
 
-        const aboutUsHtml = marked(this.state.weddingProfile.aboutUs || '');
-        const rsvpHtml = marked(this.state.weddingProfile.rsvp || '');
-        const aboutOurDayHtml = marked(this.state.weddingProfile.aboutOurDay || '');
-        const songSuggestionHtml = marked(this.state.weddingProfile.songSuggestions || '');
-        const aboutOurHoneymoonHtml = marked(this.state.weddingProfile.aboutOurHoneymoon || '');
-
         return (
             <div className="landing">
                 <header className="landing__header" style={backgroundImageStyle}>
@@ -131,29 +125,24 @@ class LandingPage extends React.Component {
                     </div>
                 </header>
 
-                <LandingSection>
-                    <span dangerouslySetInnerHTML={{ __html: aboutUsHtml }}>
-                    </span>
+                <LandingSection title="A little bit about us">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
                 </LandingSection>
 
-                <LandingSection>
-                    <span dangerouslySetInnerHTML={{ __html: rsvpHtml }}>
-                    </span>
+                <LandingSection title="RSVP">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.rsvp} />
                 </LandingSection>
 
-                <LandingSection>
-                    <span dangerouslySetInnerHTML={{ __html: aboutOurDayHtml }}>
-                    </span>
+                <LandingSection title="About our Day">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurDay} />
                 </LandingSection>
 
-                <LandingSection>
-                    <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
-                    </span>
+                <LandingSection title="the wedding playlist">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.songSuggestions} />
                 </LandingSection>
 
-                <LandingSection>
-                    <span dangerouslySetInnerHTML={{ __html: aboutOurHoneymoonHtml }}>
-                    </span>
+                <LandingSection title="about our honeymoon">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurHoneymoon} />
                 </LandingSection>
 
                 <section className="landing__section">
