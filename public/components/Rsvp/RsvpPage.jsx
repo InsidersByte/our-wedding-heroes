@@ -1,6 +1,6 @@
 import React from 'react';
 import rsvpApi from '../../api/rsvp.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import RsvpForm from './RsvpForm.jsx';
 
 class RsvpPage extends React.Component {
@@ -47,17 +47,15 @@ class RsvpPage extends React.Component {
 
     render() {
         return (
-            <Col md={12}>
-                <Jumbotron>
-                    <h1>RSVP</h1>
+            <Jumbotron>
+                <h1>RSVP</h1>
 
-                    <RsvpForm
-                        rsvp={this.state.rsvp}
-                        onChange={this.setRsvpState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <RsvpForm
+                    rsvp={this.state.rsvp}
+                    onChange={this.setRsvpState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }

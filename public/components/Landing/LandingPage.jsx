@@ -111,8 +111,11 @@ class LandingPage extends React.Component {
             );
         }
 
+        const aboutUsHtml = marked(this.state.weddingProfile.aboutUs || '');
         const rsvpHtml = marked(this.state.weddingProfile.rsvp || '');
+        const aboutOurDayHtml = marked(this.state.weddingProfile.aboutOurDay || '');
         const songSuggestionHtml = marked(this.state.weddingProfile.songSuggestions || '');
+        const aboutOurHoneymoonHtml = marked(this.state.weddingProfile.aboutOurHoneymoon || '');
 
         return (
             <div className="landing">
@@ -131,8 +134,7 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">A little bit about us</h1>
 
                     <div className="landing__section__content">
-                        <span className="landing__section__pre">
-                            {this.state.weddingProfile.aboutUs}
+                        <span dangerouslySetInnerHTML={{ __html: aboutUsHtml }}>
                         </span>
                     </div>
                 </section>
@@ -150,8 +152,7 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">About our day</h1>
 
                     <div className="landing__section__content">
-                        <span className="landing__section__pre">
-                            {this.state.weddingProfile.aboutOurDay}
+                        <span dangerouslySetInnerHTML={{ __html: aboutOurDayHtml }}>
                         </span>
                     </div>
                 </section>
@@ -169,8 +170,7 @@ class LandingPage extends React.Component {
                     <h1 className="landing__section__heading">About our honeymoon</h1>
 
                     <div className="landing__section__content">
-                        <span className="landing__section__pre">
-                            {this.state.weddingProfile.aboutOurHoneymoon}
+                        <span dangerouslySetInnerHTML={{ __html: aboutOurHoneymoonHtml }}>
                         </span>
                     </div>
                 </section>

@@ -1,6 +1,6 @@
 import React from 'react';
 import aboutOurDayApi from '../../api/aboutOurDay.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import AboutOurDayForm from './AboutOurDayForm.jsx';
 
 class AboutOurDayPage extends React.Component {
@@ -47,17 +47,15 @@ class AboutOurDayPage extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
-                <Jumbotron>
-                    <h1>About Our Day</h1>
+            <Jumbotron>
+                <h1>About Our Day</h1>
 
-                    <AboutOurDayForm
-                        aboutOurDay={this.state.aboutOurDay}
-                        onChange={this.setAboutOurDayState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <AboutOurDayForm
+                    aboutOurDay={this.state.aboutOurDay}
+                    onChange={this.setAboutOurDayState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }
