@@ -14,7 +14,7 @@ export default {
         if (savedJwt !== jwt) {
             localStorage.setItem('jwt', jwt);
 
-            history.replaceState(null, '/admin');
+            history.replace('/admin');
         }
     },
 
@@ -25,6 +25,6 @@ export default {
             actionType: LOGOUT_USER,
         });
 
-        history.replaceState(null, '/admin/login');
+        history.replace('/admin/login');
     },
 };
