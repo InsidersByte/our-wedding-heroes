@@ -1,12 +1,10 @@
 import React from 'react';
-import marked from 'marked';
+import MarkdownRenderer from './MarkdownRenderer.jsx';
 
 import './MarkdownEditor.styl';
 
 class MarkdownEditorWrapper extends React.Component {
     render() {
-        const html = marked(this.props.content);
-
         return (
             <div className="markdown-editor-container">
                 <div>
@@ -18,7 +16,7 @@ class MarkdownEditorWrapper extends React.Component {
                 <div>
                     <h2>Preview</h2>
 
-                    <div className="markdown-editor-preview" dangerouslySetInnerHTML={{ __html: html }}></div>
+                    <MarkdownRenderer className="markdown-editor-preview" markdown={this.props.content} />
                 </div>
             </div>
         );

@@ -5,7 +5,8 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
-import marked from 'marked';
+import LandingSection from './LandingSection.jsx';
+import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
 import moment from 'moment';
 
 import './Landing.styl';
@@ -111,12 +112,6 @@ class LandingPage extends React.Component {
             );
         }
 
-        const aboutUsHtml = marked(this.state.weddingProfile.aboutUs || '');
-        const rsvpHtml = marked(this.state.weddingProfile.rsvp || '');
-        const aboutOurDayHtml = marked(this.state.weddingProfile.aboutOurDay || '');
-        const songSuggestionHtml = marked(this.state.weddingProfile.songSuggestions || '');
-        const aboutOurHoneymoonHtml = marked(this.state.weddingProfile.aboutOurHoneymoon || '');
-
         return (
             <div className="landing">
                 <header className="landing__header" style={backgroundImageStyle}>
@@ -130,50 +125,25 @@ class LandingPage extends React.Component {
                     </div>
                 </header>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">A little bit about us</h1>
+                <LandingSection title="A little bit about us">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
+                </LandingSection>
 
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutUsHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection title="RSVP">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.rsvp} />
+                </LandingSection>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">RSVP</h1>
+                <LandingSection title="About our Day">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurDay} />
+                </LandingSection>
 
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: rsvpHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection title="the wedding playlist">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.songSuggestions} />
+                </LandingSection>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">About our day</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutOurDayHtml }}>
-                        </span>
-                    </div>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">The wedding playlist</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: songSuggestionHtml }}>
-                        </span>
-                    </div>
-                </section>
-
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">About our honeymoon</h1>
-
-                    <div className="landing__section__content">
-                        <span dangerouslySetInnerHTML={{ __html: aboutOurHoneymoonHtml }}>
-                        </span>
-                    </div>
-                </section>
+                <LandingSection title="about our honeymoon">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurHoneymoon} />
+                </LandingSection>
 
                 <section className="landing__section">
                     <h1 className="landing__section__heading">Gift List</h1>
