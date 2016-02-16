@@ -47,17 +47,15 @@ class SongSuggestionsPage extends React.Component {
 
     render() {
         return (
-            <Col md={12}>
-                <Jumbotron>
-                    <h1>Song Suggestions</h1>
+            <Jumbotron>
+                <h1>Song Suggestions</h1>
 
-                    <SongSuggestionsForm
-                        songSuggestions={this.state.songSuggestions}
-                        onChange={this.setRsvpState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <SongSuggestionsForm
+                    songSuggestions={this.state.songSuggestions}
+                    onChange={this.setRsvpState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }

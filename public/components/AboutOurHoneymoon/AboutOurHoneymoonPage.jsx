@@ -47,17 +47,15 @@ class AboutOurHoneymoonPage extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
-                <Jumbotron>
-                    <h1>About Our Honeymoon</h1>
+            <Jumbotron>
+                <h1>About Our Honeymoon</h1>
 
-                    <AboutOurHoneymoonForm
-                        aboutOurHoneymoon={this.state.aboutOurHoneymoon}
-                        onChange={this.setAboutOurHoneymoonState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <AboutOurHoneymoonForm
+                    aboutOurHoneymoon={this.state.aboutOurHoneymoon}
+                    onChange={this.setAboutOurHoneymoonState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }

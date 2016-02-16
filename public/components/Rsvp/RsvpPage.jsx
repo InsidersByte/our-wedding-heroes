@@ -47,17 +47,15 @@ class RsvpPage extends React.Component {
 
     render() {
         return (
-            <Col md={12}>
-                <Jumbotron>
-                    <h1>RSVP</h1>
+            <Jumbotron>
+                <h1>RSVP</h1>
 
-                    <RsvpForm
-                        rsvp={this.state.rsvp}
-                        onChange={this.setRsvpState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <RsvpForm
+                    rsvp={this.state.rsvp}
+                    onChange={this.setRsvpState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }

@@ -47,17 +47,15 @@ class AboutOurDayPage extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
-                <Jumbotron>
-                    <h1>About Our Day</h1>
+            <Jumbotron>
+                <h1>About Our Day</h1>
 
-                    <AboutOurDayForm
-                        aboutOurDay={this.state.aboutOurDay}
-                        onChange={this.setAboutOurDayState}
-                        onSubmit={this.submit}
-                    />
-                </Jumbotron>
-            </Col>
+                <AboutOurDayForm
+                    aboutOurDay={this.state.aboutOurDay}
+                    onChange={this.setAboutOurDayState}
+                    onSubmit={this.submit}
+                />
+            </Jumbotron>
         );
     }
 }

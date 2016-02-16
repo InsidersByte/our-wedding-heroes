@@ -9,16 +9,16 @@ class MarkdownEditorWrapper extends React.Component {
 
         return (
             <div className="markdown-editor-container">
-                <div className="markdown-editor">
+                <div>
                     <h2>Markdown</h2>
 
                     <textarea value={this.props.content} onChange={this.props.onChange} />
                 </div>
 
-                <div className="markdown-preview">
+                <div>
                     <h2>Preview</h2>
 
-                    <div dangerouslySetInnerHTML={{ __html: html }}></div>
+                    <div className="markdown-editor-preview" dangerouslySetInnerHTML={{ __html: html }}></div>
                 </div>
             </div>
         );
