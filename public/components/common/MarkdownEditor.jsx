@@ -1,11 +1,11 @@
 import React from 'react';
-import markdown from 'markdown';
+import marked from 'marked';
 
 import './MarkdownEditor.styl';
 
 class MarkdownEditorWrapper extends React.Component {
     render() {
-        const html = markdown.parse(this.props.content);
+        const html = marked(this.props.content);
 
         return (
             <div className="markdown-editor-container">
