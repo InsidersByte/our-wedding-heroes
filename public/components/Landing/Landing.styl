@@ -38,8 +38,6 @@ maximumSize()
 
 .landing__section
     padding 50px 0
-    margin-left auto
-    margin-right auto
     text-align center
 
     &:nth-child(even)
@@ -68,9 +66,13 @@ maximumSize()
 
 .landing__section__content
     padding-top 10px
-    max-width 75%
-    margin auto
     font-size 0.9em
+    margin 0 25%
+
+    img
+        width 100%
+        max-width 500px
+        height auto
 
 .landing__section__pre
     white-space pre-wrap
@@ -95,5 +97,11 @@ maximumSize()
             text-transform capitalize
 
 @media (max-width 599px)
+    .landing
+        font-size medium
+
     .landing__header__content__header
         font-size 3em
+
+    .landing__section__content
+        margin 0 5%
