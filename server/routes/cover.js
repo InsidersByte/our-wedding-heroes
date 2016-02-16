@@ -19,6 +19,7 @@ module.exports = (app, express) => {
             try {
                 req.checkBody('title').notEmpty();
                 req.checkBody('imageUrl').isURL();
+                req.checkBody('weddingDate').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -32,6 +33,7 @@ module.exports = (app, express) => {
 
                 weddingProfile.cover.title = req.body.title;
                 weddingProfile.cover.imageUrl = req.body.imageUrl;
+                weddingProfile.cover.weddingDate = req.body.weddingDate;
 
                 yield weddingProfile.save();
 
