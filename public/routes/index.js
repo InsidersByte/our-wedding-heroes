@@ -27,9 +27,9 @@ import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/Honey
 import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage.jsx';
 import UsersPage from '../components/Users/UsersPage.jsx';
 
-function requireAuth(nextState, replaceState) {
+function requireAuth(nextState, replace) {
     if (!loginStore.isLoggedIn()) {
-        replaceState({ nextPathname: nextState.location.pathname }, 'admin/login');
+        replace('admin/login');
     }
 }
 
