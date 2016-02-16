@@ -5,7 +5,7 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItem from './GiftItem.jsx';
 import Basket from './Basket.jsx';
-import markdown from 'markdown';
+import marked from 'marked';
 import moment from 'moment';
 
 import './Landing.styl';
@@ -111,8 +111,8 @@ class LandingPage extends React.Component {
             );
         }
 
-        const rsvpHtml = markdown.parse(this.state.weddingProfile.rsvp || '');
-        const songSuggestionHtml = markdown.parse(this.state.weddingProfile.songSuggestions || '');
+        const rsvpHtml = marked(this.state.weddingProfile.rsvp || '');
+        const songSuggestionHtml = marked(this.state.weddingProfile.songSuggestions || '');
 
         return (
             <div className="landing">
