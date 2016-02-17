@@ -2,31 +2,29 @@ import React from 'react';
 import { Link } from 'react-router';
 import FontAwesome from '../common/FontAwesome.jsx';
 
+import './Basket.styl';
+
 class Basket extends React.Component {
     render() {
         let element;
 
         if (this.props.basketCount > 0) {
             element = (
-                <section className="basket">
-                    <h3>Basket</h3>
+                <section className="basket-summary">
+                    <div style={{ marginRight: '6px' }}>
+                        <FontAwesome icon="shopping-basket" />
+                    </div>
 
-                    <hr />
+                    <div style={{ marginRight: '6px' }}>
+                        {this.props.basketCount} item(s)
+                    </div>
 
-                    <ul className="basket__summary">
-                        {
-                            Object.keys(this.props.items).map(key => (
-                                <li key={key}>{this.props.items[key].name} x {this.props.items[key].quantity}</li>
-                            ))
-                        }
-                    </ul>
+                    <div style={{ marginRight: '6px' }}>
+                        £{this.props.total}
+                    </div>
 
-                    <hr />
-
-                    <p>Total: £{this.props.total}</p>
-
-                    <Link to="basket" className="btn btn-success btn-sm btn-block">
-                        <FontAwesome icon="shopping-basket" /> Go to Basket
+                    <Link to="basket" className="btn btn-success btn-sm">
+                        Checkout
                     </Link>
                 </section>
             );
