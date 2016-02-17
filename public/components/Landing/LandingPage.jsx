@@ -24,7 +24,7 @@ class LandingPage extends React.Component {
                 honeymoonGiftListItems: [],
                 honeymoonGiftList: {},
                 rsvp: '',
-                songSuggestion: '',
+                songSuggestions: '',
             },
             items: basketStore.items,
             total: basketStore.total,
