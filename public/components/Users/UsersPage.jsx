@@ -14,10 +14,11 @@ class Users extends React.Component {
             user: {},
         };
 
+        this.add = this.add.bind(this);
         this.open = this.open.bind(this);
-        this.delete = this.delete.bind(this);
         this.close = this.close.bind(this);
         this.save = this.save.bind(this);
+        this.delete = this.delete.bind(this);
         this.setUserState = this.setUserState.bind(this);
     }
 
@@ -71,12 +72,16 @@ class Users extends React.Component {
             });
     }
 
-    close() {
-        this.setState({ showModal: false });
+    add() {
+        this.open({});
     }
 
     open(user) {
         this.setState({ showModal: true, user });
+    }
+
+    close() {
+        this.setState({ showModal: false });
     }
 
     _loadUsers() {
@@ -97,7 +102,7 @@ class Users extends React.Component {
             <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Users&nbsp;
-                        <Button bsStyle="success" bsSize="small" onClick={this.open}><Glyphicon glyph="plus" /></Button>
+                        <Button bsStyle="success" bsSize="small" onClick={this.add}><Glyphicon glyph="plus" /></Button>
                     </h1>
 
                     <UserTable users={this.state.users} onEdit={this.open} onDelete={this.delete} />
