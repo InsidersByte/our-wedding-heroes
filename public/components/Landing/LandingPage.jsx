@@ -3,7 +3,7 @@ import FontAwesome from '../common/FontAwesome.jsx';
 import WeddingProfileApi from '../../api/weddingProfile.api.js';
 import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
-import GiftItem from './GiftItem.jsx';
+import GiftItems from './GiftItems.jsx';
 import Basket from './Basket.jsx';
 import LandingSection from './LandingSection.jsx';
 import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
@@ -148,7 +148,7 @@ class LandingPage extends React.Component {
                 <section className="landing__section">
                     <h1 className="landing__section__heading">Gift List</h1>
 
-                    <div className="landing__section__content">
+                    <div className="landing__section__content" style={{ marginBottom: '10px' }}>
                         <span className="landing__section__pre">
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
@@ -158,18 +158,11 @@ class LandingPage extends React.Component {
                         {disclaimerMessage}
                     </div>
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                        {
-                            this.state.weddingProfile.honeymoonGiftListItems.map(item => (
-                                <GiftItem
-                                    key={item._id}
-                                    item={item}
-                                    addToBasket={this.addToBasket}
-                                    basketItems={this.state.items}
-                                />
-                            ))
-                        }
-                    </div>
+                    <GiftItems
+                        giftItems={this.state.weddingProfile.honeymoonGiftListItems}
+                        addToBasket={this.addToBasket}
+                        basketItems={this.state.items}
+                    />
                 </section>
 
                 <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
