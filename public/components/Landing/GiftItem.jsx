@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
 import './GiftItem.styl';
@@ -34,17 +34,11 @@ class GiftItem extends React.Component {
             );
         }
 
-        const giftItemStyle = {
-            display: 'flex',
-            alignItems: 'center',
-            alignContent: 'center',
-            flexDirection: 'column',
-        };
+        const backgroundImageStyle = { backgroundImage: `url(${item.imageUrl})` };
 
         return (
-            <div className="gift-item" style={giftItemStyle}>
-                <div style={{ flex: '1 1 0%', width: '100%' }}>
-                    <Image src={item.imageUrl} className="gift-item--avatar" rounded />
+            <div className="gift-item">
+                <div className="gift-item--avatar" style={backgroundImageStyle}>
                 </div>
 
                 <div style={{ padding: '8px' }}>
