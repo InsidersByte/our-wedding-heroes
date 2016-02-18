@@ -1,0 +1,35 @@
+maximumSize()
+    width 100%
+    height 100%
+
+.landing-header
+    background-position center center
+    background-attachment fixed
+    background-repeat no-repeat
+    background-size cover
+    maximumSize()
+
+.landing-header__overlay
+    position absolute
+    height 100%
+    width 100%
+    background-color black
+    opacity 0.1
+    color white
+
+.landing-header__content
+    color white
+    display flex
+    flex-direction column
+    justify-content flex-end
+    align-content center
+    text-align center
+    maximumSize()
+
+.landing-header__title
+    font-size 4.5em
+    font-weight 700
+
+@media (max-width 599px)
+    .landing-header__title
+        font-size 3em

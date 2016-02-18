@@ -38,7 +38,7 @@ class GiftItem extends React.Component {
 
         return (
             <div className="gift-item">
-                <div className="gift-item--avatar" style={backgroundImageStyle}>
+                <div className="gift-item__avatar" style={backgroundImageStyle}>
                 </div>
 
                 <div style={{ padding: '8px' }}>

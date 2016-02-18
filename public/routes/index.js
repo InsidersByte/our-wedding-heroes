@@ -22,7 +22,6 @@ import RsvpPage from '../components/Rsvp/RsvpPage.jsx';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
 import SongSuggestionsPage from '../components/SongSuggestions/SongSuggestionsPage.jsx';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
-import RequestsForTheDayPage from '../components/RequestsForTheDay/RequestsForTheDayPage.jsx';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage.jsx';
 import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage.jsx';
 import UsersPage from '../components/Users/UsersPage.jsx';
@@ -48,7 +47,6 @@ export default (
             <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth}/>
             <Route path="songSuggestions" component={SongSuggestionsPage} onEnter={requireAuth}/>
             <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth}/>
-            <Route path="requestsForTheDay" component={RequestsForTheDayPage} onEnter={requireAuth}/>
             <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth}/>
             <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} onEnter={requireAuth}/>
             <Route path="users" component={UsersPage} onEnter={requireAuth}/>

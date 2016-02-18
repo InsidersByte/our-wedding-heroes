@@ -6,7 +6,7 @@ import './MarkdownEditor.styl';
 class MarkdownEditorWrapper extends React.Component {
     render() {
         return (
-            <div className="markdown-editor-container">
+            <div className="markdown-editor">
                 <div>
                     <h2>Markdown</h2>
 
@@ -16,7 +16,7 @@ class MarkdownEditorWrapper extends React.Component {
                 <div>
                     <h2>Preview</h2>
 
-                    <MarkdownRenderer className="markdown-editor-preview" markdown={this.props.content} />
+                    <MarkdownRenderer className="markdown-editor__preview" markdown={this.props.content} />
                 </div>
             </div>
         );

@@ -1,4 +1,24 @@
-.landing__section__content
+.landing-section
+    padding 50px 0
+    text-align center
+
+    &:nth-child(even)
+        color white
+        background rgba(31, 119, 180, 0.85)
+
+    &:before
+        display table
+        content ' '
+
+    &:after
+        display table
+        content ' '
+        clear both
+
+    &:last-of-type
+        padding-bottom 0
+
+.landing-section__content
     padding-top 10px
     font-size 0.9em
     margin 0 25%
@@ -8,11 +28,11 @@
         max-width 500px
         height auto
 
-.landing__section__heading
+.landing-section__title
     text-transform capitalize
     text-align center
     font-size 2.5em
 
 @media (max-width 599px)
-    .landing__section__content
+    .landing-section__content
         margin 0 5%

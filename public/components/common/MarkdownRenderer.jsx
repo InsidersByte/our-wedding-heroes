@@ -3,7 +3,7 @@ import marked from 'marked';
 
 class MarkdownRenderer extends React.Component {
     render() {
-        const html = marked(this.props.markdown || '');
+        const html = marked(this.props.markdown || '', { sanitize: true });
 
         return (
             <div className={this.props.className} dangerouslySetInnerHTML={{ __html: html }}></div>

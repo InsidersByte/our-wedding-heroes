@@ -40,12 +40,12 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <section className="landing__section">
-                <h1 className="landing__section__heading">
+            <section className="landing-section">
+                <h1 className="landing-section__title">
                     Subtotal ({this.state.basketCount} items): £{this.state.total}
                 </h1>
 
-                <div className="landing__section__content">
+                <div className="landing-section__content">
                     <BasketSummaryTable
                         items={this.state.items}
                         total={this.state.total}
