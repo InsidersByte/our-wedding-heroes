@@ -5,6 +5,7 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import GiftItems from './GiftItems.jsx';
 import Basket from './Basket.jsx';
+import LandingHeader from './LandingHeader.jsx';
 import LandingSection from './LandingSection.jsx';
 import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
 import moment from 'moment';
@@ -77,18 +78,8 @@ class LandingPage extends React.Component {
     }
 
     render() {
-        const backgroundImageStyle = { backgroundImage: `url(${this.state.weddingProfile.cover.imageUrl})` };
         let offlinePaymentMessage = null;
         let disclaimerMessage = null;
-        let daysTillIDoCountdown = null;
-
-        if (this.state.weddingProfile.cover.weddingDate) {
-            daysTillIDoCountdown = (
-                <h2>
-                    {this.state.weddingProfile.cover.daysToGo} Days until I Do
-                </h2>
-            );
-        }
 
         if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
             offlinePaymentMessage = (
@@ -103,7 +94,7 @@ class LandingPage extends React.Component {
 
         if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
             disclaimerMessage = (
-                <span>
+                <span style={{ marginBottom: '10px' }}>
                     <br />
                     <br />
 
@@ -112,18 +103,17 @@ class LandingPage extends React.Component {
             );
         }
 
+        const giftItemsElement = (
+            <GiftItems
+                giftItems={this.state.weddingProfile.honeymoonGiftListItems}
+                addToBasket={this.addToBasket}
+                basketItems={this.state.items}
+            />
+        );
+
         return (
             <div className="landing">
-                <header className="landing__header" style={backgroundImageStyle}>
-                    <div className="landing__header__overlay"></div>
-                    <div className="landing__header__content">
-                        <h1 className="landing__header__content__header">{this.state.weddingProfile.cover.title}</h1>
-
-                        {daysTillIDoCountdown}
-
-                        <div style={{ flex: '1 1 10%', maxHeight: '10%' }}></div>
-                    </div>
-                </header>
+                <LandingHeader cover={this.state.weddingProfile.cover} />
 
                 <LandingSection title="A little bit about us">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
@@ -145,25 +135,15 @@ class LandingPage extends React.Component {
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurHoneymoon} />
                 </LandingSection>
 
-                <section className="landing__section">
-                    <h1 className="landing__section__heading">Gift List</h1>
-
-                    <div className="landing__section__content" style={{ marginBottom: '10px' }}>
-                        <span className="landing__section__pre">
+                <LandingSection title="Gift List" postContent={giftItemsElement}>
+                    <span style={{ whiteSpace: 'pre-wrap' }}>
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
-                        {offlinePaymentMessage}
+                    {offlinePaymentMessage}
 
-                        {disclaimerMessage}
-                    </div>
-
-                    <GiftItems
-                        giftItems={this.state.weddingProfile.honeymoonGiftListItems}
-                        addToBasket={this.addToBasket}
-                        basketItems={this.state.items}
-                    />
-                </section>
+                    {disclaimerMessage}
+                </LandingSection>
 
                 <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
             </div>

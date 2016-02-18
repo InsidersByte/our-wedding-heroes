@@ -5,12 +5,14 @@ import './LandingSection.styl';
 class LandingSection extends React.Component {
     render() {
         return (
-            <section className="landing__section">
-                <h1 className="landing__section__heading">{this.props.title}</h1>
+            <section className="landing-section">
+                <h1 className="landing-section__title">{this.props.title}</h1>
 
-                <div className="landing__section__content">
+                <div className="landing-section__content">
                     {this.props.children}
                 </div>
+
+                {this.props.postContent}
             </section>
         );
     }
@@ -18,6 +20,7 @@ class LandingSection extends React.Component {
 
 LandingSection.propTypes = {
     children: React.PropTypes.element.isRequired,
+    postContent: React.PropTypes.element,
     title: React.PropTypes.string.isRequired,
 };
 

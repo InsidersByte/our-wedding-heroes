@@ -11,15 +11,15 @@ class Basket extends React.Component {
         if (this.props.basketCount > 0) {
             element = (
                 <section className="basket-summary">
-                    <div style={{ marginRight: '6px' }}>
+                    <div>
                         <FontAwesome icon="shopping-basket" />
                     </div>
 
-                    <div style={{ marginRight: '6px' }}>
+                    <div>
                         {this.props.basketCount} item(s)
                     </div>
 
-                    <div style={{ marginRight: '6px' }}>
+                    <div>
                         £{this.props.total}
                     </div>
 
