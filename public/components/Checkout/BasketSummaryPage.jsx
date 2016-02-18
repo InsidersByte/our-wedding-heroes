@@ -40,30 +40,32 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <section className="landing-section">
-                <h1 className="landing-section__title">
-                    Subtotal ({this.state.basketCount} items): £{this.state.total}
-                </h1>
+            <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ minWidth: '50%' }}>
+                    <h1 style={{ textAlign: 'center' }}>
+                        Subtotal ({this.state.basketCount} items): £{this.state.total}
+                    </h1>
 
-                <div className="landing-section__content">
-                    <BasketSummaryTable
-                        items={this.state.items}
-                        total={this.state.total}
-                        onRemoveFromBasket={this.removeFromBasket}
-                    />
-                </div>
+                    <div>
+                        <BasketSummaryTable
+                            items={this.state.items}
+                            total={this.state.total}
+                            onRemoveFromBasket={this.removeFromBasket}
+                        />
+                    </div>
 
-                <div style={{ textAlign: 'center' }}>
-                    <Link to="giver" className="btn btn-success" role="button">Continue</Link>
+                    <div style={{ textAlign: 'center' }}>
+                        <Link to="giver" className="btn btn-success" role="button">Continue</Link>
 
-                    <Link
-                        to="/"
-                        className="btn btn-default"
-                        role="button"
-                        style={{ marginLeft: '5px' }}
-                    >
-                        Back
-                    </Link>
+                        <Link
+                            to="/"
+                            className="btn btn-default"
+                            role="button"
+                            style={{ marginLeft: '5px' }}
+                        >
+                            Back
+                        </Link>
+                    </div>
                 </div>
             </section>
         );

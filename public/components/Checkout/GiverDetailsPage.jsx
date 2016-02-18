@@ -40,14 +40,16 @@ class GiverDetailsPage extends React.Component {
 
     render() {
         return (
-            <section style={{ width: '50%', margin: 'auto' }}>
-                <h1>Your Details</h1>
+            <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <div style={{ minWidth: '25%' }}>
+                    <h1>Your Details</h1>
 
-                <GiverDetailsForm
-                    giver={this.state.giver}
-                    onChange={this.setGiverState}
-                    onSubmit={this.submit}
-                />
+                    <GiverDetailsForm
+                        giver={this.state.giver}
+                        onChange={this.setGiverState}
+                        onSubmit={this.submit}
+                    />
+                </div>
             </section>
         );
     }
