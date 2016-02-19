@@ -5,10 +5,24 @@ const Gift = require('../models/gift');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
 
-module.exports = (app, express) => {
+module.exports = (app, express, jwt) => {
     const router = new express.Router();
 
     router.route('/')
+        .get(jwt, co.wrap(function* getGifts(req, res, next) {
+            try {
+                const gifts = yield Gift
+                    .find({})
+                    .populate('giver')
+                    .populate('honeymoonGiftListItem')
+                    .exec();
+
+                return res.json(gifts);
+            } catch (error) {
+                next(error);
+            }
+        }))
+
         .post(co.wrap(function* createGift(req, res, next) {
             try {
                 req.checkBody('giver').notEmpty();
