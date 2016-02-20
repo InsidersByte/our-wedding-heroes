@@ -1,6 +1,6 @@
 import React from 'react';
 import UserApi from '../../api/user.api.js';
-import { Jumbotron, Col, Button, Glyphicon } from 'react-bootstrap';
+import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import UserTable from './UserTable.jsx';
 import User from './User.jsx';
 
@@ -99,7 +99,7 @@ class Users extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
+            <div>
                 <Jumbotron>
                     <h1>Users&nbsp;
                         <Button bsStyle="success" bsSize="small" onClick={this.add}><Glyphicon glyph="plus" /></Button>
@@ -115,7 +115,7 @@ class Users extends React.Component {
                     onSubmit={this.save}
                     onChange={this.setUserState}
                 />
-            </Col>
+            </div>
         );
     }
 }
