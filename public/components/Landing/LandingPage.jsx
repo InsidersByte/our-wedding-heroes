@@ -136,13 +136,15 @@ class LandingPage extends React.Component {
                 </LandingSection>
 
                 <LandingSection title="Gift List" postContent={giftItemsElement}>
-                    <span style={{ whiteSpace: 'pre-wrap' }}>
+                    <div>
+                        <span style={{ whiteSpace: 'pre-wrap' }}>
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
-                    {offlinePaymentMessage}
+                        {offlinePaymentMessage}
 
-                    {disclaimerMessage}
+                        {disclaimerMessage}
+                    </div>
                 </LandingSection>
 
                 <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
