@@ -8,7 +8,9 @@ const co = require('co');
 module.exports = (app, express, jwt) => {
     const router = new express.Router();
 
-    router.route('/')
+    router
+        .route('/')
+
         .get(jwt, co.wrap(function* getGifts(req, res, next) {
             try {
                 const gifts = yield Gift
@@ -19,7 +21,7 @@ module.exports = (app, express, jwt) => {
 
                 return res.json(gifts);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }))
 
@@ -76,11 +78,13 @@ module.exports = (app, express, jwt) => {
 
                 return res.json(giver);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }));
 
-    router.route('/:giftId')
+    router
+        .route('/:giftId')
+
         .delete(jwt, co.wrap(function* getGifts(req, res, next) {
             try {
                 const gift = yield Gift.findById(req.params.giftId);
@@ -93,7 +97,7 @@ module.exports = (app, express, jwt) => {
 
                 return res.json({ message: 'Successfully deleted' });
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }));
 

@@ -35,25 +35,25 @@ function requireAuth(nextState, replace) {
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={LandingPage}/>
+        <IndexRoute component={LandingPage} />
         <Route path="basket" component={BasketSummaryPage} />
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="admin" component={Admin}>
-            <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth}/>
-            <Route path="login" component={LoginPage}/>
-            <Route path="setup" component={SetupPage}/>
-            <Route path="cover" component={CoverPage} onEnter={requireAuth}/>
-            <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth}/>
-            <Route path="rsvp" component={RsvpPage} onEnter={requireAuth}/>
-            <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth}/>
-            <Route path="songSuggestions" component={SongSuggestionsPage} onEnter={requireAuth}/>
-            <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth}/>
-            <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth}/>
-            <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} onEnter={requireAuth}/>
-            <Route path="users" component={UsersPage} onEnter={requireAuth}/>
-            <Route path="gifts" component={GiftsPage} onEnter={requireAuth}/>
-            <Route path="*" component={NoMatchAdmin}/>
+            <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
+            <Route path="login" component={LoginPage} />
+            <Route path="setup" component={SetupPage} />
+            <Route path="cover" component={CoverPage} onEnter={requireAuth} />
+            <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
+            <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />
+            <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth} />
+            <Route path="songSuggestions" component={SongSuggestionsPage} onEnter={requireAuth} />
+            <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth} />
+            <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth} />
+            <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} onEnter={requireAuth} />
+            <Route path="users" component={UsersPage} onEnter={requireAuth} />
+            <Route path="gifts" component={GiftsPage} onEnter={requireAuth} />
+            <Route path="*" component={NoMatchAdmin} />
         </Route>
-        <Route path="*" component={NoMatch}/>
+        <Route path="*" component={NoMatch} />
     </Route>
 );

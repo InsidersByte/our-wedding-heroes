@@ -12,21 +12,25 @@ class App extends React.Component {
     }
 
     toastSuccess(message) {
-        this.refs.container.success(
-            message,
-            'Success',
-            {
-                closeButton: true,
-            });
+        this
+            .refs
+            .container
+            .success(
+                message,
+                'Success',
+                { closeButton: true }
+            );
     }
 
     toastError(message) {
-        this.refs.container.error(
-            message,
-            'Error',
-            {
-                closeButton: true,
-            });
+        this
+            .refs
+            .container
+            .error(
+                message,
+                'Error',
+                { closeButton: true }
+            );
     }
 
     render() {
