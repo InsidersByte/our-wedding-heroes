@@ -20,9 +20,9 @@ class GiftsPage extends React.Component {
                     gifts: response,
                 });
             })
-            //.catch(() => {
-            //    this.props.toastError('There was an error getting gifts');
-            //});
+            .catch(() => {
+                this.props.toastError('There was an error getting gifts');
+            });
     }
 
     render() {
