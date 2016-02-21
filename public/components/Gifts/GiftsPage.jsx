@@ -10,9 +10,42 @@ class GiftsPage extends React.Component {
         this.state = {
             gifts: [],
         };
+
+        this.markAsPaid = this.markAsPaid.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
+        this._loadGifts();
+    }
+
+    markAsPaid() {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to delete this user?')) { //eslint-disable-line
+            return;
+        }
+
+        this.props.toastError('Not yet implemented, please come again soon');
+    }
+
+    delete(gift) {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to delete this gift?')) { //eslint-disable-line
+            return;
+        }
+
+        GiftApi
+            .delete(gift._id)
+            .then(() => {
+                this._loadGifts();
+                this.props.toastSuccess('Gift deleted');
+            })
+            .catch(() => {
+                this.props.toastError('There was an error deleting a gift');
+            });
+    }
+
+    _loadGifts() {
         GiftApi
             .get()
             .then((response) => {
@@ -30,7 +63,7 @@ class GiftsPage extends React.Component {
             <Jumbotron>
                 <h1>Gifts</h1>
 
-                <GiftsTable gifts={this.state.gifts} />
+                <GiftsTable gifts={this.state.gifts} onMarkAsPaid={this.markAsPaid} onDelete={this.delete} />
             </Jumbotron>
         );
     }

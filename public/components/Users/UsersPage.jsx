@@ -68,7 +68,6 @@ class Users extends React.Component {
         UserApi
             .delete(user._id)
             .then(() => {
-                this.close();
                 this._loadUsers();
                 this.props.toastSuccess('User deleted');
             })
