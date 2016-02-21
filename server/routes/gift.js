@@ -95,7 +95,7 @@ module.exports = (app, express, jwt) => {
             } catch (error) {
                 next(error);
             }
-        }))
+        }));
 
     return router;
 };
