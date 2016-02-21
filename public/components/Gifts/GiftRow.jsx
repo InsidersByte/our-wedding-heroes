@@ -37,6 +37,7 @@ class GiftRow extends React.Component {
                         bsSize="xsmall"
                         bsStyle="success"
                         onClick={this.onMarkAsPaid}
+                        disabled={this.props.gift.paid}
                     >
                         <Glyphicon glyph="gbp" />
                     </Button>
@@ -45,6 +46,7 @@ class GiftRow extends React.Component {
                         bsSize="xsmall"
                         bsStyle="danger"
                         onClick={this.onDelete}
+                        disabled={this.props.gift.paid}
                     >
                         <Glyphicon glyph="trash" />
                     </Button>
