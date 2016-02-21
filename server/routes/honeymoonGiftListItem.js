@@ -94,6 +94,7 @@ module.exports = (app, express) => {
                 honeymoonGiftItem.imageUrl = req.body.imageUrl;
                 honeymoonGiftItem.name = req.body.name;
                 honeymoonGiftItem.description = req.body.description;
+                honeymoonGiftItem.description = req.body.description;
                 honeymoonGiftItem.requested = req.body.requested;
                 honeymoonGiftItem.price = req.body.price;
 
