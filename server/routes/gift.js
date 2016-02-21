@@ -80,5 +80,22 @@ module.exports = (app, express, jwt) => {
             }
         }));
 
+    router.route('/:giftId')
+        .delete(jwt, co.wrap(function* getGifts(req, res, next) {
+            try {
+                const gift = yield Gift.findById(req.params.giftId);
+
+                if (!gift) {
+                    return res.status(404).send(`Cannot find gift with id '${req.params.giftId}'`);
+                }
+
+                yield gift.remove();
+
+                return res.json({ message: 'Successfully deleted' });
+            } catch (error) {
+                next(error);
+            }
+        }))
+
     return router;
 };
