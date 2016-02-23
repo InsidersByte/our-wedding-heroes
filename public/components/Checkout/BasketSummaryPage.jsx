@@ -4,6 +4,8 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import BasketSummaryTable from './BasketSummaryTable.jsx';
 
+import './BasketSummary.styl';
+
 class BasketSummaryPage extends React.Component {
     constructor() {
         super();
@@ -40,9 +42,9 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ minWidth: '50%' }}>
-                    <h1 style={{ textAlign: 'center' }}>
+            <section className="basket-summary">
+                <div className="basket-summary__container">
+                    <h1 className="basket-summary__title">
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
                     </h1>
 
@@ -54,7 +56,7 @@ class BasketSummaryPage extends React.Component {
                         />
                     </div>
 
-                    <div style={{ textAlign: 'center' }}>
+                    <div className="basket-summary__actions">
                         <Link to="giver" className="btn btn-success" role="button">Continue</Link>
 
                         <Link
