@@ -3,6 +3,8 @@ import GiverDetailsForm from './GiverDetailsForm.jsx';
 import giftApi from '../../api/gift.api';
 import basketStore from '../../stores/basket.store.js';
 
+import './GiverDetails.styl';
+
 class GiverDetailsPage extends React.Component {
     constructor() {
         super();
@@ -40,8 +42,8 @@ class GiverDetailsPage extends React.Component {
 
     render() {
         return (
-            <section style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <div style={{ minWidth: '25%' }}>
+            <section className="giver-details">
+                <div className="giver-details__container">
                     <h1>Your Details</h1>
 
                     <GiverDetailsForm

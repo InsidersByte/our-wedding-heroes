@@ -63,7 +63,6 @@ class BasketSummaryPage extends React.Component {
                             to="/"
                             className="btn btn-default"
                             role="button"
-                            style={{ marginLeft: '5px' }}
                         >
                             Back
                         </Link>

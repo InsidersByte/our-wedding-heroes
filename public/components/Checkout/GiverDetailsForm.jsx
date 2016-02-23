@@ -36,14 +36,13 @@ class GiverDetailsForm extends React.Component {
                     required
                 />
 
-                <div style={{ textAlign: 'center' }}>
+                <div className="giver-details__actions">
                     <Button type="submit" bsStyle="success">Gift</Button>
 
                     <Link
                         to="/basket"
                         className="btn btn-default"
                         role="button"
-                        style={{ marginLeft: '5px' }}
                     >
                         Back
                     </Link>
