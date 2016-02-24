@@ -24,7 +24,7 @@ class Basket extends React.Component {
                     </div>
 
                     <Link to="basket" className="btn btn-success btn-sm">
-                        Checkout
+                        Basket
                     </Link>
                 </section>
             );

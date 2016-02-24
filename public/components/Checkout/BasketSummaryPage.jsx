@@ -57,7 +57,7 @@ class BasketSummaryPage extends React.Component {
                     </div>
 
                     <div className="basket-summary__actions">
-                        <Link to="giver" className="btn btn-success" role="button">Continue</Link>
+                        <Link to="giver" className="btn btn-success" role="button">Proceed to Checkout</Link>
 
                         <Link
                             to="/"

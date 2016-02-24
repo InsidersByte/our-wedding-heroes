@@ -37,7 +37,7 @@ class GiverDetailsForm extends React.Component {
                 />
 
                 <div className="giver-details__actions">
-                    <Button type="submit" bsStyle="success">Gift</Button>
+                    <Button type="submit" bsStyle="success">Complete Gift</Button>
 
                     <Link
                         to="/basket"
