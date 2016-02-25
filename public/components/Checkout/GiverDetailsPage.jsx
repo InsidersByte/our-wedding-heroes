@@ -33,7 +33,7 @@ class GiverDetailsPage extends React.Component {
                 items: basketStore.items,
             })
             .then(() => {
-                this.props.toastSuccess('Gift created');
+                this.props.toastSuccess('Gift completed');
             })
             .catch(() => {
                 this.props.toastError('There was an error');
