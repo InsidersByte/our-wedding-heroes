@@ -14,5 +14,5 @@ require('./config/mongoose')(config);
 require('./routes/index')(app, express, config, environment);
 
 app.listen(config.port, () => {
-    console.log(`Server running on port ${config.port}`); // eslint-disable-line no-console
+    console.log(`Server running on port ${config.port}`);
 });
