@@ -59,6 +59,11 @@ class HoneymoonGiftListItemPage extends React.Component {
     }
 
     delete(item) {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to delete this gift item?')) { //eslint-disable-line
+            return;
+        }
+
         honeymoonGiftListItemApi
             .delete(item._id)
             .then(() => {

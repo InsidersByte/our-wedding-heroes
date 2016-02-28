@@ -4,14 +4,16 @@ const co = require('co');
 module.exports = (app, express) => {
     const router = new express.Router();
 
-    router.route('/')
+    router
+        .route('/')
+
         .get(co.wrap(function* getCover(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
                 return res.json(weddingProfile.cover);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }))
 
@@ -39,7 +41,7 @@ module.exports = (app, express) => {
 
                 return res.json(weddingProfile.cover);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }));
 

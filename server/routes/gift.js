@@ -6,10 +6,26 @@ const Gift = require('../models/gift');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
 
-module.exports = (app, express) => {
+module.exports = (app, express, jwt) => {
     const router = new express.Router();
 
-    router.route('/')
+    router
+        .route('/')
+
+        .get(jwt, co.wrap(function* getGifts(req, res, next) {
+            try {
+                const gifts = yield Gift
+                    .find({})
+                    .populate('giver')
+                    .populate('honeymoonGiftListItem')
+                    .exec();
+
+                return res.json(gifts);
+            } catch (error) {
+                return next(error);
+            }
+        }))
+
         .post(co.wrap(function* createGift(req, res, next) {
             try {
                 req.checkBody('giver').notEmpty();
@@ -71,7 +87,26 @@ module.exports = (app, express) => {
 
                 return res.json(giftSet);
             } catch (error) {
-                next(error);
+                return next(error);
+            }
+        }));
+
+    router
+        .route('/:giftId')
+
+        .delete(jwt, co.wrap(function* getGifts(req, res, next) {
+            try {
+                const gift = yield Gift.findById(req.params.giftId);
+
+                if (!gift) {
+                    return res.status(404).send(`Cannot find gift with id '${req.params.giftId}'`);
+                }
+
+                yield gift.remove();
+
+                return res.json({ message: 'Successfully deleted' });
+            } catch (error) {
+                return next(error);
             }
         }));
 

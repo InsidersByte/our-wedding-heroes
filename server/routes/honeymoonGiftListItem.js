@@ -6,7 +6,9 @@ const co = require('co');
 module.exports = (app, express) => {
     const router = new express.Router();
 
-    router.route('/')
+    router
+        .route('/')
+
         .get(co.wrap(function* getHoneymoonGiftItems(req, res, next) {
             try {
                 const honeymoonGiftList = yield HoneymoonGiftListItem
@@ -33,7 +35,7 @@ module.exports = (app, express) => {
 
                 return res.json(honeymoonGiftList);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }))
 
@@ -63,7 +65,7 @@ module.exports = (app, express) => {
 
                 yield honeymoonGiftItem.save();
 
-                res
+                return res
                     .status(201)
                     .json({ message: 'Honeymoon Gift Item Created!' });
             } catch (error) {
@@ -71,7 +73,9 @@ module.exports = (app, express) => {
             }
         }));
 
-    router.route('/:id')
+    router
+        .route('/:id')
+
         .put(co.wrap(function* updateHoneymoonGiftItem(req, res, next) {
             try {
                 req.checkParams('id').equals(req.body._id);
@@ -94,6 +98,7 @@ module.exports = (app, express) => {
                 honeymoonGiftItem.imageUrl = req.body.imageUrl;
                 honeymoonGiftItem.name = req.body.name;
                 honeymoonGiftItem.description = req.body.description;
+                honeymoonGiftItem.description = req.body.description;
                 honeymoonGiftItem.requested = req.body.requested;
                 honeymoonGiftItem.price = req.body.price;
 
@@ -101,7 +106,7 @@ module.exports = (app, express) => {
 
                 return res.json({ message: 'Honeymoon Gift Item Updated!' });
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }))
 
