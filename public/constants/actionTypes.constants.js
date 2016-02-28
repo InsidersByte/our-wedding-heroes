@@ -3,4 +3,5 @@ export const LOGOUT_USER = Symbol('LOGOUT_USER');
 
 export const ADD_TO_BASKET = Symbol('ADD_TO_BASKET');
 export const REMOVE_FROM_BASKET = Symbol('REMOVE_FROM_BASKET');
+export const DELETE_FROM_BASKET = Symbol('DELETE_FROM_BASKET');
 export const EMPTY_BASKET = Symbol('EMPTY_BASKET');

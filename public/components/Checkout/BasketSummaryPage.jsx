@@ -17,7 +17,9 @@ class BasketSummaryPage extends React.Component {
         };
 
         this._onChange = this._onChange.bind(this);
+        this.addToBasket = this.addToBasket.bind(this);
         this.removeFromBasket = this.removeFromBasket.bind(this);
+        this.deleteFromBasket = this.deleteFromBasket.bind(this);
     }
 
     componentDidMount() {
@@ -36,8 +38,16 @@ class BasketSummaryPage extends React.Component {
         });
     }
 
+    addToBasket(item) {
+        basketActions.addToBasket(item);
+    }
+
     removeFromBasket(item) {
         basketActions.removeFromBasket(item);
+    }
+
+    deleteFromBasket(item) {
+        basketActions.deleteFromBasket(item);
     }
 
     render() {
@@ -50,11 +60,13 @@ class BasketSummaryPage extends React.Component {
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
                     </h1>
 
-                    <div>
+                    <div className="basket-summary__content">
                         <BasketSummaryTable
                             items={this.state.items}
                             total={this.state.total}
-                            onRemoveFromBasket={this.removeFromBasket}
+                            onAdd={this.addToBasket}
+                            onRemove={this.removeFromBasket}
+                            onDelete={this.deleteFromBasket}
                         />
                     </div>
 
@@ -74,7 +86,7 @@ class BasketSummaryPage extends React.Component {
         } else {
             content = (
                 <div className="basket-summary__container">
-                    <h1 className="basket-summary__title basket-summary__title--no-items">
+                    <h1 className="basket-summary__title">
                         Your Basket is empty!
                     </h1>
 

@@ -1,4 +1,4 @@
-import { ADD_TO_BASKET, REMOVE_FROM_BASKET, EMPTY_BASKET } from '../constants/actionTypes.constants';
+import { ADD_TO_BASKET, REMOVE_FROM_BASKET, EMPTY_BASKET, DELETE_FROM_BASKET } from '../constants/actionTypes.constants';
 import BaseStore from './base.store.js';
 
 class BasketStore extends BaseStore {
@@ -41,10 +41,24 @@ class BasketStore extends BaseStore {
     _addToBasket(id, item) {
         const existingItem = this._items[id] || { quantity: 0 };
         existingItem.quantity += 1;
-        this._items[id] = Object.assign({}, existingItem, item);
+        const updatedItem = Object.assign({}, existingItem, item);
+
+        if (updatedItem.quantity > updatedItem.remaining) {
+            updatedItem.quantity = updatedItem.remaining;
+        }
+
+        this._items[id] = updatedItem;
     }
 
     _removeFromBasket(id) {
+        if (this._items[id].quantity <= 1) {
+            return;
+        }
+
+        this._items[id].quantity -= 1;
+    }
+
+    _deleteFromBasket(id) {
         delete this._items[id];
     }
 
@@ -60,6 +74,10 @@ class BasketStore extends BaseStore {
 
             case REMOVE_FROM_BASKET:
                 this._removeFromBasket(action.item._id);
+                break;
+
+            case DELETE_FROM_BASKET:
+                this._deleteFromBasket(action.item._id);
                 break;
 
             case EMPTY_BASKET:

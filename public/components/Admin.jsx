@@ -7,11 +7,13 @@ import auth from '../services/auth';
 class App extends React.Component {
     constructor() {
         super();
+
         this.state = this._getLoginState();
+
+        this.changeListener = this._onChange.bind(this);
     }
 
     componentDidMount() {
-        this.changeListener = this._onChange.bind(this);
         loginStore.addChangeListener(this.changeListener);
     }
 
@@ -63,7 +65,7 @@ class App extends React.Component {
                             <Link to="/admin/aboutOurDay">About Our Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/songSuggestions">Song Suggestions</Link>
+                            <Link to="/admin/weddingPlaylist">Wedding Playlist</Link>
                         </li>
                         <li>
                             <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
