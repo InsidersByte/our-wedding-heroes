@@ -14,6 +14,7 @@ class HoneymoonGiftListItemPage extends React.Component {
             item: {},
         };
 
+        this.add = this.add.bind(this);
         this.open = this.open.bind(this);
         this.delete = this.delete.bind(this);
         this.close = this.close.bind(this);
@@ -89,11 +90,16 @@ class HoneymoonGiftListItemPage extends React.Component {
             });
     }
 
+    add() {
+        this.open({});
+    }
+
     close() {
         this.setState({ showModal: false });
     }
 
-    open(item) {
+    open(itemToEdit) {
+        const item = Object.assign({}, itemToEdit);
         this.setState({ showModal: true, item });
     }
 
@@ -103,7 +109,7 @@ class HoneymoonGiftListItemPage extends React.Component {
                 <Jumbotron>
                     <h1>
                         Honeymoon Gift List Items&nbsp;
-                        <Button bsStyle="success" bsSize="small" onClick={this.open}>
+                        <Button bsStyle="success" bsSize="small" onClick={this.add}>
                             <Glyphicon glyph="plus" />
                         </Button>
                     </h1>

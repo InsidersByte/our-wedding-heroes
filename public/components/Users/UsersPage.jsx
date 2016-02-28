@@ -80,7 +80,8 @@ class Users extends React.Component {
         this.open({});
     }
 
-    open(user) {
+    open(userToEdit) {
+        const user = Object.assign({}, userToEdit);
         this.setState({ showModal: true, user });
     }
 
