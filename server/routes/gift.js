@@ -16,7 +16,10 @@ module.exports = (app, express, jwt) => {
             try {
                 const gifts = yield Gift
                     .find({})
-                    .populate('giver')
+                    .populate({
+                        path: 'giftSet',
+                        populate: { path: 'giver', model: 'Giver' },
+                    })
                     .populate('honeymoonGiftListItem')
                     .exec();
 
@@ -72,7 +75,7 @@ module.exports = (app, express, jwt) => {
                     const gift = new Gift({
                         quantity: item.quantity,
                         honeymoonGiftListItem: honeymoonGiftListItem._id,
-                        gifts: giftSet._id,
+                        giftSet: giftSet._id,
                     });
 
                     gift.save();

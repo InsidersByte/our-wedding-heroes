@@ -40,8 +40,8 @@ class GiftsPage extends React.Component {
                 this._loadGifts();
                 this.props.toastSuccess('Gift deleted');
             })
-            .catch(() => {
-                this.props.toastError('There was an error deleting a gift');
+            .catch((error) => {
+                this.props.toastError('There was an error deleting a gift', error);
             });
     }
 
@@ -53,8 +53,8 @@ class GiftsPage extends React.Component {
                     gifts: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error getting gifts');
+            .catch((error) => {
+                this.props.toastError('There was an error getting gifts', error);
             });
     }
 
