@@ -9,12 +9,21 @@ const GiftSchema = new Schema(
     });
 
 GiftSchema.pre('remove', function preRemove(next) {
-    this.model('Giver').update(
+    const giftSetPromise = this.model('GiftSet').update(
         { gifts: this._id },
         { $pull: { gifts: this._id } },
-        { multi: true },
-        next
+        { multi: true }
     );
+
+    const honeymoonGiftListItemPromise = this.model('HoneymoonGiftListItem').update(
+        { gifts: this._id },
+        { $pull: { gifts: this._id } },
+        { multi: true }
+    );
+
+    Promise
+        .all([giftSetPromise, honeymoonGiftListItemPromise])
+        .then(next);
 });
 
 module.exports = mongoose.model('Gift', GiftSchema);
