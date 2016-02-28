@@ -34,7 +34,6 @@ class GiverDetailsPage extends React.Component {
             })
             .then((giftSet) => {
                 this.context.router.push(`confirmation/${giftSet._id}`);
-                this.props.toastSuccess('Gift successful');
             })
             .catch((error) => {
                 this.props.toastError('There was an error', error);
