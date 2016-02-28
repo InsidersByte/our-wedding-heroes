@@ -33,6 +33,7 @@ class BasketSummaryRow extends React.Component {
                         bsSize="xsmall"
                         bsStyle="success"
                         onClick={this.onRemove}
+                        disabled={this.props.item.quantity === 1}
                     >
                         <FontAwesome icon="minus" />
                     </Button>
@@ -45,6 +46,7 @@ class BasketSummaryRow extends React.Component {
                         bsSize="xsmall"
                         bsStyle="success"
                         onClick={this.onAdd}
+                        disabled={this.props.item.quantity === this.props.item.remaining}
                     >
                         <FontAwesome icon="plus" />
                     </Button>
