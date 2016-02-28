@@ -1,6 +1,7 @@
-'use strict'; // eslint-disable-line
+'use strict'; // eslint-disable-line strict
 
 const Giver = require('../models/giver');
+const GiftSet = require('../models/giftSet');
 const Gift = require('../models/gift');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
@@ -15,7 +16,10 @@ module.exports = (app, express, jwt) => {
             try {
                 const gifts = yield Gift
                     .find({})
-                    .populate('giver')
+                    .populate({
+                        path: 'giftSet',
+                        populate: { path: 'giver', model: 'Giver' },
+                    })
                     .populate('honeymoonGiftListItem')
                     .exec();
 
@@ -28,7 +32,8 @@ module.exports = (app, express, jwt) => {
         .post(co.wrap(function* createGift(req, res, next) {
             try {
                 req.checkBody('giver').notEmpty();
-                req.checkBody('giver.name').notEmpty();
+                req.checkBody('giver.forename').notEmpty();
+                req.checkBody('giver.surname').notEmpty();
                 req.checkBody('giver.email').isEmail();
                 req.checkBody('giver.phoneNumber').notEmpty();
                 req.checkBody('items').notEmpty();
@@ -52,6 +57,13 @@ module.exports = (app, express, jwt) => {
                     yield giver.save();
                 }
 
+                const giftSet = yield GiftSet.create({
+                    giver: giver._id,
+                });
+
+                giver.giftSets.push(giftSet._id);
+                yield giver.save();
+
                 for (const key in itemsData) {
                     if (!itemsData.hasOwnProperty(key)) {
                         continue;
@@ -62,8 +74,8 @@ module.exports = (app, express, jwt) => {
 
                     const gift = new Gift({
                         quantity: item.quantity,
-                        giver: giver._id,
                         honeymoonGiftListItem: honeymoonGiftListItem._id,
+                        giftSet: giftSet._id,
                     });
 
                     gift.save();
@@ -71,12 +83,12 @@ module.exports = (app, express, jwt) => {
                     honeymoonGiftListItem.gifts.push(gift._id);
                     honeymoonGiftListItem.save();
 
-                    giver.gifts.push(gift._id);
+                    giftSet.gifts.push(gift._id);
                 }
 
-                giver.save();
+                giftSet.save();
 
-                return res.json(giver);
+                return res.json(giftSet);
             } catch (error) {
                 return next(error);
             }

@@ -1,4 +1,4 @@
-'use strict'; // eslint-disable-line
+'use strict'; // eslint-disable-line strict
 
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');

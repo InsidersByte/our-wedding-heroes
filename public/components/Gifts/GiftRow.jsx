@@ -24,14 +24,14 @@ class GiftRow extends React.Component {
 
         return (
             <tr>
-                <th>{this.props.gift.giver.name}</th>
-                <th>{this.props.gift.giver.email}</th>
-                <th>{this.props.gift.giver.phoneNumber}</th>
+                <th>{this.props.gift.giftSet.giver.forename} {this.props.gift.giftSet.giver.surname}</th>
+                <th>{this.props.gift.giftSet.giver.email}</th>
+                <th>{this.props.gift.giftSet.giver.phoneNumber}</th>
                 <th>{this.props.gift.honeymoonGiftListItem.name}</th>
                 <th>{this.props.gift.honeymoonGiftListItem.price}</th>
                 <th>{this.props.gift.quantity}</th>
                 <th>{createdAtFormatted}</th>
-                <th>{this.props.gift.paid ? 'Yes' : 'No'}</th>
+                <th>{this.props.gift.giftSet.paid ? 'Yes' : 'No'}</th>
                 <th>
                     <Button
                         bsSize="xsmall"

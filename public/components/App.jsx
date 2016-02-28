@@ -22,7 +22,11 @@ class App extends React.Component {
             );
     }
 
-    toastError(message) {
+    toastError(message, error) {
+        if (error) {
+            console.error(error);
+        }
+
         this
             .refs
             .container

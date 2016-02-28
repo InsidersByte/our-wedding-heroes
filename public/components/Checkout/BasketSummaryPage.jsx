@@ -4,6 +4,8 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import BasketSummaryTable from './BasketSummaryTable.jsx';
 
+import './BasketSummary.styl';
+
 class BasketSummaryPage extends React.Component {
     constructor() {
         super();
@@ -40,30 +42,31 @@ class BasketSummaryPage extends React.Component {
 
     render() {
         return (
-            <section className="landing-section">
-                <h1 className="landing-section__title">
-                    Subtotal ({this.state.basketCount} items): £{this.state.total}
-                </h1>
+            <section className="basket-summary">
+                <div className="basket-summary__container">
+                    <h1 className="basket-summary__title">
+                        Subtotal ({this.state.basketCount} items): £{this.state.total}
+                    </h1>
 
-                <div className="landing-section__content">
-                    <BasketSummaryTable
-                        items={this.state.items}
-                        total={this.state.total}
-                        onRemoveFromBasket={this.removeFromBasket}
-                    />
-                </div>
+                    <div>
+                        <BasketSummaryTable
+                            items={this.state.items}
+                            total={this.state.total}
+                            onRemoveFromBasket={this.removeFromBasket}
+                        />
+                    </div>
 
-                <div style={{ textAlign: 'center' }}>
-                    <Link to="giver" className="btn btn-success" role="button">Continue</Link>
+                    <div className="basket-summary__actions">
+                        <Link to="giver" className="btn btn-success" role="button">Proceed to Checkout</Link>
 
-                    <Link
-                        to="/"
-                        className="btn btn-default"
-                        role="button"
-                        style={{ marginLeft: '5px' }}
-                    >
-                        Back
-                    </Link>
+                        <Link
+                            to="/"
+                            className="btn btn-default"
+                            role="button"
+                        >
+                            Back
+                        </Link>
+                    </div>
                 </div>
             </section>
         );
