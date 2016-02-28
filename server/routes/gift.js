@@ -1,6 +1,7 @@
 'use strict'; // eslint-disable-line strict
 
 const Giver = require('../models/giver');
+const GiftSet = require('../models/giftSet');
 const Gift = require('../models/gift');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
@@ -37,6 +38,13 @@ module.exports = (app, express) => {
                     yield giver.save();
                 }
 
+                const giftSet = yield GiftSet.create({
+                    giver: giver._id,
+                });
+
+                giver.giftSets.push(giftSet._id);
+                yield giver.save();
+
                 for (const key in itemsData) {
                     if (!itemsData.hasOwnProperty(key)) {
                         continue;
@@ -47,8 +55,8 @@ module.exports = (app, express) => {
 
                     const gift = new Gift({
                         quantity: item.quantity,
-                        giver: giver._id,
                         honeymoonGiftListItem: honeymoonGiftListItem._id,
+                        gifts: giftSet._id,
                     });
 
                     gift.save();
@@ -56,12 +64,12 @@ module.exports = (app, express) => {
                     honeymoonGiftListItem.gifts.push(gift._id);
                     honeymoonGiftListItem.save();
 
-                    giver.gifts.push(gift._id);
+                    giftSet.gifts.push(gift._id);
                 }
 
-                giver.save();
+                giftSet.save();
 
-                return res.json(giver);
+                return res.json(giftSet);
             } catch (error) {
                 next(error);
             }

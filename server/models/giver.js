@@ -6,7 +6,7 @@ const GiverSchema = new Schema({
     surname: { type: String, required: true },
     email: { type: String, required: true, index: { unique: true } },
     phoneNumber: { type: String, required: true },
-    gifts: [{ type: Schema.Types.ObjectId, ref: 'Gift' }],
+    giftSets: [{ type: Schema.Types.ObjectId, ref: 'GiftSet' }],
 });
 
 module.exports = mongoose.model('Giver', GiverSchema);

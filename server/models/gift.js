@@ -3,13 +3,9 @@ const Schema = mongoose.Schema;
 
 const GiftSchema = new Schema(
     {
-        paid: { type: Boolean, default: false },
         quantity: { type: Number, required: true },
         honeymoonGiftListItem: { type: Schema.Types.ObjectId, ref: 'HoneymoonGiftListItem' },
-        giver: { type: Schema.Types.ObjectId, ref: 'Giver' },
-    },
-    {
-        timestamps: true,
+        gifts: { type: Schema.Types.ObjectId, ref: 'GiftSet' },
     });
 
 module.exports = mongoose.model('Gift', GiftSchema);
