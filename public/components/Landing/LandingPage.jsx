@@ -25,7 +25,7 @@ class LandingPage extends React.Component {
                 honeymoonGiftListItems: [],
                 honeymoonGiftList: {},
                 rsvp: '',
-                songSuggestions: '',
+                weddingPlaylist: '',
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -128,7 +128,7 @@ class LandingPage extends React.Component {
                 </LandingSection>
 
                 <LandingSection title="the wedding playlist">
-                    <MarkdownRenderer markdown={this.state.weddingProfile.songSuggestions} />
+                    <MarkdownRenderer markdown={this.state.weddingProfile.weddingPlaylist} />
                 </LandingSection>
 
                 <LandingSection title="about our honeymoon">

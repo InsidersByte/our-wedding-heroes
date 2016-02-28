@@ -1,6 +1,6 @@
 import BaseApi from './base.api';
 
-const apiUrl = 'songSuggestions';
+const apiUrl = 'weddingPlaylist';
 
 class SetupApi extends BaseApi {
     constructor() {

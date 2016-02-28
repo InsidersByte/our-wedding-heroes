@@ -7,19 +7,19 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getSongSuggestions(req, res, next) {
+        .get(co.wrap(function* getWeddingPlaylist(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                return res.json(weddingProfile.songSuggestions || '');
+                return res.json(weddingProfile.weddingPlaylist || '');
             } catch (error) {
                 return next(error);
             }
         }))
 
-        .put(co.wrap(function* updateSongSuggestions(req, res, next) {
+        .put(co.wrap(function* updateWeddingPlaylist(req, res, next) {
             try {
-                req.checkBody('songSuggestions').notEmpty();
+                req.checkBody('weddingPlaylist').notEmpty();
 
                 const errors = req.validationErrors();
 
@@ -31,11 +31,11 @@ module.exports = (app, express) => {
 
                 const weddingProfile = yield WeddingProfile.findOne({});
 
-                weddingProfile.songSuggestions = req.body.songSuggestions;
+                weddingProfile.weddingPlaylist = req.body.weddingPlaylist;
 
                 yield weddingProfile.save();
 
-                return res.json(weddingProfile.songSuggestions);
+                return res.json(weddingProfile.weddingPlaylist);
             } catch (error) {
                 return next(error);
             }
