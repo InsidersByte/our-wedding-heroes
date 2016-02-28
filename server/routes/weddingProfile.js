@@ -1,4 +1,4 @@
-'use strict'; // eslint-disable-line
+'use strict'; // eslint-disable-line strict
 
 const WeddingProfile = require('../models/weddingProfile');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
@@ -7,7 +7,9 @@ const co = require('co');
 module.exports = (app, express) => {
     const router = new express.Router();
 
-    router.route('/')
+    router
+        .route('/')
+
         .get(co.wrap(function* getWeddingProfile(req, res, next) {
             try {
                 const weddingProfile = yield WeddingProfile.findOne({}).lean();
@@ -30,14 +32,14 @@ module.exports = (app, express) => {
                         bought += gift.quantity;
                     }
 
-                    honeymoonGiftListItem.remaining -= bought;
+                    honeymoonGiftListItem.remaining -= bought > honeymoonGiftListItem.remaining ? honeymoonGiftListItem.remaining : bought;
                 }
 
                 weddingProfile.honeymoonGiftListItems = honeymoonGiftList;
 
                 return res.json(weddingProfile);
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }));
 

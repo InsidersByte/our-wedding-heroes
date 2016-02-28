@@ -7,11 +7,21 @@ class GiverDetailsForm extends React.Component {
         return (
             <form onSubmit={this.props.onSubmit}>
                 <Input
-                    name="name"
+                    name="forename"
                     type="text"
-                    label="Name"
-                    placeholder="Enter your name"
-                    value={this.props.giver.name}
+                    label="Forename"
+                    placeholder="Enter your forename"
+                    value={this.props.giver.forename}
+                    onChange={this.props.onChange}
+                    required
+                />
+
+                <Input
+                    name="surname"
+                    type="text"
+                    label="Surname"
+                    placeholder="Enter your surname"
+                    value={this.props.giver.surname}
                     onChange={this.props.onChange}
                     required
                 />
@@ -36,14 +46,13 @@ class GiverDetailsForm extends React.Component {
                     required
                 />
 
-                <div style={{ textAlign: 'center' }}>
-                    <Button type="submit" bsStyle="success">Gift</Button>
+                <div className="giver-details__actions">
+                    <Button type="submit" bsStyle="success">Complete Gift</Button>
 
                     <Link
                         to="/basket"
                         className="btn btn-default"
                         role="button"
-                        style={{ marginLeft: '5px' }}
                     >
                         Back
                     </Link>

@@ -4,11 +4,17 @@ const co = require('co');
 module.exports = (app, express) => {
     const router = new express.Router();
 
-    router.route('/')
-        .get(co.wrap(function* getUsers(req, res) {
-            const users = yield User.find({});
+    router
+        .route('/')
 
-            return res.json(users);
+        .get(co.wrap(function* getUsers(req, res, next) {
+            try {
+                const users = yield User.find({});
+
+                return res.json(users);
+            } catch (error) {
+                return next(error);
+            }
         }))
 
         .post(co.wrap(function* createUser(req, res, next) {
@@ -33,7 +39,7 @@ module.exports = (app, express) => {
 
                 yield user.save();
 
-                res.json({ message: 'User created!' });
+                return res.json({ message: 'User created!' });
             } catch (error) {
                 if (error.code === 11000) {
                     return res
@@ -46,7 +52,9 @@ module.exports = (app, express) => {
         }));
 
 
-    router.route('/:userId')
+    router
+        .route('/:userId')
+
         .put((co.wrap(function* updateUser(req, res, next) {
             try {
                 req.checkParams('id').equals(req.params.id);
@@ -70,7 +78,7 @@ module.exports = (app, express) => {
 
                 yield user.save();
 
-                res.json({ message: 'User updated!' });
+                return res.json({ message: 'User updated!' });
             } catch (error) {
                 if (error.code === 11000) {
                     return res
@@ -82,10 +90,14 @@ module.exports = (app, express) => {
             }
         })))
 
-        .delete(co.wrap(function* deleteUser(req, res) {
-            yield User.remove({ _id: req.params.userId });
+        .delete(co.wrap(function* deleteUser(req, res, next) {
+            try {
+                yield User.remove({ _id: req.params.userId });
 
-            return res.json({ message: 'Successfully deleted' });
+                return res.json({ message: 'Successfully deleted' });
+            } catch (error) {
+                return next(error);
+            }
         }));
 
     return router;

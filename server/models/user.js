@@ -20,7 +20,7 @@ UserSchema.pre('save', function preSave(next) {
     self.salt = encryption.createSalt();
     self.password = encryption.hashPassword(self.salt, self.password);
 
-    next();
+    return next();
 });
 
 UserSchema.methods.comparePassword = function comparePassword(password) {

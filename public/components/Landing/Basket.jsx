@@ -10,7 +10,7 @@ class Basket extends React.Component {
 
         if (this.props.basketCount > 0) {
             element = (
-                <section className="basket-summary">
+                <section className="basket">
                     <div>
                         <FontAwesome icon="shopping-basket" />
                     </div>
@@ -24,7 +24,7 @@ class Basket extends React.Component {
                     </div>
 
                     <Link to="basket" className="btn btn-success btn-sm">
-                        Checkout
+                        Basket
                     </Link>
                 </section>
             );

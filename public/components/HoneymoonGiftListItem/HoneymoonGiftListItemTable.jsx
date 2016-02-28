@@ -35,14 +35,17 @@ class HoneymoonGiftListItemTable extends React.Component {
 
                 <tbody>
                 {
-                    this.props.items.map(item => (
-                        <HoneymoonGiftListItemRow
-                            key={item._id}
-                            item={item}
-                            onEdit={this.onEdit}
-                            onDelete={this.onDelete}
-                        />
-                    ))
+                    this
+                        .props
+                        .items
+                        .map(item => (
+                            <HoneymoonGiftListItemRow
+                                key={item._id}
+                                item={item}
+                                onEdit={this.onEdit}
+                                onDelete={this.onDelete}
+                            />
+                        ))
                 }
                 </tbody>
             </Table>

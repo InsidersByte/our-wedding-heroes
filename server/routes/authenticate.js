@@ -47,7 +47,7 @@ module.exports = (app, express, config) => {
                 token,
             });
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }));
 

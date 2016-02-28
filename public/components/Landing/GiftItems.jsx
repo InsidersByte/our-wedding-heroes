@@ -6,14 +6,17 @@ class GiftItems extends React.Component {
         return (
             <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px' }}>
                 {
-                    this.props.giftItems.map(item => (
-                        <GiftItem
-                            key={item._id}
-                            item={item}
-                            addToBasket={this.props.addToBasket}
-                            basketItems={this.props.basketItems}
-                        />
-                    ))
+                    this
+                        .props
+                        .giftItems
+                        .map(item => (
+                            <GiftItem
+                                key={item._id}
+                                item={item}
+                                addToBasket={this.props.addToBasket}
+                                basketItems={this.props.basketItems}
+                            />
+                        ))
                 }
             </div>
         );

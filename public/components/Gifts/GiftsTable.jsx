@@ -21,9 +21,13 @@ class GiftsTable extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.props.gifts.map(gift => (
-                        <GiftRow key={gift._id} gift={gift} onMarkAsPaid={this.props.onMarkAsPaid} onDelete={this.props.onDelete} />
-                    ))}
+                    {this
+                        .props
+                        .gifts
+                        .map(gift => (
+                            <GiftRow key={gift._id} gift={gift} onMarkAsPaid={this.props.onMarkAsPaid} onDelete={this.props.onDelete} />
+                        ))
+                    }
                 </tbody>
             </Table>
         );

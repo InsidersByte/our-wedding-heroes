@@ -24,10 +24,9 @@ module.exports = (app, express, config) => {
     router.use('/rsvp', require('./rsvp')(app, express));
     router.use('/songSuggestions', require('./songSuggestions')(app, express));
 
-    router.all('/*', (req, res) => { // eslint-disable-line
-        return res
-            .sendStatus(404);
-    });
+    router.all('/*', (req, res) =>
+        res.sendStatus(404)
+    );
 
     return router;
 };

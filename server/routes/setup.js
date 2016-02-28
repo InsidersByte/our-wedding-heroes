@@ -49,7 +49,7 @@ module.exports = (app, express) => {
 
                 return res.json({ message: 'User created!' });
             } catch (error) {
-                next(error);
+                return next(error);
             }
         }));
 

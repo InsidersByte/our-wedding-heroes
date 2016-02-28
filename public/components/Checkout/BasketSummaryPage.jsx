@@ -4,6 +4,8 @@ import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 import BasketSummaryTable from './BasketSummaryTable.jsx';
 
+import './BasketSummary.styl';
+
 class BasketSummaryPage extends React.Component {
     constructor() {
         super();
@@ -39,32 +41,59 @@ class BasketSummaryPage extends React.Component {
     }
 
     render() {
+        let content;
+
+        if (basketStore.count > 0) {
+            content = (
+                <div className="basket-summary__container">
+                    <h1 className="basket-summary__title">
+                        Subtotal ({this.state.basketCount} items): £{this.state.total}
+                    </h1>
+
+                    <div>
+                        <BasketSummaryTable
+                            items={this.state.items}
+                            total={this.state.total}
+                            onRemoveFromBasket={this.removeFromBasket}
+                        />
+                    </div>
+
+                    <div className="basket-summary__actions">
+                        <Link to="giver" className="btn btn-success" role="button">Proceed to Checkout</Link>
+
+                        <Link
+                            to="/"
+                            className="btn btn-default"
+                            role="button"
+                        >
+                            Back
+                        </Link>
+                    </div>
+                </div>
+            );
+        } else {
+            content = (
+                <div className="basket-summary__container">
+                    <h1 className="basket-summary__title basket-summary__title--no-items">
+                        Your Basket is empty!
+                    </h1>
+
+                    <div className="basket-summary__actions">
+                        <Link
+                            to="/"
+                            className="btn btn-success"
+                            role="button"
+                        >
+                            Back to Home
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
+
         return (
-            <section className="landing-section">
-                <h1 className="landing-section__title">
-                    Subtotal ({this.state.basketCount} items): £{this.state.total}
-                </h1>
-
-                <div className="landing-section__content">
-                    <BasketSummaryTable
-                        items={this.state.items}
-                        total={this.state.total}
-                        onRemoveFromBasket={this.removeFromBasket}
-                    />
-                </div>
-
-                <div style={{ textAlign: 'center' }}>
-                    <Link to="giver" className="btn btn-success" role="button">Continue</Link>
-
-                    <Link
-                        to="/"
-                        className="btn btn-default"
-                        role="button"
-                        style={{ marginLeft: '5px' }}
-                    >
-                        Back
-                    </Link>
-                </div>
+            <section className="basket-summary">
+                {content}
             </section>
         );
     }

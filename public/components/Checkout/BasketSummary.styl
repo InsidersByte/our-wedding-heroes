@@ -1,0 +1,21 @@
+.basket-summary
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    min-height 75%
+
+    .basket-summary__container
+        min-width 50%
+
+        .basket-summary__title
+            text-align center
+
+            &.basket-summary__title--no-items
+                margin-bottom 30px
+
+        .basket-summary__actions
+            text-align center
+
+            *:not(:first-child)
+                margin-left 5px

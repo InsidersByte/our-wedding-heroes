@@ -6,14 +6,14 @@ module.exports = (config) => {
 
     const db = mongoose.connection;
 
-    db.on('error', console.error.bind(console, 'connection error...')); // eslint-disable-line no-console
+    db.on('error', console.error.bind(console, 'connection error...'));
 
     db.once('open', () => {
-        console.log('db opened'); // eslint-disable-line no-console
+        console.log('db opened');
     });
 
     databaseInitialiser()
         .catch((err) => {
-            console.log(err); // eslint-disable-line no-console
+            console.log(err);
         });
 };

@@ -30,9 +30,13 @@ class UserTable extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.props.users.map(user => (
-                        <UserRow key={user._id} user={user} onEdit={this.onEdit} onDelete={this.onDelete} />
-                    ))}
+                    {this
+                        .props
+                        .users
+                        .map(user => (
+                            <UserRow key={user._id} user={user} onEdit={this.onEdit} onDelete={this.onDelete} />
+                        ))
+                    }
                 </tbody>
             </Table>
         );
