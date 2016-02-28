@@ -41,8 +41,10 @@ class BasketSummaryPage extends React.Component {
     }
 
     render() {
-        return (
-            <section className="basket-summary">
+        let content;
+
+        if (basketStore.count > 0) {
+            content = (
                 <div className="basket-summary__container">
                     <h1 className="basket-summary__title">
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
@@ -68,6 +70,30 @@ class BasketSummaryPage extends React.Component {
                         </Link>
                     </div>
                 </div>
+            );
+        } else {
+            content = (
+                <div className="basket-summary__container">
+                    <h1 className="basket-summary__title basket-summary__title--no-items">
+                        Your Basket is empty!
+                    </h1>
+
+                    <div className="basket-summary__actions">
+                        <Link
+                            to="/"
+                            className="btn btn-success"
+                            role="button"
+                        >
+                            Back to Home
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <section className="basket-summary">
+                {content}
             </section>
         );
     }
