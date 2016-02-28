@@ -93,7 +93,9 @@ class HoneymoonGiftListItemPage extends React.Component {
         this.setState({ showModal: false });
     }
 
-    open(item) {
+    open(itemToEdit) {
+        const item = Object.assign({}, itemToEdit);
+
         this.setState({ showModal: true, item });
     }
 
