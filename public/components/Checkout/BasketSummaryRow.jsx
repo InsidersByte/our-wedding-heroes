@@ -56,7 +56,7 @@ class BasketSummaryRow extends React.Component {
                     <Button
                         bsSize="xsmall"
                         bsStyle="danger"
-                        onClick={this.onAdd}
+                        onClick={this.onDelete}
                     >
                         <FontAwesome icon="remove" />
                     </Button>

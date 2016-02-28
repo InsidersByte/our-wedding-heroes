@@ -18,7 +18,7 @@ export default {
 
     deleteFromBasket: (item) => {
         AppDispatcher.dispatch({
-            actionType: REMOVE_FROM_BASKET,
+            actionType: DELETE_FROM_BASKET,
             item,
         });
     },
