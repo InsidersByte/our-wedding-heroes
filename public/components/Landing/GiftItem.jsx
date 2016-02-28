@@ -19,7 +19,7 @@ class GiftItem extends React.Component {
         const item = this.props.item;
         const id = item._id;
 
-        const basketItem = this.props.basketItems[id] || {};
+        const basketItem = this.props.basketItems[id] || { quantity: 0 };
         const outOfStock = item.remaining - basketItem.quantity <= 0;
 
         let button;
