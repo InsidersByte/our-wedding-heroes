@@ -32,7 +32,7 @@ module.exports = (app, express) => {
                         bought += gift.quantity;
                     }
 
-                    honeymoonGiftListItem.remaining -= bought;
+                    honeymoonGiftListItem.remaining -= bought > honeymoonGiftListItem.remaining ? honeymoonGiftListItem.remaining : bought;
                 }
 
                 weddingProfile.honeymoonGiftListItems = honeymoonGiftList;

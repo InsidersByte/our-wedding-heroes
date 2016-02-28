@@ -1,6 +1,7 @@
 import React from 'react';
 import GiverDetailsForm from './GiverDetailsForm.jsx';
 import giftApi from '../../api/gift.api';
+import basketActions from '../../actions/basket.action.js';
 import basketStore from '../../stores/basket.store.js';
 
 import './GiverDetails.styl';
@@ -33,6 +34,7 @@ class GiverDetailsPage extends React.Component {
                 items: basketStore.items,
             })
             .then((giftSet) => {
+                basketActions.emptyBasket();
                 this.context.router.push(`confirmation/${giftSet._id}`);
             })
             .catch((error) => {
