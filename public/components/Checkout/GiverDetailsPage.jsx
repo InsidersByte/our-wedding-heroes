@@ -6,8 +6,8 @@ import basketStore from '../../stores/basket.store.js';
 import './GiverDetails.styl';
 
 class GiverDetailsPage extends React.Component {
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             giver: {},
@@ -32,11 +32,12 @@ class GiverDetailsPage extends React.Component {
                 giver: this.state.giver,
                 items: basketStore.items,
             })
-            .then(() => {
-                this.props.toastSuccess('Gift completed');
+            .then((giftSet) => {
+                this.context.router.push(`confirmation/${giftSet._id}`);
+                this.props.toastSuccess('Gift successful');
             })
-            .catch(() => {
-                this.props.toastError('There was an error');
+            .catch((error) => {
+                this.props.toastError('There was an error', error);
             });
     }
 
@@ -60,6 +61,10 @@ class GiverDetailsPage extends React.Component {
 GiverDetailsPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
+};
+
+GiverDetailsPage.contextTypes = {
+    router: React.PropTypes.object.isRequired,
 };
 
 export default GiverDetailsPage;
