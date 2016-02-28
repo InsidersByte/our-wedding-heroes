@@ -12,7 +12,8 @@ module.exports = (app, express) => {
         .post(co.wrap(function* createGift(req, res, next) {
             try {
                 req.checkBody('giver').notEmpty();
-                req.checkBody('giver.name').notEmpty();
+                req.checkBody('giver.forename').notEmpty();
+                req.checkBody('giver.surname').notEmpty();
                 req.checkBody('giver.email').isEmail();
                 req.checkBody('giver.phoneNumber').notEmpty();
                 req.checkBody('items').notEmpty();

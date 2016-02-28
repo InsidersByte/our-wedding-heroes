@@ -7,11 +7,21 @@ class GiverDetailsForm extends React.Component {
         return (
             <form onSubmit={this.props.onSubmit}>
                 <Input
-                    name="name"
+                    name="forename"
                     type="text"
-                    label="Name"
-                    placeholder="Enter your name"
-                    value={this.props.giver.name}
+                    label="Forename"
+                    placeholder="Enter your forename"
+                    value={this.props.giver.forename}
+                    onChange={this.props.onChange}
+                    required
+                />
+
+                <Input
+                    name="surname"
+                    type="text"
+                    label="Surname"
+                    placeholder="Enter your surname"
+                    value={this.props.giver.surname}
                     onChange={this.props.onChange}
                     required
                 />
