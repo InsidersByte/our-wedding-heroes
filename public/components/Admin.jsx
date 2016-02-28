@@ -7,11 +7,13 @@ import auth from '../services/auth';
 class App extends React.Component {
     constructor() {
         super();
+
         this.state = this._getLoginState();
+
+        this.changeListener = this._onChange.bind(this);
     }
 
     componentDidMount() {
-        this.changeListener = this._onChange.bind(this);
         loginStore.addChangeListener(this.changeListener);
     }
 
