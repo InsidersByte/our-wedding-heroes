@@ -66,7 +66,7 @@ class BasketSummaryPage extends React.Component {
                             className="btn btn-default"
                             role="button"
                         >
-                            Back
+                            Back to Home
                         </Link>
                     </div>
                 </div>

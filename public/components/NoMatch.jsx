@@ -7,11 +7,13 @@ class NoMatch extends React.Component {
     render() {
         return (
             <div className="no-match">
-                <h1>Page not found</h1>
+                <h1 className="no-match__title">Page not found</h1>
 
-                <p>Woops! Sorry, there is nothing to see here.</p>
+                <div className="no-match__content">
+                    Woops! Sorry, there is nothing to see here.
+                </div>
 
-                <p><Link to="/">Back to Home</Link></p>
+                <Link to="" className="btn btn-success" role="button">Back to Home</Link>
             </div>
         );
     }
