@@ -18,7 +18,7 @@ const WeddingProfileSchema = new Schema({
         disclaimerMessage: { type: String },
     },
     rsvp: { type: String, required: true },
-    songSuggestions: { type: String, required: true },
+    weddingPlaylist: { type: String, required: true },
 });
 
 module.exports = mongoose.model('WeddingProfile', WeddingProfileSchema);
