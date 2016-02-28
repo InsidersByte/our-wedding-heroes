@@ -17,7 +17,9 @@ class BasketSummaryPage extends React.Component {
         };
 
         this._onChange = this._onChange.bind(this);
+        this.addToBasket = this.addToBasket.bind(this);
         this.removeFromBasket = this.removeFromBasket.bind(this);
+        this.deleteFromBasket = this.deleteFromBasket.bind(this);
     }
 
     componentDidMount() {
@@ -36,8 +38,16 @@ class BasketSummaryPage extends React.Component {
         });
     }
 
-    removeFromBasket(item) {
-        basketActions.removeFromBasket(item);
+    addToBasket() {
+        // TODO: add to basket
+    }
+
+    removeFromBasket() {
+        // TODO: remove from basket
+    }
+
+    deleteFromBasket() {
+        // TODO: delete from basket
     }
 
     render() {
@@ -54,7 +64,9 @@ class BasketSummaryPage extends React.Component {
                         <BasketSummaryTable
                             items={this.state.items}
                             total={this.state.total}
-                            onRemoveFromBasket={this.removeFromBasket}
+                            onAdd={this.addToBasket}
+                            onRemove={this.removeFromBasket}
+                            onDelete={this.deleteFromBasket}
                         />
                     </div>
 

@@ -3,19 +3,9 @@ import { Table } from 'react-bootstrap';
 import BasketSummaryRow from './BasketSummaryRow.jsx';
 
 class BasketSummaryTable extends React.Component {
-    constructor() {
-        super();
-
-        this.removeFromBasket = this.removeFromBasket.bind(this);
-    }
-
-    removeFromBasket(item) {
-        this.props.onRemoveFromBasket(item);
-    }
-
     render() {
         return (
-            <Table responsive>
+            <Table responsive className="basket-summary__table">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -28,7 +18,13 @@ class BasketSummaryTable extends React.Component {
                 <tbody>
                 {
                     Object.keys(this.props.items).map(key => (
-                        <BasketSummaryRow key={key} item={this.props.items[key]} onRemove={this.removeFromBasket} />
+                        <BasketSummaryRow
+                            key={key}
+                            item={this.props.items[key]}
+                            onAdd={this.props.onAdd}
+                            onRemove={this.props.onRemove}
+                            onDelete={this.props.onDelete}
+                        />
                     ))
                 }
                 </tbody>
@@ -40,7 +36,9 @@ class BasketSummaryTable extends React.Component {
 BasketSummaryTable.propTypes = {
     items: React.PropTypes.object.isRequired,
     total: React.PropTypes.number.isRequired,
-    onRemoveFromBasket: React.PropTypes.func.isRequired,
+    onAdd: React.PropTypes.func.isRequired,
+    onRemove: React.PropTypes.func.isRequired,
+    onDelete: React.PropTypes.func.isRequired,
 };
 
 export default BasketSummaryTable;
