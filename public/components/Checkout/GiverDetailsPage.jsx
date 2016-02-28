@@ -18,6 +18,12 @@ class GiverDetailsPage extends React.Component {
         this.submit = this.submit.bind(this);
     }
 
+    componentWillMount() {
+        if (basketStore.count <= 0) {
+            this.context.router.replace('');
+        }
+    }
+
     setGiverState(event) {
         const field = event.target.name;
         const value = event.target.value;
