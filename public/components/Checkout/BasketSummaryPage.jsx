@@ -50,7 +50,7 @@ class BasketSummaryPage extends React.Component {
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
                     </h1>
 
-                    <div>
+                    <div className="basket-summary__content">
                         <BasketSummaryTable
                             items={this.state.items}
                             total={this.state.total}
@@ -74,7 +74,7 @@ class BasketSummaryPage extends React.Component {
         } else {
             content = (
                 <div className="basket-summary__container">
-                    <h1 className="basket-summary__title basket-summary__title--no-items">
+                    <h1 className="basket-summary__title">
                         Your Basket is empty!
                     </h1>
 

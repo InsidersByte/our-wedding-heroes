@@ -52,7 +52,7 @@ class GiverDetailsPage extends React.Component {
         return (
             <section className="giver-details">
                 <div className="giver-details__container">
-                    <h1>Your Details</h1>
+                    <h1 className="giver-details__title">Your Details</h1>
 
                     <GiverDetailsForm
                         giver={this.state.giver}
