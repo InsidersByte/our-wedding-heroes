@@ -1,4 +1,4 @@
-import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from '../constants/actionTypes.constants';
+import { ADD_TO_BASKET, REMOVE_FROM_BASKET, EMPTY_BASKET } from '../constants/actionTypes.constants';
 import BaseStore from './base.store.js';
 
 class BasketStore extends BaseStore {
@@ -48,6 +48,10 @@ class BasketStore extends BaseStore {
         delete this._items[id];
     }
 
+    _emptyBasket() {
+        this._items = {};
+    }
+
     _registerToActions(action) {
         switch (action.actionType) {
             case ADD_TO_BASKET:
@@ -56,6 +60,10 @@ class BasketStore extends BaseStore {
 
             case REMOVE_FROM_BASKET:
                 this._removeFromBasket(action.item._id);
+                break;
+
+            case EMPTY_BASKET:
+                this._emptyBasket();
                 break;
 
             default:

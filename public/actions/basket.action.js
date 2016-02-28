@@ -1,5 +1,5 @@
 import AppDispatcher from '../dispatchers/app.dispatcher.js';
-import { ADD_TO_BASKET, REMOVE_FROM_BASKET } from '../constants/actionTypes.constants';
+import { ADD_TO_BASKET, REMOVE_FROM_BASKET, EMPTY_BASKET } from '../constants/actionTypes.constants';
 
 export default {
     addToBasket: (item) => {
@@ -13,6 +13,12 @@ export default {
         AppDispatcher.dispatch({
             actionType: REMOVE_FROM_BASKET,
             item,
+        });
+    },
+
+    emptyBasket: () => {
+        AppDispatcher.dispatch({
+            actionType: EMPTY_BASKET,
         });
     },
 };
