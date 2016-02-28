@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
 class BasketSummaryRow extends React.Component {
@@ -32,7 +32,7 @@ class BasketSummaryRow extends React.Component {
                     <Button
                         bsSize="xsmall"
                         bsStyle="success"
-                        onClick={this.onAdd}
+                        onClick={this.onRemove}
                     >
                         <FontAwesome icon="minus" />
                     </Button>
@@ -44,16 +44,17 @@ class BasketSummaryRow extends React.Component {
                     <Button
                         bsSize="xsmall"
                         bsStyle="success"
-                        onClick={this.onRemove}
+                        onClick={this.onAdd}
                     >
                         <FontAwesome icon="plus" />
                     </Button>
                 </th>
+                <th>{this.props.item.remaining}</th>
                 <th>
                     <Button
                         bsSize="xsmall"
                         bsStyle="danger"
-                        onClick={this.onDelete}
+                        onClick={this.onAdd}
                     >
                         <FontAwesome icon="remove" />
                     </Button>

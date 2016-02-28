@@ -38,16 +38,16 @@ class BasketSummaryPage extends React.Component {
         });
     }
 
-    addToBasket() {
-        // TODO: add to basket
+    addToBasket(item) {
+        basketActions.addToBasket(item);
     }
 
-    removeFromBasket() {
-        // TODO: remove from basket
+    removeFromBasket(item) {
+        basketActions.removeFromBasket(item);
     }
 
-    deleteFromBasket() {
-        // TODO: delete from basket
+    deleteFromBasket(item) {
+        basketActions.deleteFromBasket(item);
     }
 
     render() {

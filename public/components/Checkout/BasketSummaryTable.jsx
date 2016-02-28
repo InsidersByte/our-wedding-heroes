@@ -11,6 +11,7 @@ class BasketSummaryTable extends React.Component {
                     <th>Name</th>
                     <th>Price (£)</th>
                     <th>Quantity</th>
+                    <th>Remaining</th>
                     <th>Remove</th>
                 </tr>
                 </thead>
