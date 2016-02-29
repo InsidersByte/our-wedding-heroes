@@ -50,7 +50,7 @@ class App extends React.Component {
             headerItems = (
                 <Nav pullRight>
                     {backToSiteLink}
-                    
+
                     <li>
                         <Link to="/admin/login">Login</Link>
                     </li>
