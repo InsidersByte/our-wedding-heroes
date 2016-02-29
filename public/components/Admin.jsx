@@ -40,9 +40,17 @@ class App extends React.Component {
     render() {
         let headerItems;
 
+        const backToSiteLink = (
+            <li>
+                <Link to="/">Back to Site</Link>
+            </li>
+        );
+
         if (!this.state.userLoggedIn) {
             headerItems = (
                 <Nav pullRight>
+                    {backToSiteLink}
+                    
                     <li>
                         <Link to="/admin/login">Login</Link>
                     </li>
@@ -86,6 +94,8 @@ class App extends React.Component {
                         <Link to="/admin/users">Users</Link>
                     </li>
 
+                    {backToSiteLink}
+
                     <li>
                         <a href="#" onClick={this.logout}>Logout</a>
                     </li>
@@ -98,7 +108,7 @@ class App extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <Link to="/">Honeymoon Gift List</Link>
+                            <Link to="/admin">Honeymoon Gift List</Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
