@@ -15,6 +15,7 @@ module.exports = (app, express, config) => {
     router.use(jwt);
 
     router.use('/user', require('./user')(app, express));
+    router.use('/landing', require('./landing')(app, express));
     router.use('/cover', require('./cover')(app, express));
     router.use('/aboutUs', require('./aboutUs')(app, express));
     router.use('/aboutOurDay', require('./aboutOurDay')(app, express));
