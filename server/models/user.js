@@ -7,6 +7,7 @@ const UserSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true, select: false },
     salt: { type: String, select: false },
+    lastLogin: { type: Date },
 });
 
 UserSchema.pre('save', function preSave(next) {
