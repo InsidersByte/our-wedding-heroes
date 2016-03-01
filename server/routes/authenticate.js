@@ -41,6 +41,9 @@ module.exports = (app, express, config) => {
                 expiresIn: 86400, // expires in 24 hours
             });
 
+            user.lastLogin = Date.now();
+            yield user.save();
+
             return res.json({
                 success: true,
                 message: 'Enjoy your token!',
