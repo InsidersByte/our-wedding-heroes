@@ -41,7 +41,6 @@
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.7",
-    "react-google-maps": "^4.9.1",
     "react-router": "^2.0.0",
     "react-toastr": "^2.4.0",
     "superagent": "^1.7.2",
