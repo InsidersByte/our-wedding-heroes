@@ -19,7 +19,7 @@ class GiftRow extends React.Component {
     }
 
     render() {
-        const createdAt = moment(this.props.gift.createdAt);
+        const createdAt = moment(this.props.gift.giftSet.createdAt);
         const createdAtFormatted = createdAt.format('DD/MM/YY HH:MM');
 
         return (
@@ -28,7 +28,7 @@ class GiftRow extends React.Component {
                 <th>{this.props.gift.giftSet.giver.email}</th>
                 <th>{this.props.gift.giftSet.giver.phoneNumber}</th>
                 <th>{this.props.gift.honeymoonGiftListItem.name}</th>
-                <th>{this.props.gift.honeymoonGiftListItem.price}</th>
+                <th>{this.props.gift.price}</th>
                 <th>{this.props.gift.quantity}</th>
                 <th>{createdAtFormatted}</th>
                 <th>{this.props.gift.giftSet.paid ? 'Yes' : 'No'}</th>
