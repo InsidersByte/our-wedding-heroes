@@ -3,6 +3,10 @@ const environmentConstants = require('./constants/environment');
 
 const environment = process.env.NODE_ENV || environmentConstants.development;
 
+if (environment === environmentConstants.development) {
+    require('dotenv').config({ silent: true });
+}
+
 const app = express();
 
 const config = require('./config/config');

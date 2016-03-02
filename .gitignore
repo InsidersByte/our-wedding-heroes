@@ -35,3 +35,6 @@ build
 
 # Dist folder
 dist
+
+# Environment file
+.env
