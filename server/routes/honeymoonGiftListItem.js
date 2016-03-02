@@ -122,11 +122,21 @@ module.exports = (app, express) => {
                         .send(errors);
                 }
 
-                const honeymoonGiftList = yield HoneymoonGiftListItem.findOne({ _id: req.params.id });
+                const honeymoonGiftListItem = yield HoneymoonGiftListItem
+                    .findOne({ _id: req.params.id })
+                    .populate('gifts');
 
-                honeymoonGiftList.remove();
+                const existingGift = honeymoonGiftListItem.gifts.find(o => o !== null);
 
-                yield honeymoonGiftList.save();
+                if (existingGift) {
+                    return res
+                        .status(400)
+                        .json({ message: 'there is currently a gift that exists for this item' });
+                }
+
+                honeymoonGiftListItem.remove();
+
+                yield honeymoonGiftListItem.save();
 
                 return res.json({ message: 'Successfully deleted' });
             } catch (error) {
