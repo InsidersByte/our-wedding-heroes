@@ -3,8 +3,11 @@
 const Giver = require('../models/giver');
 const GiftSet = require('../models/giftSet');
 const Gift = require('../models/gift');
+const User = require('../models/user');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const co = require('co');
+const Mailer = require('../mail');
+const mailer = new Mailer();
 
 module.exports = (app, express, jwt) => {
     const router = new express.Router();
@@ -22,6 +25,9 @@ module.exports = (app, express, jwt) => {
                     })
                     .populate('honeymoonGiftListItem')
                     .exec();
+
+                // TODO: kind of a hack should just sort
+                gifts.reverse();
 
                 return res.json(gifts);
             } catch (error) {
@@ -74,6 +80,7 @@ module.exports = (app, express, jwt) => {
 
                     const gift = new Gift({
                         quantity: item.quantity,
+                        price: honeymoonGiftListItem.price,
                         honeymoonGiftListItem: honeymoonGiftListItem._id,
                         giftSet: giftSet._id,
                     });
@@ -83,8 +90,38 @@ module.exports = (app, express, jwt) => {
                     honeymoonGiftListItem.gifts.push(gift._id);
                     honeymoonGiftListItem.save();
 
-                    giftSet.gifts.push(gift._id);
+                    giftSet.gifts.push(gift);
                 }
+
+                giftSet.save();
+
+                yield giftSet
+                    .populate({
+                        path: 'gifts',
+                        populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                    })
+                    .execPopulate();
+
+                yield mailer
+                    .send({
+                        to: giver.email,
+                        subject: 'Gift Confirmation',
+                        text: 'Thank you very much for your gift!',
+                    });
+
+                const users = yield User.find({}, 'username');
+                const userEmails = users.map(user => { // eslint-disable-line arrow-body-style
+                    return user.username;
+                });
+
+                yield mailer
+                    .send({
+                        to: userEmails,
+                        subject: 'Woop we just got a gift!',
+                        text: `${giver.forename} ${giver.surname} has just confirmed a gift! They have confirmed £${giftSet.total}`,
+                    });
+
+                giftSet.emailSent = true;
 
                 giftSet.save();
 

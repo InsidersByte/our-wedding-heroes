@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const GiftSchema = new Schema(
     {
         quantity: { type: Number, required: true },
+        price: { type: Number, required: true },
         honeymoonGiftListItem: { type: Schema.Types.ObjectId, ref: 'HoneymoonGiftListItem' },
         giftSet: { type: Schema.Types.ObjectId, ref: 'GiftSet' },
     });
@@ -25,5 +26,11 @@ GiftSchema.pre('remove', function preRemove(next) {
         .all([giftSetPromise, honeymoonGiftListItemPromise])
         .then(next);
 });
+
+GiftSchema
+    .virtual('total')
+    .get(function calculateTotal() {
+        return this.quantity * this.price;
+    });
 
 module.exports = mongoose.model('Gift', GiftSchema);
