@@ -1,4 +1,4 @@
-'use strict'; // eslint-disable-line stict
+'use strict'; // eslint-disable-line strict
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -24,7 +24,7 @@ GiftSetSchema
 
         let total = 0;
 
-        for (let gift of this.gifts) {
+        for (const gift of this.gifts) {
             total += gift.total;
         }
 
