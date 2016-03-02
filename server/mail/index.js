@@ -14,7 +14,7 @@ class mailer {
         let from = config.mail && config.mail.from;
 
         if (config.siteTitle) {
-            from = `${config.siteTitle} <${from}}>`;
+            from = `${config.siteTitle} <${from}>`;
         }
 
         return from;
