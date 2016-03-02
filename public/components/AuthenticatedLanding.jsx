@@ -24,9 +24,9 @@ class AuthenticatedLanding extends React.Component {
     }
 
     render() {
-        const giftSetCount = this.state.info.giftSetCount;
+        const giftSetCount = this.state.info.giftSetCount || 0;
 
-        const message = giftSetCount <= 0 ?
+        const message =  giftSetCount <= 0 ?
             'There have been no gift sets since you last logged in' :
             `There has been ${giftSetCount} gift set${giftSetCount === 1 ? '' : 's'} since you last logged in!`;
 
