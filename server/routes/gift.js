@@ -118,7 +118,7 @@ module.exports = (app, express, jwt) => {
                     .send({
                         to: userEmails,
                         subject: 'Woop we just got a gift!',
-                        text: `${giver.forename} ${giver.surname} has just confirmed a gift! They have confirmed £${giftSet.total}`,
+                        text: `${giver.forename} ${giver.surname} has just confirmed a gift set worth £${giftSet.total}!`,
                     });
 
                 giftSet.emailSent = true;
