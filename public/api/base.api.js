@@ -9,38 +9,11 @@ export default class {
     }
 
     get() {
-        return new Promise((resolve, reject) => {
-            request
-                .get(this._baseUrl)
-                .set('Authorization', `Bearer ${loginStore.jwt}`)
-                .end((err, res) => {
-                    if (err) {
-                        this._logoutIfUnauthorised(res);
-                        reject();
-                        return;
-                    }
-
-                    resolve(JSON.parse(res.text));
-                });
-        });
+        return this._request('GET', this._baseUrl);
     }
 
     post(data) {
-        return new Promise((resolve, reject) => {
-            request
-                .post(this._baseUrl)
-                .set('Authorization', `Bearer ${loginStore.jwt}`)
-                .send(data)
-                .end((err, res) => {
-                    if (err) {
-                        this._logoutIfUnauthorised(res);
-                        reject();
-                        return;
-                    }
-
-                    resolve(JSON.parse(res.text));
-                });
-        });
+        return this._request('POST', this._baseUrl, data);
     }
 
     put(data, id) {
@@ -50,43 +23,36 @@ export default class {
             url += `/${id}`;
         }
 
-        return new Promise((resolve, reject) => {
-            request
-                .put(url)
-                .set('Authorization', `Bearer ${loginStore.jwt}`)
-                .send(data)
-                .end((err, res) => {
-                    if (err) {
-                        this._logoutIfUnauthorised(res);
-                        reject();
-                        return;
-                    }
-
-                    resolve(JSON.parse(res.text));
-                });
-        });
+        return this._request('PUT', url, data);
     }
 
     delete(id) {
-        return new Promise((resolve, reject) => {
-            request
-                .delete(`${this._baseUrl}/${id}`)
-                .set('Authorization', `Bearer ${loginStore.jwt}`)
-                .end((err, res) => {
-                    if (err) {
-                        this._logoutIfUnauthorised(res);
-                        reject();
-                        return;
-                    }
-
-                    resolve(JSON.parse(res.text));
-                });
-        });
+        return this._request('DELETE', `${this._baseUrl}/${id}`);
     }
 
-    _logoutIfUnauthorised(res) {
-        if (res.status === 401) {
-            loginActions.logoutUser();
+    _request(method, url, data) {
+        const req = request(method, url);
+
+        if (loginStore.isLoggedIn) {
+            req.set('Authorization', `Bearer ${loginStore.jwt}`);
         }
+
+        if (data) {
+            req.send(data);
+        }
+
+        return new Promise((resolve, reject) => {
+            req.end((err, response) => {
+                if (err) {
+                    if (response.status === 401) {
+                        loginActions.logoutUser();
+                    }
+
+                    return reject(response.statusText);
+                }
+
+                return resolve(JSON.parse(response.text));
+            });
+        });
     }
 }

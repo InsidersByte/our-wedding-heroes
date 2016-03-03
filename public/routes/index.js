@@ -29,7 +29,7 @@ import UsersPage from '../components/Users/UsersPage.jsx';
 import GiftsPage from '../components/Gifts/GiftsPage.jsx';
 
 function requireAuth(nextState, replace) {
-    if (!loginStore.isLoggedIn()) {
+    if (!loginStore.isLoggedIn) {
         replace('admin/login');
     }
 }
