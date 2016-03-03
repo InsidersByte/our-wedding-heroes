@@ -29,7 +29,7 @@ class App extends React.Component {
 
     _getLoginState() {
         return {
-            userLoggedIn: loginStore.isLoggedIn(),
+            userLoggedIn: loginStore.isLoggedIn,
         };
     }
 
