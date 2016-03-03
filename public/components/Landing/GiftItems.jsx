@@ -4,7 +4,7 @@ import GiftItem from './GiftItem.jsx';
 class GiftItems extends React.Component {
     render() {
         return (
-            <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
                 {
                     this
                         .props
