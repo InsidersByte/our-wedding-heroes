@@ -12,6 +12,7 @@ class GiverDetailsPage extends React.Component {
 
         this.state = {
             giver: {},
+            isSaving: false,
         };
 
         this.setGiverState = this.setGiverState.bind(this);
@@ -34,16 +35,20 @@ class GiverDetailsPage extends React.Component {
     submit(event) {
         event.preventDefault();
 
+        this.setState({ isSaving: true });
+
         giftApi
             .post({
                 giver: this.state.giver,
                 items: basketStore.items,
             })
             .then((giftSet) => {
+                this.setState({ isSaving: false });
                 basketActions.emptyBasket();
                 this.context.router.push(`confirmation/${giftSet._id}`);
             })
             .catch((error) => {
+                this.setState({ isSaving: false });
                 this.props.toastError('There was an error', error);
             });
     }
@@ -56,6 +61,7 @@ class GiverDetailsPage extends React.Component {
 
                     <GiverDetailsForm
                         giver={this.state.giver}
+                        isSaving={this.state.isSaving}
                         onChange={this.setGiverState}
                         onSubmit={this.submit}
                     />

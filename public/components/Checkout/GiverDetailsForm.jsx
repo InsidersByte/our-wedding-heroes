@@ -49,12 +49,19 @@ class GiverDetailsForm extends React.Component {
                 </div>
 
                 <div className="giver-details__actions">
-                    <Button type="submit" bsStyle="success">Complete Gift</Button>
+                    <Button
+                        type="submit"
+                        bsStyle="success"
+                        disabled={this.props.isSaving}
+                    >
+                        { this.props.isSaving ? 'Completing Gift...' : 'Complete Gift' }
+                    </Button>
 
                     <Link
                         to="/basket"
                         className="btn btn-default"
                         role="button"
+                        disabled={this.props.isSaving}
                     >
                         Back to Basket
                     </Link>
@@ -66,6 +73,7 @@ class GiverDetailsForm extends React.Component {
 
 GiverDetailsForm.propTypes = {
     giver: React.PropTypes.object.isRequired,
+    isSaving: React.PropTypes.bool.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
