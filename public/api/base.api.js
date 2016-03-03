@@ -1,6 +1,6 @@
 import request from 'superagent';
 import loginStore from '../stores/login.store';
-import { BASE_URL } from '../constants/api.constants';
+import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants';
 import loginActions from '../actions/login.action.js';
 
 export default class {
@@ -9,11 +9,11 @@ export default class {
     }
 
     get() {
-        return this._request('GET', this._baseUrl);
+        return this._request(GET_METHOD, this._baseUrl);
     }
 
     post(data) {
-        return this._request('POST', this._baseUrl, data);
+        return this._request(POST_METHOD, this._baseUrl, data);
     }
 
     put(data, id) {
@@ -23,11 +23,11 @@ export default class {
             url += `/${id}`;
         }
 
-        return this._request('PUT', url, data);
+        return this._request(PUT_METHOD, url, data);
     }
 
     delete(id) {
-        return this._request('DELETE', `${this._baseUrl}/${id}`);
+        return this._request(DELETE_METHOD, `${this._baseUrl}/${id}`);
     }
 
     _request(method, url, data) {
