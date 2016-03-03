@@ -110,9 +110,9 @@ module.exports = (app, express, jwt) => {
                     });
 
                 const users = yield User.find({}, 'username');
-                const userEmails = users.map(user => { // eslint-disable-line arrow-body-style
-                    return user.username;
-                });
+                const userEmails = users.map(user =>
+                    user.username
+                );
 
                 yield mailer
                     .send({

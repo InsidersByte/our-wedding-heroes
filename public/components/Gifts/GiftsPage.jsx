@@ -21,7 +21,7 @@ class GiftsPage extends React.Component {
 
     markAsPaid() {
         // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to delete this user?')) { //eslint-disable-line
+        if (!confirm('Are you sure you want to delete this user?')) {
             return;
         }
 
@@ -30,7 +30,7 @@ class GiftsPage extends React.Component {
 
     delete(gift) {
         // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to delete this gift?')) { //eslint-disable-line
+        if (!confirm('Are you sure you want to delete this gift?')) {
             return;
         }
 
