@@ -12,6 +12,7 @@ module.exports = (app, express) => {
                 const giftSets = yield GiftSet
                     .find({})
                     .populate('gifts')
+                    .populate('giver')
                     .sort('-createdAt');
 
                 return res.json(giftSets);

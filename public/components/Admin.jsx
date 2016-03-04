@@ -87,6 +87,10 @@ class App extends React.Component {
                     </NavDropdown>
 
                     <li>
+                        <Link to="/admin/giftSet">Gift Sets</Link>
+                    </li>
+
+                    <li>
                         <Link to="/admin/gifts">Gifts</Link>
                     </li>
 
