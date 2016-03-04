@@ -12,6 +12,9 @@ const GiftSetSchema = new Schema(
     },
     {
         timestamps: true,
+        toJSON: {
+            virtuals: true,
+        },
     });
 
 GiftSetSchema

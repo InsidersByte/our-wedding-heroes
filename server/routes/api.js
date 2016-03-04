@@ -24,6 +24,7 @@ module.exports = (app, express, config) => {
     router.use('/honeymoonGiftListItem', require('./honeymoonGiftListItem')(app, express));
     router.use('/rsvp', require('./rsvp')(app, express));
     router.use('/weddingPlaylist', require('./weddingPlaylist')(app, express));
+    router.use('/giftSet', require('./giftSet')(app, express));
 
     router.all('/*', (req, res) =>
         res.sendStatus(404)
