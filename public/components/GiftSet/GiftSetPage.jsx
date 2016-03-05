@@ -19,13 +19,21 @@ class GiftSetPage extends React.Component {
         this._loadGiftSets();
     }
 
-    markAsPaid() {
+    markAsPaid(giftSet) {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift as paid?')) {
             return;
         }
 
-        this.props.toastError('Not yet implemented, please come again soon');
+        GiftSetApi
+            .paid(giftSet, giftSet._id)
+            .then(() => {
+                this._loadGiftSets();
+                this.props.toastSuccess('Gift marked as paid');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error marking a gift set as paid', error);
+            });
     }
 
     delete(giftSet) {
