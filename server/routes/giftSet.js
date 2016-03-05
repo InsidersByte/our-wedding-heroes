@@ -1,3 +1,5 @@
+'use strict'; // eslint-disable-line strict
+
 const GiftSet = require('../models/giftSet');
 const co = require('co');
 
@@ -55,7 +57,7 @@ module.exports = (app, express) => {
                         .send();
                 }
 
-                for (const gift of giftSet.gifts) {
+                for (let gift of giftSet.gifts) { // eslint-disable-line prefer-const
                     yield gift.remove();
                 }
 

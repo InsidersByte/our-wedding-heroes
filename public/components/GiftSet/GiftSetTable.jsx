@@ -14,6 +14,7 @@ class GiftSetTable extends React.Component {
                         <th>Total (£)</th>
                         <th>Date</th>
                         <th>Paid?</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -22,7 +23,12 @@ class GiftSetTable extends React.Component {
                         .props
                         .giftSets
                         .map(giftSet => (
-                            <GiftSetRow key={giftSet._id} giftSet={giftSet} />
+                            <GiftSetRow
+                                key={giftSet._id}
+                                giftSet={giftSet}
+                                onMarkAsPaid={this.props.onMarkAsPaid}
+                                onDelete={this.props.onDelete}
+                            />
                         ))
                     }
                 </tbody>
@@ -33,6 +39,8 @@ class GiftSetTable extends React.Component {
 
 GiftSetTable.propTypes = {
     giftSets: React.PropTypes.array.isRequired,
+    onDelete: React.PropTypes.func.isRequired,
+    onMarkAsPaid: React.PropTypes.func.isRequired,
 };
 
 GiftSetTable.defaultProps = {

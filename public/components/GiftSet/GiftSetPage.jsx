@@ -10,10 +10,39 @@ class GiftSetPage extends React.Component {
         this.state = {
             giftSets: [],
         };
+
+        this.markAsPaid = this.markAsPaid.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
         this._loadGiftSets();
+    }
+
+    markAsPaid() {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+            return;
+        }
+
+        this.props.toastError('Not yet implemented, please come again soon');
+    }
+
+    delete(giftSet) {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to delete this gift set?')) {
+            return;
+        }
+
+        GiftSetApi
+            .delete(giftSet._id)
+            .then(() => {
+                this._loadGiftSets();
+                this.props.toastSuccess('Gift deleted');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error deleting a gift set', error);
+            });
     }
 
     _loadGiftSets() {
@@ -34,7 +63,7 @@ class GiftSetPage extends React.Component {
             <Jumbotron>
                 <h1>Gift Sets</h1>
 
-                <GiftSetTable giftSets={this.state.giftSets} />
+                <GiftSetTable giftSets={this.state.giftSets} onMarkAsPaid={this.markAsPaid} onDelete={this.delete} />
             </Jumbotron>
         );
     }
