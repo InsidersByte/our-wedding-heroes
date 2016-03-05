@@ -8,8 +8,14 @@ export default class {
         this._baseUrl = `${BASE_URL}${baseUrl}`;
     }
 
-    get() {
-        return this._request(GET_METHOD, this._baseUrl);
+    get(id) {
+        let url = this._baseUrl;
+
+        if (id) {
+            url += `/${id}`;
+        }
+
+        return this._request(GET_METHOD, url);
     }
 
     post(data) {
