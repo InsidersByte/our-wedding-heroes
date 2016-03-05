@@ -51,7 +51,7 @@ export default class {
                     return reject(response.statusText);
                 }
 
-                return resolve(JSON.parse(response.text));
+                return resolve(response.body ? response.body : response.text);
             });
         });
     }
