@@ -3,6 +3,7 @@ import { Jumbotron, FormControls, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
+import GiftTable from './GiftTable.jsx';
 
 class ConfirmationPage extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class ConfirmationPage extends React.Component {
         this.state = {
             giftSet: {
                 giver: {},
+                gifts: [],
             },
         };
     }
@@ -56,6 +58,10 @@ class ConfirmationPage extends React.Component {
                         <FormControls.Static label="Paid" value={this.state.giftSet.paid ? 'Yes' : 'No'} />
                     </Col>
                 </Row>
+
+                <h3>Gifts</h3>
+
+                <GiftTable gifts={this.state.giftSet.gifts} />
 
                 <Link to="admin/giftSet" className="btn btn-success" role="button">Back to Gift Sets</Link>
             </Jumbotron>

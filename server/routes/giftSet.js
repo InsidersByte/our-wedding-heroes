@@ -30,7 +30,10 @@ module.exports = (app, express) => {
             try {
                 const giftSet = yield GiftSet
                     .findById(req.params.giftSetId)
-                    .populate('gifts')
+                    .populate({
+                        path: 'gifts',
+                        populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                    })
                     .populate('giver');
 
                 if (!giftSet) {
