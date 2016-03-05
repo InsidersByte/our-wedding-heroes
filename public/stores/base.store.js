@@ -2,10 +2,6 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatchers/app.dispatcher.js';
 
 export default class extends EventEmitter {
-    constructor() {
-        super();
-    }
-
     subscribe(actionSubscribe) {
         this._dispatchToken = AppDispatcher.register(actionSubscribe());
     }
