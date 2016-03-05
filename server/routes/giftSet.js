@@ -7,7 +7,7 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getGifts(req, res, next) {
+        .get(co.wrap(function* getGiftSets(req, res, next) {
             try {
                 const giftSets = yield GiftSet
                     .find({})
@@ -24,7 +24,7 @@ module.exports = (app, express) => {
     router
         .route('/:giftSetId')
 
-        .get(co.wrap(function* getGift(req, res, next) {
+        .get(co.wrap(function* getGiftSet(req, res, next) {
             try {
                 const giftSet = yield GiftSet
                     .findById(req.params.giftSetId)
@@ -41,12 +41,38 @@ module.exports = (app, express) => {
             } catch (error) {
                 return next(error);
             }
+        }))
+
+        .delete(co.wrap(function* deleteGiftSet(req, res, next) {
+            try {
+                const giftSet = yield GiftSet
+                    .findById(req.params.giftSetId)
+                    .populate('gifts');
+
+                if (!giftSet) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
+                for (const gift of giftSet.gifts) {
+                    yield gift.remove();
+                }
+
+                yield giftSet.remove();
+
+                return res
+                    .status(204)
+                    .send();
+            } catch (error) {
+                return next(error);
+            }
         }));
 
     router
         .route('/:giftSetId/paid')
 
-        .put(co.wrap(function* markGiftAsPaid(req, res, next) {
+        .put(co.wrap(function* markGiftSetAsPaid(req, res, next) {
             try {
                 req.checkParams('id').equals(req.params.id);
 

@@ -17,6 +17,15 @@ const GiftSetSchema = new Schema(
         },
     });
 
+GiftSetSchema.pre('remove', function preRemove(next) {
+    this.model('Giver').update(
+        { giftSets: this._id },
+        { $pull: { giftSets: this._id } },
+        { multi: true },
+        next
+    );
+});
+
 GiftSetSchema
     .virtual('total')
     .get(function calculateTotal() {
