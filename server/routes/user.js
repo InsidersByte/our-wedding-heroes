@@ -72,6 +72,12 @@ module.exports = (app, express) => {
 
                 const user = yield User.findById(req.body._id);
 
+                if (!user) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
                 user.name = req.body.name;
                 user.username = req.body.username;
                 user.password = req.body.password;
