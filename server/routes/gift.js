@@ -144,7 +144,9 @@ module.exports = (app, express, jwt) => {
 
                 yield gift.remove();
 
-                return res.json({ message: 'Successfully deleted' });
+                return res
+                    .status(204)
+                    .send();
             } catch (error) {
                 return next(error);
             }

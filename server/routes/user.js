@@ -94,7 +94,9 @@ module.exports = (app, express) => {
             try {
                 yield User.remove({ _id: req.params.userId });
 
-                return res.json({ message: 'Successfully deleted' });
+                return res
+                    .status(204)
+                    .send();
             } catch (error) {
                 return next(error);
             }
