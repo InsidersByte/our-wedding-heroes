@@ -21,5 +21,61 @@ module.exports = (app, express) => {
             }
         }));
 
+    router
+        .route('/:giftSetId')
+
+        .get(co.wrap(function* getGift(req, res, next) {
+            try {
+                const giftSet = yield GiftSet
+                    .findById(req.params.giftSetId)
+                    .populate('gifts')
+                    .populate('giver');
+
+                if (!giftSet) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
+                return res.json(giftSet);
+            } catch (error) {
+                return next(error);
+            }
+        }));
+
+    router
+        .route('/:giftSetId/paid')
+
+        .put(co.wrap(function* markGiftAsPaid(req, res, next) {
+            try {
+                req.checkParams('id').equals(req.params.id);
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    return res
+                        .status(400)
+                        .send(errors);
+                }
+
+                const giftSet = yield GiftSet
+                    .findById(req.params.giftSetId);
+
+                if (!giftSet) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
+                giftSet.paid = true;
+
+                yield giftSet.save();
+
+                return res.json(giftSet);
+            } catch (error) {
+                return next(error);
+            }
+        }));
+
     return router;
 };
