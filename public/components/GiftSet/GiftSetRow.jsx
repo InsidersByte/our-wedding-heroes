@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Button } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
 class GiftSetRow extends React.Component {
@@ -37,31 +37,33 @@ class GiftSetRow extends React.Component {
                 <th>{createdAtFormatted}</th>
                 <th>{this.props.giftSet.paid ? 'Yes' : 'No'}</th>
                 <th>
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="primary"
-                        onClick={this.onSelect}
-                    >
-                        <FontAwesome icon="eye" />
-                    </Button>
+                    <ButtonToolbar>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="primary"
+                            onClick={this.onSelect}
+                        >
+                            <FontAwesome icon="eye" />
+                        </Button>
 
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="success"
-                        onClick={this.onMarkAsPaid}
-                        disabled={this.props.giftSet.paid}
-                    >
-                        <FontAwesome icon="gbp" />
-                    </Button>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="success"
+                            onClick={this.onMarkAsPaid}
+                            disabled={this.props.giftSet.paid}
+                        >
+                            <FontAwesome icon="gbp" />
+                        </Button>
 
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="danger"
-                        onClick={this.onDelete}
-                        disabled={this.props.giftSet.paid}
-                    >
-                        <FontAwesome icon="trash" />
-                    </Button>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="danger"
+                            onClick={this.onDelete}
+                            disabled={this.props.giftSet.paid}
+                        >
+                            <FontAwesome icon="trash" />
+                        </Button>
+                    </ButtonToolbar>
                 </th>
             </tr>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome.jsx';
 
 class HoneymoonGiftListItemRow extends React.Component {
@@ -28,21 +28,23 @@ class HoneymoonGiftListItemRow extends React.Component {
                 <th>{this.props.item.remaining}</th>
                 <th>{this.props.item.price}</th>
                 <th>
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="primary"
-                        onClick={this.onEdit}
-                    >
-                        <FontAwesome icon="pencil" />
-                    </Button>
+                    <ButtonToolbar>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="primary"
+                            onClick={this.onEdit}
+                        >
+                            <FontAwesome icon="pencil" />
+                        </Button>
 
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="danger"
-                        onClick={this.onDelete}
-                    >
-                        <FontAwesome icon="trash" />
-                    </Button>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="danger"
+                            onClick={this.onDelete}
+                        >
+                            <FontAwesome icon="trash" />
+                        </Button>
+                    </ButtonToolbar>
                 </th>
             </tr>
         );
