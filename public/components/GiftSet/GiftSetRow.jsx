@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import FontAwesome from '../common/FontAwesome.jsx';
 
 class GiftSetRow extends React.Component {
     constructor() {
@@ -8,6 +9,7 @@ class GiftSetRow extends React.Component {
 
         this.onDelete = this.onDelete.bind(this);
         this.onMarkAsPaid = this.onMarkAsPaid.bind(this);
+        this.onSelect = this.onSelect.bind(this);
     }
 
     onDelete() {
@@ -18,11 +20,13 @@ class GiftSetRow extends React.Component {
         this.props.onMarkAsPaid(this.props.giftSet);
     }
 
+    onSelect() {
+        this.props.onSelect(this.props.giftSet);
+    }
+
     render() {
         const createdAt = moment(this.props.giftSet.createdAt);
         const createdAtFormatted = createdAt.format('DD/MM/YY HH:MM');
-
-        console.log(this.props.giftSet);
 
         return (
             <tr>
@@ -35,11 +39,19 @@ class GiftSetRow extends React.Component {
                 <th>
                     <Button
                         bsSize="xsmall"
+                        bsStyle="primary"
+                        onClick={this.onSelect}
+                    >
+                        <FontAwesome icon="eye" />
+                    </Button>
+
+                    <Button
+                        bsSize="xsmall"
                         bsStyle="success"
                         onClick={this.onMarkAsPaid}
                         disabled={this.props.giftSet.paid}
                     >
-                        <Glyphicon glyph="gbp" />
+                        <FontAwesome icon="gbp" />
                     </Button>
 
                     <Button
@@ -48,7 +60,7 @@ class GiftSetRow extends React.Component {
                         onClick={this.onDelete}
                         disabled={this.props.giftSet.paid}
                     >
-                        <Glyphicon glyph="trash" />
+                        <FontAwesome icon="trash" />
                     </Button>
                 </th>
             </tr>
@@ -60,6 +72,7 @@ GiftSetRow.propTypes = {
     giftSet: React.PropTypes.object.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
 };
 
 GiftSetRow.defaultProps = {

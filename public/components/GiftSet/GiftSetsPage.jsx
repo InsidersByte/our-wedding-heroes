@@ -4,8 +4,8 @@ import GiftSetTable from './GiftSetTable.jsx';
 import GiftSetApi from '../../api/giftSet.api';
 
 class GiftSetsPage extends React.Component {
-    constructor() {
-        super();
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             giftSets: [],
@@ -13,6 +13,7 @@ class GiftSetsPage extends React.Component {
 
         this.markAsPaid = this.markAsPaid.bind(this);
         this.delete = this.delete.bind(this);
+        this.view = this.view.bind(this);
     }
 
     componentDidMount() {
@@ -53,6 +54,10 @@ class GiftSetsPage extends React.Component {
             });
     }
 
+    view(giftSet) {
+        this.context.router.push(`admin/giftSet/${giftSet._id}`);
+    }
+
     _loadGiftSets() {
         GiftSetApi
             .get()
@@ -71,7 +76,7 @@ class GiftSetsPage extends React.Component {
             <Jumbotron>
                 <h1>Gift Sets</h1>
 
-                <GiftSetTable giftSets={this.state.giftSets} onMarkAsPaid={this.markAsPaid} onDelete={this.delete} />
+                <GiftSetTable giftSets={this.state.giftSets} onMarkAsPaid={this.markAsPaid} onDelete={this.delete} onSelect={this.view} />
             </Jumbotron>
         );
     }
@@ -83,5 +88,9 @@ GiftSetsPage.propTypes = {
 };
 
 GiftSetsPage.defaultProps = {};
+
+GiftSetsPage.contextTypes = {
+    router: React.PropTypes.object.isRequired,
+};
 
 export default GiftSetsPage;

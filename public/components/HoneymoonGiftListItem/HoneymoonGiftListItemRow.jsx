@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import FontAwesome from '../common/FontAwesome.jsx';
 
 class HoneymoonGiftListItemRow extends React.Component {
     constructor() {
@@ -32,7 +33,7 @@ class HoneymoonGiftListItemRow extends React.Component {
                         bsStyle="primary"
                         onClick={this.onEdit}
                     >
-                        <Glyphicon glyph="pencil" />
+                        <FontAwesome icon="pencil" />
                     </Button>
 
                     <Button
@@ -40,7 +41,7 @@ class HoneymoonGiftListItemRow extends React.Component {
                         bsStyle="danger"
                         onClick={this.onDelete}
                     >
-                        <Glyphicon glyph="trash" />
+                        <FontAwesome icon="trash" />
                     </Button>
                 </th>
             </tr>
