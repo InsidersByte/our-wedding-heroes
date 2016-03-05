@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { Button, Glyphicon } from 'react-bootstrap';
 
-class GiftRow extends React.Component {
+class GiftSetRow extends React.Component {
     constructor() {
         super();
 
@@ -11,33 +11,33 @@ class GiftRow extends React.Component {
     }
 
     onDelete() {
-        this.props.onDelete(this.props.gift);
+        this.props.onDelete(this.props.giftSet);
     }
 
     onMarkAsPaid() {
-        this.props.onMarkAsPaid(this.props.gift);
+        this.props.onMarkAsPaid(this.props.giftSet);
     }
 
     render() {
-        const createdAt = moment(this.props.gift.giftSet.createdAt);
+        const createdAt = moment(this.props.giftSet.createdAt);
         const createdAtFormatted = createdAt.format('DD/MM/YY HH:MM');
+
+        console.log(this.props.giftSet);
 
         return (
             <tr>
-                <th>{this.props.gift.giftSet.giver.forename} {this.props.gift.giftSet.giver.surname}</th>
-                <th>{this.props.gift.giftSet.giver.email}</th>
-                <th>{this.props.gift.giftSet.giver.phoneNumber}</th>
-                <th>{this.props.gift.honeymoonGiftListItem.name}</th>
-                <th>{this.props.gift.price}</th>
-                <th>{this.props.gift.quantity}</th>
+                <th>{this.props.giftSet.giver.forename} {this.props.giftSet.giver.surname}</th>
+                <th>{this.props.giftSet.giver.email}</th>
+                <th>{this.props.giftSet.giver.phoneNumber}</th>
+                <th>{this.props.giftSet.total}</th>
                 <th>{createdAtFormatted}</th>
-                <th>{this.props.gift.giftSet.paid ? 'Yes' : 'No'}</th>
+                <th>{this.props.giftSet.paid ? 'Yes' : 'No'}</th>
                 <th>
                     <Button
                         bsSize="xsmall"
                         bsStyle="success"
                         onClick={this.onMarkAsPaid}
-                        disabled={this.props.gift.paid}
+                        disabled={this.props.giftSet.paid}
                     >
                         <Glyphicon glyph="gbp" />
                     </Button>
@@ -46,7 +46,7 @@ class GiftRow extends React.Component {
                         bsSize="xsmall"
                         bsStyle="danger"
                         onClick={this.onDelete}
-                        disabled={this.props.gift.paid}
+                        disabled={this.props.giftSet.paid}
                     >
                         <Glyphicon glyph="trash" />
                     </Button>
@@ -56,14 +56,14 @@ class GiftRow extends React.Component {
     }
 }
 
-GiftRow.propTypes = {
-    gift: React.PropTypes.object.isRequired,
+GiftSetRow.propTypes = {
+    giftSet: React.PropTypes.object.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
 };
 
-GiftRow.defaultProps = {
-    gift: {},
+GiftSetRow.defaultProps = {
+    giftSet: {},
 };
 
-export default GiftRow;
+export default GiftSetRow;

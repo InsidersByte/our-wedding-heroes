@@ -7,6 +7,11 @@ const GiftSchema = new Schema(
         price: { type: Number, required: true },
         honeymoonGiftListItem: { type: Schema.Types.ObjectId, ref: 'HoneymoonGiftListItem' },
         giftSet: { type: Schema.Types.ObjectId, ref: 'GiftSet' },
+    },
+    {
+        toJSON: {
+            virtuals: true,
+        },
     });
 
 GiftSchema.pre('remove', function preRemove(next) {

@@ -16,11 +16,15 @@ export default class {
         return this._request(POST_METHOD, this._baseUrl, data);
     }
 
-    put(data, id) {
+    put(data, id, extraUrl) {
         let url = this._baseUrl;
 
         if (id) {
             url += `/${id}`;
+        }
+
+        if (extraUrl) {
+            url += `/${extraUrl}`;
         }
 
         return this._request(PUT_METHOD, url, data);
@@ -51,7 +55,7 @@ export default class {
                     return reject(response.statusText);
                 }
 
-                return resolve(JSON.parse(response.text));
+                return resolve(response.body ? response.body : response.text);
             });
         });
     }

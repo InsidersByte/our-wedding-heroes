@@ -1,8 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import GiftRow from './GiftRow.jsx';
+import GiftSetRow from './GiftSetRow.jsx';
 
-class GiftsTable extends React.Component {
+class GiftSetTable extends React.Component {
     render() {
         return (
             <Table striped bordered condensed hover responsive>
@@ -11,9 +11,7 @@ class GiftsTable extends React.Component {
                         <th>Giver Name</th>
                         <th>Giver Email</th>
                         <th>Giver Phone Number</th>
-                        <th>Gift Name</th>
-                        <th>Price per unit (£)</th>
-                        <th>Quantity</th>
+                        <th>Total (£)</th>
                         <th>Date</th>
                         <th>Paid?</th>
                         <th>Actions</th>
@@ -23,9 +21,14 @@ class GiftsTable extends React.Component {
                 <tbody>
                     {this
                         .props
-                        .gifts
-                        .map(gift => (
-                            <GiftRow key={gift._id} gift={gift} onMarkAsPaid={this.props.onMarkAsPaid} onDelete={this.props.onDelete} />
+                        .giftSets
+                        .map(giftSet => (
+                            <GiftSetRow
+                                key={giftSet._id}
+                                giftSet={giftSet}
+                                onMarkAsPaid={this.props.onMarkAsPaid}
+                                onDelete={this.props.onDelete}
+                            />
                         ))
                     }
                 </tbody>
@@ -34,14 +37,14 @@ class GiftsTable extends React.Component {
     }
 }
 
-GiftsTable.propTypes = {
-    gifts: React.PropTypes.array.isRequired,
+GiftSetTable.propTypes = {
+    giftSets: React.PropTypes.array.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
 };
 
-GiftsTable.defaultProps = {
-    gifts: [],
+GiftSetTable.defaultProps = {
+    giftSets: [],
 };
 
-export default GiftsTable;
+export default GiftSetTable;
