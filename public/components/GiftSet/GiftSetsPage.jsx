@@ -3,7 +3,7 @@ import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable.jsx';
 import GiftSetApi from '../../api/giftSet.api';
 
-class GiftSetPage extends React.Component {
+class GiftSetsPage extends React.Component {
     constructor() {
         super();
 
@@ -77,11 +77,11 @@ class GiftSetPage extends React.Component {
     }
 }
 
-GiftSetPage.propTypes = {
+GiftSetsPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
 };
 
-GiftSetPage.defaultProps = {};
+GiftSetsPage.defaultProps = {};
 
-export default GiftSetPage;
+export default GiftSetsPage;
