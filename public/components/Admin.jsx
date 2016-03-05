@@ -91,10 +91,6 @@ class App extends React.Component {
                     </li>
 
                     <li>
-                        <Link to="/admin/gifts">Gifts</Link>
-                    </li>
-
-                    <li>
                         <Link to="/admin/users">Users</Link>
                     </li>
 
