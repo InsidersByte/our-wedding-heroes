@@ -9,6 +9,7 @@ class GiftSetRow extends React.Component {
 
         this.onDelete = this.onDelete.bind(this);
         this.onMarkAsPaid = this.onMarkAsPaid.bind(this);
+        this.onMarkAsDetailsSent = this.onMarkAsDetailsSent.bind(this);
         this.onSelect = this.onSelect.bind(this);
     }
 
@@ -18,6 +19,10 @@ class GiftSetRow extends React.Component {
 
     onMarkAsPaid() {
         this.props.onMarkAsPaid(this.props.giftSet);
+    }
+
+    onMarkAsDetailsSent() {
+        this.props.onMarkAsDetailsSent(this.props.giftSet);
     }
 
     onSelect() {
@@ -49,6 +54,15 @@ class GiftSetRow extends React.Component {
                         <Button
                             bsSize="xsmall"
                             bsStyle="success"
+                            onClick={this.onMarkAsDetailsSent}
+                            disabled={this.props.giftSet.detailsSent || this.props.giftSet.paid}
+                        >
+                            <FontAwesome icon="send" />
+                        </Button>
+
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="success"
                             onClick={this.onMarkAsPaid}
                             disabled={this.props.giftSet.paid}
                         >
@@ -74,6 +88,7 @@ GiftSetRow.propTypes = {
     giftSet: React.PropTypes.object.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
+    onMarkAsDetailsSent: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func.isRequired,
 };
 
