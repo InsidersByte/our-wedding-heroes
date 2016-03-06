@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
+import FontAwesome from '../common/FontAwesome.jsx';
 
 class UserRow extends React.Component {
     constructor() {
@@ -23,21 +24,23 @@ class UserRow extends React.Component {
                 <th>{this.props.user.name}</th>
                 <th>{this.props.user.username}</th>
                 <th>
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="primary"
-                        onClick={this.onEdit}
-                    >
-                        <Glyphicon glyph="pencil" />
-                    </Button>
+                    <ButtonToolbar>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="primary"
+                            onClick={this.onEdit}
+                        >
+                            <FontAwesome icon="pencil" />
+                        </Button>
 
-                    <Button
-                        bsSize="xsmall"
-                        bsStyle="danger"
-                        onClick={this.onDelete}
-                    >
-                        <Glyphicon glyph="trash" />
-                    </Button>
+                        <Button
+                            bsSize="xsmall"
+                            bsStyle="danger"
+                            onClick={this.onDelete}
+                        >
+                            <FontAwesome icon="trash" />
+                        </Button>
+                    </ButtonToolbar>
                 </th>
             </tr>
         );

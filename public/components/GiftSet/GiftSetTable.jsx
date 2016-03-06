@@ -28,6 +28,7 @@ class GiftSetTable extends React.Component {
                                 giftSet={giftSet}
                                 onMarkAsPaid={this.props.onMarkAsPaid}
                                 onDelete={this.props.onDelete}
+                                onSelect={this.props.onSelect}
                             />
                         ))
                     }
@@ -41,6 +42,7 @@ GiftSetTable.propTypes = {
     giftSets: React.PropTypes.array.isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
 };
 
 GiftSetTable.defaultProps = {
