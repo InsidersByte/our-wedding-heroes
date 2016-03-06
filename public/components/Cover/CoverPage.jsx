@@ -31,8 +31,8 @@ class CoverPage extends React.Component {
                     cover,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error loading the cover data');
+            .catch((error) => {
+                this.props.toastError('There was an error loading the cover data', error);
             });
     }
 
@@ -51,8 +51,8 @@ class CoverPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('Cover updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving cover');
+            .catch((error) => {
+                this.props.toastError('There was an error saving cover', error);
             });
     }
 

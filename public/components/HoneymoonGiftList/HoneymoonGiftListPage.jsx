@@ -23,8 +23,8 @@ class HoneymoonGiftListPage extends React.Component {
                     honeymoonGiftList: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error loading the honeymoonGiftList data');
+            .catch((error) => {
+                this.props.toastError('There was an error loading the honeymoonGiftList data', error);
             });
     }
 
@@ -48,8 +48,8 @@ class HoneymoonGiftListPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('HoneymoonGiftList updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving honeymoonGiftList');
+            .catch((error) => {
+                this.props.toastError('There was an error saving honeymoonGiftList', error);
             });
     }
 

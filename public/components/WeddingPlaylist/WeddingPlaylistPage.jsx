@@ -23,8 +23,8 @@ class WeddingPlaylistPage extends React.Component {
                     weddingPlaylist: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error loading wedding playlist');
+            .catch((error) => {
+                this.props.toastError('There was an error loading wedding playlist', error);
             });
     }
 
@@ -40,8 +40,8 @@ class WeddingPlaylistPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('Wedding Playlist updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving wedding playlist');
+            .catch((error) => {
+                this.props.toastError('There was an error saving wedding playlist', error);
             });
     }
 

@@ -23,8 +23,8 @@ class AboutOurDayPage extends React.Component {
                     aboutOurDay: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error loading the about our day data');
+            .catch((error) => {
+                this.props.toastError('There was an error loading the about our day data', error);
             });
     }
 
@@ -40,8 +40,8 @@ class AboutOurDayPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('About our day updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving about our day');
+            .catch((error) => {
+                this.props.toastError('There was an error saving about our day', error);
             });
     }
 

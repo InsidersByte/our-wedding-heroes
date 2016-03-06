@@ -30,8 +30,8 @@ class SetupPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('Setup successful');
             })
-            .catch(() => {
-                this.props.toastError('There was an error setting up');
+            .catch((error) => {
+                this.props.toastError('There was an error setting up', error);
             });
     }
 

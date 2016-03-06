@@ -30,8 +30,8 @@ class Login extends React.Component {
             .then(() => {
                 this.props.toastSuccess('Logged in');
             })
-            .catch(() => {
-                this.props.toastError('There was an error logging in');
+            .catch((error) => {
+                this.props.toastError('There was an error logging in', error);
             });
     }
 
