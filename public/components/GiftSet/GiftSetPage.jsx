@@ -109,6 +109,8 @@ class GiftSetPage extends React.Component {
                 <GiftTable gifts={this.state.giftSet.gifts} />
 
                 <ButtonToolbar>
+                    <Link to="admin/giftSet" className="btn btn-primary" role="button">Back to Gift Sets</Link>
+
                     <Button
                         onClick={this.markAsPaid}
                         bsStyle="success"
@@ -116,8 +118,6 @@ class GiftSetPage extends React.Component {
                     >
                         {this.state.giftSet.paid ? 'Already Marked as Paid' : 'Mark as Paid'}
                     </Button>
-
-                    <Link to="admin/giftSet" className="btn btn-default" role="button">Back to Gift Sets</Link>
 
                     <Button onClick={this.delete} bsStyle="danger" disabled={this.state.giftSet.paid}>Delete</Button>
                 </ButtonToolbar>

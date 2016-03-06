@@ -12,6 +12,7 @@ class GiftSetsPage extends React.Component {
         };
 
         this.markAsPaid = this.markAsPaid.bind(this);
+        this.markAsDetailsSent = this.markAsDetailsSent.bind(this);
         this.delete = this.delete.bind(this);
         this.view = this.view.bind(this);
     }
@@ -22,7 +23,7 @@ class GiftSetsPage extends React.Component {
 
     markAsPaid(giftSet) {
         // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+        if (!confirm('Are you sure you want to mark this gift set as paid?')) {
             return;
         }
 
@@ -34,6 +35,23 @@ class GiftSetsPage extends React.Component {
             })
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
+            });
+    }
+
+    markAsDetailsSent(giftSet) {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
+            return;
+        }
+
+        GiftSetApi
+            .detailsSent(giftSet, giftSet._id)
+            .then(() => {
+                this._loadGiftSets();
+                this.props.toastSuccess('Gift set marked as details sent');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error marking a gift set as details sent', error);
             });
     }
 
@@ -76,7 +94,13 @@ class GiftSetsPage extends React.Component {
             <Jumbotron>
                 <h1>Gift Sets</h1>
 
-                <GiftSetTable giftSets={this.state.giftSets} onMarkAsPaid={this.markAsPaid} onDelete={this.delete} onSelect={this.view} />
+                <GiftSetTable
+                    giftSets={this.state.giftSets}
+                    onMarkAsPaid={this.markAsPaid}
+                    onMarkAsDetailsSent={this.markAsDetailsSent}
+                    onDelete={this.delete}
+                    onSelect={this.view}
+                />
             </Jumbotron>
         );
     }
