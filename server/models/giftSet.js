@@ -12,7 +12,19 @@ const GiftSetSchema = new Schema(
     },
     {
         timestamps: true,
+        toJSON: {
+            virtuals: true,
+        },
     });
+
+GiftSetSchema.pre('remove', function preRemove(next) {
+    this.model('Giver').update(
+        { giftSets: this._id },
+        { $pull: { giftSets: this._id } },
+        { multi: true },
+        next
+    );
+});
 
 GiftSetSchema
     .virtual('total')

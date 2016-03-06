@@ -7,7 +7,7 @@
         "max-len": [2, 140, 2],
         "react/jsx-indent-props": [2, 4],
 
-        // TODO: remove this later once fixed https://github.com/eslint/eslint/issues/5290
-        "no-useless-constructor": 0
+        // TODO: We have a lot of 'stateless' components look at how to fix this
+        "react/prefer-stateless-function": 0
     }
 }

@@ -95,6 +95,12 @@ module.exports = (app, express) => {
 
                 const honeymoonGiftItem = yield HoneymoonGiftListItem.findById(req.params.id);
 
+                if (!honeymoonGiftItem) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
                 honeymoonGiftItem.imageUrl = req.body.imageUrl;
                 honeymoonGiftItem.name = req.body.name;
                 honeymoonGiftItem.description = req.body.description;
@@ -126,6 +132,12 @@ module.exports = (app, express) => {
                     .findOne({ _id: req.params.id })
                     .populate('gifts');
 
+                if (!honeymoonGiftListItem) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
                 const existingGift = honeymoonGiftListItem.gifts.find(o => o !== null);
 
                 if (existingGift) {
@@ -138,7 +150,9 @@ module.exports = (app, express) => {
 
                 yield honeymoonGiftListItem.save();
 
-                return res.json({ message: 'Successfully deleted' });
+                return res
+                    .status(204)
+                    .send();
             } catch (error) {
                 return next(error);
             }

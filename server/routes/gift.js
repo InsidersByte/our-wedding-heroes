@@ -9,31 +9,11 @@ const co = require('co');
 const Mailer = require('../mail');
 const mailer = new Mailer();
 
-module.exports = (app, express, jwt) => {
+module.exports = (app, express) => {
     const router = new express.Router();
 
     router
         .route('/')
-
-        .get(jwt, co.wrap(function* getGifts(req, res, next) {
-            try {
-                const gifts = yield Gift
-                    .find({})
-                    .populate({
-                        path: 'giftSet',
-                        populate: { path: 'giver', model: 'Giver' },
-                    })
-                    .populate('honeymoonGiftListItem')
-                    .exec();
-
-                // TODO: kind of a hack should just sort
-                gifts.reverse();
-
-                return res.json(gifts);
-            } catch (error) {
-                return next(error);
-            }
-        }))
 
         .post(co.wrap(function* createGift(req, res, next) {
             try {
@@ -110,9 +90,9 @@ module.exports = (app, express, jwt) => {
                     });
 
                 const users = yield User.find({}, 'username');
-                const userEmails = users.map(user => { // eslint-disable-line arrow-body-style
-                    return user.username;
-                });
+                const userEmails = users.map(user =>
+                    user.username
+                );
 
                 yield mailer
                     .send({
@@ -126,25 +106,6 @@ module.exports = (app, express, jwt) => {
                 giftSet.save();
 
                 return res.json(giftSet);
-            } catch (error) {
-                return next(error);
-            }
-        }));
-
-    router
-        .route('/:giftId')
-
-        .delete(jwt, co.wrap(function* getGifts(req, res, next) {
-            try {
-                const gift = yield Gift.findById(req.params.giftId);
-
-                if (!gift) {
-                    return res.status(404).send(`Cannot find gift with id '${req.params.giftId}'`);
-                }
-
-                yield gift.remove();
-
-                return res.json({ message: 'Successfully deleted' });
             } catch (error) {
                 return next(error);
             }

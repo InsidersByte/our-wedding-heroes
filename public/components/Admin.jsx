@@ -29,7 +29,7 @@ class App extends React.Component {
 
     _getLoginState() {
         return {
-            userLoggedIn: loginStore.isLoggedIn(),
+            userLoggedIn: loginStore.isLoggedIn,
         };
     }
 
@@ -87,7 +87,7 @@ class App extends React.Component {
                     </NavDropdown>
 
                     <li>
-                        <Link to="/admin/gifts">Gifts</Link>
+                        <Link to="/admin/giftSet">Gift Sets</Link>
                     </li>
 
                     <li>
