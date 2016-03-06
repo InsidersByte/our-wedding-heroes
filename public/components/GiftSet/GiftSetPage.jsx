@@ -1,13 +1,13 @@
 import React from 'react';
-import { Jumbotron, FormControls, Col, Row } from 'react-bootstrap';
+import { Jumbotron, FormControls, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
 import GiftTable from './GiftTable.jsx';
 
-class ConfirmationPage extends React.Component {
-    constructor(props) {
-        super(props);
+class GiftSetPage extends React.Component {
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             giftSet: {
@@ -15,9 +15,54 @@ class ConfirmationPage extends React.Component {
                 gifts: [],
             },
         };
+
+        this.markAsPaid = this.markAsPaid.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
+        this._loadGiftSet();
+    }
+
+    markAsPaid() {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+            return;
+        }
+
+        const { giftSetId } = this.props.params;
+
+        GiftSetApi
+            .paid(this.state.giftSet, giftSetId)
+            .then(() => {
+                this._loadGiftSet();
+                this.props.toastSuccess('Gift set marked as paid');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error marking a gift set as paid', error);
+            });
+    }
+
+    delete() {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to delete this gift set?')) {
+            return;
+        }
+
+        const { giftSetId } = this.props.params;
+
+        GiftSetApi
+            .delete(giftSetId)
+            .then(() => {
+                this.context.router.push('admin/giftSet');
+                this.props.toastSuccess('Gift set deleted');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error deleting a gift set', error);
+            });
+    }
+
+    _loadGiftSet() {
         const { giftSetId } = this.props.params;
 
         GiftSetApi
@@ -28,7 +73,7 @@ class ConfirmationPage extends React.Component {
                 });
             })
             .catch((error) => {
-                this.props.toastError('There was an error getting gift sets', error);
+                this.props.toastError('There was an error loading the gift set', error);
             });
     }
 
@@ -63,20 +108,36 @@ class ConfirmationPage extends React.Component {
 
                 <GiftTable gifts={this.state.giftSet.gifts} />
 
-                <Link to="admin/giftSet" className="btn btn-success" role="button">Back to Gift Sets</Link>
+                <ButtonToolbar>
+                    <Button
+                        onClick={this.markAsPaid}
+                        bsStyle="success"
+                        disabled={this.state.giftSet.paid}
+                    >
+                        {this.state.giftSet.paid ? 'Already Marked as Paid' : 'Mark as Paid'}
+                    </Button>
+
+                    <Button onClick={this.delete} bsStyle="danger" disabled={this.state.giftSet.paid}>Delete</Button>
+
+                    <Link to="admin/giftSet" className="btn btn-default" role="button">Back to Gift Sets</Link>
+                </ButtonToolbar>
             </Jumbotron>
         );
     }
 }
 
-ConfirmationPage.propTypes = {
+GiftSetPage.propTypes = {
     toastSuccess: React.PropTypes.func,
     toastError: React.PropTypes.func,
     params: React.PropTypes.object.isRequired,
 };
 
-ConfirmationPage.defaultProps = {
+GiftSetPage.defaultProps = {
     params: {},
 };
 
-export default ConfirmationPage;
+GiftSetPage.contextTypes = {
+    router: React.PropTypes.object.isRequired,
+};
+
+export default GiftSetPage;

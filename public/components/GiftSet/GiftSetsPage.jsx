@@ -30,7 +30,7 @@ class GiftSetsPage extends React.Component {
             .paid(giftSet, giftSet._id)
             .then(() => {
                 this._loadGiftSets();
-                this.props.toastSuccess('Gift marked as paid');
+                this.props.toastSuccess('Gift set marked as paid');
             })
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
@@ -47,7 +47,7 @@ class GiftSetsPage extends React.Component {
             .delete(giftSet._id)
             .then(() => {
                 this._loadGiftSets();
-                this.props.toastSuccess('Gift deleted');
+                this.props.toastSuccess('Gift set deleted');
             })
             .catch((error) => {
                 this.props.toastError('There was an error deleting a gift set', error);
@@ -67,7 +67,7 @@ class GiftSetsPage extends React.Component {
                 });
             })
             .catch((error) => {
-                this.props.toastError('There was an error getting gift sets', error);
+                this.props.toastError('There was an error loading the gift sets', error);
             });
     }
 
