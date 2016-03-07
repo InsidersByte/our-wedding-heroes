@@ -28,15 +28,7 @@ class mailer {
             }
         );
 
-        return new Promise((resolve, reject) => {
-            this._transport.sendMail(messageToSend, (error, response) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                return resolve(response);
-            });
-        });
+        return this._transport.sendMail(messageToSend);
     }
 }
 
