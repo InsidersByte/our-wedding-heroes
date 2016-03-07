@@ -23,8 +23,8 @@ class RsvpPage extends React.Component {
                     rsvp: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error getting rsvp');
+            .catch((error) => {
+                this.props.toastError('There was an error getting rsvp', error);
             });
     }
 
@@ -40,8 +40,8 @@ class RsvpPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('Rsvp updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving Rsvp');
+            .catch((error) => {
+                this.props.toastError('There was an error saving Rsvp', error);
             });
     }
 

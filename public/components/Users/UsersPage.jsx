@@ -42,8 +42,8 @@ class Users extends React.Component {
                     this._loadUsers();
                     this.props.toastSuccess('User saved');
                 })
-                .catch(() => {
-                    this.props.toastError('There was an error saving a user');
+                .catch((error) => {
+                    this.props.toastError('There was an error saving a user', error);
                 });
         } else {
             UserApi
@@ -53,8 +53,8 @@ class Users extends React.Component {
                     this._loadUsers();
                     this.props.toastSuccess('User saved');
                 })
-                .catch(() => {
-                    this.props.toastError('There was an error saving a user');
+                .catch((error) => {
+                    this.props.toastError('There was an error saving a user', error);
                 });
         }
     }
@@ -71,8 +71,8 @@ class Users extends React.Component {
                 this._loadUsers();
                 this.props.toastSuccess('User deleted');
             })
-            .catch(() => {
-                this.props.toastError('There was an error deleting a user');
+            .catch((error) => {
+                this.props.toastError('There was an error deleting a user', error);
             });
     }
 
@@ -97,8 +97,8 @@ class Users extends React.Component {
                     users: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error getting users');
+            .catch((error) => {
+                this.props.toastError('There was an error getting users', error);
             });
     }
 

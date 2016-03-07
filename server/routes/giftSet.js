@@ -108,5 +108,39 @@ module.exports = (app, express) => {
             }
         }));
 
+    router
+        .route('/:giftSetId/detailsSent')
+
+        .put(co.wrap(function* markGiftSetAsDetailsSent(req, res, next) {
+            try {
+                req.checkParams('id').equals(req.params.id);
+
+                const errors = req.validationErrors();
+
+                if (errors) {
+                    return res
+                        .status(400)
+                        .send(errors);
+                }
+
+                const giftSet = yield GiftSet
+                    .findById(req.params.giftSetId);
+
+                if (!giftSet) {
+                    return res
+                        .status(404)
+                        .send();
+                }
+
+                giftSet.detailsSent = true;
+
+                yield giftSet.save();
+
+                return res.json(giftSet);
+            } catch (error) {
+                return next(error);
+            }
+        }));
+
     return router;
 };

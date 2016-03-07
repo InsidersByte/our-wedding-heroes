@@ -23,8 +23,8 @@ class AboutUsPage extends React.Component {
                     aboutUs: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error getting about us');
+            .catch((error) => {
+                this.props.toastError('There was an error getting about us', error);
             });
     }
 
@@ -40,8 +40,8 @@ class AboutUsPage extends React.Component {
             .then(() => {
                 this.props.toastSuccess('About us updated');
             })
-            .catch(() => {
-                this.props.toastError('There was an error saving about us');
+            .catch((error) => {
+                this.props.toastError('There was an error saving about us', error);
             });
     }
 

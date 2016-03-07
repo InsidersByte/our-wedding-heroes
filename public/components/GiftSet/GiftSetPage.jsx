@@ -17,6 +17,7 @@ class GiftSetPage extends React.Component {
         };
 
         this.markAsPaid = this.markAsPaid.bind(this);
+        this.markAsDetailsSent = this.markAsDetailsSent.bind(this);
         this.delete = this.delete.bind(this);
     }
 
@@ -40,6 +41,25 @@ class GiftSetPage extends React.Component {
             })
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
+            });
+    }
+
+    markAsDetailsSent() {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
+            return;
+        }
+
+        const { giftSetId } = this.props.params;
+
+        GiftSetApi
+            .detailsSent(this.state.giftSet, giftSetId)
+            .then(() => {
+                this._loadGiftSet();
+                this.props.toastSuccess('Gift set marked as details sent');
+            })
+            .catch((error) => {
+                this.props.toastError('There was an error marking a gift set as details sent', error);
             });
     }
 
@@ -109,6 +129,20 @@ class GiftSetPage extends React.Component {
                 <GiftTable gifts={this.state.giftSet.gifts} />
 
                 <ButtonToolbar>
+                    <Link to="admin/giftSet" className="btn btn-primary" role="button">Back to Gift Sets</Link>
+
+                    <Button
+                        onClick={this.markAsDetailsSent}
+                        bsStyle="success"
+                        disabled={this.state.giftSet.detailsSent || this.state.giftSet.paid}
+                    >
+                        {
+                            this.state.giftSet.detailsSent || this.state.giftSet.paid ?
+                                'Already Marked as Details Sent or Paid' :
+                                'Mark as Details Sent'
+                        }
+                    </Button>
+
                     <Button
                         onClick={this.markAsPaid}
                         bsStyle="success"
@@ -118,8 +152,6 @@ class GiftSetPage extends React.Component {
                     </Button>
 
                     <Button onClick={this.delete} bsStyle="danger" disabled={this.state.giftSet.paid}>Delete</Button>
-
-                    <Link to="admin/giftSet" className="btn btn-default" role="button">Back to Gift Sets</Link>
                 </ButtonToolbar>
             </Jumbotron>
         );
