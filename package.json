@@ -1,7 +1,7 @@
 {
-  "name": "honeymoon-gift-list",
+  "name": "our-wedding-heroes",
   "version": "0.1.0",
-  "description": "A Honeymoon Gift List",
+  "description": "Wedding website with gift list",
   "main": "./server",
   "scripts": {
     "postinstall": "npm run build",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://insidersbyte@github.com/InsidersByte/honeymoon-gift-list.git"
+    "url": "git+https://insidersbyte@github.com/InsidersByte/our-wedding-heroes.git"
   },
   "author": "Jonathon Kelly <jonathon.kelly@insidersbyte.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/InsidersByte/honeymoon-gift-list/issues"
+    "url": "https://github.com/InsidersByte/our-wedding-heroes/issues"
   },
-  "homepage": "https://github.com/InsidersByte/honeymoon-gift-list#readme",
+  "homepage": "https://github.com/InsidersByte/our-wedding-heroes#readme",
   "dependencies": {
     "animate.css": "^3.5.1",
     "body-parser": "^1.15.0",

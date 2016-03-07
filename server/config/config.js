@@ -1,7 +1,7 @@
 module.exports = {
     port: process.env.PORT || 8080,
-    database: process.env.DATABASE_URL || 'mongodb://localhost:27017/honeymoon-gift-list',
-    secret: process.env.SECRET || 'ilovetheideaofmyhoneymoon',
+    database: process.env.DATABASE_URL || 'mongodb://localhost:27017/our-wedding-heroes',
+    secret: process.env.SECRET || 'ilovetheideaofmywedding',
     siteTitle: process.env.SITE_TITLE || 'Our Wedding',
     mail: {
         from: process.env.EMAIL_FROM,
