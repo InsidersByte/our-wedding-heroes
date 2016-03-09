@@ -1,5 +1,5 @@
 const WeddingProfile = require('../models/weddingProfile');
-const co = require('co');
+const wrap = require('../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -7,38 +7,29 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getWeddingPlaylist(req, res, next) {
-            try {
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                return res.json(weddingProfile.weddingPlaylist || '');
-            } catch (error) {
-                return next(error);
-            }
+        .get(wrap(function* getWeddingPlaylist(req, res) {
+            const weddingProfile = yield WeddingProfile.findOne({});
+            return res.json(weddingProfile.weddingPlaylist || '');
         }))
 
-        .put(co.wrap(function* updateWeddingPlaylist(req, res, next) {
-            try {
-                req.checkBody('weddingPlaylist').notEmpty();
+        .put(wrap(function* updateWeddingPlaylist(req, res) {
+            req.checkBody('weddingPlaylist').notEmpty();
 
-                const errors = req.validationErrors();
+            const errors = req.validationErrors();
 
-                if (errors) {
-                    return res
-                        .status(400)
-                        .send(errors);
-                }
-
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                weddingProfile.weddingPlaylist = req.body.weddingPlaylist;
-
-                yield weddingProfile.save();
-
-                return res.json(weddingProfile.weddingPlaylist);
-            } catch (error) {
-                return next(error);
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
             }
+
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            weddingProfile.weddingPlaylist = req.body.weddingPlaylist;
+
+            yield weddingProfile.save();
+
+            return res.json(weddingProfile.weddingPlaylist);
         }));
 
     return router;

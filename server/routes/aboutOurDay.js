@@ -1,5 +1,5 @@
 const WeddingProfile = require('../models/weddingProfile');
-const co = require('co');
+const wrap = require('../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -7,38 +7,29 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getAboutOurDay(req, res, next) {
-            try {
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                return res.json(weddingProfile.aboutOurDay);
-            } catch (error) {
-                return next(error);
-            }
+        .get(wrap(function* getAboutOurDay(req, res) {
+            const weddingProfile = yield WeddingProfile.findOne({});
+            return res.json(weddingProfile.aboutOurDay);
         }))
 
-        .put(co.wrap(function* updateAboutOurDay(req, res, next) {
-            try {
-                req.checkBody('aboutOurDay').notEmpty();
+        .put(wrap(function* updateAboutOurDay(req, res) {
+            req.checkBody('aboutOurDay').notEmpty();
 
-                const errors = req.validationErrors();
+            const errors = req.validationErrors();
 
-                if (errors) {
-                    return res
-                        .status(400)
-                        .send(errors);
-                }
-
-                const weddingProfile = yield WeddingProfile.findOne({});
-
-                weddingProfile.aboutOurDay = req.body.aboutOurDay;
-
-                yield weddingProfile.save();
-
-                return res.json(weddingProfile.aboutOurDay);
-            } catch (error) {
-                return next(error);
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
             }
+
+            const weddingProfile = yield WeddingProfile.findOne({});
+
+            weddingProfile.aboutOurDay = req.body.aboutOurDay;
+
+            yield weddingProfile.save();
+
+            return res.json(weddingProfile.aboutOurDay);
         }));
 
     return router;

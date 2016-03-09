@@ -1,0 +1,23 @@
+doctype html
+html
+    body
+        h1 Thank you very much for your gift!
+
+        p We will then be in touch with our bank transfer details, as all payments are offline.
+
+        table(style="text-align: left;")
+            thead
+                tr
+                    th Name
+                    th Price (£)
+                    th Quantity
+                    th Total (£)
+            tbody
+                each gift in giftSet.gifts
+                    tr
+                        td #{gift.honeymoonGiftListItem.name}
+                        td #{gift.price}
+                        td #{gift.quantity}
+                        td #{gift.total}
+
+        h3 Total £#{giftSet.total}
