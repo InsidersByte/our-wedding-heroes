@@ -1,7 +1,7 @@
 'use strict'; // eslint-disable-line strict
 
 const GiftSet = require('../models/giftSet');
-const co = require('co');
+const wrap = require('../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -9,137 +9,117 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getGiftSets(req, res, next) {
-            try {
-                const giftSets = yield GiftSet
-                    .find({})
-                    .populate('gifts')
-                    .populate('giver')
-                    .sort('-createdAt');
+        .get(wrap(function* getGiftSets(req, res) {
+            const giftSets = yield GiftSet
+                .find({})
+                .populate('gifts')
+                .populate('giver')
+                .sort('-createdAt');
 
-                return res.json(giftSets);
-            } catch (error) {
-                return next(error);
-            }
+            return res.json(giftSets);
         }));
 
     router
         .route('/:giftSetId')
 
-        .get(co.wrap(function* getGiftSet(req, res, next) {
-            try {
-                const giftSet = yield GiftSet
-                    .findById(req.params.giftSetId)
-                    .populate({
-                        path: 'gifts',
-                        populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
-                    })
-                    .populate('giver');
+        .get(wrap(function* getGiftSet(req, res) {
+            const giftSet = yield GiftSet
+                .findById(req.params.giftSetId)
+                .populate({
+                    path: 'gifts',
+                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                })
+                .populate('giver');
 
-                if (!giftSet) {
-                    return res
-                        .status(404)
-                        .send();
-                }
-
-                return res.json(giftSet);
-            } catch (error) {
-                return next(error);
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
             }
+
+            return res.json(giftSet);
         }))
 
-        .delete(co.wrap(function* deleteGiftSet(req, res, next) {
-            try {
-                const giftSet = yield GiftSet
-                    .findById(req.params.giftSetId)
-                    .populate('gifts');
+        .delete(wrap(function* deleteGiftSet(req, res) {
+            const giftSet = yield GiftSet
+                .findById(req.params.giftSetId)
+                .populate('gifts');
 
-                if (!giftSet) {
-                    return res
-                        .status(404)
-                        .send();
-                }
-
-                for (let gift of giftSet.gifts) { // eslint-disable-line prefer-const
-                    yield gift.remove();
-                }
-
-                yield giftSet.remove();
-
+            if (!giftSet) {
                 return res
-                    .status(204)
+                    .status(404)
                     .send();
-            } catch (error) {
-                return next(error);
             }
+
+            for (let gift of giftSet.gifts) { // eslint-disable-line prefer-const
+                yield gift.remove();
+            }
+
+            yield giftSet.remove();
+
+            return res
+                .status(204)
+                .send();
         }));
 
     router
         .route('/:giftSetId/paid')
 
-        .put(co.wrap(function* markGiftSetAsPaid(req, res, next) {
-            try {
-                req.checkParams('id').equals(req.params.id);
+        .put(wrap(function* markGiftSetAsPaid(req, res) {
+            req.checkParams('id').equals(req.params.id);
 
-                const errors = req.validationErrors();
+            const errors = req.validationErrors();
 
-                if (errors) {
-                    return res
-                        .status(400)
-                        .send(errors);
-                }
-
-                const giftSet = yield GiftSet
-                    .findById(req.params.giftSetId);
-
-                if (!giftSet) {
-                    return res
-                        .status(404)
-                        .send();
-                }
-
-                giftSet.paid = true;
-
-                yield giftSet.save();
-
-                return res.json(giftSet);
-            } catch (error) {
-                return next(error);
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
             }
+
+            const giftSet = yield GiftSet
+                .findById(req.params.giftSetId);
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            giftSet.paid = true;
+
+            yield giftSet.save();
+
+            return res.json(giftSet);
         }));
 
     router
         .route('/:giftSetId/detailsSent')
 
-        .put(co.wrap(function* markGiftSetAsDetailsSent(req, res, next) {
-            try {
-                req.checkParams('id').equals(req.params.id);
+        .put(wrap(function* markGiftSetAsDetailsSent(req, res) {
+            req.checkParams('id').equals(req.params.id);
 
-                const errors = req.validationErrors();
+            const errors = req.validationErrors();
 
-                if (errors) {
-                    return res
-                        .status(400)
-                        .send(errors);
-                }
-
-                const giftSet = yield GiftSet
-                    .findById(req.params.giftSetId);
-
-                if (!giftSet) {
-                    return res
-                        .status(404)
-                        .send();
-                }
-
-                giftSet.detailsSent = true;
-
-                yield giftSet.save();
-
-                return res.json(giftSet);
-            } catch (error) {
-                return next(error);
+            if (errors) {
+                return res
+                    .status(400)
+                    .send(errors);
             }
+
+            const giftSet = yield GiftSet
+                .findById(req.params.giftSetId);
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            giftSet.detailsSent = true;
+
+            yield giftSet.save();
+
+            return res.json(giftSet);
         }));
 
     return router;

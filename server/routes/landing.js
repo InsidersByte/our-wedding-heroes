@@ -2,7 +2,7 @@
 
 const GiftSet = require('../models/giftSet');
 const User = require('../models/user');
-const co = require('co');
+const wrap = require('../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -10,16 +10,10 @@ module.exports = (app, express) => {
     router
         .route('/')
 
-        .get(co.wrap(function* getLanding(req, res, next) {
-            try {
-                const user = yield User.findOne({ username: req.user.username });
-
-                const giftSetCount = yield GiftSet.count({ createdAt: { $gt: user.lastLogin } });
-
-                return res.json({ giftSetCount });
-            } catch (error) {
-                return next(error);
-            }
+        .get(wrap(function* getLanding(req, res) {
+            const user = yield User.findOne({ username: req.user.username });
+            const giftSetCount = yield GiftSet.count({ createdAt: { $gt: user.lastLogin } });
+            return res.json({ giftSetCount });
         }));
 
     return router;
