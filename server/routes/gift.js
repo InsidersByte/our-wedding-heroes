@@ -65,15 +65,15 @@ module.exports = (app, express) => {
                         giftSet: giftSet._id,
                     });
 
-                    gift.save();
+                    yield gift.save();
 
                     honeymoonGiftListItem.gifts.push(gift._id);
-                    honeymoonGiftListItem.save();
+                    yield honeymoonGiftListItem.save();
 
                     giftSet.gifts.push(gift);
                 }
 
-                giftSet.save();
+                yield giftSet.save();
 
                 yield giftSet
                     .populate({
@@ -82,17 +82,10 @@ module.exports = (app, express) => {
                     })
                     .execPopulate();
 
-                yield mailer
-                    .send({
-                        to: giver.email,
-                        subject: 'Gift Confirmation',
-                        text: 'Thank you very much for your gift!',
-                    });
+                yield mailer.send({ to: giver.email, subject: 'Gift Confirmation', giftSet }, 'confirmation');
 
                 const users = yield User.find({}, 'username');
-                const userEmails = users.map(user =>
-                    user.username
-                );
+                const userEmails = users.map(user => user.username);
 
                 yield mailer
                     .send({
@@ -103,7 +96,7 @@ module.exports = (app, express) => {
 
                 giftSet.emailSent = true;
 
-                giftSet.save();
+                yield giftSet.save();
 
                 return res.json(giftSet);
             } catch (error) {
