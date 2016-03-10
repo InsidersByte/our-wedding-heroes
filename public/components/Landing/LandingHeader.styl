@@ -4,18 +4,16 @@ maximumSize()
 
 .landing-header
     background-position center center
-    background-attachment fixed
+    background-attachment scroll
     background-repeat no-repeat
     background-size cover
     maximumSize()
 
 .landing-header__overlay
     position absolute
-    height 100%
-    width 100%
     background-color black
     opacity 0.1
-    color white
+    maximumSize()
 
 .landing-header__content
     color white
@@ -30,6 +28,6 @@ maximumSize()
     font-size 4.5em
     font-weight 700
 
-@media (max-width 599px)
+@media (max-width 736px)
     .landing-header__title
         font-size 3em
