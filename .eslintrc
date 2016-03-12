@@ -9,5 +9,7 @@
 
         // TODO: We have a lot of 'stateless' components look at how to fix this
         "react/prefer-stateless-function": 0
+
+        // TODO: Once estraverse-fb dependency is fixed can be removed from package.json (https://github.com/eslint/eslint/issues/5476)
     }
 }
