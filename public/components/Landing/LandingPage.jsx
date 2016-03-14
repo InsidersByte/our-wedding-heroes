@@ -7,7 +7,7 @@ import GiftItems from './GiftItems.jsx';
 import Basket from './Basket.jsx';
 import LandingHeader from './LandingHeader.jsx';
 import LandingSection from './LandingSection.jsx';
-import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
+import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
 
 import './Landing.styl';
