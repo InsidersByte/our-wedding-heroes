@@ -10,6 +10,7 @@ const WeddingProfileSchema = new Schema({
     aboutUs: { type: String, required: true },
     aboutOurDay: { type: String, required: true },
     localFlavour: { type: String, required: true },
+    onTheDay: { type: String, required: true },
     weddingPlaylist: { type: String, required: true },
     aboutOurHoneymoon: { type: String, required: true },
     honeymoonGiftList: {
