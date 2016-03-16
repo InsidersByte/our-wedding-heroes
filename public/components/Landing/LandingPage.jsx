@@ -27,6 +27,7 @@ class LandingPage extends React.Component {
                 rsvp: '',
                 weddingPlaylist: '',
                 localFlavour: '',
+                onTheDay: '',
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -130,6 +131,10 @@ class LandingPage extends React.Component {
 
                 <LandingSection title="Local Flavour">
                     <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />
+                </LandingSection>
+
+                <LandingSection title="On The Day">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.onTheDay} />
                 </LandingSection>
 
                 <LandingSection title="the wedding playlist">
