@@ -17,11 +17,12 @@ module.exports = (app, express, config) => {
     router.use('/cover', require('./cover')(app, express));
     router.use('/aboutUs', require('./aboutUs')(app, express));
     router.use('/aboutOurDay', require('./aboutOurDay')(app, express));
+    router.use('/aboutOurDay', require('./aboutOurDay')(app, express));
+    router.use('/localFlavour', require('./localFlavour')(app, express));
     router.use('/aboutOurHoneymoon', require('./aboutOurHoneymoon')(app, express));
     router.use('/honeymoonGiftList', require('./honeymoonGiftList')(app, express));
     router.use('/honeymoonGiftListItem', require('./honeymoonGiftListItem')(app, express));
     router.use('/rsvp', require('./rsvp')(app, express));
-    router.use('/weddingPlaylist', require('./weddingPlaylist')(app, express));
     router.use('/giftSet', require('./giftSet')(app, express));
 
     router.all('/*', (req, res) =>

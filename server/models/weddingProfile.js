@@ -9,6 +9,8 @@ const WeddingProfileSchema = new Schema({
     },
     aboutUs: { type: String, required: true },
     aboutOurDay: { type: String, required: true },
+    localFlavour: { type: String, required: true },
+    weddingPlaylist: { type: String, required: true },
     aboutOurHoneymoon: { type: String, required: true },
     honeymoonGiftList: {
         content: { type: String, required: true },
@@ -18,7 +20,6 @@ const WeddingProfileSchema = new Schema({
         disclaimerMessage: { type: String },
     },
     rsvp: { type: String, required: true },
-    weddingPlaylist: { type: String, required: true },
 });
 
 module.exports = mongoose.model('WeddingProfile', WeddingProfileSchema);
