@@ -21,6 +21,7 @@ import CoverPage from '../components/Cover/CoverPage.jsx';
 import AboutUsPage from '../components/AboutUs/AboutUsPage.jsx';
 import RsvpPage from '../components/Rsvp/RsvpPage.jsx';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
+import LocalFlavourPage from '../components/LocalFlavour/LocalFlavourPage.jsx';
 import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage.jsx';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage.jsx';
@@ -49,6 +50,7 @@ export default (
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
             <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />
             <Route path="aboutOurDay" component={AboutOurDayPage} onEnter={requireAuth} />
+            <Route path="localFlavour" component={LocalFlavourPage} onEnter={requireAuth} />
             <Route path="weddingPlaylist" component={WeddingPlaylistPage} onEnter={requireAuth} />
             <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} onEnter={requireAuth} />
             <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} onEnter={requireAuth} />
