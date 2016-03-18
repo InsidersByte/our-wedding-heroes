@@ -1,35 +1,35 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import loginStore from '../stores/login.store.js';
+import loginStore from '../stores/login.store';
 
-import NoMatch from '../components/NoMatch.jsx';
-import NoMatchAdmin from '../components/NoMatchAdmin.jsx';
+import NoMatch from '../components/NoMatch';
+import NoMatchAdmin from '../components/NoMatchAdmin';
 
-import App from '../components/App.jsx';
+import App from '../components/App';
 
-import LandingPage from '../components/Landing/LandingPage.jsx';
-import BasketSummaryPage from '../components/Checkout/BasketSummaryPage.jsx';
-import GiverDetailsPage from '../components/Checkout/GiverDetailsPage.jsx';
-import ConfirmationPage from '../components/Checkout/ConfirmationPage.jsx';
+import LandingPage from '../components/Landing/LandingPage';
+import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
+import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
+import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
-import LoginPage from '../components/Login/LoginPage.jsx';
-import SetupPage from '../components/Setup/SetupPage.jsx';
-import Admin from '../components/Admin.jsx';
-import AuthenticatedLanding from '../components/AuthenticatedLanding.jsx';
-import CoverPage from '../components/Cover/CoverPage.jsx';
-import AboutUsPage from '../components/AboutUs/AboutUsPage.jsx';
-import RsvpPage from '../components/Rsvp/RsvpPage.jsx';
-import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage.jsx';
-import LocalFlavourPage from '../components/LocalFlavour/LocalFlavourPage.jsx';
-import OnTheDayPage from '../components/OnTheDay/OnTheDayPage.jsx';
-import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage.jsx';
-import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage.jsx';
-import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage.jsx';
-import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage.jsx';
-import UsersPage from '../components/Users/UsersPage.jsx';
-import GiftSetsPage from '../components/GiftSet/GiftSetsPage.jsx';
-import GiftSetPage from '../components/GiftSet/GiftSetPage.jsx';
+import LoginPage from '../components/Login/LoginPage';
+import SetupPage from '../components/Setup/SetupPage';
+import Admin from '../components/Admin';
+import AuthenticatedLanding from '../components/AuthenticatedLanding';
+import CoverPage from '../components/Cover/CoverPage';
+import AboutUsPage from '../components/AboutUs/AboutUsPage';
+import RsvpPage from '../components/Rsvp/RsvpPage';
+import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage';
+import LocalFlavourPage from '../components/LocalFlavour/LocalFlavourPage';
+import OnTheDayPage from '../components/OnTheDay/OnTheDayPage';
+import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage';
+import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage';
+import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
+import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage';
+import UsersPage from '../components/Users/UsersPage';
+import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
+import GiftSetPage from '../components/GiftSet/GiftSetPage';
 
 function requireAuth(nextState, replace) {
     if (!loginStore.isLoggedIn) {

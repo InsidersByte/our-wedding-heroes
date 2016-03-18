@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import basketActions from '../../actions/basket.action.js';
-import basketStore from '../../stores/basket.store.js';
-import BasketSummaryTable from './BasketSummaryTable.jsx';
+import basketActions from '../../actions/basket.action';
+import basketStore from '../../stores/basket.store';
+import BasketSummaryTable from './BasketSummaryTable';
 
 import './BasketSummary.styl';
 

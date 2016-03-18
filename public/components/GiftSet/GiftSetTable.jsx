@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import GiftSetRow from './GiftSetRow.jsx';
+import GiftSetRow from './GiftSetRow';
 
 class GiftSetTable extends React.Component {
     render() {

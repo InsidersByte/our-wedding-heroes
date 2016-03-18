@@ -1,5 +1,5 @@
 import React from 'react';
-import GiftItem from './GiftItem.jsx';
+import GiftItem from './GiftItem';
 
 class GiftItems extends React.Component {
     render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import FontAwesome from '../common/FontAwesome.jsx';
+import FontAwesome from '../common/FontAwesome';
 
 class HoneymoonGiftListItemRow extends React.Component {
     constructor() {

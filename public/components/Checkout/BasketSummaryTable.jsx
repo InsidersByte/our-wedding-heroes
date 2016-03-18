@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import BasketSummaryRow from './BasketSummaryRow.jsx';
+import BasketSummaryRow from './BasketSummaryRow';
 
 class BasketSummaryTable extends React.Component {
     render() {

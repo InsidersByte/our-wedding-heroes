@@ -6,12 +6,11 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.resolve(__dirname, 'public/Main.jsx'),
+        path.resolve(__dirname, 'public/Main'),
     ],
     output: {
         path: path.join(__dirname, '/build/'),
         filename: '[name].js',
-        publicPath: '/',
     },
     module: {
         loaders: [
@@ -64,4 +63,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
     ],
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
 };

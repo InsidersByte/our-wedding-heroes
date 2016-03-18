@@ -1,7 +1,7 @@
 import React from 'react';
 import localFlavourApi from '../../api/localFlavour.api';
 import { Jumbotron } from 'react-bootstrap';
-import LocalFlavourForm from './LocalFlavourForm.jsx';
+import LocalFlavourForm from './LocalFlavourForm';
 
 class LocalFlavourPage extends React.Component {
     constructor() {

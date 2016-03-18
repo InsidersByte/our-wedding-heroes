@@ -1,7 +1,7 @@
 import React from 'react';
 import aboutOurHoneymoonApi from '../../api/aboutOurHoneymoon.api';
 import { Jumbotron } from 'react-bootstrap';
-import AboutOurHoneymoonForm from './AboutOurHoneymoonForm.jsx';
+import AboutOurHoneymoonForm from './AboutOurHoneymoonForm';
 
 class AboutOurHoneymoonPage extends React.Component {
     constructor() {

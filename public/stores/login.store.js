@@ -1,5 +1,5 @@
 import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.constants';
-import BaseStore from './base.store.js';
+import BaseStore from './base.store';
 import jwtDecode from 'jwt-decode';
 
 class LoginStore extends BaseStore {

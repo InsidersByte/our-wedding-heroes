@@ -5,30 +5,12 @@ const StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
     entry: [
-        path.resolve(__dirname, 'public/Main.jsx'),
+        path.resolve(__dirname, 'public/Main'),
     ],
     output: {
         path: path.join(__dirname, '/dist/'),
         filename: '[name]-[hash].min.js',
     },
-    plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new HtmlWebpackPlugin({
-            template: 'public/index.html',
-            inject: 'body',
-            filename: 'index.html',
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false,
-                screw_ie8: true,
-            },
-        }),
-        new StatsPlugin('webpack.stats.json', {
-            source: false,
-            modules: false,
-        }),
-    ],
     module: {
         loaders: [
             {
@@ -69,5 +51,26 @@ module.exports = {
                 loader: 'url?limit=10000&mimetype=image/svg+xml',
             },
         ],
+    },
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'public/index.html',
+            inject: 'body',
+            filename: 'index.html',
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false,
+                screw_ie8: true,
+            },
+        }),
+        new StatsPlugin('webpack.stats.json', {
+            source: false,
+            modules: false,
+        }),
+    ],
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
     },
 };

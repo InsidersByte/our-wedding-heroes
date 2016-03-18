@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import HoneymoonGiftListItemRow from './HoneymoonGiftListItemRow.jsx';
+import HoneymoonGiftListItemRow from './HoneymoonGiftListItemRow';
 
 class HoneymoonGiftListItemTable extends React.Component {
     constructor() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import CoverApi from '../../api/cover.api';
 import { Jumbotron, Col } from 'react-bootstrap';
-import CoverForm from './CoverForm.jsx';
+import CoverForm from './CoverForm';
 import moment from 'moment';
 
 class CoverPage extends React.Component {

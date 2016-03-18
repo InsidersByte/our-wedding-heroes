@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatchers/app.dispatcher.js';
+import AppDispatcher from '../dispatchers/app.dispatcher';
 
 export default class extends EventEmitter {
     subscribe(actionSubscribe) {

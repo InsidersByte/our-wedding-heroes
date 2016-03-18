@@ -1,8 +1,8 @@
 import React from 'react';
-import UserApi from '../../api/user.api.js';
+import UserApi from '../../api/user.api';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
-import UserTable from './UserTable.jsx';
-import User from './User.jsx';
+import UserTable from './UserTable';
+import User from './User';
 
 class Users extends React.Component {
     constructor() {

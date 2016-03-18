@@ -1,5 +1,5 @@
 import { ADD_TO_BASKET, REMOVE_FROM_BASKET, EMPTY_BASKET, DELETE_FROM_BASKET } from '../constants/actionTypes.constants';
-import BaseStore from './base.store.js';
+import BaseStore from './base.store';
 
 class BasketStore extends BaseStore {
     constructor() {

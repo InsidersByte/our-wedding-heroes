@@ -1,7 +1,7 @@
 import React from 'react';
 import weddingPlaylistApi from '../../api/weddingPlaylist.api';
 import { Jumbotron } from 'react-bootstrap';
-import WeddingPlaylistForm from './WeddingPlaylistForm.jsx';
+import WeddingPlaylistForm from './WeddingPlaylistForm';
 
 class WeddingPlaylistPage extends React.Component {
     constructor() {

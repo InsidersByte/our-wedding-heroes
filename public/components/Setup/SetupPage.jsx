@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import setupApi from '../../api/setup.api';
-import SetupForm from './SetupForm.jsx';
+import SetupForm from './SetupForm';
 
 class SetupPage extends React.Component {
     constructor() {
