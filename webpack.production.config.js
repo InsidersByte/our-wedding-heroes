@@ -12,6 +12,13 @@ module.exports = {
         filename: '[name]-[hash].min.js',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+            },
+        ],
         loaders: [
             {
                 test: /\.css$/,
