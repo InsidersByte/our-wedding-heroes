@@ -67,6 +67,7 @@ module.exports = {
             filename: 'index.html',
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor.js'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
     ],

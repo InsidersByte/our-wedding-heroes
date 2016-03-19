@@ -2,6 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
+const extractCss = new ExtractTextPlugin('vendor-[hash].css');
+const extractStyl = new ExtractTextPlugin('app-[hash].css');
 
 module.exports = {
     entry: [
@@ -22,11 +27,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loaders: ['style', 'css'],
+                loader: extractCss.extract('style', 'css', 'postcss'),
             },
             {
                 test: /\.styl$/,
-                loaders: ['style', 'css', 'stylus'],
+                loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
             },
             {
                 test: /\.jsx?$/,
@@ -60,7 +65,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
             template: 'public/index.html',
             inject: 'body',
@@ -76,8 +80,13 @@ module.exports = {
             source: false,
             modules: false,
         }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor-[hash].min.js'),
+        extractCss,
+        extractStyl,
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
+    postcss: () => [autoprefixer],
 };
