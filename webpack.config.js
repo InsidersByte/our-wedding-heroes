@@ -35,16 +35,8 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff2',
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
@@ -56,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml',
+                loader: 'file',
             },
         ],
     },
