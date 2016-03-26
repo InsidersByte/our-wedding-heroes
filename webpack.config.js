@@ -30,7 +30,7 @@ module.exports = {
                 loaders: ['style', 'css', 'stylus'],
             },
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loaders: ['react-hot', 'babel'],
                 exclude: /node_modules/,
             },

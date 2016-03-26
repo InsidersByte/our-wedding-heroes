@@ -9,9 +9,10 @@ const extractCss = new ExtractTextPlugin('vendor-[hash].css');
 const extractStyl = new ExtractTextPlugin('app-[hash].css');
 
 module.exports = {
-    entry: [
-        path.resolve(__dirname, 'public/Main'),
-    ],
+    entry: {
+        app: path.resolve(__dirname, 'public/Main'),
+        vendor: ['react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent', 'classnames', 'jwt-decode'],
+    },
     output: {
         path: path.join(__dirname, '/dist/'),
         filename: '[name]-[hash].min.js',
@@ -34,7 +35,7 @@ module.exports = {
                 loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
             },
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel',
                 exclude: /node_modules/,
             },
@@ -73,7 +74,6 @@ module.exports = {
             modules: false,
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.CommonsChunkPlugin('vendor-[hash].min.js'),
         extractCss,
         extractStyl,
     ],
