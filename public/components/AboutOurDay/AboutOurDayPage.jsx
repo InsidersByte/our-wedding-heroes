@@ -1,7 +1,7 @@
 import React from 'react';
 import aboutOurDayApi from '../../api/aboutOurDay.api';
 import { Jumbotron } from 'react-bootstrap';
-import AboutOurDayForm from './AboutOurDayForm.jsx';
+import AboutOurDayForm from './AboutOurDayForm';
 
 class AboutOurDayPage extends React.Component {
     constructor() {

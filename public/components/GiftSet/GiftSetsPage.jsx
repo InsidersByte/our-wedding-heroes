@@ -1,6 +1,6 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import GiftSetTable from './GiftSetTable.jsx';
+import GiftSetTable from './GiftSetTable';
 import GiftSetApi from '../../api/giftSet.api';
 
 class GiftSetsPage extends React.Component {

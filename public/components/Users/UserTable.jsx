@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import UserRow from './UserRow.jsx';
+import UserRow from './UserRow';
 
 class UserTable extends React.Component {
     constructor() {

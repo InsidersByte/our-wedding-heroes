@@ -1,4 +1,4 @@
-import AppDispatcher from '../dispatchers/app.dispatcher.js';
+import AppDispatcher from '../dispatchers/app.dispatcher';
 import { ADD_TO_BASKET, REMOVE_FROM_BASKET, DELETE_FROM_BASKET, EMPTY_BASKET } from '../constants/actionTypes.constants';
 
 export default {

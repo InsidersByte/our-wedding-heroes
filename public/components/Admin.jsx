@@ -1,5 +1,5 @@
 import React from 'react';
-import loginStore from '../stores/login.store.js';
+import loginStore from '../stores/login.store';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../services/auth';
@@ -71,6 +71,12 @@ class App extends React.Component {
                         </li>
                         <li>
                             <Link to="/admin/aboutOurDay">About Our Day</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/localFlavour">Local Flavour</Link>
+                        </li>
+                        <li>
+                            <Link to="/admin/onTheDay">On the Day</Link>
                         </li>
                         <li>
                             <Link to="/admin/weddingPlaylist">Wedding Playlist</Link>

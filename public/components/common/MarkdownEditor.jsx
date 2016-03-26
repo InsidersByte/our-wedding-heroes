@@ -1,5 +1,5 @@
 import React from 'react';
-import MarkdownRenderer from './MarkdownRenderer.jsx';
+import MarkdownRenderer from 'react-markdown-renderer';
 
 import './MarkdownEditor.styl';
 

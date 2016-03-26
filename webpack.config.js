@@ -6,14 +6,20 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.resolve(__dirname, 'public/Main.jsx'),
+        path.resolve(__dirname, 'public/Main'),
     ],
     output: {
         path: path.join(__dirname, '/build/'),
         filename: '[name].js',
-        publicPath: '/',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+            },
+        ],
         loaders: [
             {
                 test: /\.css$/,
@@ -24,21 +30,13 @@ module.exports = {
                 loaders: ['style', 'css', 'stylus'],
             },
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loaders: ['react-hot', 'babel'],
                 exclude: /node_modules/,
             },
             {
-                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff2',
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
@@ -50,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml',
+                loader: 'file',
             },
         ],
     },
@@ -61,7 +59,11 @@ module.exports = {
             filename: 'index.html',
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin('vendor.js'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
     ],
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
+    },
 };

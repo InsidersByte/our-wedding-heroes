@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MarkdownEditor from '../common/MarkdownEditor.jsx';
+import MarkdownEditor from '../common/MarkdownEditor';
 
 class WeddingPlaylistForm extends React.Component {
     render() {

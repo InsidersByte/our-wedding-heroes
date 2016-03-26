@@ -1,8 +1,8 @@
 import React from 'react';
-import GiverDetailsForm from './GiverDetailsForm.jsx';
+import GiverDetailsForm from './GiverDetailsForm';
 import giftApi from '../../api/gift.api';
-import basketActions from '../../actions/basket.action.js';
-import basketStore from '../../stores/basket.store.js';
+import basketActions from '../../actions/basket.action';
+import basketStore from '../../stores/basket.store';
 
 import './GiverDetails.styl';
 

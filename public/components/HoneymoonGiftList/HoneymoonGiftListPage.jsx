@@ -1,7 +1,7 @@
 import React from 'react';
 import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
 import { Jumbotron, Col } from 'react-bootstrap';
-import HoneymoonGiftListForm from './HoneymoonGiftListForm.jsx';
+import HoneymoonGiftListForm from './HoneymoonGiftListForm';
 
 class HoneymoonGiftListPage extends React.Component {
     constructor() {

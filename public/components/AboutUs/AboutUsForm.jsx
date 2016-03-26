@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MarkdownEditor from '../common/MarkdownEditor.jsx';
+import MarkdownEditor from '../common/MarkdownEditor';
 
 class AboutUsForm extends React.Component {
     render() {

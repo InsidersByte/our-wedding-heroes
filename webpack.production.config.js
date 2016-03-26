@@ -2,17 +2,65 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StatsPlugin = require('stats-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
+const extractCss = new ExtractTextPlugin('vendor-[hash].css');
+const extractStyl = new ExtractTextPlugin('app-[hash].css');
 
 module.exports = {
-    entry: [
-        path.resolve(__dirname, 'public/Main.jsx'),
-    ],
+    entry: {
+        app: path.resolve(__dirname, 'public/Main'),
+        vendor: [
+            'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent',
+            'classnames', 'jwt-decode',
+        ],
+    },
     output: {
         path: path.join(__dirname, '/dist/'),
         filename: '[name]-[hash].min.js',
     },
+    module: {
+        preLoaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'eslint-loader',
+                exclude: /node_modules/,
+            },
+        ],
+        loaders: [
+            {
+                test: /\.css$/,
+                loader: extractCss.extract('style', 'css', 'postcss'),
+            },
+            {
+                test: /\.styl$/,
+                loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
+            },
+            {
+                test: /\.(js|jsx)$/,
+                loader: 'babel',
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/font-woff',
+            },
+            {
+                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'url?limit=10000&mimetype=application/octet-stream',
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file',
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                loader: 'file',
+            },
+        ],
+    },
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
         new HtmlWebpackPlugin({
             template: 'public/index.html',
             inject: 'body',
@@ -28,46 +76,12 @@ module.exports = {
             source: false,
             modules: false,
         }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        extractCss,
+        extractStyl,
     ],
-    module: {
-        loaders: [
-            {
-                test: /\.css$/,
-                loaders: ['style', 'css'],
-            },
-            {
-                test: /\.styl$/,
-                loaders: ['style', 'css', 'stylus'],
-            },
-            {
-                test: /\.jsx?$/,
-                loader: 'babel',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff',
-            },
-            {
-                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/font-woff2',
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=application/octet-stream',
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'file',
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: 'url?limit=10000&mimetype=image/svg+xml',
-            },
-        ],
+    resolve: {
+        extensions: ['', '.js', '.jsx'],
     },
+    postcss: () => [autoprefixer],
 };

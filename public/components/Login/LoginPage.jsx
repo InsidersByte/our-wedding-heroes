@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
 import auth from '../../services/auth';
-import LoginForm from './LoginForm.jsx';
+import LoginForm from './LoginForm';
 
 class Login extends React.Component {
     constructor() {

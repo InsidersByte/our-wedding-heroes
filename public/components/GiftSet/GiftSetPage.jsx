@@ -3,7 +3,7 @@ import { Jumbotron, FormControls, Col, Row, ButtonToolbar, Button } from 'react-
 import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
-import GiftTable from './GiftTable.jsx';
+import GiftTable from './GiftTable';
 
 class GiftSetPage extends React.Component {
     constructor(props, context) {

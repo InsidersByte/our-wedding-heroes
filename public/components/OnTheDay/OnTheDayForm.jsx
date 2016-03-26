@@ -2,11 +2,11 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import MarkdownEditor from '../common/MarkdownEditor';
 
-class RsvpForm extends React.Component {
+class OnTheDayForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.props.onSubmit}>
-                <MarkdownEditor content={this.props.rsvp} onChange={this.props.onChange} />
+                <MarkdownEditor content={this.props.onTheDay} onChange={this.props.onChange} />
 
                 <Button type="submit" bsStyle="primary" block>Update</Button>
             </form>
@@ -14,10 +14,10 @@ class RsvpForm extends React.Component {
     }
 }
 
-RsvpForm.propTypes = {
-    rsvp: React.PropTypes.string.isRequired,
+OnTheDayForm.propTypes = {
+    onTheDay: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };
 
-export default RsvpForm;
+export default OnTheDayForm;

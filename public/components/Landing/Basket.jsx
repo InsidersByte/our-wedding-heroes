@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import FontAwesome from '../common/FontAwesome.jsx';
+import FontAwesome from '../common/FontAwesome';
 
 import './Basket.styl';
 

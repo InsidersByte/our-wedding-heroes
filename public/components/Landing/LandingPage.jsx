@@ -1,13 +1,13 @@
 import React from 'react';
-import FontAwesome from '../common/FontAwesome.jsx';
-import WeddingProfileApi from '../../api/weddingProfile.api.js';
-import basketActions from '../../actions/basket.action.js';
-import basketStore from '../../stores/basket.store.js';
-import GiftItems from './GiftItems.jsx';
-import Basket from './Basket.jsx';
-import LandingHeader from './LandingHeader.jsx';
-import LandingSection from './LandingSection.jsx';
-import MarkdownRenderer from '../common/MarkdownRenderer.jsx';
+import FontAwesome from '../common/FontAwesome';
+import WeddingProfileApi from '../../api/weddingProfile.api';
+import basketActions from '../../actions/basket.action';
+import basketStore from '../../stores/basket.store';
+import GiftItems from './GiftItems';
+import Basket from './Basket';
+import LandingHeader from './LandingHeader';
+import LandingSection from './LandingSection';
+import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
 
 import './Landing.styl';
@@ -26,6 +26,8 @@ class LandingPage extends React.Component {
                 honeymoonGiftList: {},
                 rsvp: '',
                 weddingPlaylist: '',
+                localFlavour: '',
+                onTheDay: '',
             },
             items: basketStore.items,
             total: basketStore.total,
@@ -125,6 +127,14 @@ class LandingPage extends React.Component {
 
                 <LandingSection title="About our Day">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurDay} />
+                </LandingSection>
+
+                <LandingSection title="Local Flavour">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />
+                </LandingSection>
+
+                <LandingSection title="On The Day">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.onTheDay} />
                 </LandingSection>
 
                 <LandingSection title="the wedding playlist">

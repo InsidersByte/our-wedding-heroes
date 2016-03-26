@@ -1,7 +1,7 @@
 import React from 'react';
 import rsvpApi from '../../api/rsvp.api';
 import { Jumbotron } from 'react-bootstrap';
-import RsvpForm from './RsvpForm.jsx';
+import RsvpForm from './RsvpForm';
 
 class RsvpPage extends React.Component {
     constructor() {

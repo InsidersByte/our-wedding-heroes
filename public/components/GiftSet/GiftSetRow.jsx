@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { ButtonToolbar, Button } from 'react-bootstrap';
-import FontAwesome from '../common/FontAwesome.jsx';
+import FontAwesome from '../common/FontAwesome';
 
 class GiftSetRow extends React.Component {
     constructor() {
