@@ -11,7 +11,10 @@ const extractStyl = new ExtractTextPlugin('app-[hash].css');
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'public/Main'),
-        vendor: ['react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent', 'classnames', 'jwt-decode'],
+        vendor: [
+            'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent',
+            'classnames', 'jwt-decode',
+        ],
     },
     output: {
         path: path.join(__dirname, '/dist/'),
