@@ -8,16 +8,21 @@ const autoprefixer = require('autoprefixer');
 const extractCss = new ExtractTextPlugin('vendor-[hash].css');
 const extractStyl = new ExtractTextPlugin('app-[hash].css');
 
+const PATHS = {
+    app: path.join(__dirname, 'public'),
+    dist: path.join(__dirname, 'dist'),
+};
+
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'public/Main'),
+        app: PATHS.app,
         vendor: [
             'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent',
             'classnames', 'jwt-decode',
         ],
     },
     output: {
-        path: path.join(__dirname, '/dist/'),
+        path: PATHS.dist,
         filename: '[name]-[hash].min.js',
     },
     module: {

@@ -43,16 +43,16 @@
     "mongoose": "^4.4.10",
     "nodemailer": "^2.3.0",
     "react": "^0.14.7",
-    "react-bootstrap": "^0.28.3",
+    "react-bootstrap": "^0.28.4",
     "react-dom": "^0.14.7",
     "react-markdown-renderer": "^0.1.2",
     "react-router": "^2.0.1",
     "react-toastr": "^2.4.0",
-    "superagent": "^1.8.1",
+    "superagent": "^1.8.3",
     "toastr": "^2.1.2"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.4",
+    "autoprefixer": "^6.3.5",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.2.4",
@@ -78,10 +78,10 @@
     "stylus-loader": "^1.5.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
-    "webpack-dev-middleware": "^1.5.1",
+    "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   },
   "engines": {
-    "node": "5.8.0"
+    "node": "5.9.1"
   }
 }

@@ -2,20 +2,25 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const PATHS = {
+    app: path.join(__dirname, 'public'),
+    build: path.join(__dirname, 'build'),
+};
+
 module.exports = {
     devtool: 'eval-source-map',
     entry: [
         'webpack-hot-middleware/client?reload=true',
-        path.resolve(__dirname, 'public/Main'),
+        PATHS.app,
     ],
     output: {
-        path: path.join(__dirname, '/build/'),
+        path: PATHS.build,
         filename: '[name].js',
     },
     module: {
         preLoaders: [
             {
-                test: /\.jsx?$/,
+                test: /\.(js|jsx)$/,
                 loader: 'eslint-loader',
                 exclude: /node_modules/,
             },
