@@ -12,7 +12,7 @@ const TARGETS = {
 };
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
-    PUBLIC: path.join(__dirname, 'PUBLIC'),
+    PUBLIC: path.join(__dirname, 'public'),
     BUILD: path.join(__dirname, 'build'),
     DIST: path.join(__dirname, 'dist'),
     NODE_MODULES: path.join(__dirname, 'node_modules'),
@@ -67,13 +67,13 @@ if (TARGET === TARGETS.START_DEV) {
             filename: '[name].js',
         },
         module: {
-            preLoaders: [
-                {
-                    test: /\.(js|jsx)$/,
-                    loader: 'eslint',
-                    include: PATHS.PUBLIC,
-                },
-            ],
+            // preLoaders: [
+            //     {
+            //         test: /\.(js|jsx)$/,
+            //         loader: 'eslint',
+            //         include: PATHS.PUBLIC,
+            //     },
+            // ],
             loaders: [
                 {
                     test: /\.css$/,
