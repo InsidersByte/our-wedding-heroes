@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 
 import loginActions from './actions/login.action';
-import history from './services/history';
+import history from './lib/history';
 import routes from './routes';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
