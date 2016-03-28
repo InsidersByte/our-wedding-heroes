@@ -1,6 +1,6 @@
 import React from 'react';
 import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
 
 class HoneymoonGiftListPage extends React.Component {
@@ -55,7 +55,7 @@ class HoneymoonGiftListPage extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
+            <div>
                 <Jumbotron>
                     <h1>Honeymoon Gift List</h1>
 
@@ -65,7 +65,7 @@ class HoneymoonGiftListPage extends React.Component {
                         onSubmit={this.submit}
                     />
                 </Jumbotron>
-            </Col>
+            </div>
         );
     }
 }

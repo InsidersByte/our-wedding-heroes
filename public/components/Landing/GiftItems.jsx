@@ -1,26 +1,23 @@
 import React from 'react';
 import GiftItem from './GiftItem';
 
-class GiftItems extends React.Component {
-    render() {
-        return (
-            <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
-                {
-                    this
-                        .props
-                        .giftItems
-                        .map(item => (
-                            <GiftItem
-                                key={item._id}
-                                item={item}
-                                addToBasket={this.props.addToBasket}
-                                basketItems={this.props.basketItems}
-                            />
-                        ))
-                }
-            </div>
-        );
-    }
+function GiftItems(props) {
+    return (
+        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '15px', justifyContent: 'center' }}>
+            {
+                props
+                    .giftItems
+                    .map(item => (
+                        <GiftItem
+                            key={item._id}
+                            item={item}
+                            addToBasket={props.addToBasket}
+                            basketItems={props.basketItems}
+                        />
+                    ))
+            }
+        </div>
+    );
 }
 
 GiftItems.propTypes = {

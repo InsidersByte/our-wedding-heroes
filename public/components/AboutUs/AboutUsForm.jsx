@@ -2,16 +2,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import MarkdownEditor from '../common/MarkdownEditor';
 
-class AboutUsForm extends React.Component {
-    render() {
-        return (
-            <form onSubmit={this.props.onSubmit}>
-                <MarkdownEditor content={this.props.aboutUs} onChange={this.props.onChange} />
+function AboutUsForm(props) {
+    return (
+        <form onSubmit={props.onSubmit}>
+            <MarkdownEditor content={props.aboutUs} onChange={props.onChange} />
 
-                <Button type="submit" bsStyle="primary" block>Update</Button>
-            </form>
-        );
-    }
+            <Button type="submit" bsStyle="primary" block>Update</Button>
+        </form>
+    );
 }
 
 AboutUsForm.propTypes = {

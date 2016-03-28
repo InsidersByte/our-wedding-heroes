@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Col, Button, Glyphicon } from 'react-bootstrap';
+import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
 import honeymoonGiftListItemApi from '../../api/honeymoonGiftListItem.api';
 import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
@@ -42,8 +42,8 @@ class HoneymoonGiftListItemPage extends React.Component {
                     this._loadItems();
                     this.props.toastSuccess('Honeymoon gift list item saved');
                 })
-                .catch(() => {
-                    this.props.toastError('There was an error saving honeymoon gift list item');
+                .catch((error) => {
+                    this.props.toastError('There was an error saving honeymoon gift list item', error);
                 });
         } else {
             honeymoonGiftListItemApi
@@ -53,8 +53,8 @@ class HoneymoonGiftListItemPage extends React.Component {
                     this._loadItems();
                     this.props.toastSuccess('Honeymoon gift list item saved');
                 })
-                .catch(() => {
-                    this.props.toastError('There was an error saving honeymoon gift list item');
+                .catch((error) => {
+                    this.props.toastError('There was an error saving honeymoon gift list item', error);
                 });
         }
     }
@@ -72,8 +72,8 @@ class HoneymoonGiftListItemPage extends React.Component {
                 this._loadItems();
                 this.props.toastSuccess('honeymoon gift list item deleted');
             })
-            .catch(() => {
-                this.props.toastError('There was an error deleting honeymoon gift list item');
+            .catch((error) => {
+                this.props.toastError('There was an error deleting honeymoon gift list item', error);
             });
     }
 
@@ -85,8 +85,8 @@ class HoneymoonGiftListItemPage extends React.Component {
                     items: response,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error getting honeymoon gift list items');
+            .catch((error) => {
+                this.props.toastError('There was an error getting honeymoon gift list items', error);
             });
     }
 
@@ -105,7 +105,7 @@ class HoneymoonGiftListItemPage extends React.Component {
 
     render() {
         return (
-            <Col md={12}>
+            <div>
                 <Jumbotron>
                     <h1>
                         Honeymoon Gift List Items&nbsp;
@@ -124,7 +124,7 @@ class HoneymoonGiftListItemPage extends React.Component {
                     onSubmit={this.save}
                     onChange={this.setItemState}
                 />
-            </Col>
+            </div>
         );
     }
 }

@@ -1,16 +1,14 @@
 import React from 'react';
 
-class GiftRow extends React.Component {
-    render() {
-        return (
-            <tr>
-                <th>{this.props.gift.honeymoonGiftListItem.name}</th>
-                <th>{this.props.gift.price}</th>
-                <th>{this.props.gift.quantity}</th>
-                <th>{this.props.gift.total}</th>
-            </tr>
-        );
-    }
+function GiftRow(props) {
+    return (
+        <tr>
+            <th>{props.gift.honeymoonGiftListItem.name}</th>
+            <th>{props.gift.price}</th>
+            <th>{props.gift.quantity}</th>
+            <th>{props.gift.total}</th>
+        </tr>
+    );
 }
 
 GiftRow.propTypes = {

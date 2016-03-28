@@ -2,36 +2,34 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import BasketSummaryRow from './BasketSummaryRow';
 
-class BasketSummaryTable extends React.Component {
-    render() {
-        return (
-            <Table responsive className="basket-summary__table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price (£)</th>
-                    <th>Quantity</th>
-                    <th>Remaining</th>
-                    <th>Remove</th>
-                </tr>
-                </thead>
+function BasketSummaryTable(props) {
+    return (
+        <Table responsive className="basket-summary__table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price (£)</th>
+                <th>Quantity</th>
+                <th>Remaining</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
 
-                <tbody>
-                {
-                    Object.keys(this.props.items).map(key => (
-                        <BasketSummaryRow
-                            key={key}
-                            item={this.props.items[key]}
-                            onAdd={this.props.onAdd}
-                            onRemove={this.props.onRemove}
-                            onDelete={this.props.onDelete}
-                        />
-                    ))
-                }
-                </tbody>
-            </Table>
-        );
-    }
+            <tbody>
+            {
+                Object.keys(props.items).map(key => (
+                    <BasketSummaryRow
+                        key={key}
+                        item={props.items[key]}
+                        onAdd={props.onAdd}
+                        onRemove={props.onRemove}
+                        onDelete={props.onDelete}
+                    />
+                ))
+            }
+            </tbody>
+        </Table>
+    );
 }
 
 BasketSummaryTable.propTypes = {

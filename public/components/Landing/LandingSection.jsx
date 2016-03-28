@@ -2,20 +2,18 @@ import React from 'react';
 
 import './LandingSection.styl';
 
-class LandingSection extends React.Component {
-    render() {
-        return (
-            <section className="landing-section">
-                <h1 className="landing-section__title">{this.props.title}</h1>
+function LandingSection(props) {
+    return (
+        <section className="landing-section">
+            <h1 className="landing-section__title">{props.title}</h1>
 
-                <div className="landing-section__content">
-                    {this.props.children}
-                </div>
+            <div className="landing-section__content">
+                {props.children}
+            </div>
 
-                {this.props.postContent}
-            </section>
-        );
-    }
+            {props.postContent}
+        </section>
+    );
 }
 
 LandingSection.propTypes = {

@@ -1,23 +1,21 @@
 import React from 'react';
 import classNames from 'classnames';
 
-class FontAwesome extends React.Component {
-    render() {
-        const className = classNames(
-            this.props.className,
-            {
-                fa: true,
-                [`fa-${this.props.icon}`]: true,
-                [`fa-${this.props.size}`]: this.props.size,
-            }
-        );
+function FontAwesome(props) {
+    const className = classNames(
+        props.className,
+        {
+            fa: true,
+            [`fa-${props.icon}`]: true,
+            [`fa-${props.size}`]: props.size,
+        }
+    );
 
-        return (
-            <i className={className}>
-                {this.props.children}
-            </i>
-        );
-    }
+    return (
+        <i className={className}>
+            {props.children}
+        </i>
+    );
 }
 
 FontAwesome.propTypes = {
