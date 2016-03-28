@@ -33,8 +33,6 @@ class LandingPage extends React.Component {
             total: basketStore.total,
             basketCount: basketStore.count,
         };
-
-        this._onChange = this._onChange.bind(this);
     }
 
     componentDidMount() {
@@ -67,24 +65,21 @@ class LandingPage extends React.Component {
         basketStore.removeChangeListener(this._onChange);
     }
 
-    _onChange() {
+    _onChange = () => {
         this.setState({
             items: basketStore.items,
             total: basketStore.total,
             basketCount: basketStore.count,
         });
-    }
+    };
 
     addToBasket(item, event) {
         basketActions.addToBasket(item, parseInt(event.target.value, 10));
     }
 
-    render() {
-        let offlinePaymentMessage = null;
-        let disclaimerMessage = null;
-
+    renderOfflineMessage = () => {
         if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
-            offlinePaymentMessage = (
+            return (
                 <span>
                     <br />
                     <br />
@@ -94,8 +89,12 @@ class LandingPage extends React.Component {
             );
         }
 
+        return null;
+    };
+
+    renderDisclaimerMessage = () => {
         if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
-            disclaimerMessage = (
+            return (
                 <span style={{ marginBottom: '10px' }}>
                     <br />
                     <br />
@@ -105,6 +104,10 @@ class LandingPage extends React.Component {
             );
         }
 
+        return null;
+    };
+
+    render() {
         const giftItemsElement = (
             <GiftItems
                 giftItems={this.state.weddingProfile.honeymoonGiftListItems}
@@ -151,9 +154,9 @@ class LandingPage extends React.Component {
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
-                        {offlinePaymentMessage}
+                        {this.renderOfflineMessage()}
 
-                        {disclaimerMessage}
+                        {this.renderDisclaimerMessage()}
                     </div>
                 </LandingSection>
 
