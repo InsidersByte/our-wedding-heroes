@@ -3,21 +3,6 @@ import { Table } from 'react-bootstrap';
 import HoneymoonGiftListItemRow from './HoneymoonGiftListItemRow';
 
 class HoneymoonGiftListItemTable extends React.Component {
-    constructor() {
-        super();
-
-        this.onDelete = this.onDelete.bind(this);
-        this.onEdit = this.onEdit.bind(this);
-    }
-
-    onDelete(item) {
-        this.props.onDelete(item);
-    }
-
-    onEdit(item) {
-        this.props.onEdit(item);
-    }
-
     render() {
         return (
             <Table striped bordered condensed hover responsive>
@@ -42,8 +27,8 @@ class HoneymoonGiftListItemTable extends React.Component {
                             <HoneymoonGiftListItemRow
                                 key={item._id}
                                 item={item}
-                                onEdit={this.onEdit}
-                                onDelete={this.onDelete}
+                                onEdit={this.props.onEdit}
+                                onDelete={this.props.onDelete}
                             />
                         ))
                 }

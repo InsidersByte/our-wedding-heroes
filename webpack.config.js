@@ -25,11 +25,6 @@ const common = {
     module: {
         loaders: [
             {
-                test: /\.(js|jsx)$/,
-                loader: 'babel',
-                include: PATHS.PUBLIC,
-            },
-            {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/font-woff',
             },
@@ -125,6 +120,11 @@ if (TARGET === TARGETS.BUILD) {
                 {
                     test: /\.styl$/,
                     loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
+                },
+                {
+                    test: /\.(js|jsx)$/,
+                    loader: 'babel',
+                    include: PATHS.PUBLIC,
                 },
             ],
         },

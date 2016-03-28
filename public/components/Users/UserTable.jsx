@@ -3,21 +3,6 @@ import { Table } from 'react-bootstrap';
 import UserRow from './UserRow';
 
 class UserTable extends React.Component {
-    constructor() {
-        super();
-
-        this.onDelete = this.onDelete.bind(this);
-        this.onEdit = this.onEdit.bind(this);
-    }
-
-    onDelete(user) {
-        this.props.onDelete(user);
-    }
-
-    onEdit(user) {
-        this.props.onEdit(user);
-    }
-
     render() {
         return (
             <Table striped bordered condensed hover responsive>
@@ -34,7 +19,7 @@ class UserTable extends React.Component {
                         .props
                         .users
                         .map(user => (
-                            <UserRow key={user._id} user={user} onEdit={this.onEdit} onDelete={this.onDelete} />
+                            <UserRow key={user._id} user={user} onEdit={this.props.onEdit} onDelete={this.props.onDelete} />
                         ))
                     }
                 </tbody>
