@@ -5,6 +5,7 @@ const StatsPlugin = require('stats-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const merge = require('webpack-merge');
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
 const TARGETS = {
     START_DEV: 'start-dev',
@@ -94,6 +95,9 @@ if (TARGET === TARGETS.START_DEV) {
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoErrorsPlugin(),
+            new NpmInstallPlugin({
+                save: true,
+            }),
         ],
     });
 }
