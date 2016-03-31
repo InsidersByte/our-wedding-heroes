@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MarkdownEditor from '../common/MarkdownEditor';
+import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 
 function AboutOurDayForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
-            <MarkdownEditor content={props.aboutOurDay} onChange={props.onChange} />
+            <MarkdownEditor value={props.aboutOurDay} onChange={props.onChange} />
 
             <Button type="submit" bsStyle="primary" block>Update</Button>
         </form>

@@ -1,4 +1,4 @@
-import BaseApi from './base.api';
+import BaseApi from '../lib/api';
 
 const apiUrl = 'cover';
 

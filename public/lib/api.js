@@ -1,7 +1,7 @@
 import request from 'superagent';
-import loginStore from '../stores/login.store';
-import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants';
-import loginActions from '../actions/login.action';
+import loginStore from '../stores/login.store.js';
+import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants.js';
+import loginActions from '../actions/login.action.js';
 
 export default class {
     constructor(baseUrl) {

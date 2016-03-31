@@ -6,10 +6,11 @@ import loginActions from './actions/login.action';
 import history from './lib/history';
 import routes from './routes';
 
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
-import '../node_modules/animate.css/animate.css';
-import '../node_modules/font-awesome/css/font-awesome.css';
-import '../node_modules/toastr/build/toastr.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'animate.css/animate.css';
+import 'font-awesome/css/font-awesome.css';
+import 'toastr/build/toastr.css';
+import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
 import './index.styl';
 
 const jwt = localStorage.getItem('jwt');

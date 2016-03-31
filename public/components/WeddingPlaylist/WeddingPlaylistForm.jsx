@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MarkdownEditor from '../common/MarkdownEditor';
+import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 
 function WeddingPlaylistForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
-            <MarkdownEditor content={props.weddingPlaylist} onChange={props.onChange} />
+            <MarkdownEditor value={props.weddingPlaylist} onChange={props.onChange} />
 
             <Button type="submit" bsStyle="primary" block>Update</Button>
         </form>
