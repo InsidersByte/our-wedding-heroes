@@ -8,6 +8,7 @@ const merge = require('webpack-merge');
 
 const TARGETS = {
     START_DEV: 'start-dev',
+    START: 'start',
     BUILD: 'build',
 };
 const TARGET = process.env.npm_lifecycle_event;
@@ -24,6 +25,11 @@ const extractStyl = new ExtractTextPlugin('app-[hash].css');
 const common = {
     module: {
         loaders: [
+            {
+                test: /\.(js|jsx)$/,
+                loader: 'babel',
+                include: PATHS.PUBLIC,
+            },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'url?limit=10000&mimetype=application/font-woff',
@@ -55,7 +61,7 @@ const common = {
     },
 };
 
-if (TARGET === TARGETS.START_DEV) {
+if (TARGET === TARGETS.START || TARGET === TARGETS.START_DEV) {
     module.exports = merge(common, {
         devtool: 'eval-source-map',
         entry: [
@@ -67,13 +73,6 @@ if (TARGET === TARGETS.START_DEV) {
             filename: '[name].js',
         },
         module: {
-            // preLoaders: [
-            //     {
-            //         test: /\.(js|jsx)$/,
-            //         loader: 'eslint',
-            //         include: PATHS.PUBLIC,
-            //     },
-            // ],
             loaders: [
                 {
                     test: /\.css$/,
@@ -82,11 +81,6 @@ if (TARGET === TARGETS.START_DEV) {
                 {
                     test: /\.styl$/,
                     loaders: ['style', 'css', 'stylus'],
-                    include: PATHS.PUBLIC,
-                },
-                {
-                    test: /\.(js|jsx)$/,
-                    loaders: ['react-hot', 'babel'],
                     include: PATHS.PUBLIC,
                 },
             ],
@@ -120,11 +114,6 @@ if (TARGET === TARGETS.BUILD) {
                 {
                     test: /\.styl$/,
                     loader: extractStyl.extract('style', ['css', 'postcss', 'stylus']),
-                },
-                {
-                    test: /\.(js|jsx)$/,
-                    loader: 'babel',
-                    include: PATHS.PUBLIC,
                 },
             ],
         },
