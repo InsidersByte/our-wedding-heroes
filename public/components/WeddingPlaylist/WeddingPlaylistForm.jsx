@@ -1,17 +1,15 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import MarkdownEditor from '../common/MarkdownEditor';
+import MarkdownEditor from '@insidersbyte/react-markdown-editor';
 
-class WeddingPlaylistForm extends React.Component {
-    render() {
-        return (
-            <form onSubmit={this.props.onSubmit}>
-                <MarkdownEditor content={this.props.weddingPlaylist} onChange={this.props.onChange} />
+function WeddingPlaylistForm(props) {
+    return (
+        <form onSubmit={props.onSubmit}>
+            <MarkdownEditor value={props.weddingPlaylist} onChange={props.onChange} />
 
-                <Button type="submit" bsStyle="primary" block>Update</Button>
-            </form>
-        );
-    }
+            <Button type="submit" bsStyle="primary" block>Update</Button>
+        </form>
+    );
 }
 
 WeddingPlaylistForm.propTypes = {
