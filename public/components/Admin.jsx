@@ -2,7 +2,7 @@ import React from 'react';
 import loginStore from '../stores/login.store';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
-import auth from '../lib/auth';
+import auth from '../helpers/auth';
 
 class App extends React.Component {
     constructor() {

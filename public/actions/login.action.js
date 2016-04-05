@@ -1,6 +1,6 @@
 import AppDispatcher from '../dispatchers/app.dispatcher';
 import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.constants';
-import history from '../lib/history';
+import history from '../helpers/history';
 
 export default {
     loginUser: (jwt) => {

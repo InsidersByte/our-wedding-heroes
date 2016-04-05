@@ -1,4 +1,4 @@
-import BaseApi from '../lib/api';
+import BaseApi from '../helpers/api';
 
 const apiUrl = 'gift';
 
