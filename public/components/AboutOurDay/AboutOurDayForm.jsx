@@ -7,13 +7,14 @@ function AboutOurDayForm(props) {
         <form onSubmit={props.onSubmit}>
             <MarkdownEditor value={props.aboutOurDay} onChange={props.onChange} />
 
-            <Button type="submit" bsStyle="primary" block>Update</Button>
+            <Button type="submit" bsStyle="primary" block disabled={props.saving}>Update</Button>
         </form>
     );
 }
 
 AboutOurDayForm.propTypes = {
     aboutOurDay: React.PropTypes.string.isRequired,
+    saving: React.PropTypes.bool.isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
 };

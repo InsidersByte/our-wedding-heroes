@@ -24,6 +24,7 @@
   "homepage": "https://github.com/InsidersByte/our-wedding-heroes#readme",
   "dependencies": {
     "@insidersbyte/react-markdown-editor": "^0.1.2",
+    "alt": "^0.18.4",
     "animate.css": "^3.5.1",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.6",

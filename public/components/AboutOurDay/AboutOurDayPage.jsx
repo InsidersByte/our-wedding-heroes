@@ -1,31 +1,31 @@
 import React from 'react';
-import aboutOurDayApi from '../../api/aboutOurDay.api';
 import { Jumbotron } from 'react-bootstrap';
 import AboutOurDayForm from './AboutOurDayForm';
+import AboutOurDayStore from '../../stores/AboutOurDayStore';
+import AboutOurDayActions from '../../actions/AboutOurDayActions';
 
 class AboutOurDayPage extends React.Component {
     constructor() {
         super();
 
-        this.state = {
-            aboutOurDay: '',
-        };
+        this.state = AboutOurDayStore.getState();
 
         this.setAboutOurDayState = this.setAboutOurDayState.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
-        aboutOurDayApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    aboutOurDay: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the about our day data', error);
-            });
+        AboutOurDayStore.listen(this.onChange);
+        AboutOurDayActions.fetch();
+    }
+
+    componentWillUnmount() {
+        AboutOurDayStore.unlisten(this.onChange);
+    }
+
+    onChange(state) {
+        this.setState(state);
     }
 
     setAboutOurDayState(event) {
@@ -34,15 +34,7 @@ class AboutOurDayPage extends React.Component {
 
     submit(event) {
         event.preventDefault();
-
-        aboutOurDayApi
-            .put(this.state)
-            .then(() => {
-                this.props.toastSuccess('About our day updated');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving about our day', error);
-            });
+        AboutOurDayActions.update(this.state);
     }
 
     render() {
@@ -54,6 +46,7 @@ class AboutOurDayPage extends React.Component {
                     aboutOurDay={this.state.aboutOurDay}
                     onChange={this.setAboutOurDayState}
                     onSubmit={this.submit}
+                    saving={this.state.saving}
                 />
             </Jumbotron>
         );
