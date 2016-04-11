@@ -58,13 +58,11 @@ class CoverPage extends React.Component {
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
-                <Jumbotron>
-                    <h1>Cover</h1>
+            <Jumbotron>
+                <h1>Cover</h1>
 
-                    <CoverForm cover={this.state.cover} onChange={this.setCoverState} onSubmit={this.submit} />
-                </Jumbotron>
-            </Col>
+                <CoverForm cover={this.state.cover} onChange={this.setCoverState} onSubmit={this.submit} />
+            </Jumbotron>
         );
     }
 }
