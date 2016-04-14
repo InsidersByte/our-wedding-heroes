@@ -6,11 +6,12 @@
   "scripts": {
     "clean": "rimraf dist",
     "postinstall": "npm run build",
-    "build": "npm run clean && NODE_ENV=production webpack --progress --profile --colors",
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors",
     "lint": "eslint --ignore-path .gitignore --ext .js,.jsx .",
     "test": "npm run lint",
     "start": "node ./server/index.js",
-    "start-dev": "nodemon --ignore public ./server/index.js"
+    "start:dev": "nodemon --ignore public ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,7 @@
     "express-jwt": "^3.3.0",
     "express-validator": "^2.20.3",
     "flux": "^2.1.1",
-    "font-awesome": "^4.5.0",
+    "font-awesome": "^4.6.1",
     "jade": "^1.11.0",
     "jsonwebtoken": "^5.7.0",
     "jwt-decode": "^2.0.1",
@@ -82,8 +83,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.15",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0",
-    "webpack-merge": "^0.10.0"
+    "webpack-hot-middleware": "^2.10.0"
   },
   "engines": {
     "node": "5.9.1"
