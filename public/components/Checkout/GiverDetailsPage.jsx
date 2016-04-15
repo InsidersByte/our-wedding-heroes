@@ -1,8 +1,8 @@
 import React from 'react';
 import GiverDetailsForm from './GiverDetailsForm';
 import giftApi from '../../api/gift.api';
-import basketActions from '../../actions/basket.action';
-import basketStore from '../../stores/basket.store';
+import basketActions from '../../actions/BasketActions';
+import basketStore from '../../stores/BasketStore';
 
 import './GiverDetails.styl';
 
@@ -20,7 +20,9 @@ class GiverDetailsPage extends React.Component {
     }
 
     componentWillMount() {
-        if (basketStore.count <= 0) {
+        const { basketCount } = basketStore.getState();
+
+        if (basketCount <= 0) {
             this.context.router.replace('');
         }
     }
@@ -37,10 +39,12 @@ class GiverDetailsPage extends React.Component {
 
         this.setState({ isSaving: true });
 
+        const { items } = basketStore.getState();
+
         giftApi
             .post({
                 giver: this.state.giver,
-                items: basketStore.items,
+                items,
             })
             .then((giftSet) => {
                 this.setState({ isSaving: false });

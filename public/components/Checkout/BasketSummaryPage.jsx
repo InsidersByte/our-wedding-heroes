@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
-import basketActions from '../../actions/basket.action';
-import basketStore from '../../stores/basket.store';
+import basketActions from '../../actions/BasketActions';
+import basketStore from '../../stores/BasketStore';
 import BasketSummaryTable from './BasketSummaryTable';
 
 import './BasketSummary.styl';
@@ -10,50 +10,37 @@ class BasketSummaryPage extends React.Component {
     constructor() {
         super();
 
-        this.state = {
-            items: basketStore.items,
-            total: basketStore.total,
-            basketCount: basketStore.count,
-        };
-
-        this._onChange = this._onChange.bind(this);
-        this.addToBasket = this.addToBasket.bind(this);
-        this.removeFromBasket = this.removeFromBasket.bind(this);
-        this.deleteFromBasket = this.deleteFromBasket.bind(this);
+        this.state = basketStore.getState();
     }
 
     componentDidMount() {
-        basketStore.addChangeListener(this._onChange);
+        basketStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        basketStore.removeChangeListener(this._onChange);
+        basketStore.unlisten(this.onStoreChange);
     }
 
-    _onChange() {
-        this.setState({
-            items: basketStore.items,
-            total: basketStore.total,
-            basketCount: basketStore.count,
-        });
-    }
+    onStoreChange = (state) => {
+        this.setState(state);
+    };
 
-    addToBasket(item) {
+    addToBasket = (item) => {
         basketActions.addToBasket(item);
-    }
+    };
 
-    removeFromBasket(item) {
+    removeFromBasket = (item) => {
         basketActions.removeFromBasket(item);
-    }
+    };
 
-    deleteFromBasket(item) {
+    deleteFromBasket = (item) => {
         basketActions.deleteFromBasket(item);
-    }
+    };
 
     render() {
         let content;
 
-        if (basketStore.count > 0) {
+        if (this.state.basketCount > 0) {
             content = (
                 <div className="basket-summary__container">
                     <h1 className="basket-summary__title">
