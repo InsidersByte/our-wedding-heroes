@@ -3,6 +3,7 @@ import basketActions from '../actions/BasketActions';
 
 class BasketStore {
     constructor() {
+        this.on('afterEach', this.setCountAndTotal);
         this.bindActions(basketActions);
 
         this.items = {};
@@ -16,9 +17,9 @@ class BasketStore {
 
         for (const key in this.items) {
             if (this.items.hasOwnProperty(key)) {
-                const item = this.items[key];
-                basketCount += item.quantity;
-                total += item.price * item.quantity;
+                const { quantity, price } = this.items[key];
+                basketCount += quantity;
+                total += price * quantity;
             }
         }
 
@@ -38,7 +39,6 @@ class BasketStore {
         }
 
         this.items[item._id] = updatedItem;
-        this.setCountAndTotal();
     }
 
     removeFromBasket({ _id }) {
@@ -47,17 +47,14 @@ class BasketStore {
         }
 
         this.items[_id].quantity -= 1;
-        this.setCountAndTotal();
     }
 
     deleteFromBasket({ _id }) {
         delete this.items[_id];
-        this.setCountAndTotal();
     }
 
     emptyBasket() {
         this.items = {};
-        this.setCountAndTotal();
     }
 }
 
