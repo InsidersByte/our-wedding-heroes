@@ -42,9 +42,10 @@ export default class {
 
     _request(method, url, data) {
         const req = request(method, url);
+        const { isLoggedIn, jwt } = loginStore.getState();
 
-        if (loginStore.isLoggedIn) {
-            req.set('Authorization', `Bearer ${loginStore.jwt}`);
+        if (isLoggedIn) {
+            req.set('Authorization', `Bearer ${jwt}`);
         }
 
         if (data) {

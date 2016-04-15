@@ -1,30 +1,24 @@
-import AppDispatcher from '../dispatchers/app.dispatcher';
-import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.constants';
-import history from '../helpers/history';
+import alt from '../helpers/alt';
 
-export default {
-    loginUser: (jwt) => {
+class LoginActions {
+    loginUser(jwt) {
         const savedJwt = localStorage.getItem('jwt');
-
-        AppDispatcher.dispatch({
-            actionType: LOGIN_USER,
-            jwt,
-        });
+        let redirect = false;
 
         if (savedJwt !== jwt) {
             localStorage.setItem('jwt', jwt);
-
-            history.replace('/admin');
+            redirect = true;
         }
-    },
 
-    logoutUser: () => {
-        localStorage.removeItem('jwt');
+        return { jwt, redirect };
+    }
 
-        AppDispatcher.dispatch({
-            actionType: LOGOUT_USER,
-        });
+    logoutUser() {
+        return (dispatch) => {
+            localStorage.removeItem('jwt');
+            dispatch();
+        };
+    }
+}
 
-        history.replace('/admin/login');
-    },
-};
+export default alt.createActions(LoginActions);

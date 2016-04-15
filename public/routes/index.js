@@ -32,7 +32,9 @@ import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 
 function requireAuth(nextState, replace) {
-    if (!loginStore.isLoggedIn) {
+    const { isLoggedIn } = loginStore.getState();
+
+    if (!isLoggedIn) {
         replace('admin/login');
     }
 }

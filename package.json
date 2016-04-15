@@ -35,7 +35,6 @@
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "express-validator": "^2.20.3",
-    "flux": "^2.1.1",
     "font-awesome": "^4.6.1",
     "jade": "^1.11.0",
     "jsonwebtoken": "^5.7.0",
