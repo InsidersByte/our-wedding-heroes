@@ -1,5 +1,5 @@
-import authenticateApi from '../api/authenticate.api.js';
-import loginActions from '../actions/login.action.js';
+import authenticateApi from '../api/authenticate.api';
+import loginActions from '../actions/LoginActions';
 
 class Auth {
     login(user) {

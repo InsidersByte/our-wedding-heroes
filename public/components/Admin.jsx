@@ -1,5 +1,5 @@
 import React from 'react';
-import loginStore from '../stores/login.store';
+import loginStore from '../stores/LoginStore';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../helpers/auth';

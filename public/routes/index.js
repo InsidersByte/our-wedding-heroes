@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import loginStore from '../stores/login.store';
+import loginStore from '../stores/LoginStore';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
