@@ -1,8 +1,7 @@
 import alt from '../helpers/alt';
 import BaseActions from './BaseActions';
 import api from '../api/aboutOurDay.api';
-
-const key = 'aboutOurDay';
+import { ABOUT_OUR_DAY as key } from '../constants/keys.constants';
 
 class AboutOurDayActions extends BaseActions {
     constructor() {
