@@ -41,7 +41,7 @@ function GiverDetailsForm(props) {
                     type="text"
                     label="Telephone Number"
                     placeholder="Enter your telephone number"
-                    value={props.giver.telephoneNumber}
+                    value={props.giver.phoneNumber}
                     onChange={props.onChange}
                     required
                 />

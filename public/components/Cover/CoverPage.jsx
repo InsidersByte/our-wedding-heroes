@@ -9,7 +9,11 @@ class CoverPage extends React.Component {
         super();
 
         this.state = {
-            cover: {},
+            cover: {
+                title: '',
+                imageUrl: '',
+                weddingDate: '',
+            },
         };
 
         this.setCoverState = this.setCoverState.bind(this);

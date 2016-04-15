@@ -112,7 +112,7 @@ class App extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <Link to="/admin">Honeymoon Gift List</Link>
+                            <Link to="/admin">Our Wedding Heroes</Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>

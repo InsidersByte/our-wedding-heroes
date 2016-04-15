@@ -8,7 +8,11 @@ class SetupPage extends React.Component {
         super();
 
         this.state = {
-            user: {},
+            user: {
+                name: '',
+                username: '',
+                password: '',
+            },
         };
 
         this.setUserState = this.setUserState.bind(this);

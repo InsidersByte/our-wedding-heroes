@@ -8,7 +8,10 @@ class Login extends React.Component {
         super();
 
         this.state = {
-            user: {},
+            user: {
+                username: '',
+                password: '',
+            },
         };
 
         this.setUserState = this.setUserState.bind(this);

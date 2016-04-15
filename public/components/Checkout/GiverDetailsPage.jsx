@@ -11,7 +11,12 @@ class GiverDetailsPage extends React.Component {
         super(props, context);
 
         this.state = {
-            giver: {},
+            giver: {
+                forename: '',
+                surname: '',
+                email: '',
+                phoneNumber: '',
+            },
             isSaving: false,
         };
 

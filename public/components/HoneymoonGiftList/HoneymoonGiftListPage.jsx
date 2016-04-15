@@ -8,7 +8,13 @@ class HoneymoonGiftListPage extends React.Component {
         super();
 
         this.state = {
-            honeymoonGiftList: {},
+            honeymoonGiftList: {
+                content: '',
+                showOfflinePaymentMessage: false,
+                showDisclaimerMessage: false,
+                offlinePaymentMessage: '',
+                disclaimerMessage: '',
+            },
         };
 
         this.setHoneymoonGiftListState = this.setHoneymoonGiftListState.bind(this);

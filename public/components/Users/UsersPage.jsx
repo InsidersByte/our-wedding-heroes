@@ -77,11 +77,15 @@ class Users extends React.Component {
     }
 
     add() {
-        this.open({});
+        this.open({
+            name: '',
+            username: '',
+            password: '',
+        });
     }
 
     open(userToEdit) {
-        const user = Object.assign({}, userToEdit);
+        const user = Object.assign({ password: '' }, userToEdit);
         this.setState({ showModal: true, user });
     }
 

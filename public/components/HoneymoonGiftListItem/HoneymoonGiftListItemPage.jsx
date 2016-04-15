@@ -91,7 +91,13 @@ class HoneymoonGiftListItemPage extends React.Component {
     }
 
     add() {
-        this.open({});
+        this.open({
+            imageUrl: '',
+            name: '',
+            description: '',
+            requested: '',
+            price: '',
+        });
     }
 
     close() {
