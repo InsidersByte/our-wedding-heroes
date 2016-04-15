@@ -22,11 +22,11 @@ class MarkdownEditorPage extends React.Component {
         this.setState(state);
     };
 
-    onChange = (event) => {
+    onChange = event => {
         this.setState({ [this.props.propKey]: event.target.value });
     };
 
-    submit = (event) => {
+    submit = event => {
         event.preventDefault();
         this.props.actions.update(this.state);
     };

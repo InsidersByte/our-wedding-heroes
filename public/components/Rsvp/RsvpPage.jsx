@@ -1,68 +1,13 @@
 import React from 'react';
-import rsvpApi from '../../api/rsvp.api';
-import { Jumbotron } from 'react-bootstrap';
-import RsvpForm from './RsvpForm';
+import RsvpStore from '../../stores/RsvpStore';
+import RsvpActions from '../../actions/RsvpActions';
+import MarkdownEditorPage from '../common/MarkdownEditorPage';
+import { RSVP as key } from '../../constants/keys.constants';
 
-class RsvpPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            rsvp: '',
-        };
-
-        this.setRsvpState = this.setRsvpState.bind(this);
-        this.submit = this.submit.bind(this);
-    }
-
-    componentDidMount() {
-        rsvpApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    rsvp: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error getting rsvp', error);
-            });
-    }
-
-    setRsvpState(event) {
-        this.setState({ rsvp: event.target.value });
-    }
-
-    submit(event) {
-        event.preventDefault();
-
-        rsvpApi
-            .put(this.state)
-            .then(() => {
-                this.props.toastSuccess('Rsvp updated');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving Rsvp', error);
-            });
-    }
-
-    render() {
-        return (
-            <Jumbotron>
-                <h1>RSVP</h1>
-
-                <RsvpForm
-                    rsvp={this.state.rsvp}
-                    onChange={this.setRsvpState}
-                    onSubmit={this.submit}
-                />
-            </Jumbotron>
-        );
-    }
+function AboutOurDayPage() {
+    return (
+        <MarkdownEditorPage propKey={key} title="RSVP" store={RsvpStore} actions={RsvpActions} />
+    );
 }
 
-RsvpPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default RsvpPage;
+export default AboutOurDayPage;

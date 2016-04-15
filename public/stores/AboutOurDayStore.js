@@ -1,12 +1,11 @@
 import alt from '../helpers/alt';
-import AboutOurDayActions from '../actions/AboutOurDayActions';
+import actions from '../actions/AboutOurDayActions';
 import BaseStore from './BaseStore';
-
-const key = 'aboutOurDay';
+import { ABOUT_OUR_DAY as key } from '../constants/keys.constants';
 
 class AboutOurDayStore extends BaseStore {
     constructor() {
-        super({ actions: AboutOurDayActions, key });
+        super({ actions, key });
     }
 }
 
