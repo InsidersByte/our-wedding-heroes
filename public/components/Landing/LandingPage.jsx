@@ -1,8 +1,8 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
 import WeddingProfileApi from '../../api/weddingProfile.api';
-import basketActions from '../../actions/basket.action';
-import basketStore from '../../stores/basket.store';
+import basketActions from '../../actions/BasketActions';
+import basketStore from '../../stores/BasketStore';
 import GiftItems from './GiftItems';
 import Basket from './Basket';
 import LandingHeader from './LandingHeader';
@@ -16,7 +16,7 @@ class LandingPage extends React.Component {
     constructor() {
         super();
 
-        this.state = {
+        this.state = Object.assign({
             weddingProfile: {
                 cover: {},
                 aboutUs: '',
@@ -29,10 +29,7 @@ class LandingPage extends React.Component {
                 localFlavour: '',
                 onTheDay: '',
             },
-            items: basketStore.items,
-            total: basketStore.total,
-            basketCount: basketStore.count,
-        };
+        }, basketStore.getState());
     }
 
     componentDidMount() {
@@ -58,23 +55,19 @@ class LandingPage extends React.Component {
                 this.props.toastError('There was an error loading the profile data');
             });
 
-        basketStore.addChangeListener(this._onChange);
+        basketStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        basketStore.removeChangeListener(this._onChange);
+        basketStore.unlisten(this.onStoreChange);
     }
 
-    _onChange = () => {
-        this.setState({
-            items: basketStore.items,
-            total: basketStore.total,
-            basketCount: basketStore.count,
-        });
+    onStoreChange = (state) => {
+        this.setState(state);
     };
 
-    addToBasket(item, event) {
-        basketActions.addToBasket(item, parseInt(event.target.value, 10));
+    addToBasket(item) {
+        basketActions.addToBasket(item);
     }
 
     renderOfflineMessage = () => {

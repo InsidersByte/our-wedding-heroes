@@ -1,5 +1,5 @@
 import React from 'react';
-import loginStore from '../stores/login.store';
+import loginStore from '../stores/LoginStore';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
 import auth from '../helpers/auth';
@@ -9,17 +9,19 @@ class App extends React.Component {
         super();
 
         this.state = this._getLoginState();
-
-        this.changeListener = this._onChange.bind(this);
     }
 
     componentDidMount() {
-        loginStore.addChangeListener(this.changeListener);
+        loginStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        loginStore.removeChangeListener(this.changeListener);
+        loginStore.unlisten(this.onStoreChange);
     }
+
+    onStoreChange = () => {
+        this.setState(this._getLoginState());
+    };
 
     logout(event) {
         event.preventDefault();
@@ -29,12 +31,8 @@ class App extends React.Component {
 
     _getLoginState() {
         return {
-            userLoggedIn: loginStore.isLoggedIn,
+            userLoggedIn: loginStore.getState().isLoggedIn,
         };
-    }
-
-    _onChange() {
-        this.setState(this._getLoginState());
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import loginStore from '../stores/login.store';
+import loginStore from '../stores/LoginStore';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
@@ -32,7 +32,9 @@ import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 
 function requireAuth(nextState, replace) {
-    if (!loginStore.isLoggedIn) {
+    const { isLoggedIn } = loginStore.getState();
+
+    if (!isLoggedIn) {
         replace('admin/login');
     }
 }

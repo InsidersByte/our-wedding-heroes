@@ -10,22 +10,14 @@ class BaseActions {
 
             this._api
                 .get()
-                .then((data) => {
-                    this.fetchSuccess(data);
-                })
-                .catch((error) => {
-                    this.fetchError(error);
-                });
+                .then(this.fetchSuccess)
+                .catch(this.fetchError);
         };
     }
 
-    fetchSuccess(data) {
-        return data;
-    }
+    fetchSuccess = o => o;
 
-    fetchError(error) {
-        return error;
-    }
+    fetchError = o => o;
 
     update({ [this._key]: data }) {
         return (dispatch) => {
@@ -33,22 +25,14 @@ class BaseActions {
 
             this._api
                 .put({ [this._key]: data })
-                .then((updatedData) => {
-                    this.updateSuccess(updatedData);
-                })
-                .catch((errorMessage) => {
-                    this.updateError(errorMessage);
-                });
+                .then(this.updateSuccess)
+                .catch(this.updateError);
         };
     }
 
-    updateSuccess(data) {
-        return data;
-    }
+    updateSuccess = o => o;
 
-    updateError(errorMessage) {
-        return errorMessage;
-    }
+    updateError = o => o;
 }
 
 export default BaseActions;

@@ -1,7 +1,7 @@
 import request from 'superagent';
-import loginStore from '../stores/login.store.js';
-import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants.js';
-import loginActions from '../actions/login.action.js';
+import loginStore from '../stores/LoginStore';
+import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/api.constants';
+import loginActions from '../actions/LoginActions';
 
 export default class {
     constructor(baseUrl) {
@@ -42,9 +42,10 @@ export default class {
 
     _request(method, url, data) {
         const req = request(method, url);
+        const { isLoggedIn, jwt } = loginStore.getState();
 
-        if (loginStore.isLoggedIn) {
-            req.set('Authorization', `Bearer ${loginStore.jwt}`);
+        if (isLoggedIn) {
+            req.set('Authorization', `Bearer ${jwt}`);
         }
 
         if (data) {

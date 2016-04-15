@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 
-import loginActions from './actions/login.action';
+import loginActions from './actions/LoginActions';
 import history from './helpers/history';
 import routes from './routes';
 
