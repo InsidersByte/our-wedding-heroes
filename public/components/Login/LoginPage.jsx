@@ -13,19 +13,16 @@ class Login extends React.Component {
                 password: '',
             },
         };
-
-        this.setUserState = this.setUserState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
-    setUserState(event) {
+    setUserState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.user[field] = value;
         return this.setState({ user: this.state.user });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         auth
@@ -36,7 +33,7 @@ class Login extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error logging in', error);
             });
-    }
+    };
 
     render() {
         return (

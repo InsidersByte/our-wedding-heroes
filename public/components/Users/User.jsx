@@ -2,16 +2,10 @@ import React from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 
 class User extends React.Component {
-    constructor() {
-        super();
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.props.user);
-    }
+    };
 
     render() {
         return (

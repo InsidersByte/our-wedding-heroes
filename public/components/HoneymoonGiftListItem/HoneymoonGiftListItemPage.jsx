@@ -13,27 +13,20 @@ class HoneymoonGiftListItemPage extends React.Component {
             showModal: false,
             item: {},
         };
-
-        this.add = this.add.bind(this);
-        this.open = this.open.bind(this);
-        this.delete = this.delete.bind(this);
-        this.close = this.close.bind(this);
-        this.save = this.save.bind(this);
-        this.setItemState = this.setItemState.bind(this);
     }
 
     componentDidMount() {
         this._loadItems();
     }
 
-    setItemState(event) {
+    setItemState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.item[field] = value;
         return this.setState({ item: this.state.item });
-    }
+    };
 
-    save(item) {
+    save = (item) => {
         if (item._id) {
             honeymoonGiftListItemApi
                 .put(item, item._id)
@@ -57,9 +50,9 @@ class HoneymoonGiftListItemPage extends React.Component {
                     this.props.toastError('There was an error saving honeymoon gift list item', error);
                 });
         }
-    }
+    };
 
-    delete(item) {
+    delete = (item) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift item?')) {
             return;
@@ -75,7 +68,7 @@ class HoneymoonGiftListItemPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error deleting honeymoon gift list item', error);
             });
-    }
+    };
 
     _loadItems() {
         honeymoonGiftListItemApi
@@ -90,7 +83,7 @@ class HoneymoonGiftListItemPage extends React.Component {
             });
     }
 
-    add() {
+    add = () => {
         this.open({
             imageUrl: '',
             name: '',
@@ -98,16 +91,16 @@ class HoneymoonGiftListItemPage extends React.Component {
             requested: '',
             price: '',
         });
-    }
+    };
 
-    close() {
+    close = () => {
         this.setState({ showModal: false });
-    }
+    };
 
-    open(itemToEdit) {
+    open = (itemToEdit) => {
         const item = Object.assign({}, itemToEdit);
         this.setState({ showModal: true, item });
-    }
+    };
 
     render() {
         return (

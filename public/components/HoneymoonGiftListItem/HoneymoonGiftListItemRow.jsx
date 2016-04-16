@@ -3,20 +3,13 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
 class HoneymoonGiftListItemRow extends React.Component {
-    constructor() {
-        super();
-
-        this.onEdit = this.onEdit.bind(this);
-        this.onDelete = this.onDelete.bind(this);
-    }
-
-    onDelete() {
+    onDelete = () => {
         this.props.onDelete(this.props.item);
-    }
+    };
 
-    onEdit() {
+    onEdit = () => {
         this.props.onEdit(this.props.item);
-    }
+    };
 
     render() {
         return (

@@ -5,15 +5,9 @@ import FontAwesome from '../common/FontAwesome';
 import './GiftItem.styl';
 
 class GiftItem extends React.Component {
-    constructor() {
-        super();
-
-        this.onClick = this.onClick.bind(this);
-    }
-
-    onClick(event) {
+    onClick = (event) => {
         this.props.addToBasket(this.props.item, event);
-    }
+    };
 
     render() {
         const item = this.props.item;

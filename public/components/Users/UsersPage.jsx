@@ -13,27 +13,20 @@ class Users extends React.Component {
             showModal: false,
             user: {},
         };
-
-        this.add = this.add.bind(this);
-        this.open = this.open.bind(this);
-        this.close = this.close.bind(this);
-        this.save = this.save.bind(this);
-        this.delete = this.delete.bind(this);
-        this.setUserState = this.setUserState.bind(this);
     }
 
     componentDidMount() {
         this._loadUsers();
     }
 
-    setUserState(event) {
+    setUserState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.user[field] = value;
         return this.setState({ user: this.state.user });
-    }
+    };
 
-    save(user) {
+    save = (user) => {
         if (user._id) {
             UserApi
                 .put(user, user._id)
@@ -57,9 +50,9 @@ class Users extends React.Component {
                     this.props.toastError('There was an error saving a user', error);
                 });
         }
-    }
+    };
 
-    delete(user) {
+    delete = (user) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this user?')) {
             return;
@@ -74,24 +67,24 @@ class Users extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error deleting a user', error);
             });
-    }
+    };
 
-    add() {
+    add = () => {
         this.open({
             name: '',
             username: '',
             password: '',
         });
-    }
+    };
 
-    open(userToEdit) {
+    open = (userToEdit) => {
         const user = Object.assign({ password: '' }, userToEdit);
         this.setState({ showModal: true, user });
-    }
+    };
 
-    close() {
+    close = () => {
         this.setState({ showModal: false });
-    }
+    };
 
     _loadUsers() {
         UserApi

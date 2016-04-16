@@ -19,9 +19,6 @@ class GiverDetailsPage extends React.Component {
             },
             isSaving: false,
         };
-
-        this.setGiverState = this.setGiverState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
     componentWillMount() {
@@ -32,14 +29,14 @@ class GiverDetailsPage extends React.Component {
         }
     }
 
-    setGiverState(event) {
+    setGiverState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.giver[field] = value;
         return this.setState({ giver: this.state.giver });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         this.setState({ isSaving: true });
@@ -60,7 +57,7 @@ class GiverDetailsPage extends React.Component {
                 this.setState({ isSaving: false });
                 this.props.toastError('There was an error', error);
             });
-    }
+    };
 
     render() {
         return (
