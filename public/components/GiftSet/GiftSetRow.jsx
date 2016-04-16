@@ -4,30 +4,21 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
 class GiftSetRow extends React.Component {
-    constructor() {
-        super();
-
-        this.onDelete = this.onDelete.bind(this);
-        this.onMarkAsPaid = this.onMarkAsPaid.bind(this);
-        this.onMarkAsDetailsSent = this.onMarkAsDetailsSent.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-    }
-
-    onDelete() {
+    onDelete = () => {
         this.props.onDelete(this.props.giftSet);
-    }
+    };
 
-    onMarkAsPaid() {
+    onMarkAsPaid = () => {
         this.props.onMarkAsPaid(this.props.giftSet);
-    }
+    };
 
-    onMarkAsDetailsSent() {
+    onMarkAsDetailsSent = () => {
         this.props.onMarkAsDetailsSent(this.props.giftSet);
-    }
+    };
 
-    onSelect() {
+    onSelect = () => {
         this.props.onSelect(this.props.giftSet);
-    }
+    };
 
     render() {
         const createdAt = moment(this.props.giftSet.createdAt);

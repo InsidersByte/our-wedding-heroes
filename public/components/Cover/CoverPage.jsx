@@ -15,9 +15,6 @@ class CoverPage extends React.Component {
                 weddingDate: '',
             },
         };
-
-        this.setCoverState = this.setCoverState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -40,14 +37,14 @@ class CoverPage extends React.Component {
             });
     }
 
-    setCoverState(event) {
+    setCoverState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.cover[field] = value;
         return this.setState({ cover: this.state.cover });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         CoverApi
@@ -58,7 +55,7 @@ class CoverPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error saving cover', error);
             });
-    }
+    };
 
     render() {
         return (

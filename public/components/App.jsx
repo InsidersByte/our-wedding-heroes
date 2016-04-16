@@ -4,14 +4,7 @@ import { ToastContainer, ToastMessage } from 'react-toastr';
 const ToastMessageFactory = React.createFactory(ToastMessage.animation);
 
 class App extends React.Component {
-    constructor() {
-        super();
-
-        this.toastSuccess = this.toastSuccess.bind(this);
-        this.toastError = this.toastError.bind(this);
-    }
-
-    toastSuccess(message) {
+    toastSuccess = (message) => {
         this
             .refs
             .container
@@ -20,9 +13,9 @@ class App extends React.Component {
                 'Success',
                 { closeButton: true }
             );
-    }
+    };
 
-    toastError(message, error) {
+    toastError = (message, error) => {
         if (error) {
             console.error(error);
         }

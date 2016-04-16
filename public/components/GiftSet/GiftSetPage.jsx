@@ -15,17 +15,13 @@ class GiftSetPage extends React.Component {
                 gifts: [],
             },
         };
-
-        this.markAsPaid = this.markAsPaid.bind(this);
-        this.markAsDetailsSent = this.markAsDetailsSent.bind(this);
-        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
         this._loadGiftSet();
     }
 
-    markAsPaid() {
+    markAsPaid = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift as paid?')) {
             return;
@@ -42,9 +38,9 @@ class GiftSetPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
             });
-    }
+    };
 
-    markAsDetailsSent() {
+    markAsDetailsSent = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
             return;
@@ -61,9 +57,9 @@ class GiftSetPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as details sent', error);
             });
-    }
+    };
 
-    delete() {
+    delete = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift set?')) {
             return;
@@ -80,7 +76,7 @@ class GiftSetPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error deleting a gift set', error);
             });
-    }
+    };
 
     _loadGiftSet() {
         const { giftSetId } = this.props.params;
