@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
 import GiftTable from './GiftTable';
+import { GIFT_SETS_ROUTE } from '../../constants/routes.constants';
 
 class GiftSetPage extends React.Component {
     constructor(props, context) {
@@ -15,17 +16,13 @@ class GiftSetPage extends React.Component {
                 gifts: [],
             },
         };
-
-        this.markAsPaid = this.markAsPaid.bind(this);
-        this.markAsDetailsSent = this.markAsDetailsSent.bind(this);
-        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
         this._loadGiftSet();
     }
 
-    markAsPaid() {
+    markAsPaid = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift as paid?')) {
             return;
@@ -42,9 +39,9 @@ class GiftSetPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
             });
-    }
+    };
 
-    markAsDetailsSent() {
+    markAsDetailsSent = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
             return;
@@ -61,9 +58,9 @@ class GiftSetPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as details sent', error);
             });
-    }
+    };
 
-    delete() {
+    delete = () => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift set?')) {
             return;
@@ -74,13 +71,13 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .delete(giftSetId)
             .then(() => {
-                this.context.router.push('admin/giftSet');
+                this.context.router.push(GIFT_SETS_ROUTE);
                 this.props.toastSuccess('Gift set deleted');
             })
             .catch((error) => {
                 this.props.toastError('There was an error deleting a gift set', error);
             });
-    }
+    };
 
     _loadGiftSet() {
         const { giftSetId } = this.props.params;

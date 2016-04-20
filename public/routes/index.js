@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import loginStore from '../stores/login.store';
+import loginStore from '../stores/LoginStore';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
@@ -30,9 +30,12 @@ import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGift
 import UsersPage from '../components/Users/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
+import ResetPage from '../components/Reset/ResetPage';
 
 function requireAuth(nextState, replace) {
-    if (!loginStore.isLoggedIn) {
+    const { isLoggedIn } = loginStore.getState();
+
+    if (!isLoggedIn) {
         replace('admin/login');
     }
 }
@@ -47,6 +50,7 @@ export default (
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
             <Route path="login" component={LoginPage} />
             <Route path="setup" component={SetupPage} />
+            <Route path="reset/:token" component={ResetPage} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
             <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />

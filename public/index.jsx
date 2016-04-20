@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 
-import loginActions from './actions/login.action';
-import history from './lib/history';
+import loginActions from './actions/LoginActions';
+import history from './helpers/history';
 import routes from './routes';
 
 import 'bootstrap/dist/css/bootstrap.css';

@@ -3,25 +3,17 @@ import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
 class BasketSummaryRow extends React.Component {
-    constructor() {
-        super();
-
-        this.onAdd = this.onAdd.bind(this);
-        this.onRemove = this.onRemove.bind(this);
-        this.onDelete = this.onDelete.bind(this);
-    }
-
-    onAdd() {
+    onAdd = () => {
         this.props.onAdd(this.props.item);
-    }
+    };
 
-    onRemove() {
+    onRemove = () => {
         this.props.onRemove(this.props.item);
-    }
+    };
 
-    onDelete() {
+    onDelete = () => {
         this.props.onDelete(this.props.item);
-    }
+    };
 
     render() {
         return (

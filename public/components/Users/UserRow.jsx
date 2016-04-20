@@ -3,20 +3,13 @@ import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
 class UserRow extends React.Component {
-    constructor() {
-        super();
-
-        this.onDelete = this.onDelete.bind(this);
-        this.onEdit = this.onEdit.bind(this);
-    }
-
-    onDelete() {
+    onDelete = () => {
         this.props.onDelete(this.props.user);
-    }
+    };
 
-    onEdit() {
+    onEdit = () => {
         this.props.onEdit(this.props.user);
-    }
+    };
 
     render() {
         return (

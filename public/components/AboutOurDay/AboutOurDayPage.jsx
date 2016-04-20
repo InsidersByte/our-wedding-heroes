@@ -1,68 +1,13 @@
 import React from 'react';
-import aboutOurDayApi from '../../api/aboutOurDay.api';
-import { Jumbotron } from 'react-bootstrap';
-import AboutOurDayForm from './AboutOurDayForm';
+import AboutOurDayStore from '../../stores/AboutOurDayStore';
+import AboutOurDayActions from '../../actions/AboutOurDayActions';
+import MarkdownEditorPage from '../common/MarkdownEditorPage';
+import { ABOUT_OUR_DAY as key } from '../../constants/keys.constants';
 
-class AboutOurDayPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            aboutOurDay: '',
-        };
-
-        this.setAboutOurDayState = this.setAboutOurDayState.bind(this);
-        this.submit = this.submit.bind(this);
-    }
-
-    componentDidMount() {
-        aboutOurDayApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    aboutOurDay: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the about our day data', error);
-            });
-    }
-
-    setAboutOurDayState(event) {
-        this.setState({ aboutOurDay: event.target.value });
-    }
-
-    submit(event) {
-        event.preventDefault();
-
-        aboutOurDayApi
-            .put(this.state)
-            .then(() => {
-                this.props.toastSuccess('About our day updated');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving about our day', error);
-            });
-    }
-
-    render() {
-        return (
-            <Jumbotron>
-                <h1>About Our Day</h1>
-
-                <AboutOurDayForm
-                    aboutOurDay={this.state.aboutOurDay}
-                    onChange={this.setAboutOurDayState}
-                    onSubmit={this.submit}
-                />
-            </Jumbotron>
-        );
-    }
+function AboutOurDayPage() {
+    return (
+        <MarkdownEditorPage propKey={key} title="About Our Day" store={AboutOurDayStore} actions={AboutOurDayActions} />
+    );
 }
-
-AboutOurDayPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
 
 export default AboutOurDayPage;

@@ -1,6 +1,6 @@
 import React from 'react';
 import CoverApi from '../../api/cover.api';
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron } from 'react-bootstrap';
 import CoverForm from './CoverForm';
 import moment from 'moment';
 
@@ -9,11 +9,12 @@ class CoverPage extends React.Component {
         super();
 
         this.state = {
-            cover: {},
+            cover: {
+                title: '',
+                imageUrl: '',
+                weddingDate: '',
+            },
         };
-
-        this.setCoverState = this.setCoverState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -36,14 +37,14 @@ class CoverPage extends React.Component {
             });
     }
 
-    setCoverState(event) {
+    setCoverState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.cover[field] = value;
         return this.setState({ cover: this.state.cover });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         CoverApi
@@ -54,17 +55,15 @@ class CoverPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error saving cover', error);
             });
-    }
+    };
 
     render() {
         return (
-            <Col md={8} mdOffset={2}>
-                <Jumbotron>
-                    <h1>Cover</h1>
+            <Jumbotron>
+                <h1>Cover</h1>
 
-                    <CoverForm cover={this.state.cover} onChange={this.setCoverState} onSubmit={this.submit} />
-                </Jumbotron>
-            </Col>
+                <CoverForm cover={this.state.cover} onChange={this.setCoverState} onSubmit={this.submit} />
+            </Jumbotron>
         );
     }
 }

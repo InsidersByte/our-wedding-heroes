@@ -8,11 +8,14 @@ class HoneymoonGiftListPage extends React.Component {
         super();
 
         this.state = {
-            honeymoonGiftList: {},
+            honeymoonGiftList: {
+                content: '',
+                showOfflinePaymentMessage: false,
+                showDisclaimerMessage: false,
+                offlinePaymentMessage: '',
+                disclaimerMessage: '',
+            },
         };
-
-        this.setHoneymoonGiftListState = this.setHoneymoonGiftListState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -28,7 +31,7 @@ class HoneymoonGiftListPage extends React.Component {
             });
     }
 
-    setHoneymoonGiftListState(event) {
+    setHoneymoonGiftListState = (event) => {
         const field = event.target.name;
         let value = event.target.value;
 
@@ -38,9 +41,9 @@ class HoneymoonGiftListPage extends React.Component {
 
         this.state.honeymoonGiftList[field] = value;
         return this.setState({ honeymoonGiftList: this.state.honeymoonGiftList });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         HoneymoonGiftListApi
@@ -51,7 +54,7 @@ class HoneymoonGiftListPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error saving honeymoonGiftList', error);
             });
-    }
+    };
 
     render() {
         return (

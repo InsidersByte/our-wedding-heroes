@@ -1,28 +1,43 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import auth from '../../lib/auth';
+import auth from '../../helpers/auth';
 import LoginForm from './LoginForm';
+import authenticateActions from '../../actions/PasswordResetActions';
+import authenticateStore from '../../stores/PasswordResetStore';
+import { isEmail } from 'validator';
 
 class Login extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            user: {},
+            user: {
+                username: '',
+                password: '',
+            },
         };
-
-        this.setUserState = this.setUserState.bind(this);
-        this.submit = this.submit.bind(this);
     }
 
-    setUserState(event) {
+    componentDidMount() {
+        authenticateStore.listen(this.onStoreChange);
+    }
+
+    componentWillUnmount() {
+        authenticateStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    } ;
+
+    setUserState = (event) => {
         const field = event.target.name;
         const value = event.target.value;
         this.state.user[field] = value;
         return this.setState({ user: this.state.user });
-    }
+    };
 
-    submit(event) {
+    submit = (event) => {
         event.preventDefault();
 
         auth
@@ -33,7 +48,20 @@ class Login extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error logging in', error);
             });
-    }
+    };
+
+    forgot = (event) => {
+        event.preventDefault();
+
+        const username = this.state.user.username;
+
+        if (!username || !isEmail(username)) {
+            alert('We need your email address to reset your password!');
+            return;
+        }
+
+        authenticateActions.create({ username });
+    };
 
     render() {
         return (
@@ -41,7 +69,7 @@ class Login extends React.Component {
                 <Jumbotron>
                     <h1>Login</h1>
 
-                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
+                    <LoginForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} onForgot={this.forgot} />
                 </Jumbotron>
             </Col>
         );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable';
 import GiftSetApi from '../../api/giftSet.api';
+import { giftSetRoute } from '../../constants/routes.constants';
 
 class GiftSetsPage extends React.Component {
     constructor(props, context) {
@@ -10,18 +11,13 @@ class GiftSetsPage extends React.Component {
         this.state = {
             giftSets: [],
         };
-
-        this.markAsPaid = this.markAsPaid.bind(this);
-        this.markAsDetailsSent = this.markAsDetailsSent.bind(this);
-        this.delete = this.delete.bind(this);
-        this.view = this.view.bind(this);
     }
 
     componentDidMount() {
         this._loadGiftSets();
     }
 
-    markAsPaid(giftSet) {
+    markAsPaid = (giftSet) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift set as paid?')) {
             return;
@@ -36,9 +32,9 @@ class GiftSetsPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as paid', error);
             });
-    }
+    };
 
-    markAsDetailsSent(giftSet) {
+    markAsDetailsSent = (giftSet) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to mark this gift set as details sent?')) {
             return;
@@ -53,9 +49,9 @@ class GiftSetsPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error marking a gift set as details sent', error);
             });
-    }
+    };
 
-    delete(giftSet) {
+    delete = (giftSet) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift set?')) {
             return;
@@ -70,11 +66,11 @@ class GiftSetsPage extends React.Component {
             .catch((error) => {
                 this.props.toastError('There was an error deleting a gift set', error);
             });
-    }
+    };
 
-    view(giftSet) {
-        this.context.router.push(`admin/giftSet/${giftSet._id}`);
-    }
+    view = (giftSet) => {
+        this.context.router.push(giftSetRoute(giftSet._id));
+    };
 
     _loadGiftSets() {
         GiftSetApi
