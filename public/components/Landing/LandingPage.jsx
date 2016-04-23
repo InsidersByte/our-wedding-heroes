@@ -9,6 +9,7 @@ import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
 import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
+import WeddingPartyMembers from './WeddingPartyMembers';
 
 import './Landing.styl';
 
@@ -28,6 +29,7 @@ class LandingPage extends React.Component {
                 weddingPlaylist: '',
                 localFlavour: '',
                 onTheDay: '',
+                weddingPartyMembers: [],
             },
         }, basketStore.getState());
     }
@@ -100,6 +102,18 @@ class LandingPage extends React.Component {
         return null;
     };
 
+    renderWeddingPartyMembersSection = () => {
+        if (this.state.weddingProfile.weddingPartyMembers.length <= 0) {
+            return null;
+        }
+
+        const weddingPartyMembersElement = (
+            <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />
+        );
+
+        return <LandingSection title="Wedding Party Members" postContent={weddingPartyMembersElement} />;
+    };
+
     render() {
         const giftItemsElement = (
             <GiftItems
@@ -124,6 +138,8 @@ class LandingPage extends React.Component {
                 <LandingSection title="About our Day">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutOurDay} />
                 </LandingSection>
+
+                {this.renderWeddingPartyMembersSection()}
 
                 <LandingSection title="Local Flavour">
                     <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />

@@ -41,15 +41,16 @@ module.exports = (app, express) => {
                 }
             }
 
-            return res.json(user);
+            return res
+                .status(201)
+                .json(user);
         }));
-
 
     router
         .route('/:userId')
 
         .put((wrap(function* updateUser(req, res) {
-            req.checkBody('id').equals(req.params.id);
+            req.checkBody('_id').equals(req.params.userId);
             req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
             req.checkBody('password').notEmpty();
@@ -62,7 +63,7 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const user = yield User.findById(req.body._id);
+            const user = yield User.findById(req.body._id); // eslint-disable-line no-underscore-dangle
 
             if (!user) {
                 return res
