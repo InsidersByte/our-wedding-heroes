@@ -1,10 +1,26 @@
+primary-color = white;
+alternate-colour = #00aded;
+
 .landing-section
     padding 50px 0
     text-align center
 
+    a
+        color alternate-colour
+        text-decoration underline
+
+        &:hover
+            color alternate-colour
+
     &:nth-child(even)
         color white
-        background rgba(31, 119, 180, 0.85)
+        background alternate-colour
+
+        a
+            color primary-color
+
+            &:hover
+                color primary-color
 
     &:before
         display table
@@ -32,7 +48,7 @@
     text-transform capitalize
     text-align center
     font-size 2.5em
-
+    
 @media (max-width 736px)
     .landing-section__content
         margin 0 5%
