@@ -17,7 +17,7 @@ function LandingSection(props) {
 }
 
 LandingSection.propTypes = {
-    children: React.PropTypes.element.isRequired,
+    children: React.PropTypes.element,
     postContent: React.PropTypes.element,
     title: React.PropTypes.string.isRequired,
 };
