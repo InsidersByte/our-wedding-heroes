@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, FormControls, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
+import { Jumbotron, FormGroup, ControlLabel, FormControl, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
@@ -19,7 +19,7 @@ class GiftSetPage extends React.Component {
     }
 
     componentDidMount() {
-        this._loadGiftSet();
+        this.loadGiftSet();
     }
 
     markAsPaid = () => {
@@ -33,7 +33,7 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .paid(this.state.giftSet, giftSetId)
             .then(() => {
-                this._loadGiftSet();
+                this.loadGiftSet();
                 this.props.toastSuccess('Gift set marked as paid');
             })
             .catch((error) => {
@@ -52,7 +52,7 @@ class GiftSetPage extends React.Component {
         GiftSetApi
             .detailsSent(this.state.giftSet, giftSetId)
             .then(() => {
-                this._loadGiftSet();
+                this.loadGiftSet();
                 this.props.toastSuccess('Gift set marked as details sent');
             })
             .catch((error) => {
@@ -79,7 +79,7 @@ class GiftSetPage extends React.Component {
             });
     };
 
-    _loadGiftSet() {
+    loadGiftSet() {
         const { giftSetId } = this.props.params;
 
         GiftSetApi
@@ -105,19 +105,51 @@ class GiftSetPage extends React.Component {
 
                 <Row>
                     <Col md={4}>
-                        <FormControls.Static label="Full Name" value={fullName} />
-                        <FormControls.Static label="Email Address" value={this.state.giftSet.giver.email} />
+                        <FormGroup>
+                            <ControlLabel>Full Name</ControlLabel>
+                            <FormControl.Static>
+                                {fullName}
+                            </FormControl.Static>
+                        </FormGroup>
 
+                        <FormGroup>
+                            <ControlLabel>Email Address</ControlLabel>
+                            <FormControl.Static>
+                                {this.state.giftSet.giver.email}
+                            </FormControl.Static>
+                        </FormGroup>
                     </Col>
 
                     <Col md={4}>
-                        <FormControls.Static label="Phone Number" value={this.state.giftSet.giver.phoneNumber} />
-                        <FormControls.Static label="Gift Date" value={createdAtFormatted} />
+                        <FormGroup>
+                            <ControlLabel>Phone Number</ControlLabel>
+                            <FormControl.Static>
+                                {this.state.giftSet.giver.phoneNumber}
+                            </FormControl.Static>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <ControlLabel>Gift Date</ControlLabel>
+                            <FormControl.Static>
+                                {createdAtFormatted}
+                            </FormControl.Static>
+                        </FormGroup>
                     </Col>
 
                     <Col md={4}>
-                        <FormControls.Static label="Gift Total (£)" value={this.state.giftSet.total} />
-                        <FormControls.Static label="Paid" value={this.state.giftSet.paid ? 'Yes' : 'No'} />
+                        <FormGroup>
+                            <ControlLabel>Gift Total (£)</ControlLabel>
+                            <FormControl.Static>
+                                {this.state.giftSet.total}
+                            </FormControl.Static>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <ControlLabel>Paid</ControlLabel>
+                            <FormControl.Static>
+                                {this.state.giftSet.paid ? 'Yes' : 'No'}
+                            </FormControl.Static>
+                        </FormGroup>
                     </Col>
                 </Row>
 

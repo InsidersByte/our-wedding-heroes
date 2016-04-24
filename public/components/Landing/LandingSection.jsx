@@ -5,7 +5,7 @@ import './LandingSection.styl';
 function LandingSection(props) {
     return (
         <section className="landing-section">
-            <h1 className="landing-section__title">{props.title}</h1>
+            <h1 className="landing-section__title">{props.title} <span></span></h1>
 
             <div className="landing-section__content">
                 {props.children}
@@ -17,7 +17,7 @@ function LandingSection(props) {
 }
 
 LandingSection.propTypes = {
-    children: React.PropTypes.element.isRequired,
+    children: React.PropTypes.element,
     postContent: React.PropTypes.element,
     title: React.PropTypes.string.isRequired,
 };

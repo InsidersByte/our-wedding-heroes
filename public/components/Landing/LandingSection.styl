@@ -1,10 +1,30 @@
 .landing-section
     padding 50px 0
     text-align center
+    color rgb(154, 156, 167)
+
+    h1, h2, h3, h4, h5, h6
+        color rgb(82, 105, 120)
+
+    a
+        color rgb(0, 173, 237)
+        text-decoration underline
+
+        &:hover
+            color rgb(0, 173, 237)
 
     &:nth-child(even)
         color white
-        background rgba(31, 119, 180, 0.85)
+        background #00aded
+
+        h1, h2, h3, h4, h5, h6
+            color white
+
+        a
+            color white
+
+            &:hover
+                color white
 
     &:before
         display table
