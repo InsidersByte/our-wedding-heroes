@@ -53,8 +53,8 @@ class LandingPage extends React.Component {
                     weddingProfile,
                 });
             })
-            .catch(() => {
-                this.props.toastError('There was an error loading the profile data');
+            .catch((error) => {
+                this.props.toastError('There was an error loading the profile data', error);
             });
 
         basketStore.listen(this.onStoreChange);

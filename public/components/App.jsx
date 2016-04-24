@@ -28,7 +28,7 @@ class App extends React.Component {
                 'Error',
                 { closeButton: true }
             );
-    }
+    };
 
     render() {
         return (
