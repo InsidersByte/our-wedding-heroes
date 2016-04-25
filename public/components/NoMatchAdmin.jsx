@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { ADMIN_ROUTE } from '../constants/routeConstants';
 
 export default function NoMatchAdmin() {
     return (
@@ -8,7 +9,7 @@ export default function NoMatchAdmin() {
 
             <p>Woops! Sorry, there is nothing to see here.</p>
 
-            <p><Link to="/admin">Back to Admin</Link></p>
+            <p><Link to={ADMIN_ROUTE}>Back to Admin</Link></p>
         </div>
     );
 }
