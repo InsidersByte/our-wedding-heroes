@@ -1,33 +1,27 @@
 import React from 'react';
-import landingApi from '../api/landing.api';
+import landingActions from '../actions/LandingActions';
+import landingStore from '../stores/LandingStore';
 
 import css from './AuthenticatedLanding.styl';
 
 export default class AuthenticatedLanding extends React.Component {
-    static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
-    };
-
-    state = {
-        info: {},
-    };
+    state = landingStore.getState();
 
     componentDidMount() {
-        landingApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    info: response,
-                });
-            })
-            .catch(() => {
-                this.props.toastError('There was an error loading the landing info');
-            });
+        landingStore.listen(this.onStoreChange);
+        landingActions.fetch.defer();
     }
 
+    componentWillUnmount() {
+        landingStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    };
+
     render() {
-        const giftSetCount = this.state.info.giftSetCount || 0;
+        const giftSetCount = this.state.landing.giftSetCount || 0;
 
         const message = giftSetCount <= 0 ?
             'There have been no new gift sets since you last logged in' :

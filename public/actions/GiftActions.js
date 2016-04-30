@@ -1,26 +1,26 @@
 import alt from '../helpers/alt';
+import BasketActions from './BasketActions';
 import NotificationActions from './NotificationActions';
-import AuthenticateApi from '../api/AuthenticateApi';
+import GiftApi from '../api/GiftApi';
 
 class LoginActions {
-    login({ user }) {
+    create({ giver, items }) {
         return (dispatch) => {
             dispatch();
 
-            AuthenticateApi
-                .post(user)
-                .then(this.loginSuccess)
-                .catch(this.loginError);
+            GiftApi
+                .post({ giver, items })
+                .then(this.createSuccess)
+                .catch(this.createError);
         };
     }
 
-    loginSuccess({ token: jwt }) {
-        NotificationActions.success({ message: 'Logged in' });
-        localStorage.setItem('jwt', jwt);
-        return jwt;
+    createSuccess(response) {
+        BasketActions.emptyBasket();
+        return response;
     }
 
-    loginError(error) {
+    createError(error) {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;

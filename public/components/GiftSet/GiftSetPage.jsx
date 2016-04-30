@@ -1,15 +1,14 @@
 import React from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
-import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
+import GiftSetActions from '../../actions/GiftSetActions';
+import GiftSetStore from '../../stores/GiftSetStore';
 import GiftTable from './GiftTable';
 import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
 
 export default class GiftSetPage extends React.Component {
     static propTypes = {
-        toastSuccess: React.PropTypes.func,
-        toastError: React.PropTypes.func,
         params: React.PropTypes.object.isRequired,
     };
 
@@ -21,34 +20,25 @@ export default class GiftSetPage extends React.Component {
         router: React.PropTypes.object.isRequired,
     };
 
-    state = {
-        giftSet: {
-            giver: {},
-            gifts: [],
-        },
-    };
+    state = GiftSetStore.getState();
 
     componentDidMount() {
-        this.loadGiftSet();
+        GiftSetStore.listen(this.onStoreChange);
+        const { giftSetId } = this.props.params;
+        GiftSetActions.fetch(giftSetId);
     }
 
-    markAsPaid = () => {
-        // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+    componentWillUnmount() {
+        GiftSetStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            this.context.router.push(GIFT_SETS_ROUTE);
             return;
         }
 
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .paid(this.state.giftSet, giftSetId)
-            .then(() => {
-                this.loadGiftSet();
-                this.props.toastSuccess('Gift set marked as paid');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as paid', error);
-            });
+        this.setState(state);
     };
 
     markAsDetailsSent = () => {
@@ -57,17 +47,18 @@ export default class GiftSetPage extends React.Component {
             return;
         }
 
-        const { giftSetId } = this.props.params;
+        const { giftSetId: id } = this.props.params;
+        GiftSetActions.detailsSent({ ...this.state, id });
+    };
 
-        GiftSetApi
-            .detailsSent(this.state.giftSet, giftSetId)
-            .then(() => {
-                this.loadGiftSet();
-                this.props.toastSuccess('Gift set marked as details sent');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as details sent', error);
-            });
+    markAsPaid = () => {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+            return;
+        }
+
+        const { giftSetId: id } = this.props.params;
+        GiftSetActions.paid({ ...this.state, id });
     };
 
     delete = () => {
@@ -76,33 +67,9 @@ export default class GiftSetPage extends React.Component {
             return;
         }
 
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .delete(giftSetId)
-            .then(() => {
-                this.context.router.push(GIFT_SETS_ROUTE);
-                this.props.toastSuccess('Gift set deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting a gift set', error);
-            });
+        const { giftSetId: _id } = this.props.params;
+        GiftSetActions.remove({ _id });
     };
-
-    loadGiftSet() {
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .get(giftSetId)
-            .then((response) => {
-                this.setState({
-                    giftSet: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the gift set', error);
-            });
-    }
 
     render() {
         const fullName = `${this.state.giftSet.giver.forename} ${this.state.giftSet.giver.surname}`;
