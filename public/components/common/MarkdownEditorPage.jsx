@@ -1,13 +1,17 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import MarkdownEditor from '@insidersbyte/react-markdown-editor';
+import Loader from '../common/Loader';
 
-class MarkdownEditorPage extends React.Component {
-    constructor(props) {
-        super(props);
+export default class MarkdownEditorPage extends React.Component {
+    static propTypes = {
+        propKey: React.PropTypes.string.isRequired,
+        title: React.PropTypes.string.isRequired,
+        store: React.PropTypes.object.isRequired,
+        actions: React.PropTypes.object.isRequired,
+    };
 
-        this.state = this.props.store.getState();
-    }
+    state = this.props.store.getState();
 
     componentDidMount() {
         this.props.store.listen(this.onStoreChange);
@@ -36,21 +40,14 @@ class MarkdownEditorPage extends React.Component {
             <Jumbotron>
                 <h1>{this.props.title}</h1>
 
-                <form onSubmit={this.submit}>
-                    <MarkdownEditor value={this.state[this.props.propKey]} onChange={this.onChange} />
+                <Loader loading={this.state.loading}>
+                    <form onSubmit={this.submit}>
+                        <MarkdownEditor value={this.state[this.props.propKey]} onChange={this.onChange} />
 
-                    <Button type="submit" bsStyle="primary" block disabled={this.state.saving}>Update</Button>
-                </form>
+                        <Button type="submit" bsStyle="primary" block disabled={this.state.saving}>Update</Button>
+                    </form>
+                </Loader>
             </Jumbotron>
         );
     }
 }
-
-MarkdownEditorPage.propTypes = {
-    propKey: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    store: React.PropTypes.object.isRequired,
-    actions: React.PropTypes.object.isRequired,
-};
-
-export default MarkdownEditorPage;

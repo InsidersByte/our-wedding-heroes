@@ -1,26 +1,26 @@
 import React from 'react';
 import GiverDetailsForm from './GiverDetailsForm';
-import giftApi from '../../api/gift.api';
-import basketActions from '../../actions/BasketActions';
+import GiftActions from '../../actions/GiftActions';
+import GiftStore from '../../stores/GiftStore';
 import basketStore from '../../stores/BasketStore';
-import { HOME_ROUTE, confirmationPageRoute } from '../../constants/routes.constants';
+import { HOME_ROUTE } from '../../constants/routeConstants';
 
-import './GiverDetails.styl';
+import css from './GiverDetailsPage.styl';
 
-class GiverDetailsPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiverDetailsPage extends React.Component {
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
-        this.state = {
-            giver: {
-                forename: '',
-                surname: '',
-                email: '',
-                phoneNumber: '',
-            },
-            isSaving: false,
-        };
-    }
+    state = {
+        giver: {
+            forename: '',
+            surname: '',
+            email: '',
+            phoneNumber: '',
+        },
+        saving: false,
+    };
 
     componentWillMount() {
         const { basketCount } = basketStore.getState();
@@ -29,6 +29,18 @@ class GiverDetailsPage extends React.Component {
             this.context.router.replace(HOME_ROUTE);
         }
     }
+
+    componentDidMount() {
+        GiftStore.listen(this.onStoreChange);
+    }
+
+    componentWillUnmount() {
+        GiftStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
+    };
 
     setGiverState = (event) => {
         const field = event.target.name;
@@ -40,35 +52,23 @@ class GiverDetailsPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        this.setState({ isSaving: true });
-
         const { items } = basketStore.getState();
 
-        giftApi
-            .post({
-                giver: this.state.giver,
-                items,
-            })
-            .then((giftSet) => {
-                this.setState({ isSaving: false });
-                basketActions.emptyBasket();
-                this.context.router.push(confirmationPageRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
-            })
-            .catch((error) => {
-                this.setState({ isSaving: false });
-                this.props.toastError('There was an error', error);
-            });
+        GiftActions.create({
+            giver: this.state.giver,
+            items: [...items.values()],
+        });
     };
 
     render() {
         return (
-            <section className="giver-details">
-                <div className="giver-details__container">
-                    <h1 className="giver-details__title">Your Details</h1>
+            <section className={css.root}>
+                <div className={css.container}>
+                    <h1 className={css.title}>Your Details</h1>
 
                     <GiverDetailsForm
                         giver={this.state.giver}
-                        isSaving={this.state.isSaving}
+                        isSaving={this.state.saving}
                         onChange={this.setGiverState}
                         onSubmit={this.submit}
                     />
@@ -77,14 +77,3 @@ class GiverDetailsPage extends React.Component {
         );
     }
 }
-
-GiverDetailsPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-GiverDetailsPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiverDetailsPage;

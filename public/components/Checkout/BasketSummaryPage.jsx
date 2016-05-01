@@ -3,15 +3,12 @@ import { Link } from 'react-router';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import BasketSummaryTable from './BasketSummaryTable';
+import { GIVER_ROUTE, HOME_ROUTE } from '../../constants/routeConstants';
 
-import './BasketSummary.styl';
+import css from './BasketSummaryPage.styl';
 
-class BasketSummaryPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = basketStore.getState();
-    }
+export default class BasketSummaryPage extends React.Component {
+    state = basketStore.getState();
 
     componentDidMount() {
         basketStore.listen(this.onStoreChange);
@@ -42,12 +39,12 @@ class BasketSummaryPage extends React.Component {
 
         if (this.state.basketCount > 0) {
             content = (
-                <div className="basket-summary__container">
-                    <h1 className="basket-summary__title">
+                <div className={css.container}>
+                    <h1 className={css.title}>
                         Subtotal ({this.state.basketCount} items): £{this.state.total}
                     </h1>
 
-                    <div className="basket-summary__content">
+                    <div className={css.content}>
                         <BasketSummaryTable
                             items={this.state.items}
                             total={this.state.total}
@@ -57,11 +54,11 @@ class BasketSummaryPage extends React.Component {
                         />
                     </div>
 
-                    <div className="basket-summary__actions">
-                        <Link to="giver" className="btn btn-success" role="button">Proceed to Checkout</Link>
+                    <div className={css.actions}>
+                        <Link to={GIVER_ROUTE} className="btn btn-success" role="button">Proceed to Checkout</Link>
 
                         <Link
-                            to="/"
+                            to={HOME_ROUTE}
                             className="btn btn-default"
                             role="button"
                         >
@@ -72,14 +69,14 @@ class BasketSummaryPage extends React.Component {
             );
         } else {
             content = (
-                <div className="basket-summary__container">
-                    <h1 className="basket-summary__title">
+                <div className={css.container}>
+                    <h1 className={css.title}>
                         Your Basket is empty!
                     </h1>
 
-                    <div className="basket-summary__actions">
+                    <div className={css.actions}>
                         <Link
-                            to="/"
+                            to={HOME_ROUTE}
                             className="btn btn-success"
                             role="button"
                         >
@@ -91,11 +88,9 @@ class BasketSummaryPage extends React.Component {
         }
 
         return (
-            <section className="basket-summary">
+            <section className={css.root}>
                 {content}
             </section>
         );
     }
 }
-
-export default BasketSummaryPage;

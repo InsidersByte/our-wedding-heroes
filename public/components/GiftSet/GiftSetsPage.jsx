@@ -1,37 +1,37 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import GiftSetTable from './GiftSetTable';
-import GiftSetApi from '../../api/giftSet.api';
-import { giftSetRoute } from '../../constants/routes.constants';
+import GiftSetActions from '../../actions/GiftSetActions';
+import GiftSetStore from '../../stores/GiftSetStore';
+import { giftSetRoute } from '../../constants/routeConstants';
+import Loader from '../common/Loader';
 
-class GiftSetsPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiftSetsPage extends React.Component {
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
 
-        this.state = {
-            giftSets: [],
-        };
-    }
+    state = GiftSetStore.getState();
 
     componentDidMount() {
-        this.loadGiftSets();
+        GiftSetStore.listen(this.onStoreChange);
+        GiftSetActions.query.defer();
     }
 
-    markAsPaid = (giftSet) => {
-        // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to mark this gift set as paid?')) {
-            return;
+    componentWillUnmount() {
+        GiftSetStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            GiftSetActions.query.defer();
         }
 
-        GiftSetApi
-            .paid(giftSet, giftSet._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.loadGiftSets();
-                this.props.toastSuccess('Gift set marked as paid');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as paid', error);
-            });
+        if (this.state.saving && !state.saving) {
+            GiftSetActions.query.defer();
+        }
+
+        this.setState(state);
     };
 
     markAsDetailsSent = (giftSet) => {
@@ -40,15 +40,18 @@ class GiftSetsPage extends React.Component {
             return;
         }
 
-        GiftSetApi
-            .detailsSent(giftSet, giftSet._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.loadGiftSets();
-                this.props.toastSuccess('Gift set marked as details sent');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as details sent', error);
-            });
+        const { _id: id } = giftSet;
+        GiftSetActions.detailsSent({ giftSet, id });
+    };
+
+    markAsPaid = (giftSet) => {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift set as paid?')) {
+            return;
+        }
+
+        const { _id: id } = giftSet;
+        GiftSetActions.paid({ giftSet, id });
     };
 
     delete = (giftSet) => {
@@ -57,58 +60,28 @@ class GiftSetsPage extends React.Component {
             return;
         }
 
-        GiftSetApi
-            .delete(giftSet._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.loadGiftSets();
-                this.props.toastSuccess('Gift set deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting a gift set', error);
-            });
+        GiftSetActions.remove(giftSet);
     };
 
     view = (giftSet) => {
         this.context.router.push(giftSetRoute(giftSet._id)); // eslint-disable-line no-underscore-dangle
     };
 
-    loadGiftSets() {
-        GiftSetApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    giftSets: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the gift sets', error);
-            });
-    }
-
     render() {
         return (
             <Jumbotron>
                 <h1>Gift Sets</h1>
 
-                <GiftSetTable
-                    giftSets={this.state.giftSets}
-                    onMarkAsPaid={this.markAsPaid}
-                    onMarkAsDetailsSent={this.markAsDetailsSent}
-                    onDelete={this.delete}
-                    onSelect={this.view}
-                />
+                <Loader loading={this.state.loading}>
+                    <GiftSetTable
+                        giftSets={this.state.giftSets}
+                        onMarkAsPaid={this.markAsPaid}
+                        onMarkAsDetailsSent={this.markAsDetailsSent}
+                        onDelete={this.delete}
+                        onSelect={this.view}
+                    />
+                </Loader>
             </Jumbotron>
         );
     }
 }
-
-GiftSetsPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-GiftSetsPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiftSetsPage;

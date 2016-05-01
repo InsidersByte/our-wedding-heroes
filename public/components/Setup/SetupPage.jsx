@@ -1,20 +1,31 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import setupApi from '../../api/setup.api';
+import setupActions from '../../actions/SetupActions';
+import setupStore from '../../stores/SetupStore';
+import NotificationActions from '../../actions/NotificationActions';
 import SetupForm from './SetupForm';
 
-class SetupPage extends React.Component {
-    constructor() {
-        super();
+export default class SetupPage extends React.Component {
+    state = {
+        user: {
+            name: '',
+            username: '',
+            password: '',
+            confirmPassword: '',
+        },
+    };
 
-        this.state = {
-            user: {
-                name: '',
-                username: '',
-                password: '',
-            },
-        };
+    componentDidMount() {
+        setupStore.listen(this.onStoreChange);
     }
+
+    componentWillUnmount() {
+        setupStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = (state) => {
+        this.setState(state);
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -26,19 +37,17 @@ class SetupPage extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        setupApi
-            .post(this.state.user)
-            .then(() => {
-                this.props.toastSuccess('Setup successful');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error setting up', error);
-            });
+        if (this.state.user.password !== this.state.user.confirmPassword) {
+            NotificationActions.error({ message: 'Your new passwords must match' });
+            return;
+        }
+
+        setupActions.create(this.state);
     };
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Setup</h1>
 
@@ -48,10 +57,3 @@ class SetupPage extends React.Component {
         );
     }
 }
-
-SetupPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default SetupPage;

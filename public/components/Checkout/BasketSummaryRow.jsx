@@ -1,8 +1,16 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
+import css from './BasketSummaryRow.styl';
 
-class BasketSummaryRow extends React.Component {
+export default class BasketSummaryRow extends React.Component {
+    static propTypes = {
+        item: React.PropTypes.object.isRequired,
+        onAdd: React.PropTypes.func.isRequired,
+        onRemove: React.PropTypes.func.isRequired,
+        onDelete: React.PropTypes.func.isRequired,
+    };
+
     onAdd = () => {
         this.props.onAdd(this.props.item);
     };
@@ -30,7 +38,7 @@ class BasketSummaryRow extends React.Component {
                         <FontAwesome icon="minus" />
                     </Button>
 
-                    <span style={{ margin: '0 10px' }}>
+                    <span className={css.quantity}>
                         {this.props.item.quantity}
                     </span>
 
@@ -57,12 +65,3 @@ class BasketSummaryRow extends React.Component {
         );
     }
 }
-
-BasketSummaryRow.propTypes = {
-    item: React.PropTypes.object.isRequired,
-    onAdd: React.PropTypes.func.isRequired,
-    onRemove: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-};
-
-export default BasketSummaryRow;

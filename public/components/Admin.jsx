@@ -1,15 +1,16 @@
 import React from 'react';
+import LoginActions from '../actions/LoginActions';
 import loginStore from '../stores/LoginStore';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
-import auth from '../helpers/auth';
+import * as routes from '../constants/routeConstants';
 
-class App extends React.Component {
-    constructor() {
-        super();
+export default class Admin extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element.isRequired,
+    };
 
-        this.state = this.getLoginState();
-    }
+    state = loginStore.getState();
 
     componentDidMount() {
         loginStore.listen(this.onStoreChange);
@@ -19,93 +20,91 @@ class App extends React.Component {
         loginStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = () => {
-        this.setState(this.getLoginState());
+    onStoreChange = state => {
+        this.setState(state);
     };
-
-    getLoginState() {
-        return {
-            userLoggedIn: loginStore.getState().isLoggedIn,
-        };
-    }
 
     logout(event) {
         event.preventDefault();
-
-        auth.logout();
+        LoginActions.logoutUser();
     }
 
     render() {
         let headerItems;
 
-        const backToSiteLink = (
+        const viewSiteLink = (
             <li>
-                <Link to="/">Back to Site</Link>
+                <Link to={routes.HOME_ROUTE} target="_blank">View Site</Link>
             </li>
         );
 
-        if (!this.state.userLoggedIn) {
+        if (!this.state.isLoggedIn) {
             headerItems = (
                 <Nav pullRight>
-                    {backToSiteLink}
+                    {viewSiteLink}
 
                     <li>
-                        <Link to="/admin/login">Login</Link>
+                        <Link to={routes.LOGIN_ROUTE}>Login</Link>
                     </li>
                 </Nav>
             );
         } else {
             headerItems = (
                 <Nav pullRight>
-                    <NavDropdown title="Wedding Profile" id="weddingProfileDropdown">
+                    <NavDropdown id="weddingProfile" title="Wedding Profile">
                         <li>
-                            <Link to="/admin/cover">Cover</Link>
+                            <Link to={routes.COVER_ROUTE}>Cover</Link>
                         </li>
                         <li>
-                            <Link to="/admin/aboutUs">About Us</Link>
+                            <Link to={routes.ABOUT_US_ROUTE}>About Us</Link>
                         </li>
                         <li>
-                            <Link to="/admin/rsvp">RSVP</Link>
+                            <Link to={routes.RSVP_ROUTE}>RSVP</Link>
                         </li>
                         <li>
-                            <Link to="/admin/aboutOurDay">About Our Day</Link>
+                            <Link to={routes.ABOUT_OUR_DAY_ROUTE}>About Our Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/weddingPartyMember">Wedding Party Members</Link>
+                            <Link to={routes.WEDDING_PARTY_MEMBERS_ROUTE}>Wedding Party Members</Link>
                         </li>
                         <li>
-                            <Link to="/admin/localFlavour">Local Flavour</Link>
+                            <Link to={routes.LOCAL_FLAVOUR_ROUTE}>Local Flavour</Link>
                         </li>
                         <li>
-                            <Link to="/admin/onTheDay">On the Day</Link>
+                            <Link to={routes.ON_THE_DAY_ROUTE}>On the Day</Link>
                         </li>
                         <li>
-                            <Link to="/admin/weddingPlaylist">Wedding Playlist</Link>
+                            <Link to={routes.WEDDING_PLAYLIST_ROUTE}>Wedding Playlist</Link>
                         </li>
                         <li>
-                            <Link to="/admin/aboutOurHoneymoon">About Our Honeymoon</Link>
+                            <Link to={routes.ABOUT_OUR_HONEYMOON_ROUTE}>About Our Honeymoon</Link>
                         </li>
                         <li>
-                            <Link to="/admin/honeymoonGiftList">Honeymoon Gift List</Link>
+                            <Link to={routes.HONEYMOON_GIFT_LIST_ROUTE}>Honeymoon Gift List</Link>
                         </li>
                         <li>
-                            <Link to="/admin/honeymoonGiftListItem">Honeymoon Gift List Items</Link>
+                            <Link to={routes.HONEYMOON_GIFT_LIST_ITEM_ROUTE}>Honeymoon Gift List Items</Link>
                         </li>
                     </NavDropdown>
 
                     <li>
-                        <Link to="/admin/giftSet">Gift Sets</Link>
+                        <Link to={routes.GIFT_SETS_ROUTE}>Gift Sets</Link>
                     </li>
 
                     <li>
-                        <Link to="/admin/users">Users</Link>
+                        <Link to={routes.USERS_ROUTE}>Users</Link>
                     </li>
 
-                    {backToSiteLink}
+                    {viewSiteLink}
 
-                    <li>
-                        <a href="#" onClick={this.logout}>Logout</a>
-                    </li>
+                    <NavDropdown id="userProfile" title={this.state.user.name}>
+                        <li>
+                            <Link to={routes.PROFILE_ROUTE}>Your Profile</Link>
+                        </li>
+                        <li>
+                            <a href="#" onClick={this.logout}>Logout</a>
+                        </li>
+                    </NavDropdown>
                 </Nav>
             );
         }
@@ -115,7 +114,7 @@ class App extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <Link to="/admin">Our Wedding Heroes</Link>
+                            <Link to={routes.ADMIN_ROUTE}>Our Wedding Heroes</Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
@@ -126,20 +125,9 @@ class App extends React.Component {
                 </Navbar>
 
                 <div className="container">
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        toastSuccess: this.props.toastSuccess,
-                        toastError: this.props.toastError,
-                    })}
+                    {this.props.children}
                 </div>
             </div>
         );
     }
 }
-
-App.propTypes = {
-    children: React.PropTypes.element.isRequired,
-    toastSuccess: React.PropTypes.func.isRequired,
-    toastError: React.PropTypes.func.isRequired,
-};
-
-export default App;

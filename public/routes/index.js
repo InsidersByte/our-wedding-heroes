@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+import { LOGIN_ROUTE, ADMIN_ROUTE } from '../constants/routeConstants';
 
 import loginStore from '../stores/LoginStore';
 
@@ -14,6 +15,7 @@ import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
 import LoginPage from '../components/Login/LoginPage';
+import ProfilePage from '../components/Profile/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import Admin from '../components/Admin';
 import AuthenticatedLanding from '../components/AuthenticatedLanding';
@@ -39,7 +41,15 @@ function requireAuth(nextState, replace) {
     const { isLoggedIn } = loginStore.getState();
 
     if (!isLoggedIn) {
-        replace('admin/login');
+        replace(LOGIN_ROUTE);
+    }
+}
+
+function ifLoggedInRedirectToAdmin(nextState, replace) {
+    const { isLoggedIn } = loginStore.getState();
+
+    if (isLoggedIn) {
+        replace(ADMIN_ROUTE);
     }
 }
 
@@ -51,9 +61,10 @@ export default (
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
             <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
-            <Route path="login" component={LoginPage} />
-            <Route path="setup" component={SetupPage} />
-            <Route path="reset/:token" component={ResetPage} />
+            <Route path="login" component={LoginPage} onEnter={ifLoggedInRedirectToAdmin} />
+            <Route path="setup" component={SetupPage} onEnter={ifLoggedInRedirectToAdmin} />
+            <Route path="reset/:token" component={ResetPage} onEnter={ifLoggedInRedirectToAdmin} />
+            <Route path="profile" component={ProfilePage} onEnter={requireAuth} />
             <Route path="cover" component={CoverPage} onEnter={requireAuth} />
             <Route path="aboutUs" component={AboutUsPage} onEnter={requireAuth} />
             <Route path="rsvp" component={RsvpPage} onEnter={requireAuth} />

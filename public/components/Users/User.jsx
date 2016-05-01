@@ -1,7 +1,15 @@
 import React from 'react';
 import { Button, Modal, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
-class User extends React.Component {
+export default class User extends React.Component {
+    static propTypes = {
+        user: React.PropTypes.object.isRequired,
+        show: React.PropTypes.bool.isRequired,
+        onHide: React.PropTypes.func.isRequired,
+        onSubmit: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit(this.props.user);
@@ -51,10 +59,22 @@ class User extends React.Component {
                                 required
                             />
                         </FormGroup>
+
+                        <FormGroup>
+                            <ControlLabel>Confirm Password</ControlLabel>
+                            <FormControl
+                                name="confirmPassword"
+                                type="password"
+                                placeholder="Enter confirm password"
+                                value={this.props.user.confirmPassword}
+                                onChange={this.props.onChange}
+                                required
+                            />
+                        </FormGroup>
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button bsStyle="primary" type="submit">Save</Button>
+                        <Button bsStyle="primary" type="submit">Create</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
                 </form>
@@ -62,13 +82,3 @@ class User extends React.Component {
         );
     }
 }
-
-User.propTypes = {
-    user: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onHide: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-};
-
-export default User;

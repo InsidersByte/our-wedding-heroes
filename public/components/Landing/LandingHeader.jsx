@@ -1,9 +1,8 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
+import css from './LandingHeader.styl';
 
-import './LandingHeader.styl';
-
-function LandingHeader(props) {
+export default function LandingHeader(props) {
     const backgroundImageStyle = { backgroundImage: `url(${props.cover.imageUrl})` };
     let daysTillIDoCountdown = null;
 
@@ -16,16 +15,18 @@ function LandingHeader(props) {
     }
 
     return (
-        <header className="landing-header" style={backgroundImageStyle}>
-            <div className="landing-header__overlay"></div>
-            <div className="landing-header__content">
-                <h1 className="landing-header__title">{props.cover.title}</h1>
+        <header className={css.root} style={backgroundImageStyle}>
+            <div className={css.overlay}></div>
+            <div className={css.content}>
+                <h1 className={css.title}>{props.cover.title}</h1>
 
                 {daysTillIDoCountdown}
 
-                <div style={{ flex: '1 1 5%', maxHeight: '5%' }}></div>
+                <div className={css.spacer}></div>
 
-                <FontAwesome className="landing-header__scroll-down" icon="chevron-down" size="lg" />
+                <a className={css.scrollDown} href="#" onClick={props.onScrollDown}>
+                    <FontAwesome icon="chevron-down" size="lg" />
+                </a>
             </div>
         </header>
     );
@@ -33,10 +34,9 @@ function LandingHeader(props) {
 
 LandingHeader.propTypes = {
     cover: React.PropTypes.object.isRequired,
+    onScrollDown: React.PropTypes.func.isRequired,
 };
 
 LandingHeader.defaultProps = {
     cover: {},
 };
-
-export default LandingHeader;

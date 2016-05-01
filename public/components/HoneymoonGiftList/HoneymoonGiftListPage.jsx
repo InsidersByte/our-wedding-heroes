@@ -1,35 +1,25 @@
 import React from 'react';
-import HoneymoonGiftListApi from '../../api/honeymoonGiftList.api';
 import { Jumbotron } from 'react-bootstrap';
+import HoneymoonGiftListActions from '../../actions/HoneymoonGiftListActions';
+import HoneymoonGiftListStore from '../../stores/HoneymoonGiftListStore';
 import HoneymoonGiftListForm from './HoneymoonGiftListForm';
+import Loader from '../common/Loader';
 
-class HoneymoonGiftListPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            honeymoonGiftList: {
-                content: '',
-                showOfflinePaymentMessage: false,
-                showDisclaimerMessage: false,
-                offlinePaymentMessage: '',
-                disclaimerMessage: '',
-            },
-        };
-    }
+export default class HoneymoonGiftListPage extends React.Component {
+    state = HoneymoonGiftListStore.getState();
 
     componentDidMount() {
-        HoneymoonGiftListApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    honeymoonGiftList: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the honeymoonGiftList data', error);
-            });
+        HoneymoonGiftListStore.listen(this.onStoreChange);
+        HoneymoonGiftListActions.fetch();
     }
+
+    componentWillUnmount() {
+        HoneymoonGiftListStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        this.setState(state);
+    };
 
     setHoneymoonGiftListState = (event) => {
         const field = event.target.name;
@@ -45,15 +35,7 @@ class HoneymoonGiftListPage extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-
-        HoneymoonGiftListApi
-            .put(this.state.honeymoonGiftList)
-            .then(() => {
-                this.props.toastSuccess('HoneymoonGiftList updated');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error saving honeymoonGiftList', error);
-            });
+        HoneymoonGiftListActions.update(this.state);
     };
 
     render() {
@@ -62,20 +44,15 @@ class HoneymoonGiftListPage extends React.Component {
                 <Jumbotron>
                     <h1>Honeymoon Gift List</h1>
 
-                    <HoneymoonGiftListForm
-                        honeymoonGiftList={this.state.honeymoonGiftList}
-                        onChange={this.setHoneymoonGiftListState}
-                        onSubmit={this.submit}
-                    />
+                    <Loader loading={this.state.loading}>
+                        <HoneymoonGiftListForm
+                            honeymoonGiftList={this.state.honeymoonGiftList}
+                            onChange={this.setHoneymoonGiftListState}
+                            onSubmit={this.submit}
+                        />
+                    </Loader>
                 </Jumbotron>
             </div>
         );
     }
 }
-
-HoneymoonGiftListPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default HoneymoonGiftListPage;

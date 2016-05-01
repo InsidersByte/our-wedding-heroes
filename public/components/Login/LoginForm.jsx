@@ -1,7 +1,8 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
+import css from './LoginForm.styl';
 
-function LoginForm(props) {
+export default function LoginForm(props) {
     return (
         <form onSubmit={props.onSubmit}>
             <FormGroup>
@@ -28,7 +29,7 @@ function LoginForm(props) {
                         required
                     />
                     <InputGroup.Button>
-                        <Button bsStyle="link" onClick={props.onForgot} style={{ borderColor: '#ccc' }}>Forgot?</Button>
+                        <Button className={css.forgottenLink} bsStyle="link" onClick={props.onForgot}>Forgot?</Button>
                     </InputGroup.Button>
                 </InputGroup>
             </FormGroup>
@@ -44,5 +45,3 @@ LoginForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onForgot: React.PropTypes.func.isRequired,
 };
-
-export default LoginForm;

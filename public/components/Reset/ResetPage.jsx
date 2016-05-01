@@ -1,32 +1,37 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import authenticateActions from '../../actions/PasswordResetActions';
-import authenticateStore from '../../stores/PasswordResetStore';
+import NotificationActions from '../../actions/NotificationActions';
+import passwordResetActions from '../../actions/PasswordResetActions';
+import passwordResetStore from '../../stores/PasswordResetStore';
 import ResetForm from './ResetForm';
 
-class ResetPage extends React.Component {
-    constructor() {
-        super();
+export default class ResetPage extends React.Component {
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+    };
 
-        this.state = {
-            user: {
-                password: '',
-                confirmPassword: '',
-            },
-        };
-    }
+    static defaultProps = {
+        params: {},
+    };
+
+    state = {
+        user: {
+            password: '',
+            confirmPassword: '',
+        },
+    };
 
     componentDidMount() {
-        authenticateStore.listen(this.onStoreChange);
+        passwordResetStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        authenticateStore.unlisten(this.onStoreChange);
+        passwordResetStore.unlisten(this.onStoreChange);
     }
 
     onStoreChange = (state) => {
         this.setState(state);
-    } ;
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -39,15 +44,15 @@ class ResetPage extends React.Component {
         event.preventDefault();
 
         if (this.state.user.password !== this.state.user.confirmPassword) {
-            this.props.toastError('Your new passwords must match');
+            NotificationActions.error({ message: 'Your new passwords must match' });
         }
 
-        authenticateActions.update({ token: this.props.params.token, ...this.state.user });
+        passwordResetActions.update({ token: this.props.params.token, ...this.state.user });
     };
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Reset Password</h1>
 
@@ -57,15 +62,3 @@ class ResetPage extends React.Component {
         );
     }
 }
-
-ResetPage.propTypes = {
-    params: React.PropTypes.object.isRequired,
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-ResetPage.defaultProps = {
-    params: {},
-};
-
-export default ResetPage;

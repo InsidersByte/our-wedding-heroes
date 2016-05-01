@@ -2,13 +2,14 @@ import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import FontAwesome from '../common/FontAwesome';
 
-class UserRow extends React.Component {
-    onDelete = () => {
-        this.props.onDelete(this.props.user);
+export default class UserRow extends React.Component {
+    static propTypes = {
+        user: React.PropTypes.object.isRequired,
+        onDelete: React.PropTypes.func.isRequired,
     };
 
-    onEdit = () => {
-        this.props.onEdit(this.props.user);
+    onDelete = () => {
+        this.props.onDelete(this.props.user);
     };
 
     render() {
@@ -18,14 +19,6 @@ class UserRow extends React.Component {
                 <th>{this.props.user.username}</th>
                 <th>
                     <ButtonToolbar>
-                        <Button
-                            bsSize="xsmall"
-                            bsStyle="primary"
-                            onClick={this.onEdit}
-                        >
-                            <FontAwesome icon="pencil" />
-                        </Button>
-
                         <Button
                             bsSize="xsmall"
                             bsStyle="danger"
@@ -39,11 +32,3 @@ class UserRow extends React.Component {
         );
     }
 }
-
-UserRow.propTypes = {
-    user: React.PropTypes.object.isRequired,
-    onEdit: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-};
-
-export default UserRow;

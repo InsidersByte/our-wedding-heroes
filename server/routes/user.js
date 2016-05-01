@@ -15,7 +15,7 @@ module.exports = (app, express) => {
         .post(wrap(function* createUser(req, res) {
             req.checkBody('name').notEmpty();
             req.checkBody('username').isEmail();
-            req.checkBody('password').notEmpty();
+            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
@@ -47,13 +47,12 @@ module.exports = (app, express) => {
         }));
 
     router
-        .route('/:userId')
+        .route('/password')
 
-        .put((wrap(function* updateUser(req, res) {
-            req.checkBody('_id').equals(req.params.userId);
-            req.checkBody('name').notEmpty();
-            req.checkBody('username').isEmail();
-            req.checkBody('password').notEmpty();
+        .put(wrap(function* resetPassword(req, res) {
+            req.checkBody('username').notEmpty();
+            req.checkBody('currentPassword').notEmpty();
+            req.checkBody('newPassword').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
@@ -63,7 +62,16 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const user = yield User.findById(req.body._id); // eslint-disable-line no-underscore-dangle
+            if (req.user.username !== req.body.username) {
+                return res.status(401).send();
+            }
+
+            const user = yield User
+                .findOne({
+                    username: req.body.username,
+                })
+                .select('name username password salt')
+                .exec();
 
             if (!user) {
                 return res
@@ -71,22 +79,25 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            user.name = req.body.name;
-            user.username = req.body.username;
-            user.password = req.body.password;
+            const validPassword = user.comparePassword(req.body.currentPassword);
 
-            try {
-                yield user.save();
-            } catch (error) {
-                if (error.code === 11000) {
-                    return res
-                        .status(400)
-                        .json({ success: false, message: 'A user with that username already exists.' });
-                }
+            if (!validPassword) {
+                return res
+                    .status(400)
+                    .json({ message: 'Your password is incorrect.' });
             }
 
-            return res.json(user);
-        })))
+            user.password = req.body.newPassword;
+
+            yield user.save();
+
+            return res.json({
+                message: 'Password Changed Successfully!',
+            });
+        }));
+
+    router
+        .route('/:userId')
 
         .delete(wrap(function* deleteUser(req, res) {
             yield User.remove({ _id: req.params.userId });

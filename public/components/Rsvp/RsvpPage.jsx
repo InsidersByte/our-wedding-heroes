@@ -2,12 +2,10 @@ import React from 'react';
 import RsvpStore from '../../stores/RsvpStore';
 import RsvpActions from '../../actions/RsvpActions';
 import MarkdownEditorPage from '../common/MarkdownEditorPage';
-import { RSVP as key } from '../../constants/keys.constants';
+import { RSVP as key } from '../../constants/KeyConstants';
 
-function AboutOurDayPage() {
+export default function AboutOurDayPage() {
     return (
         <MarkdownEditorPage propKey={key} title="RSVP" store={RsvpStore} actions={RsvpActions} />
     );
 }
-
-export default AboutOurDayPage;

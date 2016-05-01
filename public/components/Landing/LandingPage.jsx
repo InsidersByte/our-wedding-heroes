@@ -1,6 +1,7 @@
 import React from 'react';
 import FontAwesome from '../common/FontAwesome';
-import WeddingProfileApi from '../../api/weddingProfile.api';
+import WeddingProfileActions from '../../actions/WeddingProfileActions';
+import WeddingProfileStore from '../../stores/WeddingProfileStore';
 import basketActions from '../../actions/BasketActions';
 import basketStore from '../../stores/BasketStore';
 import GiftItems from './GiftItems';
@@ -10,62 +11,48 @@ import LandingSection from './LandingSection';
 import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
 import WeddingPartyMembers from './WeddingPartyMembers';
+import Loader from '../common/Loader';
 
-import './Landing.styl';
+import css from './LandingPage.styl';
 
-class LandingPage extends React.Component {
-    constructor() {
-        super();
-
-        this.state = Object.assign({
-            weddingProfile: {
-                cover: {},
-                aboutUs: '',
-                aboutOurDay: '',
-                aboutOurHoneymoon: '',
-                honeymoonGiftListItems: [],
-                honeymoonGiftList: {},
-                rsvp: '',
-                weddingPlaylist: '',
-                localFlavour: '',
-                onTheDay: '',
-                weddingPartyMembers: [],
-            },
-        }, basketStore.getState());
-    }
+export default class LandingPage extends React.Component {
+    state = { ...basketStore.getState(), ...WeddingProfileStore.getState() };
 
     componentDidMount() {
-        WeddingProfileApi
-            .get()
-            .then((response) => {
-                const weddingProfile = response;
-
-                if (weddingProfile.cover && weddingProfile.cover.weddingDate) {
-                    const weddingDate = moment(weddingProfile.cover.weddingDate);
-                    const now = moment.now();
-
-                    const daysToGo = weddingDate.diff(now, 'days');
-
-                    weddingProfile.cover.daysToGo = daysToGo;
-                }
-
-                this.setState({
-                    weddingProfile,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the profile data', error);
-            });
-
-        basketStore.listen(this.onStoreChange);
+        WeddingProfileStore.listen(this.onWeddingProfilesStoreChange);
+        basketStore.listen(this.onBasketStoreChange);
+        WeddingProfileActions.fetch();
     }
 
     componentWillUnmount() {
-        basketStore.unlisten(this.onStoreChange);
+        WeddingProfileStore.unlisten(this.onWeddingProfilesStoreChange);
+        basketStore.unlisten(this.onBasketStoreChange);
     }
 
-    onStoreChange = (state) => {
+    onBasketStoreChange = state => {
         this.setState(state);
+    };
+
+    onWeddingProfilesStoreChange = state => {
+        const newState = Object.assign({}, state);
+
+        if (newState.weddingProfile && newState.weddingProfile.cover && newState.weddingProfile.cover.weddingDate) {
+            const weddingDate = moment(newState.weddingProfile.cover.weddingDate);
+            const now = moment.now();
+
+            const daysToGo = weddingDate.diff(now, 'days');
+
+            newState.weddingProfile.cover.daysToGo = daysToGo;
+        }
+
+        this.setState(newState);
+    };
+
+    onScrollDown = event => {
+        event.preventDefault();
+
+        const aboutUs = this.refs.aboutUs;
+        aboutUs.scrollTo();
     };
 
     addToBasket(item) {
@@ -90,7 +77,7 @@ class LandingPage extends React.Component {
     renderDisclaimerMessage = () => {
         if (this.state.weddingProfile.honeymoonGiftList.showDisclaimerMessage) {
             return (
-                <span style={{ marginBottom: '10px' }}>
+                <span className={css.disclaimerMessage}>
                     <br />
                     <br />
 
@@ -124,10 +111,10 @@ class LandingPage extends React.Component {
         );
 
         return (
-            <div className="landing">
-                <LandingHeader cover={this.state.weddingProfile.cover} />
+            <Loader className={css.root} loading={this.state.loading}>
+                <LandingHeader cover={this.state.weddingProfile.cover} onScrollDown={this.onScrollDown} />
 
-                <LandingSection title="A little bit about us">
+                <LandingSection ref="aboutUs" title="A little bit about us">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
                 </LandingSection>
 
@@ -159,7 +146,7 @@ class LandingPage extends React.Component {
 
                 <LandingSection title="Gift List" postContent={giftItemsElement}>
                     <div>
-                        <span style={{ whiteSpace: 'pre-wrap' }}>
+                        <span className={css.content}>
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
@@ -170,14 +157,7 @@ class LandingPage extends React.Component {
                 </LandingSection>
 
                 <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
-            </div>
+            </Loader>
         );
     }
 }
-
-LandingPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default LandingPage;

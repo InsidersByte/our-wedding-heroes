@@ -1,34 +1,34 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
-import auth from '../../helpers/auth';
 import LoginForm from './LoginForm';
-import authenticateActions from '../../actions/PasswordResetActions';
-import authenticateStore from '../../stores/PasswordResetStore';
+import NotificationActions from '../../actions/NotificationActions';
+import LoginActions from '../../actions/LoginActions';
+// import LoginStore from '../../stores/LoginStore';
+import PasswordResetActions from '../../actions/PasswordResetActions';
+import PasswordResetStore from '../../stores/PasswordResetStore';
 import { isEmail } from 'validator';
 
-class Login extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            user: {
-                username: '',
-                password: '',
-            },
-        };
-    }
+export default class Login extends React.Component {
+    state = {
+        user: {
+            username: '',
+            password: '',
+        },
+    };
 
     componentDidMount() {
-        authenticateStore.listen(this.onStoreChange);
+        PasswordResetStore.listen(this.onStoreChange);
+        // LoginStore.listen(this.onStoreChange);
     }
 
     componentWillUnmount() {
-        authenticateStore.unlisten(this.onStoreChange);
+        PasswordResetStore.unlisten(this.onStoreChange);
+        // LoginStore.unlisten(this.onStoreChange);
     }
 
     onStoreChange = (state) => {
         this.setState(state);
-    } ;
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -39,15 +39,7 @@ class Login extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-
-        auth
-            .login(this.state.user)
-            .then(() => {
-                this.props.toastSuccess('Logged in');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error logging in', error);
-            });
+        LoginActions.login(this.state);
     };
 
     forgot = (event) => {
@@ -56,16 +48,16 @@ class Login extends React.Component {
         const username = this.state.user.username;
 
         if (!username || !isEmail(username)) {
-            alert('We need your email address to reset your password!');
+            NotificationActions.error({ message: 'We need your email address to reset your password!' });
             return;
         }
 
-        authenticateActions.create({ username });
+        PasswordResetActions.create({ username });
     };
 
     render() {
         return (
-            <Col md={6} mdOffset={3}>
+            <Col md={8} mdOffset={2}>
                 <Jumbotron>
                     <h1>Login</h1>
 
@@ -75,10 +67,3 @@ class Login extends React.Component {
         );
     }
 }
-
-Login.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default Login;

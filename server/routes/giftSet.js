@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line strict
-
 const GiftSet = require('../models/giftSet');
 const wrap = require('../utilities/wrap');
 
@@ -45,13 +43,19 @@ module.exports = (app, express) => {
                 .findById(req.params.giftSetId)
                 .populate('gifts');
 
+            if (giftSet.paid) {
+                return res
+                    .status(400)
+                    .json({ message: 'a gift set marked as paid cannot be deleted' });
+            }
+
             if (!giftSet) {
                 return res
                     .status(404)
                     .send();
             }
 
-            for (let gift of giftSet.gifts) { // eslint-disable-line prefer-const
+            for (const gift of giftSet.gifts) {
                 yield gift.remove();
             }
 
@@ -77,7 +81,12 @@ module.exports = (app, express) => {
             }
 
             const giftSet = yield GiftSet
-                .findById(req.params.giftSetId);
+                .findById(req.params.giftSetId)
+                .populate({
+                    path: 'gifts',
+                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                })
+                .populate('giver');
 
             if (!giftSet) {
                 return res
@@ -107,7 +116,12 @@ module.exports = (app, express) => {
             }
 
             const giftSet = yield GiftSet
-                .findById(req.params.giftSetId);
+                .findById(req.params.giftSetId)
+                .populate({
+                    path: 'gifts',
+                    populate: { path: 'honeymoonGiftListItem', model: 'HoneymoonGiftListItem' },
+                })
+                .populate('giver');
 
             if (!giftSet) {
                 return res

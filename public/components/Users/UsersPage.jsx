@@ -1,23 +1,36 @@
 import React from 'react';
-import UserApi from '../../api/user.api';
 import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
+import NotificationActions from '../../actions/NotificationActions';
+import UserActions from '../../actions/UserActions';
+import UserStore from '../../stores/UserStore';
 import UserTable from './UserTable';
 import User from './User';
+import Loader from '../common/Loader';
 
-class Users extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            users: [],
-            showModal: false,
-            user: {},
-        };
-    }
+export default class Users extends React.Component {
+    state = { ...UserStore.getState(), showModal: false };
 
     componentDidMount() {
-        this.loadUsers();
+        UserStore.listen(this.onStoreChange);
+        UserActions.query.defer();
     }
+
+    componentWillUnmount() {
+        UserStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            UserActions.query.defer();
+        }
+
+        if (this.state.saving && !state.saving) {
+            UserActions.query.defer();
+            this.close();
+        }
+
+        this.setState(state);
+    };
 
     setUserState = (event) => {
         const field = event.target.name;
@@ -27,29 +40,12 @@ class Users extends React.Component {
     };
 
     save = (user) => {
-        if (user._id) { // eslint-disable-line no-underscore-dangle
-            UserApi
-                .put(user, user._id) // eslint-disable-line no-underscore-dangle
-                .then(() => {
-                    this.close();
-                    this.loadUsers();
-                    this.props.toastSuccess('User saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving a user', error);
-                });
-        } else {
-            UserApi
-                .post(user)
-                .then(() => {
-                    this.close();
-                    this.loadUsers();
-                    this.props.toastSuccess('User saved');
-                })
-                .catch((error) => {
-                    this.props.toastError('There was an error saving a user', error);
-                });
+        if (user.password !== user.confirmPassword) {
+            NotificationActions.error({ message: 'Passwords must match!' });
+            return;
         }
+
+        UserActions.create({ user });
     };
 
     delete = (user) => {
@@ -58,46 +54,17 @@ class Users extends React.Component {
             return;
         }
 
-        UserApi
-            .delete(user._id) // eslint-disable-line no-underscore-dangle
-            .then(() => {
-                this.loadUsers();
-                this.props.toastSuccess('User deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting a user', error);
-            });
+        UserActions.remove(user);
     };
 
     add = () => {
-        this.open({
-            name: '',
-            username: '',
-            password: '',
-        });
-    };
-
-    open = (userToEdit) => {
-        const user = Object.assign({ password: '' }, userToEdit);
-        this.setState({ showModal: true, user });
+        UserActions.reset();
+        this.setState({ showModal: true });
     };
 
     close = () => {
         this.setState({ showModal: false });
     };
-
-    loadUsers() {
-        UserApi
-            .get()
-            .then((response) => {
-                this.setState({
-                    users: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error getting users', error);
-            });
-    }
 
     render() {
         return (
@@ -110,21 +77,16 @@ class Users extends React.Component {
                     <UserTable users={this.state.users} onEdit={this.open} onDelete={this.delete} />
                 </Jumbotron>
 
-                <User
-                    user={this.state.user}
-                    show={this.state.showModal}
-                    onHide={this.close}
-                    onSubmit={this.save}
-                    onChange={this.setUserState}
-                />
+                <Loader loading={this.state.loading}>
+                    <User
+                        user={this.state.user}
+                        show={this.state.showModal}
+                        onHide={this.close}
+                        onSubmit={this.save}
+                        onChange={this.setUserState}
+                    />
+                </Loader>
             </div>
         );
     }
 }
-
-Users.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-};
-
-export default Users;

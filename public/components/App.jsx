@@ -1,57 +1,38 @@
 import React from 'react';
-import { ToastContainer, ToastMessage } from 'react-toastr';
+import NotificationSystem from 'react-notification-system';
+import NotificationStore from '../stores/NotificationStore';
+import css from './App.styl';
 
-const ToastMessageFactory = React.createFactory(ToastMessage.animation);
+let notificationSystem;
 
-class App extends React.Component {
-    toastSuccess = (message) => {
-        this
-            .refs
-            .container
-            .success(
-                message,
-                'Success',
-                { closeButton: true }
-            );
+export default class App extends React.Component {
+    static propTypes = {
+        children: React.PropTypes.element.isRequired,
     };
 
-    toastError = (message, error) => {
-        if (error) {
-            console.error(error);
-        }
+    componentDidMount() {
+        NotificationStore.listen(this.onStoreChange);
+        notificationSystem = this.refs.notificationSystem;
+    }
 
-        this
-            .refs
-            .container
-            .error(
-                message,
-                'Error',
-                { closeButton: true }
-            );
-    };
+    componentWillUnmount() {
+        NotificationStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange() {
+        const { notification } = NotificationStore.getState();
+        notificationSystem.addNotification(notification);
+    }
 
     render() {
         return (
-            <div className="maximum-size">
-                <div className="maximum-size">
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        toastSuccess: this.toastSuccess,
-                        toastError: this.toastError,
-                    })}
+            <div className={css.root}>
+                <div className={css.container}>
+                    {this.props.children}
                 </div>
 
-                <ToastContainer
-                    ref="container"
-                    toastMessageFactory={ToastMessageFactory}
-                    className="toast-bottom-left"
-                />
+                <NotificationSystem ref="notificationSystem" />
             </div>
         );
     }
 }
-
-App.propTypes = {
-    children: React.PropTypes.element.isRequired,
-};
-
-export default App;

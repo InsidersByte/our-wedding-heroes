@@ -1,44 +1,45 @@
 import React from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Col, Row, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
-import GiftSetApi from '../../api/giftSet.api';
 import moment from 'moment';
+import GiftSetActions from '../../actions/GiftSetActions';
+import GiftSetStore from '../../stores/GiftSetStore';
 import GiftTable from './GiftTable';
-import { GIFT_SETS_ROUTE } from '../../constants/routes.constants';
+import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
+import Loader from '../common/Loader';
 
-class GiftSetPage extends React.Component {
-    constructor(props, context) {
-        super(props, context);
+export default class GiftSetPage extends React.Component {
+    static propTypes = {
+        params: React.PropTypes.object.isRequired,
+    };
 
-        this.state = {
-            giftSet: {
-                giver: {},
-                gifts: [],
-            },
-        };
-    }
+    static defaultProps = {
+        params: {},
+    };
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
+    state = GiftSetStore.getState();
 
     componentDidMount() {
-        this.loadGiftSet();
+        GiftSetStore.listen(this.onStoreChange);
+        const { giftSetId } = this.props.params;
+        GiftSetActions.fetch(giftSetId);
     }
 
-    markAsPaid = () => {
-        // TODO: Use a confirmation model instead of confirm
-        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+    componentWillUnmount() {
+        GiftSetStore.unlisten(this.onStoreChange);
+    }
+
+    onStoreChange = state => {
+        if (this.state.removing && !state.removing) {
+            this.context.router.push(GIFT_SETS_ROUTE);
             return;
         }
 
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .paid(this.state.giftSet, giftSetId)
-            .then(() => {
-                this.loadGiftSet();
-                this.props.toastSuccess('Gift set marked as paid');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as paid', error);
-            });
+        this.setState(state);
     };
 
     markAsDetailsSent = () => {
@@ -47,17 +48,18 @@ class GiftSetPage extends React.Component {
             return;
         }
 
-        const { giftSetId } = this.props.params;
+        const { giftSetId: id } = this.props.params;
+        GiftSetActions.detailsSent({ ...this.state, id });
+    };
 
-        GiftSetApi
-            .detailsSent(this.state.giftSet, giftSetId)
-            .then(() => {
-                this.loadGiftSet();
-                this.props.toastSuccess('Gift set marked as details sent');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error marking a gift set as details sent', error);
-            });
+    markAsPaid = () => {
+        // TODO: Use a confirmation model instead of confirm
+        if (!confirm('Are you sure you want to mark this gift as paid?')) {
+            return;
+        }
+
+        const { giftSetId: id } = this.props.params;
+        GiftSetActions.paid({ ...this.state, id });
     };
 
     delete = () => {
@@ -66,33 +68,9 @@ class GiftSetPage extends React.Component {
             return;
         }
 
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .delete(giftSetId)
-            .then(() => {
-                this.context.router.push(GIFT_SETS_ROUTE);
-                this.props.toastSuccess('Gift set deleted');
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error deleting a gift set', error);
-            });
+        const { giftSetId: _id } = this.props.params;
+        GiftSetActions.remove({ _id });
     };
-
-    loadGiftSet() {
-        const { giftSetId } = this.props.params;
-
-        GiftSetApi
-            .get(giftSetId)
-            .then((response) => {
-                this.setState({
-                    giftSet: response,
-                });
-            })
-            .catch((error) => {
-                this.props.toastError('There was an error loading the gift set', error);
-            });
-    }
 
     render() {
         const fullName = `${this.state.giftSet.giver.forename} ${this.state.giftSet.giver.surname}`;
@@ -103,102 +81,88 @@ class GiftSetPage extends React.Component {
             <Jumbotron>
                 <h1>Gift Set</h1>
 
-                <Row>
-                    <Col md={4}>
-                        <FormGroup>
-                            <ControlLabel>Full Name</ControlLabel>
-                            <FormControl.Static>
-                                {fullName}
-                            </FormControl.Static>
-                        </FormGroup>
+                <Loader loading={this.state.loading}>
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <ControlLabel>Full Name</ControlLabel>
+                                <FormControl.Static>
+                                    {fullName}
+                                </FormControl.Static>
+                            </FormGroup>
 
-                        <FormGroup>
-                            <ControlLabel>Email Address</ControlLabel>
-                            <FormControl.Static>
-                                {this.state.giftSet.giver.email}
-                            </FormControl.Static>
-                        </FormGroup>
-                    </Col>
+                            <FormGroup>
+                                <ControlLabel>Email Address</ControlLabel>
+                                <FormControl.Static>
+                                    {this.state.giftSet.giver.email}
+                                </FormControl.Static>
+                            </FormGroup>
+                        </Col>
 
-                    <Col md={4}>
-                        <FormGroup>
-                            <ControlLabel>Phone Number</ControlLabel>
-                            <FormControl.Static>
-                                {this.state.giftSet.giver.phoneNumber}
-                            </FormControl.Static>
-                        </FormGroup>
+                        <Col md={4}>
+                            <FormGroup>
+                                <ControlLabel>Phone Number</ControlLabel>
+                                <FormControl.Static>
+                                    {this.state.giftSet.giver.phoneNumber}
+                                </FormControl.Static>
+                            </FormGroup>
 
-                        <FormGroup>
-                            <ControlLabel>Gift Date</ControlLabel>
-                            <FormControl.Static>
-                                {createdAtFormatted}
-                            </FormControl.Static>
-                        </FormGroup>
-                    </Col>
+                            <FormGroup>
+                                <ControlLabel>Gift Date</ControlLabel>
+                                <FormControl.Static>
+                                    {createdAtFormatted}
+                                </FormControl.Static>
+                            </FormGroup>
+                        </Col>
 
-                    <Col md={4}>
-                        <FormGroup>
-                            <ControlLabel>Gift Total (£)</ControlLabel>
-                            <FormControl.Static>
-                                {this.state.giftSet.total}
-                            </FormControl.Static>
-                        </FormGroup>
+                        <Col md={4}>
+                            <FormGroup>
+                                <ControlLabel>Gift Total (£)</ControlLabel>
+                                <FormControl.Static>
+                                    {this.state.giftSet.total}
+                                </FormControl.Static>
+                            </FormGroup>
 
-                        <FormGroup>
-                            <ControlLabel>Paid</ControlLabel>
-                            <FormControl.Static>
-                                {this.state.giftSet.paid ? 'Yes' : 'No'}
-                            </FormControl.Static>
-                        </FormGroup>
-                    </Col>
-                </Row>
+                            <FormGroup>
+                                <ControlLabel>Paid</ControlLabel>
+                                <FormControl.Static>
+                                    {this.state.giftSet.paid ? 'Yes' : 'No'}
+                                </FormControl.Static>
+                            </FormGroup>
+                        </Col>
+                    </Row>
 
-                <h3>Gifts</h3>
+                    <h3>Gifts</h3>
 
-                <GiftTable gifts={this.state.giftSet.gifts} />
+                    <GiftTable gifts={this.state.giftSet.gifts} />
 
-                <ButtonToolbar>
-                    <Link to="admin/giftSet" className="btn btn-primary" role="button">Back to Gift Sets</Link>
+                    <ButtonToolbar>
+                        <Link to={GIFT_SETS_ROUTE} className="btn btn-primary" role="button">Back to Gift Sets</Link>
 
-                    <Button
-                        onClick={this.markAsDetailsSent}
-                        bsStyle="success"
-                        disabled={this.state.giftSet.detailsSent || this.state.giftSet.paid}
-                    >
-                        {
-                            this.state.giftSet.detailsSent || this.state.giftSet.paid ?
-                                'Already Marked as Details Sent or Paid' :
-                                'Mark as Details Sent'
-                        }
-                    </Button>
+                        <Button
+                            onClick={this.markAsDetailsSent}
+                            bsStyle="success"
+                            disabled={this.state.giftSet.detailsSent || this.state.giftSet.paid}
+                        >
+                            {
+                                this.state.giftSet.detailsSent || this.state.giftSet.paid ?
+                                    'Already Marked as Details Sent or Paid' :
+                                    'Mark as Details Sent'
+                            }
+                        </Button>
 
-                    <Button
-                        onClick={this.markAsPaid}
-                        bsStyle="success"
-                        disabled={this.state.giftSet.paid}
-                    >
-                        {this.state.giftSet.paid ? 'Already Marked as Paid' : 'Mark as Paid'}
-                    </Button>
+                        <Button
+                            onClick={this.markAsPaid}
+                            bsStyle="success"
+                            disabled={this.state.giftSet.paid}
+                        >
+                            {this.state.giftSet.paid ? 'Already Marked as Paid' : 'Mark as Paid'}
+                        </Button>
 
-                    <Button onClick={this.delete} bsStyle="danger" disabled={this.state.giftSet.paid}>Delete</Button>
-                </ButtonToolbar>
+                        <Button onClick={this.delete} bsStyle="danger" disabled={this.state.giftSet.paid}>Delete</Button>
+                    </ButtonToolbar>
+                </Loader>
             </Jumbotron>
         );
     }
 }
-
-GiftSetPage.propTypes = {
-    toastSuccess: React.PropTypes.func,
-    toastError: React.PropTypes.func,
-    params: React.PropTypes.object.isRequired,
-};
-
-GiftSetPage.defaultProps = {
-    params: {},
-};
-
-GiftSetPage.contextTypes = {
-    router: React.PropTypes.object.isRequired,
-};
-
-export default GiftSetPage;
