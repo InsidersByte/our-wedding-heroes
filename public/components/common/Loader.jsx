@@ -11,6 +11,13 @@ export default function Loader(props) {
 
 Loader.propTypes = {
     loading: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.element.isRequired,
+    children: React.PropTypes.oneOfType([
+        React.PropTypes.element,
+        React.PropTypes.arrayOf(React.PropTypes.element),
+    ]).isRequired,
     className: React.PropTypes.string,
+};
+
+Loader.defaultProps = {
+    loading: true,
 };

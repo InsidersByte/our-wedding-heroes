@@ -1,7 +1,7 @@
 import React from 'react';
 import landingActions from '../actions/LandingActions';
 import landingStore from '../stores/LandingStore';
-
+import Loader from './common/Loader';
 import css from './AuthenticatedLanding.styl';
 
 export default class AuthenticatedLanding extends React.Component {
@@ -28,9 +28,9 @@ export default class AuthenticatedLanding extends React.Component {
             `There has been ${giftSetCount} new gift set${giftSetCount === 1 ? '' : 's'} since you last logged in!`;
 
         return (
-            <div className={css.root}>
+            <Loader className={css.root} loading={this.state.loading}>
                 <h1>{message}</h1>
-            </div>
+            </Loader>
         );
     }
 }
