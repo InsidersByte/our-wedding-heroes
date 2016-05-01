@@ -1,7 +1,7 @@
 import alt from '../helpers/alt';
 import passwordActions from '../actions/PasswordActions';
 
-class PasswordResetStore {
+class SetupStore {
     constructor() {
         this.bindActions(passwordActions);
 
@@ -25,4 +25,4 @@ class PasswordResetStore {
     }
 }
 
-export default alt.createStore(PasswordResetStore, 'PasswordResetStore');
+export default alt.createStore(SetupStore, 'SetupStore');

@@ -18,8 +18,8 @@ module.exports = {
     entry: {
         app: PATHS.PUBLIC,
         vendor: [
-            'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'react-toastr', 'superagent',
-            'classnames', 'jwt-decode',
+            'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'superagent',
+            'classnames', 'jwt-decode', 'alt', 'react-notification-system', 'smoothscroll', 'validator',
         ],
     },
     output: {
