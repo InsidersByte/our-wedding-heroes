@@ -1,10 +1,13 @@
 import React from 'react';
-import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routeConstants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
-import WeddingPartyMembersTable from './WeddingPartyMembersTable';
 import Loader from '../common/Loader';
+import WeddingPartyMember from './WeddingPartyMember';
+import FontAwesome from '../common/FontAwesome';
+import SortableContainer from '../common/SortableContainer';
+import SortableItem from '../common/SortableItem';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {
@@ -30,16 +33,21 @@ export default class WeddingPartyMembersPage extends React.Component {
         this.setState(state);
     };
 
-    onDelete = (member) => {
+    onSelect = (member) => {
+        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+    };
+
+    onDelete(member) {
         if (!confirm('Are you sure you want to delete this member?')) {
             return;
         }
 
         WeddingPartyMemberActions.remove(member);
-    };
+    }
 
-    onSelect = (member) => {
-        this.context.router.push(updateWeddingPartyMemberRoute(member._id)); // eslint-disable-line no-underscore-dangle
+    onDrop = ({ id }) => {
+        const member = this.state.members.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        WeddingPartyMemberActions.update({ member, id });
     };
 
     create = () => {
@@ -47,16 +55,33 @@ export default class WeddingPartyMembersPage extends React.Component {
     };
 
     render() {
-        return (
-            <Jumbotron>
-                <h1>Wedding Party Members&nbsp;
-                    <Button bsStyle="success" bsSize="small" onClick={this.create}><Glyphicon glyph="plus" /></Button>
-                </h1>
+        const membersList = this.state.members.map((member) =>
+            <SortableItem
+                key={member._id} // eslint-disable-line no-underscore-dangle
+                id={member._id} // eslint-disable-line no-underscore-dangle
+                onMove={WeddingPartyMemberActions.move}
+                onDrop={this.onDrop}
+            >
+                <WeddingPartyMember
+                    member={member}
+                    onSelect={this.onSelect}
+                    onDelete={this.onDelete}
+                />
+            </SortableItem>
+        );
 
-                <Loader loading={this.state.loading}>
-                    <WeddingPartyMembersTable members={this.state.members} onSelect={this.onSelect} onDelete={this.onDelete} />
-                </Loader>
-            </Jumbotron>
+        return (
+            <SortableContainer>
+                <Jumbotron>
+                    <h1>Wedding Party Members&nbsp;
+                        <Button bsStyle="success" bsSize="small" onClick={this.create}><FontAwesome icon="plus" /></Button>
+                    </h1>
+
+                    <Loader loading={this.state.loading}>
+                        {membersList}
+                    </Loader>
+                </Jumbotron>
+            </SortableContainer>
         );
     }
 }
