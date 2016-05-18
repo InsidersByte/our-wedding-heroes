@@ -6,8 +6,10 @@ const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const wrap = require('../utilities/wrap');
 const Mailer = require('../mail');
 const mailer = new Mailer();
+const { PAYMENT_METHODS } = require('../../lib/constants');
+const { generatePaypalMeLink } = require('../../lib/paypal');
 
-module.exports = (app, express) => {
+module.exports = (app, express, config) => {
     const router = new express.Router();
 
     router
@@ -19,6 +21,7 @@ module.exports = (app, express) => {
             req.checkBody('giver.surname').notEmpty();
             req.checkBody('giver.email').isEmail();
             req.checkBody('giver.phoneNumber').notEmpty();
+            req.checkBody('giver.paymentMethod').isIn([PAYMENT_METHODS.PAYPAL, PAYMENT_METHODS.BANK_TRANSFER]);
             req.checkBody('items').notEmpty();
 
             const errors = req.validationErrors();
@@ -29,8 +32,8 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const giverData = req.body.giver;
-            const itemsData = req.body.items;
+            const { giver: giverData, items: itemsData } = req.body;
+            const { paymentMethod } = giverData;
 
             let giver = yield Giver.findOne({ email: giverData.email });
 
@@ -42,6 +45,7 @@ module.exports = (app, express) => {
 
             const giftSet = yield GiftSet.create({
                 giver: giver._id, // eslint-disable-line no-underscore-dangle
+                paymentMethod,
             });
 
             giver.giftSets.push(giftSet._id); // eslint-disable-line no-underscore-dangle
@@ -74,7 +78,9 @@ module.exports = (app, express) => {
                 })
                 .execPopulate();
 
-            yield mailer.send({ to: giver.email, subject: 'Gift Confirmation', giftSet }, 'confirmation');
+            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.total });
+
+            yield mailer.send({ to: giver.email, subject: 'Gift Confirmation', giftSet, PAYMENT_METHODS, paypalLink }, 'confirmation');
 
             const users = yield User.find({}, 'username');
             const userEmails = users.map(user => user.username);
@@ -91,6 +97,30 @@ module.exports = (app, express) => {
             yield giftSet.save();
 
             return res.json(giftSet);
+        }));
+
+    router
+        .route('/:id')
+
+        .get(wrap(function* getGift(req, res) {
+            const { id } = req.params;
+
+            const giftSet = yield GiftSet
+                .findById(id)
+                .populate({
+                    path: 'gifts',
+                });
+
+            if (!giftSet) {
+                return res
+                    .status(404)
+                    .send();
+            }
+
+            const paypalLink = generatePaypalMeLink({ username: config.paypalMeUsername, amount: giftSet.total });
+            const giftSetWithPaypalLink = Object.assign(giftSet.toJSON(), { paypalLink });
+
+            return res.json(giftSetWithPaypalLink);
         }));
 
     return router;

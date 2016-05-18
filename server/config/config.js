@@ -4,6 +4,7 @@ module.exports = {
     database: process.env.DATABASE_URL || 'mongodb://localhost:27017/our-wedding-heroes',
     secret: process.env.SECRET || 'ilovetheideaofmywedding',
     siteTitle: process.env.SITE_TITLE || 'Our Wedding',
+    paypalMeUsername: process.env.PAYPAL_ME_USERNAME,
     mail: {
         from: process.env.EMAIL_FROM,
         options: {
