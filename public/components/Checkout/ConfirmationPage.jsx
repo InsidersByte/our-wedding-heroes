@@ -14,7 +14,10 @@ export default class ConfirmationPage extends React.Component {
         }).isRequired,
     };
 
-    state = GiftStore.getState();
+    state = {
+        ...GiftStore.getState(),
+        linkClicked: false,
+    };
 
     componentDidMount() {
         GiftStore.listen(this.onStoreChange);
@@ -28,6 +31,10 @@ export default class ConfirmationPage extends React.Component {
 
     onStoreChange = state => {
         this.setState(state);
+    };
+
+    onLinkClicked = () => {
+        this.setState({ linkClicked: true });
     };
 
     renderPaymentMessage = () => {
@@ -47,17 +54,27 @@ export default class ConfirmationPage extends React.Component {
         );
     };
 
-    renderActions = () => {
-        const { paymentMethod, paypalLink } = this.state.giftSet;
+    renderPayPalLink = () => {
+        const { giftSet: { paymentMethod, paypalLink } } = this.state;
 
         if (paymentMethod !== PAYMENT_METHODS.PAYPAL) {
-            return (
-                <Link to={HOME_ROUTE} className="btn btn-success">Back to Home</Link>
-            );
+            return null;
         }
 
         return (
-            <a href={paypalLink} target="_blank" className="btn btn-success">Pay with PayPal</a>
+            <a href={paypalLink} target="_blank" className="btn btn-success" onClick={this.onLinkClicked}>Pay with PayPal</a>
+        );
+    };
+
+    renderHomeLink = () => {
+        const { linkClicked, giftSet: { paymentMethod } } = this.state;
+
+        if (paymentMethod === PAYMENT_METHODS.PAYPAL && !linkClicked) {
+            return null;
+        }
+
+        return (
+            <Link to={HOME_ROUTE} className="btn btn-default">Back to Home</Link>
         );
     };
 
@@ -67,12 +84,16 @@ export default class ConfirmationPage extends React.Component {
                 <h1 className={css.title}>Thank you very much for your gift!</h1>
 
                 <div className={css.content}>
-                    <p>You will receive an email with your gift confirmation.</p>
+                    <p>The email confirmation for your gift is on the way!</p>
 
                     {this.renderPaymentMessage()}
                 </div>
 
-                {this.renderActions()}
+                <div className={css.actions}>
+                    {this.renderPayPalLink()}
+
+                    {this.renderHomeLink()}
+                </div>
             </Loader>
         );
     }

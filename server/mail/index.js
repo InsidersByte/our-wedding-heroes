@@ -42,6 +42,7 @@ class mailer {
             message,
             {
                 from: this.from,
+                signature: config.mail.signature,
             }
         );
 
