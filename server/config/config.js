@@ -7,6 +7,7 @@ module.exports = {
     paypalMeUsername: process.env.PAYPAL_ME_USERNAME,
     mail: {
         from: process.env.EMAIL_FROM,
+        signature: process.env.EMAIL_SIGNATURE,
         options: {
             service: process.env.EMAIL_SERVICE, // https://www.npmjs.com/package/nodemailer#using-well-known-services
             auth: {
