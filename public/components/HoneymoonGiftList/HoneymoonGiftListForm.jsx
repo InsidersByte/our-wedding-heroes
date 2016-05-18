@@ -9,7 +9,7 @@ export default function HoneymoonGiftListForm(props) {
     if (props.honeymoonGiftList.showPaymentMessage === true) {
         paymentMessageInput = ( // eslint-disable-line no-extra-parens
             <FormGroup>
-                <ControlLabel>Offline Payment Message</ControlLabel>
+                <ControlLabel>Payment Message</ControlLabel>
                 <FormControl
                     name="paymentMessage"
                     componentClass="textarea"

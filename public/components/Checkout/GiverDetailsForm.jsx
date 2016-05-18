@@ -1,22 +1,10 @@
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, Radio, Alert } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Radio } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { BASKET_ROUTE } from '../../constants/routeConstants';
 import Form from '../common/Form';
 import css from './GiverDetailsForm.styl';
 import { PAYMENT_METHODS } from '../../../lib/constants';
-
-function renderPaymentMethodAlert(paymentMethod) {
-    if (paymentMethod !== PAYMENT_METHODS.PAYPAL) {
-        return null;
-    }
-
-    return (
-        <Alert bsStyle="success">
-            You will be redirected to <a target="_blank" href="https://www.paypal.me/">paypal.me</a> after completing your gift.
-        </Alert>
-    );
-}
 
 export default function GiverDetailsForm(props) {
     return (
@@ -90,8 +78,6 @@ export default function GiverDetailsForm(props) {
                     Bank Transfer
                 </Radio>
             </FormGroup>
-
-            {renderPaymentMethodAlert(props.giver.paymentMethod)}
 
             <div className={css.actions}>
                 <Button
