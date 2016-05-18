@@ -4,6 +4,7 @@ import BaseStore from './BaseStore';
 import { WEDDING_PARTY_MEMBER as key } from '../constants/KeyConstants';
 import { WEDDING_PARTY_MEMBERS_ROUTE } from '../constants/routeConstants';
 import history from '../helpers/history';
+import { move } from '../helpers/sortingHelper';
 
 const initialValue = {
     name: '',
@@ -20,6 +21,10 @@ class WeddingPartyMemberStore extends BaseStore {
     createSuccess(data) {
         super.createSuccess(data);
         history.push(WEDDING_PARTY_MEMBERS_ROUTE);
+    }
+
+    move({ sourceId, targetId }) {
+        this.members = move({ sourceId, targetId, data: this.members });
     }
 }
 

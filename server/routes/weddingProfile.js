@@ -10,9 +10,18 @@ module.exports = (app, express) => {
 
         .get(wrap(function* getWeddingProfile(req, res) {
             const weddingProfile = yield WeddingProfile.findOne({}).lean();
+
+            if (!weddingProfile) {
+                return res.status(404).send();
+            }
+
+            const weddingPartyMembers = weddingProfile.weddingPartyMembers || [];
+            weddingProfile.weddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+
             const honeymoonGiftList = yield HoneymoonGiftListItem
                 .find({})
                 .populate('gifts', 'quantity')
+                .sort('position')
                 .lean()
                 .exec();
 

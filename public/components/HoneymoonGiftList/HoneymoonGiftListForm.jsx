@@ -1,20 +1,21 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default function HoneymoonGiftListForm(props) {
-    let offlinePaymentMessageInput = null;
+    let paymentMessageInput = null;
     let disclaimerMessageInput = null;
 
-    if (props.honeymoonGiftList.showOfflinePaymentMessage === true) {
-        offlinePaymentMessageInput = (
+    if (props.honeymoonGiftList.showPaymentMessage === true) {
+        paymentMessageInput = ( // eslint-disable-line no-extra-parens
             <FormGroup>
                 <ControlLabel>Offline Payment Message</ControlLabel>
                 <FormControl
-                    name="offlinePaymentMessage"
+                    name="paymentMessage"
                     componentClass="textarea"
                     rows="3"
-                    placeholder="Enter your offline payment message"
-                    value={props.honeymoonGiftList.offlinePaymentMessage}
+                    placeholder="Enter your payment message"
+                    value={props.honeymoonGiftList.paymentMessage}
                     onChange={props.onChange}
                     required
                 />
@@ -23,7 +24,7 @@ export default function HoneymoonGiftListForm(props) {
     }
 
     if (props.honeymoonGiftList.showDisclaimerMessage === true) {
-        disclaimerMessageInput = (
+        disclaimerMessageInput = ( // eslint-disable-line no-extra-parens
             <FormGroup>
                 <ControlLabel>Disclaimer Message</ControlLabel>
                 <FormControl
@@ -40,7 +41,7 @@ export default function HoneymoonGiftListForm(props) {
     }
 
     return (
-        <form onSubmit={props.onSubmit}>
+        <Form onSubmit={props.onSubmit} loading={props.loading} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Content</ControlLabel>
                 <FormControl
@@ -55,15 +56,15 @@ export default function HoneymoonGiftListForm(props) {
             </FormGroup>
 
             <Checkbox
-                name="showOfflinePaymentMessage"
-                value={props.honeymoonGiftList.showOfflinePaymentMessage}
-                checked={props.honeymoonGiftList.showOfflinePaymentMessage}
+                name="showPaymentMessage"
+                value={props.honeymoonGiftList.showPaymentMessage}
+                checked={props.honeymoonGiftList.showPaymentMessage}
                 onChange={props.onChange}
             >
-                Show Offline Payment Message
+                Show Payment Message
             </Checkbox>
 
-            {offlinePaymentMessageInput}
+            {paymentMessageInput}
 
             <Checkbox
                 name="showDisclaimerMessage"
@@ -77,12 +78,20 @@ export default function HoneymoonGiftListForm(props) {
             {disclaimerMessageInput}
 
             <Button type="submit" bsStyle="primary" block>Update</Button>
-        </form>
+        </Form>
     );
 }
 
 HoneymoonGiftListForm.propTypes = {
-    honeymoonGiftList: React.PropTypes.object.isRequired,
+    honeymoonGiftList: React.PropTypes.shape({
+        showPaymentMessage: React.PropTypes.bool.isRequired,
+        showDisclaimerMessage: React.PropTypes.bool.isRequired,
+        paymentMessage: React.PropTypes.string.isRequired,
+        disclaimerMessage: React.PropTypes.string.isRequired,
+        content: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

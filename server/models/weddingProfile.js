@@ -6,6 +6,7 @@ const weddingPartyMember = new Schema({
     title: { type: String, required: true },
     imageUrl: { type: String, required: true },
     description: { type: String, required: true },
+    position: { type: Number, required: true, index: { unique: true } },
 });
 
 const WeddingProfileSchema = new Schema({
@@ -22,8 +23,8 @@ const WeddingProfileSchema = new Schema({
     aboutOurHoneymoon: { type: String, required: true },
     honeymoonGiftList: {
         content: { type: String, required: true },
-        showOfflinePaymentMessage: { type: Boolean, required: true },
-        offlinePaymentMessage: { type: String },
+        showPaymentMessage: { type: Boolean, required: true },
+        paymentMessage: { type: String },
         showDisclaimerMessage: { type: Boolean, required: true },
         disclaimerMessage: { type: String },
     },

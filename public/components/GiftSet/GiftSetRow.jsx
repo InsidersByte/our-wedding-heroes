@@ -5,7 +5,19 @@ import FontAwesome from '../common/FontAwesome';
 
 export default class GiftSetRow extends React.Component {
     static propTypes = {
-        giftSet: React.PropTypes.object.isRequired,
+        giftSet: React.PropTypes.shape({
+            giver: React.PropTypes.shape({
+                forename: React.PropTypes.string.isRequired,
+                surname: React.PropTypes.string.isRequired,
+                email: React.PropTypes.string.isRequired,
+                phoneNumber: React.PropTypes.string.isRequired,
+            }).isRequired,
+            createdAt: React.PropTypes.string.isRequired,
+            total: React.PropTypes.number.isRequired,
+            paid: React.PropTypes.bool.isRequired,
+            detailsSent: React.PropTypes.bool.isRequired,
+            paymentMethod: React.PropTypes.string.isRequired,
+        }).isRequired,
         onDelete: React.PropTypes.func.isRequired,
         onMarkAsPaid: React.PropTypes.func.isRequired,
         onMarkAsDetailsSent: React.PropTypes.func.isRequired,
@@ -42,6 +54,7 @@ export default class GiftSetRow extends React.Component {
                 <th>{this.props.giftSet.giver.email}</th>
                 <th>{this.props.giftSet.giver.phoneNumber}</th>
                 <th>{this.props.giftSet.total}</th>
+                <th>{this.props.giftSet.paymentMethod}</th>
                 <th>{createdAtFormatted}</th>
                 <th>{this.props.giftSet.paid ? 'Yes' : 'No'}</th>
                 <th>

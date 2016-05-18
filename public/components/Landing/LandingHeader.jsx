@@ -7,11 +7,7 @@ export default function LandingHeader(props) {
     let daysTillIDoCountdown = null;
 
     if (props.cover.weddingDate) {
-        daysTillIDoCountdown = (
-            <h2>
-                {props.cover.daysToGo} Days until I Do
-            </h2>
-        );
+        daysTillIDoCountdown = <h2>{props.cover.daysToGo} Days until I Do</h2>;
     }
 
     return (
@@ -33,7 +29,12 @@ export default function LandingHeader(props) {
 }
 
 LandingHeader.propTypes = {
-    cover: React.PropTypes.object.isRequired,
+    cover: React.PropTypes.shape({
+        title: React.PropTypes.string.isRequired,
+        imageUrl: React.PropTypes.string.isRequired,
+        weddingDate: React.PropTypes.string.isRequired,
+        daysToGo: React.PropTypes.number.isRequired,
+    }).isRequired,
     onScrollDown: React.PropTypes.func.isRequired,
 };
 

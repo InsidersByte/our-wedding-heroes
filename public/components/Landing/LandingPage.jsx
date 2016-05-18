@@ -59,14 +59,14 @@ export default class LandingPage extends React.Component {
         basketActions.addToBasket(item);
     }
 
-    renderOfflineMessage = () => {
-        if (this.state.weddingProfile.honeymoonGiftList.showOfflinePaymentMessage) {
+    renderPaymentMessage = () => {
+        if (this.state.weddingProfile.honeymoonGiftList.showPaymentMessage) {
             return (
                 <span>
                     <br />
                     <br />
 
-                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.offlinePaymentMessage}
+                    <FontAwesome icon="info-circle" /> {this.state.weddingProfile.honeymoonGiftList.paymentMessage}
                 </span>
             );
         }
@@ -94,15 +94,13 @@ export default class LandingPage extends React.Component {
             return null;
         }
 
-        const weddingPartyMembersElement = (
-            <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />
-        );
+        const weddingPartyMembersElement = <WeddingPartyMembers weddingPartyMembers={this.state.weddingProfile.weddingPartyMembers} />;
 
         return <LandingSection title="Wedding Party Members" postContent={weddingPartyMembersElement} />;
     };
 
     render() {
-        const giftItemsElement = (
+        const giftItemsElement = ( // eslint-disable-line no-extra-parens
             <GiftItems
                 giftItems={this.state.weddingProfile.honeymoonGiftListItems}
                 addToBasket={this.addToBasket}
@@ -150,13 +148,13 @@ export default class LandingPage extends React.Component {
                             {this.state.weddingProfile.honeymoonGiftList.content}
                         </span>
 
-                        {this.renderOfflineMessage()}
+                        {this.renderPaymentMessage()}
 
                         {this.renderDisclaimerMessage()}
                     </div>
                 </LandingSection>
 
-                <Basket items={this.state.items} basketCount={this.state.basketCount} total={this.state.total} />
+                <Basket basketCount={this.state.basketCount} total={this.state.total} />
             </Loader>
         );
     }

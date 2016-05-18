@@ -13,6 +13,7 @@ export default class SetupPage extends React.Component {
             password: '',
             confirmPassword: '',
         },
+        saving: false,
     };
 
     componentDidMount() {
@@ -51,7 +52,7 @@ export default class SetupPage extends React.Component {
                 <Jumbotron>
                     <h1>Setup</h1>
 
-                    <SetupForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
+                    <SetupForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} saving={this.state.saving} />
                 </Jumbotron>
             </Col>
         );

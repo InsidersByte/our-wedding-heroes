@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, InputGroup, Button } from 'react-bootstrap';
 import css from './LoginForm.styl';
+import Form from '../common/Form';
 
 export default function LoginForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <Form onSubmit={props.onSubmit} loading={false} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Username</ControlLabel>
                 <FormControl
@@ -35,13 +36,17 @@ export default function LoginForm(props) {
             </FormGroup>
 
             <Button type="submit" bsStyle="primary" block>Login</Button>
-        </form>
+        </Form>
     );
 }
 
 LoginForm.propTypes = {
-    user: React.PropTypes.object.isRequired,
+    user: React.PropTypes.shape({
+        username: React.PropTypes.string.isRequired,
+        password: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
     onForgot: React.PropTypes.func.isRequired,
+    onSubmit: React.PropTypes.func.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

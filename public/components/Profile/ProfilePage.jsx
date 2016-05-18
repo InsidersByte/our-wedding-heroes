@@ -14,6 +14,7 @@ export default class ProfilePage extends React.Component {
             newPassword: '',
             confirmPassword: '',
         },
+        saving: false,
     };
 
     componentDidMount() {
@@ -38,6 +39,7 @@ export default class ProfilePage extends React.Component {
 
         if (this.state.user.newPassword !== this.state.user.confirmPassword) {
             NotificationActions.error({ message: 'Your new passwords must match!' });
+            return;
         }
 
         passwordActions.update(this.state.user);
@@ -49,7 +51,12 @@ export default class ProfilePage extends React.Component {
                 <Jumbotron>
                     <h1>Change Your Password</h1>
 
-                    <ProfileForm user={this.state.user} onChange={this.onChange} onSubmit={this.submit} />
+                    <ProfileForm
+                        user={this.state.user}
+                        onChange={this.onChange}
+                        onSubmit={this.submit}
+                        saving={this.state.saving}
+                    />
                 </Jumbotron>
             </Col>
         );

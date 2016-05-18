@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import Form from '../common/Form';
 
 export default function CoverForm(props) {
     return (
-        <form onSubmit={props.onSubmit}>
+        <Form onSubmit={props.onSubmit} loading={props.loading} saving={props.saving}>
             <FormGroup>
                 <ControlLabel>Title</ControlLabel>
                 <FormControl
@@ -41,12 +42,18 @@ export default function CoverForm(props) {
             </FormGroup>
 
             <Button type="submit" bsStyle="primary" block>Update</Button>
-        </form>
+        </Form>
     );
 }
 
 CoverForm.propTypes = {
-    cover: React.PropTypes.object.isRequired,
+    cover: React.PropTypes.shape({
+        title: React.PropTypes.string.isRequired,
+        imageUrl: React.PropTypes.string.isRequired,
+        weddingDate: React.PropTypes.string.isRequired,
+    }).isRequired,
     onChange: React.PropTypes.func.isRequired,
     onSubmit: React.PropTypes.func.isRequired,
+    loading: React.PropTypes.bool.isRequired,
+    saving: React.PropTypes.bool.isRequired,
 };

@@ -3,8 +3,10 @@ import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItemActions from '../../actions/HoneymoonGiftListItemActions';
 import HoneymoonGiftListItemStore from '../../stores/HoneymoonGiftListItemStore';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
-import HoneymoonGiftListItemTable from './HoneymoonGiftListItemTable';
 import Loader from '../common/Loader';
+import SortableContainer from '../common/SortableContainer';
+import SortableItem from '../common/SortableItem';
+import HoneymoonGiftListItemListItem from './HoneymoonGiftListItemListItem';
 
 export default class HoneymoonGiftListItemPage extends React.Component {
     state = { ...HoneymoonGiftListItemStore.getState(), showModal: false };
@@ -31,14 +33,17 @@ export default class HoneymoonGiftListItemPage extends React.Component {
         this.setState(state);
     };
 
-    setItemState = (event) => {
-        const field = event.target.name;
-        const value = event.target.value;
-        this.state.item[field] = value;
-        return this.setState({ item: this.state.item });
+    onChange = ({ target: { name, value } }) => {
+        const item = Object.assign(this.state.item, { [name]: value });
+        this.setState({ item });
     };
 
-    save = (item) => {
+    onDrop = ({ id }) => {
+        const item = this.state.items.find(o => o._id === id); // eslint-disable-line no-underscore-dangle
+        HoneymoonGiftListItemActions.update({ item, id });
+    };
+
+    onSubmit = (item) => {
         if (!item._id) { // eslint-disable-line no-underscore-dangle
             HoneymoonGiftListItemActions.create({ item });
         } else {
@@ -46,7 +51,7 @@ export default class HoneymoonGiftListItemPage extends React.Component {
         }
     };
 
-    delete = (item) => {
+    onDelete = (item) => {
         // TODO: Use a confirmation model instead of confirm
         if (!confirm('Are you sure you want to delete this gift item?')) {
             return;
@@ -70,27 +75,45 @@ export default class HoneymoonGiftListItemPage extends React.Component {
     };
 
     render() {
+        const itemList = this.state.items.map(item =>
+            <SortableItem
+                key={item._id} // eslint-disable-line no-underscore-dangle
+                id={item._id} // eslint-disable-line no-underscore-dangle
+                onMove={HoneymoonGiftListItemActions.move}
+                onDrop={this.onDrop}
+            >
+                <HoneymoonGiftListItemListItem
+                    item={item}
+                    onSelect={this.open}
+                    onDelete={this.onDelete}
+                />
+            </SortableItem>
+        );
+
         return (
             <div>
-                <Jumbotron>
-                    <h1>
-                        Honeymoon Gift List Items&nbsp;
-                        <Button bsStyle="success" bsSize="small" onClick={this.add}>
-                            <Glyphicon glyph="plus" />
-                        </Button>
-                    </h1>
+                <SortableContainer>
+                    <Jumbotron>
+                        <h1>
+                            Honeymoon Gift List Items&nbsp;
+                            <Button bsStyle="success" bsSize="small" onClick={this.add}>
+                                <Glyphicon glyph="plus" />
+                            </Button>
+                        </h1>
 
-                    <Loader loading={this.state.loading}>
-                        <HoneymoonGiftListItemTable items={this.state.items} onEdit={this.open} onDelete={this.delete} />
-                    </Loader>
-                </Jumbotron>
+                        <Loader loading={this.state.loading}>
+                            {itemList}
+                        </Loader>
+                    </Jumbotron>
+                </SortableContainer>
 
                 <HoneymoonGiftListItem
                     item={this.state.item}
                     show={this.state.showModal}
                     onHide={this.close}
-                    onSubmit={this.save}
-                    onChange={this.setItemState}
+                    onChange={this.onChange}
+                    onSubmit={this.onSubmit}
+                    saving={this.state.saving}
                 />
             </div>
         );

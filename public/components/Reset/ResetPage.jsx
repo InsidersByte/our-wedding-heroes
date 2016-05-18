@@ -19,6 +19,7 @@ export default class ResetPage extends React.Component {
             password: '',
             confirmPassword: '',
         },
+        saving: false,
     };
 
     componentDidMount() {
@@ -56,7 +57,7 @@ export default class ResetPage extends React.Component {
                 <Jumbotron>
                     <h1>Reset Password</h1>
 
-                    <ResetForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} />
+                    <ResetForm user={this.state.user} onChange={this.setUserState} onSubmit={this.submit} saving={this.state.saving} />
                 </Jumbotron>
             </Col>
         );

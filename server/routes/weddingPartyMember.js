@@ -1,5 +1,7 @@
 const WeddingProfile = require('../models/weddingProfile');
 const wrap = require('../utilities/wrap');
+const { integer } = require('../../lib/random');
+const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -9,7 +11,11 @@ module.exports = (app, express) => {
 
         .get(wrap(function* getWeddingPartyMembers(req, res) {
             const weddingProfile = yield WeddingProfile.findOne({});
-            return res.json(weddingProfile.weddingPartyMembers);
+
+            const weddingPartyMembers = weddingProfile.weddingPartyMembers || [];
+            const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
+
+            return res.json(sortedWeddingPartyMembers);
         }))
 
         .post(wrap(function* createWeddingPartyMember(req, res) {
@@ -28,11 +34,16 @@ module.exports = (app, express) => {
 
             const weddingProfile = yield WeddingProfile.findOne({});
 
+            const positions = weddingProfile.weddingPartyMembers.map(o => o.position);
+            const maximumPosition = positions.length > 0 ? Math.max(...positions) : 0;
+            const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
+
             const weddingPartyMember = weddingProfile.weddingPartyMembers.create({
                 name: req.body.name,
                 title: req.body.title,
                 imageUrl: req.body.imageUrl,
                 description: req.body.description,
+                position,
             });
 
             weddingProfile.weddingPartyMembers.push(weddingPartyMember);
@@ -67,6 +78,7 @@ module.exports = (app, express) => {
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
             req.checkBody('description').notEmpty();
+            req.checkBody('position').isFloat();
 
             const errors = req.validationErrors();
 
@@ -90,6 +102,7 @@ module.exports = (app, express) => {
             weddingPartyMember.title = req.body.title;
             weddingPartyMember.imageUrl = req.body.imageUrl;
             weddingPartyMember.description = req.body.description;
+            weddingPartyMember.position = req.body.position;
 
             yield weddingProfile.save();
 
