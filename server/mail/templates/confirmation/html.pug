@@ -29,17 +29,17 @@ html(lang='en')
                                                 table.breakdown
                                                     thead
                                                         tr
-                                                            th Name
-                                                            th Price (£)
-                                                            th Quantity
-                                                            th Total (£)
+                                                            th.text-column Name
+                                                            th.numeric-column Price (£)
+                                                            th.numeric-column Quantity
+                                                            th.numeric-column Total (£)
                                                     tbody
                                                         each gift in giftSet.gifts
                                                             tr
-                                                                td #{gift.honeymoonGiftListItem.name}
-                                                                td #{gift.price}
-                                                                td #{gift.quantity}
-                                                                td #{gift.total}
+                                                                td.text-column #{gift.honeymoonGiftListItem.name}
+                                                                td.numeric-column #{gift.price}
+                                                                td.numeric-column #{gift.quantity}
+                                                                td.numeric-column #{gift.total}
 
                                                 p
                                                     strong Total £#{giftSet.total}

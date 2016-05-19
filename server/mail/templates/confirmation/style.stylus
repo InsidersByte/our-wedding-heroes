@@ -73,10 +73,16 @@ ul, ol
 .breakdown
     margin 0
     padding 0 0 1.5em 0
-    text-align left
     width 100%
+
+.text-column
+    text-align left
+    font-size 12px
+
+.numeric-column
+    text-align right
+    font-size 12px
 
 @media only screen and (max-width 620px)
     table[class="main-wrapper"]
         width 100% !important
-
