@@ -2,15 +2,12 @@ extends ../../layout.pug
 
 block content
     p
-        strong Thank you very much for your gift!
+        strong Woop we just got a gift!
 
-    p Your chosen payment method was #{giftSet.paymentMethod}
+    p
+        | #{giver.forename} #{giver.surname} has just confirmed a gift set worth £#{giftSet.total}!
 
-    if giftSet.paymentMethod === PAYMENT_METHODS.PAYPAL
-        p
-            a(href=paypalLink) Click here to pay with PayPal.Me
-    else
-        p If you do change you mind and want to pay with PayPal, then #[a(href=paypalLink) click here to pay with PayPal.Me]
+    p Their chosen payment method was #{giftSet.paymentMethod}
 
     table.breakdown
         thead
@@ -29,5 +26,3 @@ block content
 
     p
         strong Total £#{giftSet.total}
-
-    p #{signature}
