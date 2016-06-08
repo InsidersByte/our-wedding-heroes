@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import jwtDecode from 'jwt-decode';
+import { whyDidYouUpdate } from 'why-did-you-update';
 
 import history from './helpers/history';
 import routes from './routes';
@@ -12,6 +13,10 @@ import 'animate.css/animate.css';
 import 'font-awesome/css/font-awesome.css';
 import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
 import './index.styl';
+
+if (process.env.NODE_ENV !== 'production') {
+    whyDidYouUpdate(React);
+}
 
 const jwt = localStorage.getItem('jwt');
 
