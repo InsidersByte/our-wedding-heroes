@@ -41,6 +41,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
                 include: [PATHS.PUBLIC, PATHS.LIB],
+                query: {
+                    presets: ['react', 'es2015', 'stage-1'],
+                    plugins: ['transform-decorators-legacy'],
+                },
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
