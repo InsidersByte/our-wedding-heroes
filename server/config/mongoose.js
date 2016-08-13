@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const databaseInitialiser = require('../utilities/databaseInitialiser');
 
+mongoose.Promise = global.Promise;
+
 module.exports = (config) => {
     mongoose.connect(config.database);
 

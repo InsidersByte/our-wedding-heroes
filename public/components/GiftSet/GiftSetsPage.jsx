@@ -68,13 +68,21 @@ export default class GiftSetsPage extends React.Component {
     };
 
     render() {
+        const { loading, giftSets } = this.state;
+
+        const totalGiftSets = giftSets.length;
+        const giftSetsTotal = giftSets.reduce((a, b) => a.total + b.total, 0);
+
         return (
             <Jumbotron>
-                <h1>Gift Sets</h1>
+                <div style={{ display: 'inline-block' }}>
+                    <h1 style={{ display: 'inline-block' }}>Gift Sets</h1>
+                    &nbsp;({totalGiftSets} Gift Sets totalling £{giftSetsTotal})
+                </div>
 
-                <Loader loading={this.state.loading}>
+                <Loader loading={loading}>
                     <GiftSetTable
-                        giftSets={this.state.giftSets}
+                        giftSets={giftSets}
                         onMarkAsPaid={this.markAsPaid}
                         onMarkAsDetailsSent={this.markAsDetailsSent}
                         onDelete={this.delete}
