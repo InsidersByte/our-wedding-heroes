@@ -71,7 +71,7 @@ export default class GiftSetsPage extends React.Component {
         const { loading, giftSets } = this.state;
 
         const totalGiftSets = giftSets.length;
-        const giftSetsTotal = giftSets.reduce((a, b) => a.total + b.total, 0);
+        const giftSetsTotal = giftSets.reduce((a, b) => a + b.total, 0);
 
         return (
             <Jumbotron>
