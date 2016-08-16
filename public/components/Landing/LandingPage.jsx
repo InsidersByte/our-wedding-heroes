@@ -126,12 +126,12 @@ export default class LandingPage extends React.Component {
 
                 {this.renderWeddingPartyMembersSection()}
 
-                <LandingSection title="Local Flavour">
-                    <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />
-                </LandingSection>
-
                 <LandingSection title="On The Day">
                     <MarkdownRenderer markdown={this.state.weddingProfile.onTheDay} />
+                </LandingSection>
+
+                <LandingSection title="Local Flavour">
+                    <MarkdownRenderer markdown={this.state.weddingProfile.localFlavour} />
                 </LandingSection>
 
                 <LandingSection title="the wedding playlist">
