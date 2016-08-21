@@ -38,7 +38,7 @@ export default class LandingPage extends React.Component {
 
         if (newState.weddingProfile && newState.weddingProfile.cover && newState.weddingProfile.cover.weddingDate) {
             const weddingDate = moment(newState.weddingProfile.cover.weddingDate);
-            const now = moment.now();
+            const now = moment().startOf('day');
 
             const daysToGo = weddingDate.diff(now, 'days');
 
