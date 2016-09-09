@@ -1,0 +1,78 @@
+[
+    {
+        "name": "bug",
+        "color": "ee0701"
+    },
+    {
+        "name": "chore",
+        "color": "fef2c0"
+    },
+    {
+        "name": "copy",
+        "color": "FFC274"
+    },
+    {
+        "name": "design",
+        "color": "FFC274"
+    },
+    {
+        "name": "discussion",
+        "color": "cc317c"
+    },
+    {
+        "name": "duplicate",
+        "color": "cccccc"
+    },
+    {
+        "name": "enchantment",
+        "color": "5EBEFF"
+    },
+    {
+        "name": "feature",
+        "color": "91ca55"
+    },
+    {
+        "name": "in progress",
+        "color": "fbca04"
+    },
+    {
+        "name": "invalid",
+        "color": "cccccc"
+    },
+    {
+        "name": "node",
+        "color": "bfd4f2"
+    },
+    {
+        "name": "on hold",
+        "color": "cccccc"
+    },
+    {
+        "name": "optimisation",
+        "color": "5EBEFF"
+    },
+    {
+        "name": "production",
+        "color": "ee0701"
+    },
+    {
+        "name": "question",
+        "color": "cc317c"
+    },
+    {
+        "name": "react",
+        "color": "bfd4f2"
+    },
+    {
+        "name": "security",
+        "color": "ee0701"
+    },
+    {
+        "name": "ux",
+        "color": "FFC274"
+    },
+    {
+        "name": "wontfix",
+        "color": "cccccc"
+    }
+]
