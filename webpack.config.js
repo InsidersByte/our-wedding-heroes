@@ -1,6 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const validate = require('webpack-validator'); // eslint-disable-line import/no-extraneous-dependencies
+const autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-extraneous-dependencies
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 
 const PATHS = {
     PUBLIC: path.join(__dirname, 'public'),
@@ -9,8 +12,8 @@ const PATHS = {
     NODE_MODULES: path.join(__dirname, 'node_modules'),
 };
 
-module.exports = {
-    devtool: 'eval-source-map',
+const config = {
+    devtool: 'eval',
     entry: [
         'webpack-hot-middleware/client?reload=true',
         PATHS.PUBLIC,
@@ -22,15 +25,6 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.css$/,
-                loaders: ['style', 'css'],
-            },
-            {
-                test: /\.styl$/,
-                loaders: ['style', 'css?modules', 'stylus'],
-                include: PATHS.PUBLIC,
-            },
-            {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
                 include: [PATHS.PUBLIC, PATHS.LIB],
@@ -38,6 +32,15 @@ module.exports = {
                     presets: ['react', 'es2015', 'stage-1', 'react-hmre'],
                     plugins: ['transform-decorators-legacy'],
                 },
+            },
+            {
+                test: /\.css$/,
+                loaders: ['style', 'css', 'postcss'],
+            },
+            {
+                test: /\.styl$/,
+                loaders: ['style', 'css?modules', 'postcss', 'stylus'],
+                include: PATHS.PUBLIC,
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -55,19 +58,45 @@ module.exports = {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file',
             },
+            {
+                test: /\/favicon.ico$/,
+                include: [PATHS.PUBLIC],
+                loader: 'file',
+                query: {
+                    name: 'favicon.ico?[hash:8]',
+                },
+            },
+            {
+                test: /\.html$/,
+                loader: 'html',
+                query: {
+                    attrs: ['link:href'],
+                },
+            },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
             inject: 'body',
-            filename: 'index.html',
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new CaseSensitivePathsPlugin(),
         new webpack.NoErrorsPlugin(),
+    ],
+    postcss: () => [
+        autoprefixer({
+            browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 9', // React doesn't support IE8 anyway
+            ],
+        }),
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
 };
+
+module.exports = validate(config);

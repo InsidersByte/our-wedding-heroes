@@ -72,16 +72,19 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-react-hmre": "1.1.1",
     "babel-preset-stage-1": "6.5.0",
+    "case-sensitive-paths-webpack-plugin": "1.1.4",
     "css-loader": "0.23.1",
     "dotenv": "2.0.0",
     "errorhandler": "1.4.3",
     "eslint": "2.13.0",
     "eslint-config-airbnb": "9.0.1",
+    "eslint-loader": "1.5.0",
     "eslint-plugin-import": "1.8.1",
     "eslint-plugin-jsx-a11y": "1.5.3",
     "eslint-plugin-react": "5.2.2",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "html-loader": "0.4.3",
     "html-webpack-plugin": "2.21.0",
     "morgan": "1.7.0",
     "nodemon": "1.9.2",
@@ -96,7 +99,8 @@
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-middleware": "1.6.1",
-    "webpack-hot-middleware": "2.10.0"
+    "webpack-hot-middleware": "2.10.0",
+    "webpack-validator": "2.2.7"
   },
   "engines": {
     "node": "6.3.1"
