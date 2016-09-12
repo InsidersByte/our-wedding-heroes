@@ -12,13 +12,13 @@ export default function LandingHeader(props) {
 
     return (
         <header className={css.root} style={backgroundImageStyle}>
-            <div className={css.overlay}></div>
+            <div className={css.overlay} />
             <div className={css.content}>
                 <h1 className={css.title}>{props.cover.title}</h1>
 
                 {daysTillIDoCountdown}
 
-                <div className={css.spacer}></div>
+                <div className={css.spacer} />
 
                 <a className={css.scrollDown} href="#" onClick={props.onScrollDown}>
                     <FontAwesome icon="chevron-down" size="lg" />

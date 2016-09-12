@@ -1,4 +1,6 @@
 import React from 'react';
+import MarkdownRenderer from 'react-markdown-renderer';
+import moment from 'moment';
 import FontAwesome from '../common/FontAwesome';
 import WeddingProfileActions from '../../actions/WeddingProfileActions';
 import WeddingProfileStore from '../../stores/WeddingProfileStore';
@@ -8,8 +10,6 @@ import GiftItems from './GiftItems';
 import Basket from './Basket';
 import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
-import MarkdownRenderer from 'react-markdown-renderer';
-import moment from 'moment';
 import WeddingPartyMembers from './WeddingPartyMembers';
 import Loader from '../common/Loader';
 
@@ -29,11 +29,11 @@ export default class LandingPage extends React.Component {
         basketStore.unlisten(this.onBasketStoreChange);
     }
 
-    onBasketStoreChange = state => {
+    onBasketStoreChange = (state) => {
         this.setState(state);
     };
 
-    onWeddingProfilesStoreChange = state => {
+    onWeddingProfilesStoreChange = (state) => {
         const newState = Object.assign({}, state);
 
         if (newState.weddingProfile && newState.weddingProfile.cover && newState.weddingProfile.cover.weddingDate) {
@@ -48,10 +48,10 @@ export default class LandingPage extends React.Component {
         this.setState(newState);
     };
 
-    onScrollDown = event => {
+    onScrollDown = (event) => {
         event.preventDefault();
 
-        const aboutUs = this.refs.aboutUs;
+        const aboutUs = this.aboutUs;
         aboutUs.scrollTo();
     };
 
@@ -100,7 +100,7 @@ export default class LandingPage extends React.Component {
     };
 
     render() {
-        const giftItemsElement = ( // eslint-disable-line no-extra-parens
+        const giftItemsElement = (
             <GiftItems
                 giftItems={this.state.weddingProfile.honeymoonGiftListItems}
                 addToBasket={this.addToBasket}
@@ -112,7 +112,7 @@ export default class LandingPage extends React.Component {
             <Loader className={css.root} loading={this.state.loading}>
                 <LandingHeader cover={this.state.weddingProfile.cover} onScrollDown={this.onScrollDown} />
 
-                <LandingSection ref="aboutUs" title="A little bit about us">
+                <LandingSection ref={(c) => { this.aboutUs = c; }} title="A little bit about us">
                     <MarkdownRenderer markdown={this.state.weddingProfile.aboutUs} />
                 </LandingSection>
 

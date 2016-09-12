@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginActions from '../actions/LoginActions';
-import loginStore from '../stores/LoginStore';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router';
+import LoginActions from '../actions/LoginActions';
+import loginStore from '../stores/LoginStore';
 import * as routes from '../constants/routeConstants';
 
 export default class Admin extends React.Component {
@@ -20,7 +20,7 @@ export default class Admin extends React.Component {
         loginStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 
@@ -32,10 +32,10 @@ export default class Admin extends React.Component {
     render() {
         let headerItems;
 
-        const viewSiteLink = <li><Link to={routes.HOME_ROUTE} target="_blank">View Site</Link></li>;
+        const viewSiteLink = <li><Link to={routes.HOME_ROUTE} target="_blank" rel="noopener noreferrer">View Site</Link></li>;
 
         if (!this.state.isLoggedIn) {
-            headerItems = ( // eslint-disable-line no-extra-parens
+            headerItems = (
                 <Nav pullRight>
                     {viewSiteLink}
 
@@ -45,7 +45,7 @@ export default class Admin extends React.Component {
                 </Nav>
             );
         } else {
-            headerItems = ( // eslint-disable-line no-extra-parens
+            headerItems = (
                 <Nav pullRight>
                     <NavDropdown id="weddingProfile" title="Wedding Profile">
                         <li>

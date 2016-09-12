@@ -5,9 +5,10 @@ const User = require('../models/user');
 const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
 const wrap = require('../utilities/wrap');
 const Mailer = require('../mail');
-const mailer = new Mailer();
 const { PAYMENT_METHODS } = require('../../lib/constants');
 const { generatePaypalMeLink } = require('../../lib/paypal');
+
+const mailer = new Mailer();
 
 module.exports = (app, express, config) => {
     const router = new express.Router();

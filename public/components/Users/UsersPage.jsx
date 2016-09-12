@@ -18,7 +18,7 @@ export default class Users extends React.Component {
         UserStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
             UserActions.query.defer();
         }

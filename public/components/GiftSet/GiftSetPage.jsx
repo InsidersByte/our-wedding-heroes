@@ -35,7 +35,7 @@ export default class GiftSetPage extends React.Component {
         GiftSetStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
             this.context.router.push(GIFT_SETS_ROUTE);
             return;

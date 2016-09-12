@@ -7,7 +7,7 @@ import ResetForm from './ResetForm';
 
 export default class ResetPage extends React.Component {
     static propTypes = {
-        params: React.PropTypes.object.isRequired,
+        params: React.PropTypes.shape({ token: React.PropTypes.string }).isRequired,
     };
 
     static defaultProps = {

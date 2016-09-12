@@ -3,12 +3,11 @@ import WeddingPartyMember from './WeddingPartyMember';
 
 import css from './WeddingPartyMembers.styl';
 
-export default function WeddingPartyMembers(props) {
+export default function WeddingPartyMembers({ weddingPartyMembers }) {
     return (
         <div className={css.root}>
             {
-                props
-                    .weddingPartyMembers
+                weddingPartyMembers
                     .map(weddingPartyMember =>
                         <WeddingPartyMember
                             key={weddingPartyMember._id} // eslint-disable-line no-underscore-dangle
@@ -21,5 +20,5 @@ export default function WeddingPartyMembers(props) {
 }
 
 WeddingPartyMembers.propTypes = {
-    weddingPartyMembers: React.PropTypes.array.isRequired,
+    weddingPartyMembers: React.PropTypes.arrayOf(React.PropTypes.shape({})).isRequired,
 };

@@ -8,4 +8,4 @@ class GiftApi extends BaseApi {
     }
 }
 
-export default new GiftApi;
+export default new GiftApi();

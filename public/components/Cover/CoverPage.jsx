@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import CoverForm from './CoverForm';
 import moment from 'moment';
+import CoverForm from './CoverForm';
 import CoverActions from '../../actions/CoverActions';
 import CoverStore from '../../stores/CoverStore';
 
@@ -17,7 +17,7 @@ export default class CoverPage extends React.Component {
         CoverStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         const newState = Object.assign({}, state);
 
         if (newState.cover && newState.cover.weddingDate) {

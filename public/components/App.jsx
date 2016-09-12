@@ -12,7 +12,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         NotificationStore.listen(this.onStoreChange);
-        notificationSystem = this.refs.notificationSystem;
+        notificationSystem = this.notificationSystem;
     }
 
     componentWillUnmount() {
@@ -31,7 +31,7 @@ export default class App extends React.Component {
                     {this.props.children}
                 </div>
 
-                <NotificationSystem ref="notificationSystem" />
+                <NotificationSystem ref={(c) => { this.notificationSystem = c; }} />
             </div>
         );
     }

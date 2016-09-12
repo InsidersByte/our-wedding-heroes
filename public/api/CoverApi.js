@@ -8,4 +8,4 @@ class CoverApi extends BaseApi {
     }
 }
 
-export default new CoverApi;
+export default new CoverApi();

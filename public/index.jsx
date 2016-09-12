@@ -3,14 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import jwtDecode from 'jwt-decode';
-import history from './helpers/history';
-import routes from './routes';
-import alt from './helpers/alt';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import 'animate.css/animate.css';
 import 'font-awesome/css/font-awesome.css';
 import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
+import history from './helpers/history';
+import routes from './routes';
+import alt from './helpers/alt';
 import './index.styl';
 
 const jwt = localStorage.getItem('jwt');

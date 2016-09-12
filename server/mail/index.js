@@ -7,7 +7,7 @@ const templatesDirectory = path.join(__dirname, 'templates');
 
 class mailer {
     constructor() {
-        const options = config.mail && Object.assign({}, config.mail.options) || {};
+        const options = (config.mail && Object.assign({}, config.mail.options)) || {};
 
         // if a service hasn't been set, send the mail directly
         if (!options.service) {

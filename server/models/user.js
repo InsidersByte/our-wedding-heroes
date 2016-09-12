@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const encryption = require('../utilities/encryption');
+
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     name: { type: String, required: true },

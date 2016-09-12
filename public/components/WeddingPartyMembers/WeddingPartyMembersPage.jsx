@@ -25,7 +25,7 @@ export default class WeddingPartyMembersPage extends React.Component {
         WeddingPartyMemberStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
             WeddingPartyMemberActions.query.defer();
         }
@@ -55,7 +55,7 @@ export default class WeddingPartyMembersPage extends React.Component {
     };
 
     render() {
-        const membersList = this.state.members.map((member) =>
+        const membersList = this.state.members.map(member =>
             <SortableItem
                 key={member._id} // eslint-disable-line no-underscore-dangle
                 id={member._id} // eslint-disable-line no-underscore-dangle

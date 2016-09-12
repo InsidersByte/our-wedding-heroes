@@ -57,7 +57,7 @@ module.exports = (app, express) => {
                 .limit(1)
                 .exec();
 
-            const maximumPosition = maximumPositionItem && maximumPositionItem.position || 0;
+            const maximumPosition = (maximumPositionItem && maximumPositionItem.position) || 0;
             const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
             const honeymoonGiftItem = new HoneymoonGiftListItem({

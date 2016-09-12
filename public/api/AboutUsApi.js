@@ -8,4 +8,4 @@ class AboutUsApi extends BaseApi {
     }
 }
 
-export default new AboutUsApi;
+export default new AboutUsApi();

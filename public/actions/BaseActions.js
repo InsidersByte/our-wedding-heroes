@@ -106,7 +106,7 @@ export default class BaseActions {
         return response;
     }
 
-    removeError = error => {
+    removeError = (error) => {
         console.error(error);
         NotificationActions.error({ message: 'An Error Occurred' });
         return error;

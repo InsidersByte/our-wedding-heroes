@@ -3,6 +3,7 @@ const User = require('../models/user');
 const wrap = require('../utilities/wrap');
 const uuid = require('uuid');
 const Mailer = require('../mail');
+
 const mailer = new Mailer();
 
 module.exports = (app, express, config) => {

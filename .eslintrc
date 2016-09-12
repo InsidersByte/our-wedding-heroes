@@ -2,11 +2,18 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
 
+    "env": {
+        "browser": true
+    },
+
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
-        "max-len": [2, 140, 2],
+        "max-len": [2, 160, 2],
+        "no-continue": 0,
+        "class-methods-use-this": 0,
 
         "react/jsx-indent-props": [2, 4],
-        "react/jsx-indent": [2, 4]
+        "react/jsx-indent": [2, 4],
+        "jsx-a11y/href-no-hash": 0
     }
 }

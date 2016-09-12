@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import UserRow from './UserRow';
 
-export default function UserTable(props) {
+export default function UserTable({ users, onDelete }) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -14,13 +14,12 @@ export default function UserTable(props) {
             </thead>
 
             <tbody>
-                {props
-                    .users
+                {users
                     .map(user =>
                         <UserRow
                             key={user._id} // eslint-disable-line no-underscore-dangle
                             user={user}
-                            onDelete={props.onDelete}
+                            onDelete={onDelete}
                         />
                     )
                 }
@@ -30,6 +29,6 @@ export default function UserTable(props) {
 }
 
 UserTable.propTypes = {
-    users: React.PropTypes.array.isRequired,
+    users: React.PropTypes.arrayOf(React.PropTypes.shape({})).isRequired,
     onDelete: React.PropTypes.func.isRequired,
 };

@@ -8,4 +8,4 @@ class WeddingPartyMembersApi extends BaseApi {
     }
 }
 
-export default new WeddingPartyMembersApi;
+export default new WeddingPartyMembersApi();

@@ -7,7 +7,7 @@ export default function HoneymoonGiftListForm(props) {
     let disclaimerMessageInput = null;
 
     if (props.honeymoonGiftList.showPaymentMessage === true) {
-        paymentMessageInput = ( // eslint-disable-line no-extra-parens
+        paymentMessageInput = (
             <FormGroup>
                 <ControlLabel>Payment Message</ControlLabel>
                 <FormControl
@@ -24,7 +24,7 @@ export default function HoneymoonGiftListForm(props) {
     }
 
     if (props.honeymoonGiftList.showDisclaimerMessage === true) {
-        disclaimerMessageInput = ( // eslint-disable-line no-extra-parens
+        disclaimerMessageInput = (
             <FormGroup>
                 <ControlLabel>Disclaimer Message</ControlLabel>
                 <FormControl

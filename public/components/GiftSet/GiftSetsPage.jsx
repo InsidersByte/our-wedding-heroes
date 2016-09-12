@@ -22,7 +22,7 @@ export default class GiftSetsPage extends React.Component {
         GiftSetStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
             GiftSetActions.query.defer();
         }

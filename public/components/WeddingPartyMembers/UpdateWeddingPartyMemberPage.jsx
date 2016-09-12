@@ -6,7 +6,7 @@ import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
 
 export default class UpdateWeddingPartyMemberPage extends React.Component {
     static propTypes = {
-        params: React.PropTypes.object.isRequired,
+        params: React.PropTypes.shape({ id: React.PropTypes.string }).isRequired,
     };
 
     static defaultProps = {
@@ -26,7 +26,7 @@ export default class UpdateWeddingPartyMemberPage extends React.Component {
         WeddingPartyMemberStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 

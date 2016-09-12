@@ -8,4 +8,4 @@ class HoneymoonGiftListItem extends BaseApi {
     }
 }
 
-export default new HoneymoonGiftListItem;
+export default new HoneymoonGiftListItem();
