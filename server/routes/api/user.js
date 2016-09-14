@@ -115,6 +115,8 @@ module.exports = (app, express) => {
                     .json({ message: 'You cannot delete yourself!' });
             }
 
+            yield user.remove();
+
             return res
                 .status(204)
                 .send();
