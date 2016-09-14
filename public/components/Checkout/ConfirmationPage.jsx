@@ -29,7 +29,7 @@ export default class ConfirmationPage extends React.Component {
         GiftStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 
@@ -49,7 +49,7 @@ export default class ConfirmationPage extends React.Component {
         return (
             <p>
                 When you click 'Pay with PayPal' you will be redirect to
-                the <a href="https://www.paypal.me/" target="_blank">paypal.me</a> website.
+                the <a href="https://www.paypal.me/" target="_blank" rel="noopener noreferrer">paypal.me</a> website.
             </p>
         );
     };
@@ -62,7 +62,15 @@ export default class ConfirmationPage extends React.Component {
         }
 
         return (
-            <a href={paypalLink} target="_blank" className="btn btn-success" onClick={this.onLinkClicked}>Pay with PayPal</a>
+            <a
+                href={paypalLink}
+                target="_blank"
+                className="btn btn-success"
+                rel="noopener noreferrer"
+                onClick={this.onLinkClicked}
+            >
+                Pay with PayPal
+            </a>
         );
     };
 

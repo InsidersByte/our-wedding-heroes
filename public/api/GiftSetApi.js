@@ -16,4 +16,4 @@ class GiftSetApi extends BaseApi {
     }
 }
 
-export default new GiftSetApi;
+export default new GiftSetApi();

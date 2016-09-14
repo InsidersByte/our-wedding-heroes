@@ -10,13 +10,13 @@ export default class LandingSection extends React.Component {
     };
 
     scrollTo = () => {
-        const container = this.refs.container;
+        const container = this.container;
         smoothscroll(container);
     };
 
     render() {
         return (
-            <section ref="container" className={css.root}>
+            <section ref={(c) => { this.container = c; }} className={css.root}>
                 <h1 className={css.title}>{this.props.title}</h1>
 
                 <div className={css.content}>

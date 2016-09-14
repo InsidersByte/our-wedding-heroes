@@ -1,7 +1,7 @@
-const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
-const wrap = require('../utilities/wrap');
-const { integer } = require('../../lib/random');
-const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../constants');
+const HoneymoonGiftListItem = require('../../models/honeymoonGiftListItem');
+const wrap = require('../../utilities/wrap');
+const { integer } = require('../../../lib/random/index');
+const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants/index');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -57,7 +57,7 @@ module.exports = (app, express) => {
                 .limit(1)
                 .exec();
 
-            const maximumPosition = maximumPositionItem && maximumPositionItem.position || 0;
+            const maximumPosition = (maximumPositionItem && maximumPositionItem.position) || 0;
             const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
             const honeymoonGiftItem = new HoneymoonGiftListItem({

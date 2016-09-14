@@ -8,4 +8,4 @@ class AboutOurDayApi extends BaseApi {
     }
 }
 
-export default new AboutOurDayApi;
+export default new AboutOurDayApi();

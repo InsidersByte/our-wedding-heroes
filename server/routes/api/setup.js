@@ -1,5 +1,5 @@
-const User = require('../models/user');
-const wrap = require('../utilities/wrap');
+const User = require('../../models/user');
+const wrap = require('../../utilities/wrap');
 
 module.exports = (app, express) => {
     const router = new express.Router();
@@ -28,6 +28,7 @@ module.exports = (app, express) => {
 
             const user = new User();
 
+            // mongoose UserSchema calls .toLowerCase() on user.name
             user.name = req.body.name;
             user.username = req.body.username;
             user.password = req.body.password;

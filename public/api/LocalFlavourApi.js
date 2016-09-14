@@ -8,4 +8,4 @@ class LocalFlavourApi extends BaseApi {
     }
 }
 
-export default new LocalFlavourApi;
+export default new LocalFlavourApi();

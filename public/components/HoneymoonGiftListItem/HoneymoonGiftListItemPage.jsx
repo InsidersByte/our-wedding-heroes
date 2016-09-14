@@ -20,7 +20,7 @@ export default class HoneymoonGiftListItemPage extends React.Component {
         HoneymoonGiftListItemStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         if (this.state.removing && !state.removing) {
             HoneymoonGiftListItemActions.query.defer();
         }

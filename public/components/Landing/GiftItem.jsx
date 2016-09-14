@@ -14,7 +14,9 @@ export default class GiftItem extends React.Component {
             name: React.PropTypes.string.isRequired,
         }).isRequired,
         addToBasket: React.PropTypes.func.isRequired,
-        basketItems: React.PropTypes.object.isRequired,
+        basketItems: React.PropTypes.shape({
+            get: React.PropTypes.func.isRequired,
+        }).isRequired,
     };
 
     onClick = (event) => {
@@ -32,7 +34,7 @@ export default class GiftItem extends React.Component {
         if (outOfStock) {
             button = <Button disabled>Fully Gifted!</Button>;
         } else {
-            button = ( // eslint-disable-line no-extra-parens
+            button = (
                 <Button bsStyle="success" onClick={this.onClick}>
                     <FontAwesome icon="shopping-basket" /> Add to Basket £ {price}
                 </Button>
@@ -43,8 +45,7 @@ export default class GiftItem extends React.Component {
 
         return (
             <div className={css.root}>
-                <div className={css.avatar} style={backgroundImageStyle}>
-                </div>
+                <div className={css.avatar} style={backgroundImageStyle} />
 
                 <div className={css.content}>
                     <h4>{name}</h4>

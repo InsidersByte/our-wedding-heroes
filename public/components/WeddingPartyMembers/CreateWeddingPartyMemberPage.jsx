@@ -16,7 +16,7 @@ export default class CreateWeddingPartyMemberPage extends React.Component {
         WeddingPartyMemberStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 

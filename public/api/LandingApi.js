@@ -8,4 +8,4 @@ class LandingApi extends BaseApi {
     }
 }
 
-export default new LandingApi;
+export default new LandingApi();

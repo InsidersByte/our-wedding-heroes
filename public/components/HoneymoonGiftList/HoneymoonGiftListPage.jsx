@@ -16,7 +16,7 @@ export default class HoneymoonGiftListPage extends React.Component {
         HoneymoonGiftListStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 

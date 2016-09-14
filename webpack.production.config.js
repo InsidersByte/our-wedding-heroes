@@ -1,9 +1,10 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const StatsPlugin = require('stats-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const validate = require('webpack-validator'); // eslint-disable-line import/no-extraneous-dependencies
+const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-extraneous-dependencies
 
 const PATHS = {
     PUBLIC: path.join(__dirname, 'public'),
@@ -15,28 +16,24 @@ const PATHS = {
 const extractCss = new ExtractTextPlugin('vendor-[hash].min.css');
 const extractStyl = new ExtractTextPlugin('app-[hash].min.css');
 
-module.exports = {
+const config = {
+    devtool: 'source-map',
     entry: {
         app: PATHS.PUBLIC,
-        vendor: [
-            'react', 'moment', 'react-bootstrap', 'react-dom', 'flux', 'react-router', 'superagent',
-            'classnames', 'jwt-decode', 'alt', 'react-notification-system', 'smoothscroll', 'validator',
-        ],
     },
     output: {
         path: PATHS.DIST,
         filename: '[name]-[hash].min.js',
     },
     module: {
+        preLoaders: [
+            {
+                test: /\.(js|jsx)$/,
+                loader: 'eslint',
+                include: [PATHS.PUBLIC],
+            },
+        ],
         loaders: [
-            {
-                test: /\.css$/,
-                loader: extractCss.extract('style', ['css', 'postcss']),
-            },
-            {
-                test: /\.styl$/,
-                loader: extractStyl.extract('style', ['css?modules', 'postcss', 'stylus']),
-            },
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
@@ -45,6 +42,14 @@ module.exports = {
                     presets: ['react', 'es2015', 'stage-1'],
                     plugins: ['transform-decorators-legacy'],
                 },
+            },
+            {
+                test: /\.css$/,
+                loader: extractCss.extract('style', ['css', 'postcss']),
+            },
+            {
+                test: /\.styl$/,
+                loader: extractStyl.extract('style', ['css?modules', 'postcss', 'stylus']),
             },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
@@ -62,18 +67,52 @@ module.exports = {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 loader: 'file',
             },
+            {
+                test: /\/favicon.ico$/,
+                include: [PATHS.PUBLIC],
+                loader: 'file',
+                query: {
+                    name: 'favicon.ico?[hash:8]',
+                },
+            },
+            {
+                test: /\.html$/,
+                loader: 'html',
+                query: {
+                    attrs: ['link:href'],
+                },
+            },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
-            inject: 'body',
-            filename: 'index.html',
+            inject: true,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            },
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
+            compress: {
+                screw_ie8: true, // React doesn't support IE8
                 warnings: false,
+            },
+            mangle: {
+                screw_ie8: true,
+            },
+            output: {
+                comments: false,
                 screw_ie8: true,
             },
         }),
@@ -81,16 +120,22 @@ module.exports = {
             source: false,
             modules: false,
         }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production'),
-            },
-        }),
         extractCss,
         extractStyl,
     ],
-    postcss: () => [autoprefixer],
+    postcss: () => [
+        autoprefixer({
+            browsers: [
+                '>1%',
+                'last 4 versions',
+                'Firefox ESR',
+                'not ie < 9', // React doesn't support IE8 anyway
+            ],
+        }),
+    ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
 };
+
+module.exports = validate(config);

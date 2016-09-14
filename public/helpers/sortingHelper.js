@@ -1,7 +1,7 @@
 import random from '../../lib/random';
 import { MAXIMUM_NUMBER } from '../constants/sorting';
 
-export function move({ sourceId, targetId, data }) {
+export function move({ sourceId, targetId, data }) { // eslint-disable-line import/prefer-default-export
     const items = [...data];
     const sourceIndex = items.findIndex(o => o._id === sourceId); // eslint-disable-line no-underscore-dangle
     const targetIndex = items.findIndex(o => o._id === targetId); // eslint-disable-line no-underscore-dangle

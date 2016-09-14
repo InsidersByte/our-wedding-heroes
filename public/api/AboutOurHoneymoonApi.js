@@ -8,4 +8,4 @@ class AboutOurHoneymoonApi extends BaseApi {
     }
 }
 
-export default new AboutOurHoneymoonApi;
+export default new AboutOurHoneymoonApi();

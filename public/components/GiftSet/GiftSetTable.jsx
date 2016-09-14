@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import GiftSetRow from './GiftSetRow';
 
-export default function GiftSetTable(props) {
+export default function GiftSetTable({ giftSets, onMarkAsPaid, onMarkAsDetailsSent, onDelete, onSelect }) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -19,16 +19,15 @@ export default function GiftSetTable(props) {
             </thead>
 
             <tbody>
-                {props
-                    .giftSets
+                {giftSets
                     .map(giftSet =>
                         <GiftSetRow
                             key={giftSet._id} // eslint-disable-line no-underscore-dangle
                             giftSet={giftSet}
-                            onMarkAsPaid={props.onMarkAsPaid}
-                            onMarkAsDetailsSent={props.onMarkAsDetailsSent}
-                            onDelete={props.onDelete}
-                            onSelect={props.onSelect}
+                            onMarkAsPaid={onMarkAsPaid}
+                            onMarkAsDetailsSent={onMarkAsDetailsSent}
+                            onDelete={onDelete}
+                            onSelect={onSelect}
                         />
                     )
                 }
@@ -38,7 +37,7 @@ export default function GiftSetTable(props) {
 }
 
 GiftSetTable.propTypes = {
-    giftSets: React.PropTypes.array.isRequired,
+    giftSets: React.PropTypes.arrayOf(React.PropTypes.shape({})).isRequired,
     onDelete: React.PropTypes.func.isRequired,
     onMarkAsPaid: React.PropTypes.func.isRequired,
     onMarkAsDetailsSent: React.PropTypes.func.isRequired,

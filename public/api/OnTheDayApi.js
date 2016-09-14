@@ -8,4 +8,4 @@ class OnTheDayApi extends BaseApi {
     }
 }
 
-export default new OnTheDayApi;
+export default new OnTheDayApi();

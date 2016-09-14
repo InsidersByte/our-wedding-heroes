@@ -8,4 +8,4 @@ class SetupApi extends BaseApi {
     }
 }
 
-export default new SetupApi;
+export default new SetupApi();

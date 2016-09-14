@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import GiftRow from './GiftRow';
 
-export default function GiftTable(props) {
+export default function GiftTable({ gifts }) {
     return (
         <Table striped bordered condensed hover responsive>
             <thead>
@@ -15,8 +15,7 @@ export default function GiftTable(props) {
             </thead>
 
             <tbody>
-            {props
-                .gifts
+            {gifts
                 .map(gift =>
                     <GiftRow
                         key={gift._id} // eslint-disable-line no-underscore-dangle
@@ -30,7 +29,7 @@ export default function GiftTable(props) {
 }
 
 GiftTable.propTypes = {
-    gifts: React.PropTypes.array.isRequired,
+    gifts: React.PropTypes.arrayOf(React.PropTypes.shape({})).isRequired,
 };
 
 GiftTable.defaultProps = {

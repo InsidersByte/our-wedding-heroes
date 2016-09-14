@@ -8,4 +8,4 @@ class WeddingProfileApi extends BaseApi {
     }
 }
 
-export default new WeddingProfileApi;
+export default new WeddingProfileApi();

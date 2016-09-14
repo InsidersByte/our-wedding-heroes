@@ -1,13 +1,14 @@
-const Giver = require('../models/giver');
-const GiftSet = require('../models/giftSet');
-const Gift = require('../models/gift');
-const User = require('../models/user');
-const HoneymoonGiftListItem = require('../models/honeymoonGiftListItem');
-const wrap = require('../utilities/wrap');
-const Mailer = require('../mail');
+const Giver = require('../../models/giver');
+const GiftSet = require('../../models/giftSet');
+const Gift = require('../../models/gift');
+const User = require('../../models/user');
+const HoneymoonGiftListItem = require('../../models/honeymoonGiftListItem');
+const wrap = require('../../utilities/wrap');
+const Mailer = require('../../mail/index');
+const { PAYMENT_METHODS } = require('../../../lib/constants/index');
+const { generatePaypalMeLink } = require('../../../lib/paypal/index');
+
 const mailer = new Mailer();
-const { PAYMENT_METHODS } = require('../../lib/constants');
-const { generatePaypalMeLink } = require('../../lib/paypal');
 
 module.exports = (app, express, config) => {
     const router = new express.Router();

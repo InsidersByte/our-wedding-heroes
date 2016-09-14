@@ -7,8 +7,7 @@ export default function WeddingPartyMember(props) {
 
     return (
         <div className={css.root}>
-            <div className={css.image} style={backgroundImageStyle}>
-            </div>
+            <div className={css.image} style={backgroundImageStyle} />
 
             <h1 className={css.name}>{props.weddingPartyMember.name}</h1>
 

@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-const wrap = require('../utilities/wrap');
+const User = require('../../models/user');
+const wrap = require('../../utilities/wrap');
 const uuid = require('uuid');
-const Mailer = require('../mail');
+const Mailer = require('../../mail/index');
+
 const mailer = new Mailer();
 
 module.exports = (app, express, config) => {
@@ -20,9 +21,10 @@ module.exports = (app, express, config) => {
                 .send(errors);
         }
 
+        // mongoose constrains user.name toLowerCase()
         const user = yield User
             .findOne({
-                username: req.body.username,
+                username: req.body.username.toLowerCase(),
             })
             .select('name username password salt')
             .exec();

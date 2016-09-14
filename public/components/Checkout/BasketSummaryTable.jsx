@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import BasketSummaryRow from './BasketSummaryRow';
 
-export default function BasketSummaryTable(props) {
+export default function BasketSummaryTable({ items, onAdd, onRemove, onDelete }) {
     return (
         <Table responsive>
             <thead>
@@ -17,13 +17,13 @@ export default function BasketSummaryTable(props) {
 
             <tbody>
             {
-                [...props.items.entries()].map(([key, item]) =>
+                [...items.entries()].map(([key, item]) =>
                     <BasketSummaryRow
                         key={key}
                         item={item}
-                        onAdd={props.onAdd}
-                        onRemove={props.onRemove}
-                        onDelete={props.onDelete}
+                        onAdd={onAdd}
+                        onRemove={onRemove}
+                        onDelete={onDelete}
                     />
                 )
             }
@@ -33,8 +33,7 @@ export default function BasketSummaryTable(props) {
 }
 
 BasketSummaryTable.propTypes = {
-    items: React.PropTypes.object.isRequired,
-    total: React.PropTypes.number.isRequired,
+    items: React.PropTypes.shape({}).isRequired,
     onAdd: React.PropTypes.func.isRequired,
     onRemove: React.PropTypes.func.isRequired,
     onDelete: React.PropTypes.func.isRequired,

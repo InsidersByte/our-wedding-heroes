@@ -8,4 +8,4 @@ class RsvpApi extends BaseApi {
     }
 }
 
-export default new RsvpApi;
+export default new RsvpApi();

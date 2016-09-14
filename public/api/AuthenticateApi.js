@@ -17,4 +17,4 @@ class AuthenticateApi extends BaseApi {
     }
 }
 
-export default new AuthenticateApi;
+export default new AuthenticateApi();

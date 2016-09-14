@@ -1,12 +1,12 @@
 import React from 'react';
 import { Jumbotron, Col } from 'react-bootstrap';
+import { isEmail } from 'validator';
 import LoginForm from './LoginForm';
 import NotificationActions from '../../actions/NotificationActions';
 import LoginActions from '../../actions/LoginActions';
 import LoginStore from '../../stores/LoginStore';
 import PasswordResetActions from '../../actions/PasswordResetActions';
 import PasswordResetStore from '../../stores/PasswordResetStore';
-import { isEmail } from 'validator';
 
 export default class Login extends React.Component {
     state = {

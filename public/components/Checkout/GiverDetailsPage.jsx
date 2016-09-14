@@ -39,7 +39,7 @@ export default class GiverDetailsPage extends React.Component {
         GiftStore.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 

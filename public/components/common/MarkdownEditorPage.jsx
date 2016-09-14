@@ -7,8 +7,15 @@ export default class MarkdownEditorPage extends React.Component {
     static propTypes = {
         propKey: React.PropTypes.string.isRequired,
         title: React.PropTypes.string.isRequired,
-        store: React.PropTypes.object.isRequired,
-        actions: React.PropTypes.object.isRequired,
+        store: React.PropTypes.shape({
+            getState: React.PropTypes.func.isRequired,
+            listen: React.PropTypes.func.isRequired,
+            unlisten: React.PropTypes.func.isRequired,
+        }).isRequired,
+        actions: React.PropTypes.shape({
+            fetch: React.PropTypes.func.isRequired,
+            update: React.PropTypes.func.isRequired,
+        }).isRequired,
     };
 
     state = this.props.store.getState();
@@ -22,15 +29,15 @@ export default class MarkdownEditorPage extends React.Component {
         this.props.store.unlisten(this.onStoreChange);
     }
 
-    onStoreChange = state => {
+    onStoreChange = (state) => {
         this.setState(state);
     };
 
-    onChange = event => {
+    onChange = (event) => {
         this.setState({ [this.props.propKey]: event.target.value });
     };
 
-    submit = event => {
+    submit = (event) => {
         event.preventDefault();
         this.props.actions.update(this.state);
     };

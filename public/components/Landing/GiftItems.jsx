@@ -3,18 +3,17 @@ import GiftItem from './GiftItem';
 
 import css from './GiftItems.styl';
 
-export default function GiftItems(props) {
+export default function GiftItems({ giftItems, addToBasket, basketItems }) {
     return (
         <div className={css.root}>
             {
-                props
-                    .giftItems
+                giftItems
                     .map(item =>
                         <GiftItem
                             key={item._id} // eslint-disable-line no-underscore-dangle
                             item={item}
-                            addToBasket={props.addToBasket}
-                            basketItems={props.basketItems}
+                            addToBasket={addToBasket}
+                            basketItems={basketItems}
                         />
                     )
             }
@@ -23,7 +22,7 @@ export default function GiftItems(props) {
 }
 
 GiftItems.propTypes = {
-    giftItems: React.PropTypes.array.isRequired,
+    giftItems: React.PropTypes.arrayOf(React.PropTypes.shape({})).isRequired,
     addToBasket: React.PropTypes.func.isRequired,
-    basketItems: React.PropTypes.object.isRequired,
+    basketItems: React.PropTypes.shape({}).isRequired,
 };
