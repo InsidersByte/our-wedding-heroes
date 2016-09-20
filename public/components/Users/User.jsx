@@ -5,10 +5,7 @@ import Form from '../common/Form';
 export default class User extends React.Component {
     static propTypes = {
         user: React.PropTypes.shape({
-            name: React.PropTypes.string.isRequired,
             username: React.PropTypes.string.isRequired,
-            password: React.PropTypes.string.isRequired,
-            confirmPassword: React.PropTypes.string.isRequired,
         }).isRequired,
         show: React.PropTypes.bool.isRequired,
         onHide: React.PropTypes.func.isRequired,
@@ -32,18 +29,6 @@ export default class User extends React.Component {
 
                     <Modal.Body>
                         <FormGroup>
-                            <ControlLabel>Name</ControlLabel>
-                            <FormControl
-                                name="name"
-                                type="text"
-                                placeholder="Enter name"
-                                value={this.props.user.name}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
                             <ControlLabel>Username</ControlLabel>
                             <FormControl
                                 name="username"
@@ -54,34 +39,10 @@ export default class User extends React.Component {
                                 required
                             />
                         </FormGroup>
-
-                        <FormGroup>
-                            <ControlLabel>Password</ControlLabel>
-                            <FormControl
-                                name="password"
-                                type="password"
-                                placeholder="Enter password"
-                                value={this.props.user.password}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
-                            <ControlLabel>Confirm Password</ControlLabel>
-                            <FormControl
-                                name="confirmPassword"
-                                type="password"
-                                placeholder="Enter confirm password"
-                                value={this.props.user.confirmPassword}
-                                onChange={this.props.onChange}
-                                required
-                            />
-                        </FormGroup>
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <Button bsStyle="primary" type="submit">Create</Button>
+                        <Button bsStyle="primary" type="submit">Send Invitation Now</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Form>

@@ -1,8 +1,9 @@
+const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const wrap = require('../../utilities/wrap');
-const uuid = require('uuid');
 const Mailer = require('../../mail/index');
+const { ONE_DAY_MS } = require('../../constants');
 
 const mailer = new Mailer();
 
@@ -56,7 +57,7 @@ module.exports = (app, express, config) => {
             },
             config.secret,
             {
-                expiresIn: 86400, // expires in 24 hours
+                expiresIn: ONE_DAY_MS,
             }
         );
 
@@ -121,8 +122,7 @@ module.exports = (app, express, config) => {
 
         .put(wrap(function* resetPassword(req, res) {
             req.checkBody('token').equals(req.params.token);
-            req.checkBody('password').notEmpty();
-            req.checkBody('confirmPassword').equals(req.body.password);
+            req.checkBody('password').notEmpty().equals(req.body.confirmPassword);
 
             const errors = req.validationErrors();
 
