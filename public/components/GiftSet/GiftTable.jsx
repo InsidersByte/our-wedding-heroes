@@ -15,14 +15,14 @@ export default function GiftTable({ gifts }) {
             </thead>
 
             <tbody>
-            {gifts
-                .map(gift =>
-                    <GiftRow
-                        key={gift._id} // eslint-disable-line no-underscore-dangle
-                        gift={gift}
-                    />
-                )
-            }
+                {gifts
+                    .map(gift =>
+                        <GiftRow
+                            key={gift._id} // eslint-disable-line no-underscore-dangle
+                            gift={gift}
+                        />
+                    )
+                }
             </tbody>
         </Table>
     );
