@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+    web:
+        container_name: our-wedding-heroes
+        image: our-wedding-heroes
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        command: npm run start:dev
+        volumes:
+            - .:/var/www/our-wedding-heroes
+        environment:
+            - NODE_ENV=development
+            - DATABASE_URL=mongodb://db:27017/our-wedding-heroes
+        depends_on:
+            - "db"
+        ports:
+            - "8080:8080"
+
+    db:
+        container_name: our-wedding-heroes-db
+        image: mongo
+
+networks:
+    default:
+        driver: bridge
