@@ -1,14 +1,24 @@
+/* @flow */
+
 import request from 'superagent';
 import loginStore from '../stores/LoginStore';
 import { BASE_URL, GET_METHOD, POST_METHOD, PUT_METHOD, DELETE_METHOD } from '../constants/ApiConstants';
 import loginActions from '../actions/LoginActions';
 
+type HttpMethodType =
+    | GET_METHOD
+    | POST_METHOD
+    | PUT_METHOD
+    | DELETE_METHOD;
+
 export default class {
-    constructor(baseUrl) {
+    baseUrl = '';
+
+    constructor(baseUrl: string) {
         this.baseUrl = `${BASE_URL}${baseUrl}`;
     }
 
-    get(id) {
+    get(id?: string): Promise<string> {
         let url = this.baseUrl;
 
         if (id) {
@@ -18,7 +28,7 @@ export default class {
         return this.request(GET_METHOD, url);
     }
 
-    post(data, extraUrl) {
+    post(data: Object, extraUrl?: string): Promise<string> {
         let url = this.baseUrl;
 
         if (extraUrl) {
@@ -28,7 +38,7 @@ export default class {
         return this.request(POST_METHOD, url, data);
     }
 
-    put(data, id, extraUrl) {
+    put(data: Object, id?: string, extraUrl?: string): Promise<string> {
         let url = this.baseUrl;
 
         if (id) {
@@ -42,11 +52,11 @@ export default class {
         return this.request(PUT_METHOD, url, data);
     }
 
-    delete(id) {
+    delete(id: string): Promise<string> {
         return this.request(DELETE_METHOD, `${this.baseUrl}/${id}`);
     }
 
-    request(method, url, data) {
+    request(method: HttpMethodType, url: string, data?: Object) {
         const req = request(method, url);
         const { isLoggedIn, jwt } = loginStore.getState();
 

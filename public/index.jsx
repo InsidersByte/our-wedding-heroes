@@ -1,3 +1,5 @@
+/* @flow */
+
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +12,7 @@ import '@insidersbyte/react-markdown-editor/dist/css/react-markdown-editor.css';
 import history from './helpers/history';
 import routes from './routes';
 import alt from './helpers/alt';
+// FIXME:FLOW need to fix import .styl
 import './index.styl';
 
 const jwt = localStorage.getItem('jwt');

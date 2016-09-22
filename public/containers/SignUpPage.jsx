@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component, PropTypes } from 'react';
 import connect from 'alt-utils/lib/connectToStores';
 import { withRouter } from 'react-router';
@@ -36,12 +38,12 @@ export default class SignUpPage extends Component {
         SignUpActions.fetch(this.props.params.token);
     }
 
-    onChange = ({ target: { name, value } }) => {
+    onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
         const user = Object.assign(this.state.user, { [name]: value });
         this.setState({ user });
     };
 
-    onSubmit = (event) => {
+    onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
 
         const token = this.props.params.token;
