@@ -10,11 +10,10 @@ A wedding website with a honeymoon gift list.
 
 ## Requirements
 
-* [NodeJS](https://nodejs.org/en/)
-    * Version 6.x
-* [MongoDB](https://www.mongodb.org/downloads)
+* [Node.js v6](https://nodejs.org/en/)
+* [MongoDB v3](https://www.mongodb.org/downloads)
 
-## Setup
+## Install
 
 1.  **Clone the repo**
 
@@ -29,7 +28,7 @@ A wedding website with a honeymoon gift list.
     $ npm install
     ```
     
-3. **Make sure MongoDB is running**
+3. **Ensure MongoDB is running**
 
     ```bash
     $ lsof -iTCP:27017 -sTCP:LISTEN
@@ -38,13 +37,9 @@ A wedding website with a honeymoon gift list.
 4. **Start the server**
 
     ```bash
-    $ npm start
+    $ npm start-dev
     ```
-    
-    > run `npm run start:dev` to use nodemon
     
 5.  **Run the setup**
     
-    visit [http://localhost:8080/admin/setup](http://localhost:8080/admin/setup)
-    
-    > I am planning to redirect from [http://localhost:8080/admin](http://localhost:8080/admin) to [http://localhost:8080/admin/setup](http://localhost:8080/admin/setup) automatically if the setup has not been run yet, but this feature does not exist at the moment [#111](https://github.com/InsidersByte/our-wedding-heroes/issues/111).
+    visit [http://localhost:8080/admin](http://localhost:8080/admin)
