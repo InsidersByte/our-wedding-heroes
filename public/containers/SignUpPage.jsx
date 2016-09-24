@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, { Component, PropTypes } from 'react';
 import connect from 'alt-utils/lib/connectToStores';
 import { withRouter } from 'react-router';
@@ -5,6 +7,7 @@ import SignUpStore from '../stores/SignUpStore';
 import SignUpActions from '../actions/SignUpActions';
 import NotificationActions from '../actions/NotificationActions';
 import SignUpForm from '../components/SignUpForm';
+import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
 
 @withRouter
 @connect
@@ -35,23 +38,25 @@ export default class SignUpPage extends Component {
         SignUpActions.fetch(this.props.params.token);
     }
 
-    onChange = ({ target: { name, value } }) => {
+    onChange = ({ target: { name, value } }: { target: { name: string, value: string } }) => {
         const user = Object.assign(this.state.user, { [name]: value });
         this.setState({ user });
     };
 
-    onSubmit = (event) => {
+    onSubmit = (event: SyntheticEvent) => {
         event.preventDefault();
 
         const token = this.props.params.token;
         const { user } = this.state;
+        const { password, confirmPassword } = user;
 
-        if (user.password !== user.confirmPassword) {
-            NotificationActions.error({ message: 'Passwords must match!' });
-            return;
+        if (password.length < MINIMUM_PASSWORD_LENGTH) {
+            NotificationActions.error({ message: MINIMUM_PASSWORD_MESSAGE });
+        } else if (password !== confirmPassword) {
+            NotificationActions.error({ message: MATCHING_PASSWORD_MESSAGE });
+        } else {
+            SignUpActions.update({ id: token, user });
         }
-
-        SignUpActions.update({ id: token, user });
     };
 
     render() {

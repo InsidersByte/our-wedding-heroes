@@ -16,17 +16,17 @@ export default function BasketSummaryTable({ items, onAdd, onRemove, onDelete })
             </thead>
 
             <tbody>
-            {
-                [...items.entries()].map(([key, item]) =>
-                    <BasketSummaryRow
-                        key={key}
-                        item={item}
-                        onAdd={onAdd}
-                        onRemove={onRemove}
-                        onDelete={onDelete}
-                    />
-                )
-            }
+                {
+                    [...items.entries()].map(([key, item]) =>
+                        <BasketSummaryRow
+                            key={key}
+                            item={item}
+                            onAdd={onAdd}
+                            onRemove={onRemove}
+                            onDelete={onDelete}
+                        />
+                    )
+                }
             </tbody>
         </Table>
     );
