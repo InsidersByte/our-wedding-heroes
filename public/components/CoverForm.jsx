@@ -70,7 +70,7 @@ export default function CoverForm({ loading, saving, onSubmit, onChange, onDateC
 
                 <DatePicker
                     name="weddingDate"
-                    hintText="Wedding Date"
+                    floatingLabelText="Wedding Date"
                     DateTimeFormat={DateTimeFormat}
                     locale="en-GB"
                     value={weddingDate}
