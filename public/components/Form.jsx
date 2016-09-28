@@ -1,12 +1,11 @@
 /* @flow */
 
 import React from 'react';
-import Loader from './common/Loader';
+import Loader from './Loader';
 
 type PropsType = {
     loading: boolean,
     saving: boolean,
-    // FIXME should just be children not children?
     children?: React$Element<any> | Array<React$Element<any>>,
     onSubmit: Function,
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import FontAwesome from '../common/FontAwesome';
+import FontAwesome from '../FontAwesome';
 
 import css from './GiftItem.styl';
 

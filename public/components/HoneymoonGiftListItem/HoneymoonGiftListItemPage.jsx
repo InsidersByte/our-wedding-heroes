@@ -3,9 +3,9 @@ import { Jumbotron, Button, Glyphicon } from 'react-bootstrap';
 import HoneymoonGiftListItemActions from '../../actions/HoneymoonGiftListItemActions';
 import HoneymoonGiftListItemStore from '../../stores/HoneymoonGiftListItemStore';
 import HoneymoonGiftListItem from './HoneymoonGiftListItem';
-import Loader from '../common/Loader';
-import SortableContainer from '../common/SortableContainer';
-import SortableItem from '../common/SortableItem';
+import Loader from '../Loader';
+import SortableContainer from '../SortableContainer';
+import SortableItem from '../SortableItem';
 import HoneymoonGiftListItemListItem from './HoneymoonGiftListItemListItem';
 
 export default class HoneymoonGiftListItemPage extends React.Component {

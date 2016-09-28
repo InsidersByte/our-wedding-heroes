@@ -1,7 +1,7 @@
 import React from 'react';
 import MarkdownRenderer from 'react-markdown-renderer';
 import moment from 'moment';
-import FontAwesome from '../common/FontAwesome';
+import FontAwesome from '../FontAwesome';
 import WeddingProfileActions from '../../actions/WeddingProfileActions';
 import WeddingProfileStore from '../../stores/WeddingProfileStore';
 import basketActions from '../../actions/BasketActions';
@@ -11,7 +11,7 @@ import Basket from './Basket';
 import LandingHeader from './LandingHeader';
 import LandingSection from './LandingSection';
 import WeddingPartyMembers from './WeddingPartyMembers';
-import Loader from '../common/Loader';
+import Loader from '../Loader';
 
 import css from './LandingPage.styl';
 

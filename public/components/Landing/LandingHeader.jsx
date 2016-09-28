@@ -1,5 +1,5 @@
 import React from 'react';
-import FontAwesome from '../common/FontAwesome';
+import FontAwesome from '../FontAwesome';
 import css from './LandingHeader.styl';
 
 export default function LandingHeader(props) {

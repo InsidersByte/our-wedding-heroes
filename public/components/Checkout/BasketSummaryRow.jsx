@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import FontAwesome from '../common/FontAwesome';
+import FontAwesome from '../FontAwesome';
 import css from './BasketSummaryRow.styl';
 
 export default class BasketSummaryRow extends React.Component {

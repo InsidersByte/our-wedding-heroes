@@ -4,7 +4,7 @@ import GiftSetTable from './GiftSetTable';
 import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
 import { giftSetRoute } from '../../constants/routeConstants';
-import Loader from '../common/Loader';
+import Loader from '../Loader';
 
 export default class GiftSetsPage extends React.Component {
     static contextTypes = {

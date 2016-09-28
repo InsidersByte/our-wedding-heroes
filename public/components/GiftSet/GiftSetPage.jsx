@@ -6,7 +6,7 @@ import GiftSetActions from '../../actions/GiftSetActions';
 import GiftSetStore from '../../stores/GiftSetStore';
 import GiftTable from './GiftTable';
 import { GIFT_SETS_ROUTE } from '../../constants/routeConstants';
-import Loader from '../common/Loader';
+import Loader from '../Loader';
 
 export default class GiftSetPage extends React.Component {
     static propTypes = {
