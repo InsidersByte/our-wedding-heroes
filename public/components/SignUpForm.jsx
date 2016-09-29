@@ -1,9 +1,11 @@
+// TODO: Move to flow
+
 import React, { PropTypes } from 'react';
 import { Jumbotron, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import Form from './Form';
 
 export default function SignUpForm({ user, saving, loading, onChange, onSubmit }) {
-    const { username, name, password, confirmPassword } = user;
+    const { email, name, password, confirmPassword } = user;
 
     return (
         <Jumbotron>
@@ -11,9 +13,9 @@ export default function SignUpForm({ user, saving, loading, onChange, onSubmit }
 
             <Form onSubmit={onSubmit} loading={loading} saving={saving}>
                 <FormGroup>
-                    <ControlLabel>Username</ControlLabel>
+                    <ControlLabel>Email</ControlLabel>
                     <FormControl.Static>
-                        {username}
+                        {email}
                     </FormControl.Static>
                 </FormGroup>
 
@@ -61,7 +63,7 @@ export default function SignUpForm({ user, saving, loading, onChange, onSubmit }
 
 SignUpForm.propTypes = {
     user: PropTypes.shape({
-        username: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+        email: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
         name: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
         password: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
         confirmPassword: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types

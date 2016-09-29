@@ -8,10 +8,10 @@ type PropsType = {
     users: Array<{
         _id: string,
         name: string,
-        username: string,
+        email: string,
     }>,
     loggedInUser: {
-        username: string,
+        email: string,
     },
     onDelete: Function,
 };

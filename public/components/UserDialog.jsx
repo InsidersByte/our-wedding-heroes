@@ -7,7 +7,7 @@ import ProgressButton from './ProgressButton';
 
 type PropsType = {
     user: {
-        username: string,
+        email: string,
     },
     open: boolean,
     onHide: Function,
@@ -28,7 +28,7 @@ const styles = {
     },
 };
 
-export default function UserDialog({ user: { username }, open, onHide, onChange, onSubmit, saving }: PropsType) {
+export default function UserDialog({ user: { email }, open, onHide, onChange, onSubmit, saving }: PropsType) {
     return (
         <Dialog
             title="Invite a New User"
@@ -38,10 +38,10 @@ export default function UserDialog({ user: { username }, open, onHide, onChange,
         >
             <Form onSubmit={onSubmit} loading={false} saving={saving}>
                 <TextField
-                    name="username"
+                    name="email"
                     type="email"
-                    floatingLabelText="Username"
-                    value={username}
+                    floatingLabelText="Email"
+                    value={email}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}

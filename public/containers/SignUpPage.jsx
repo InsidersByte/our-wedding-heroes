@@ -14,7 +14,7 @@ import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_ME
 export default class SignUpPage extends Component {
     static propTypes = {
         user: PropTypes.shape({
-            username: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
+            email: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
         }).isRequired,
         loading: PropTypes.bool.isRequired,
         saving: PropTypes.bool.isRequired,

@@ -12,7 +12,7 @@ module.exports = (app, express, config) => {
     const router = new express.Router();
 
     router.post('/', wrap(function* authenticate(req, res) {
-        req.checkBody('username').isEmail();
+        req.checkBody('email').isEmail();
         req.checkBody('password').notEmpty();
 
         const errors = req.validationErrors();
@@ -23,12 +23,12 @@ module.exports = (app, express, config) => {
                 .send(errors);
         }
 
-        // mongoose constrains user.name toLowerCase()
+        // mongoose constrains user.email toLowerCase()
         const user = yield User
             .findOne({
-                username: req.body.username.toLowerCase(),
+                email: req.body.email.toLowerCase(),
             })
-            .select('name username password salt')
+            .select('name email password salt')
             .exec();
 
         if (!user) {
@@ -54,7 +54,7 @@ module.exports = (app, express, config) => {
         const token = jwt.sign(
             {
                 name: user.name,
-                username: user.username,
+                email: user.email,
             },
             config.secret,
             {
@@ -76,7 +76,7 @@ module.exports = (app, express, config) => {
         .route('/resetPassword')
 
         .post(wrap(function* resetPassword(req, res) {
-            req.checkBody('username').isEmail();
+            req.checkBody('email').isEmail();
 
             const errors = req.validationErrors();
 
@@ -87,7 +87,7 @@ module.exports = (app, express, config) => {
             }
 
             const user = yield User.findOne({
-                username: req.body.username,
+                email: req.body.email,
             });
 
             if (!user) {
@@ -106,7 +106,7 @@ module.exports = (app, express, config) => {
 
             yield mailer.send(
                 {
-                    to: user.username,
+                    to: user.email,
                     subject: 'Reset Password',
                     resetUrl: `http://${req.headers.host}/admin/reset/${user.resetPasswordToken}`,
                 },
@@ -114,7 +114,7 @@ module.exports = (app, express, config) => {
             );
 
             return res.json({
-                message: `A email has been sent to ${user.username} with further instructions.`,
+                message: `A email has been sent to ${user.email} with further instructions.`,
             });
         }));
 
@@ -156,7 +156,7 @@ module.exports = (app, express, config) => {
 
             yield mailer.send(
                 {
-                    to: user.username,
+                    to: user.email,
                     subject: 'Your password has been changed',
                 },
                 'resetPasswordConfirmation'

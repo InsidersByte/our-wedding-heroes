@@ -4,7 +4,7 @@ import BaseStore from './BaseStore';
 import { USER as key } from '../constants/KeyConstants';
 
 const initialValue = {
-    username: '',
+    email: '',
 };
 
 class UserStore extends BaseStore {

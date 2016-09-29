@@ -30,7 +30,7 @@ module.exports = (app, express) => {
             }
 
             req.checkBody('name').notEmpty();
-            req.checkBody('username').isEmail();
+            req.checkBody('email').isEmail();
             req.checkBody('password', MINIMUM_PASSWORD_MESSAGE).isLength({ min: MINIMUM_PASSWORD_LENGTH });
             req.checkBody('confirmPassword').equals(req.body.confirmPassword);
 
@@ -44,9 +44,9 @@ module.exports = (app, express) => {
 
             const user = new User();
 
-            // mongoose UserSchema calls .toLowerCase() on user.name
+            // mongoose UserSchema calls .toLowerCase() on user.email
             user.name = req.body.name;
-            user.username = req.body.username;
+            user.email = req.body.email;
             user.password = req.body.password;
             user.status = STATUS.ACTIVE;
 
@@ -56,7 +56,7 @@ module.exports = (app, express) => {
                 if (err.code === 11000) {
                     return res
                         .status(400)
-                        .json({ success: false, message: 'A user with that username already exists.' });
+                        .json({ success: false, message: 'A user with that email already exists.' });
                 }
 
                 return res

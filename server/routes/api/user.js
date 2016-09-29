@@ -19,7 +19,7 @@ module.exports = (app, express) => {
         }))
 
         .post(wrap(function* createUser(req, res) {
-            req.checkBody('username').isEmail();
+            req.checkBody('email').isEmail();
 
             const errors = req.validationErrors();
 
@@ -30,7 +30,7 @@ module.exports = (app, express) => {
             }
 
             let user;
-            const existingUser = yield User.findOne({ username: req.body.username.toLowerCase() });
+            const existingUser = yield User.findOne({ email: req.body.email.toLowerCase() });
 
             if (existingUser) {
                 if (existingUser.status !== STATUS.INVITED && existingUser.status !== STATUS.INVITE_PENDING) {
@@ -43,22 +43,12 @@ module.exports = (app, express) => {
             } else {
                 user = new User();
 
-                // mongoose UserSchema calls .toLowerCase() on user.name
-                user.username = req.body.username;
+                // mongoose UserSchema calls .toLowerCase() on user.email
+                user.email = req.body.email;
                 user.password = uuid.v4;
                 user.status = STATUS.INVITED;
 
-                try {
-                    yield user.save();
-                } catch (error) {
-                    if (error.code === 11000) {
-                        return res
-                            .status(400)
-                            .json({ message: 'A user with that username already exists.' });
-                    }
-
-                    throw error;
-                }
+                yield user.save();
             }
 
             try {
@@ -71,7 +61,7 @@ module.exports = (app, express) => {
 
                 yield mailer.send(
                     {
-                        to: user.username,
+                        to: user.email,
                         subject: `${name} has invited you to join Our Wedding Heroes`,
                         signUpUrl: `http://${req.headers.host}/admin/signup/${user.resetPasswordToken}`,
                         inviter: req.user,
@@ -111,11 +101,11 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const { user: { username } } = req;
+            const { user: { email } } = req;
 
             const user = yield User
-                .findOne({ username })
-                .select('name username password salt')
+                .findOne({ email })
+                .select('name email password salt')
                 .exec();
 
             if (!user) {
@@ -151,7 +141,7 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            if (user.username === req.user.username) {
+            if (user.email === req.user.email) {
                 return res
                     .status(400)
                     .json({ message: 'You cannot delete yourself!' });

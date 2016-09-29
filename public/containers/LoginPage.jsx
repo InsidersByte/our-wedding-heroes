@@ -30,7 +30,7 @@ export default class Login extends React.Component {
 
     state = {
         user: {
-            username: '',
+            email: '',
             password: '',
         },
     };
@@ -48,14 +48,14 @@ export default class Login extends React.Component {
     forgot = (event: SyntheticEvent) => {
         event.preventDefault();
 
-        const username = this.state.user.username;
+        const email = this.state.user.email;
 
-        if (!username || !isEmail(username)) {
+        if (!email || !isEmail(email)) {
             NotificationActions.error({ message: 'We need your email address to reset your password!' });
             return;
         }
 
-        PasswordResetActions.create({ username });
+        PasswordResetActions.create({ email });
     };
 
     render() {
