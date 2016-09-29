@@ -9,10 +9,10 @@ type PropsType = {
     user: {
         _id: string,
         name: string,
-        username: string,
+        email: string,
     },
     loggedInUser: {
-        username: string,
+        email: string,
     },
     onDelete: Function,
 };
@@ -25,8 +25,8 @@ export default class ActiveUserListItem extends Component {
     };
 
     render() {
-        const { user: { _id, name, username }, loggedInUser } = this.props;
-        const deletable = username !== loggedInUser.username;
+        const { user: { _id, name, email }, loggedInUser } = this.props;
+        const deletable = email !== loggedInUser.email;
 
         if (deletable) {
             return (
@@ -35,7 +35,7 @@ export default class ActiveUserListItem extends Component {
                     leftAvatar={<Avatar icon={<Person />} />}
                     rightIconButton={<IconButton onClick={this.onDelete}><Delete /></IconButton>}
                     primaryText={name}
-                    secondaryText={username}
+                    secondaryText={email}
                 />
             );
         }
@@ -45,7 +45,7 @@ export default class ActiveUserListItem extends Component {
                 key={_id}
                 leftAvatar={<Avatar icon={<Person />} />}
                 primaryText={name}
-                secondaryText={username}
+                secondaryText={email}
             />
         );
     }

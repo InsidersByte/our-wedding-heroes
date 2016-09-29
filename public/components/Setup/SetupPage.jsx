@@ -10,7 +10,7 @@ export default class SetupPage extends React.Component {
     state = {
         user: {
             name: '',
-            username: '',
+            email: '',
             password: '',
             confirmPassword: '',
         },

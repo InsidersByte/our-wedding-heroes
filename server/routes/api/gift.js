@@ -83,8 +83,8 @@ module.exports = (app, express, config) => {
 
             yield mailer.send({ to: giver.email, subject: 'Gift Confirmation', giftSet, PAYMENT_METHODS, paypalLink }, 'confirmation');
 
-            const users = yield User.find({}, 'username');
-            const userEmails = users.map(user => user.username);
+            const users = yield User.find({}, 'email');
+            const userEmails = users.map(user => user.email);
 
             console.log(giver);
 
