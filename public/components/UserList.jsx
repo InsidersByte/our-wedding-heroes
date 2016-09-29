@@ -10,14 +10,14 @@ type PropsType = {
     activeUsers: Array<{
         _id: string,
         name: string,
-        username: string,
+        email: string,
     }>,
     invitedUsers: Array<{
         _id: string,
-        username: string,
+        email: string,
     }>,
     loggedInUser: {
-        username: string,
+        email: string,
     },
     onAdd: Function,
     onDelete: Function,

@@ -7,7 +7,7 @@ import Form from './Form';
 
 type PropsType = {
     user: {
-        username: string,
+        email: string,
         password: string,
     },
     onChange: Function,
@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-export default function LoginForm({ user: { username, password }, onChange, onForgot, onSubmit, saving }: PropsType) {
+export default function LoginForm({ user: { email, password }, onChange, onForgot, onSubmit, saving }: PropsType) {
     return (
         <Paper>
             <Toolbar>
@@ -41,10 +41,10 @@ export default function LoginForm({ user: { username, password }, onChange, onFo
 
             <Form onSubmit={onSubmit} loading={false} saving={saving} style={styles.form}>
                 <TextField
-                    name="username"
+                    name="email"
                     type="email"
-                    floatingLabelText="Username"
-                    value={username}
+                    floatingLabelText="Email"
+                    value={email}
                     onChange={onChange}
                     fullWidth
                     style={styles.input}

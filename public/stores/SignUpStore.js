@@ -6,7 +6,7 @@ import { SIGN_UP as key } from '../constants/KeyConstants';
 import { LOGIN_ROUTE } from '../constants/routeConstants';
 
 const initialValue = {
-    username: '',
+    email: '',
 };
 
 class SignUpStore extends BaseStore {
