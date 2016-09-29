@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
 import loginStore from '../stores/LoginStore';
 import SetupApi from '../api/SetupApi';
@@ -9,20 +9,19 @@ import SetupApi from '../api/SetupApi';
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
 
-import App from '../components/App';
+import App from '../containers/App';
 
 import LandingPage from '../components/Landing/LandingPage';
 import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
 import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
 import ConfirmationPage from '../components/Checkout/ConfirmationPage';
 
-import LoginPage from '../components/Login/LoginPage';
-import ProfilePage from '../components/Profile/ProfilePage';
+import LoginPage from '../containers/LoginPage';
+import ProfilePage from '../containers/ProfilePage';
 import SetupPage from '../components/Setup/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
-import AuthenticatedLanding from '../components/AuthenticatedLanding';
-import CoverPage from '../components/Cover/CoverPage';
+import CoverPage from '../containers/CoverPage';
 import AboutUsPage from '../components/AboutUs/AboutUsPage';
 import RsvpPage from '../components/Rsvp/RsvpPage';
 import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage';
@@ -31,8 +30,8 @@ import OnTheDayPage from '../components/OnTheDay/OnTheDayPage';
 import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage';
 import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage';
 import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
-import HoneymoonGiftListPage from '../components/HoneymoonGiftList/HoneymoonGiftListPage';
-import UsersPage from '../components/Users/UsersPage';
+import HoneymoonGiftListPage from '../containers/HoneymoonGiftListPage';
+import UsersPage from '../containers/UsersPage';
 import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
 import GiftSetPage from '../components/GiftSet/GiftSetPage';
 import ResetPage from '../components/Reset/ResetPage';
@@ -91,6 +90,7 @@ export default (
         <Route path="giver" component={GiverDetailsPage} />
         <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
         <Route path="admin" component={Admin}>
+            <IndexRedirect to="giftSet" />
             <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
             <Route onEnter={requireSetup}>
@@ -101,7 +101,6 @@ export default (
                 </Route>
 
                 <Route onEnter={requireAuth}>
-                    <IndexRoute component={AuthenticatedLanding} onEnter={requireAuth} />
                     <Route path="profile" component={ProfilePage} />
                     <Route path="cover" component={CoverPage} />
                     <Route path="aboutUs" component={AboutUsPage} />

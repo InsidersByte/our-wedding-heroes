@@ -8,12 +8,9 @@
 
 A wedding website with a honeymoon gift list.
 
-## Requirements
-
-* [Node.js v6](https://nodejs.org/en/)
-* [MongoDB v3](https://www.mongodb.org/downloads)
-
 ## Install
+
+First, you'll need **Node.js v6** and **MongoDB v3**.
 
 1.  **Clone the repo**
 
@@ -42,4 +39,49 @@ A wedding website with a honeymoon gift list.
     
 5.  **Run the setup**
     
-    visit [http://localhost:8080/admin](http://localhost:8080/admin)
+    Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
+
+## Docker Install
+
+First, you'll need **Docker**.
+
+1.  **Clone the repo**
+
+    ```bash
+    $ git clone https://github.com/InsidersByte/our-wedding-heroes.git
+    $ cd our-wedding-heroes
+    ```
+    
+2. **Build the images**
+
+    ```bash
+    $ docker-compose build
+    ```
+    
+3. **Create the containers**
+
+    ```bash
+    $ docker-compose up -d
+    ```
+    
+4. **Install your dependencies**
+
+    ```bash
+    $ docker-compose run web npm install
+    ```
+    
+5. **Restart the website**
+
+    ```bash
+    $ docker-compose restart web
+    ```
+    
+6.  **Run the setup**
+
+    Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
+
+## Deployment
+
+This will documented as part of this [issue](https://github.com/InsidersByte/our-wedding-heroes/issues/243).
+
+> For now see this [discussion](https://github.com/InsidersByte/our-wedding-heroes/issues/216).

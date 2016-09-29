@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import GiftActions from '../../actions/GiftActions';
 import GiftStore from '../../stores/GiftStore';
 import { HOME_ROUTE } from '../../constants/routeConstants';
-import Loader from '../common/Loader';
+import Loader from '../Loader';
 import { PAYMENT_METHODS } from '../../../lib/constants';
 import css from './ConfirmationPage.styl';
 
@@ -48,7 +48,7 @@ export default class ConfirmationPage extends React.Component {
 
         return (
             <p>
-                When you click 'Pay with PayPal' you will be redirect to
+                When you click &#39;Pay with PayPal&#39; you will be redirect to
                 the <a href="https://www.paypal.me/" target="_blank" rel="noopener noreferrer">paypal.me</a> website.
             </p>
         );

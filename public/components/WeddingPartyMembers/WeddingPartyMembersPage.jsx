@@ -3,11 +3,11 @@ import { Jumbotron, Button } from 'react-bootstrap';
 import { CREATE_WEDDING_PARTY_MEMBER_ROUTE, updateWeddingPartyMemberRoute } from '../../constants/routeConstants';
 import WeddingPartyMemberActions from '../../actions/WeddingPartyMemberActions';
 import WeddingPartyMemberStore from '../../stores/WeddingPartyMemberStore';
-import Loader from '../common/Loader';
+import Loader from '../Loader';
 import WeddingPartyMember from './WeddingPartyMember';
-import FontAwesome from '../common/FontAwesome';
-import SortableContainer from '../common/SortableContainer';
-import SortableItem from '../common/SortableItem';
+import FontAwesome from '../FontAwesome';
+import SortableContainer from '../SortableContainer';
+import SortableItem from '../SortableItem';
 
 export default class WeddingPartyMembersPage extends React.Component {
     static contextTypes = {

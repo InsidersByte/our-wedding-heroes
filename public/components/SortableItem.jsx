@@ -1,7 +1,15 @@
+/* @flow */
+
 import React from 'react';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
-import { SORTABLE_ITEM } from '../../constants/itemTypes';
-import css from './SortableItem.styl';
+import { SORTABLE_ITEM } from '../constants/itemTypes';
+
+type PropsType = {
+    connectDragSource: Function,
+    connectDropTarget: Function,
+    isDragging: boolean,
+    children?: React$Element<any>,
+};
 
 const sourceSpec = {
     beginDrag({ id }) {
@@ -33,19 +41,13 @@ const targetSpec = {
     connectDropTarget: connect.dropTarget(),
 }))
 export default class SortableItem extends React.Component {
-    static propTypes = {
-        connectDragSource: React.PropTypes.func.isRequired,
-        connectDropTarget: React.PropTypes.func.isRequired,
-        isDragging: React.PropTypes.bool.isRequired,
-        children: React.PropTypes.element.isRequired,
-    };
+    props: PropsType;
 
     render() {
         const { connectDragSource, connectDropTarget, isDragging, children } = this.props;
-        const rootClassName = isDragging ? css.hidden : '';
 
         return connectDragSource(connectDropTarget(
-            <div className={rootClassName}>
+            <div style={{ opacity: isDragging ? 0 : 1 }}>
                 {children}
             </div>
         ));
