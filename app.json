@@ -8,21 +8,12 @@
         "heroku-postgresql"
     ],
     "env": {
-        "URL": {
-            "description": "The URL of this Heroku app.",
-            "value": "https://YOURAPPNAME.herokuapp.com"
-        },
         "SECRET": {
             "description": "A secret key for verifying the integrity of JWT.",
             "generator": "secret"
         },
-        "PAYPAL_ME_USERNAME": {
-            "description": "Your paypal.me username.",
-            "required": false
-        },
         "EMAIL_FROM": {
-            "description": "The from address that emails come from.",
-            "value": "no-reply@ourweddingheroes.com"
+            "description": "The from address that emails come from."
         },
         "EMAIL_SIGNATURE": {
             "description": "The email signature you want to use.",
@@ -33,10 +24,19 @@
             "value": "Mailgun"
         },
         "EMAIL_USERNAME": {
-            "description": "The username for the email service"
+            "description": "The username for the email service."
         },
         "EMAIL_PASSWORD": {
-            "description": "The password for the email service"
+            "description": "The password for the email service."
+        },
+        "PAYPAL_ME_USERNAME": {
+            "description": "Your paypal.me username.",
+            "required": false
+        },
+        "PGSSLMODE": {
+            "description": "PostgreSQL SSL connection mode. Set to 'require' to force SSL. Unset it to use the default.",
+            "required": false,
+            "value": "require"
         },
         "NPM_CONFIG_PRODUCTION": {
             "description": "Don't change, it's required at the moment to deploy.",

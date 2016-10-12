@@ -78,5 +78,8 @@ First, you'll need **Docker**.
 
 ## Deploying on Heroku
 
+To get your own Our Wedding Heroes site running on Heroku, click the button below:
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+Fill out the form, and you should be ready to go in a few seconds.
