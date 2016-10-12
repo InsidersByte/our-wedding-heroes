@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { HOME_ROUTE } from '../constants/routeConstants';
+import { HOME_ROUTE } from '../constants/routes';
 
 const styles = {
     root: {
@@ -29,7 +29,7 @@ export default function NoMatch() {
                 Woops! Sorry, there is nothing to see here.
             </div>
 
-            <Link to={HOME_ROUTE} className="btn btn-success" role="button">Back to Home</Link>
+            <Link to={HOME_ROUTE}>Back to Home</Link>
         </div>
     );
 }

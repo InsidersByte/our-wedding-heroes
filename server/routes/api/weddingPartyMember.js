@@ -1,24 +1,23 @@
-const WeddingProfile = require('../../models/weddingProfile');
+const WeddingPartyMember = require('../../models/WeddingPartyMember');
 const wrap = require('../../utilities/wrap');
-const { integer } = require('../../../lib/random/index');
-const { MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants/index');
+const { integer } = require('../../../lib/random');
+const { WEDDING_PROFILE_ID, MINIMUM_NUMBER, MAXIMUM_NUMBER } = require('../../constants');
 
-module.exports = (app, express) => {
+module.exports = ({ express, secure }) => {
     const router = new express.Router();
 
     router
         .route('/')
 
         .get(wrap(function* getWeddingPartyMembers(req, res) {
-            const weddingProfile = yield WeddingProfile.findOne({});
+            const weddingPartyMembers = yield WeddingPartyMember
+                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
+                .fetchAll();
 
-            const weddingPartyMembers = weddingProfile.weddingPartyMembers || [];
-            const sortedWeddingPartyMembers = weddingPartyMembers.sort((a, b) => a.position - b.position);
-
-            return res.json(sortedWeddingPartyMembers);
+            return res.json(weddingPartyMembers);
         }))
 
-        .post(wrap(function* createWeddingPartyMember(req, res) {
+        .post(secure, wrap(function* createWeddingPartyMember(req, res) {
             req.checkBody('name').notEmpty();
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
@@ -32,23 +31,27 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const weddingProfile = yield WeddingProfile.findOne({});
+            const { name, title, imageUrl, description } = req.body;
 
-            const positions = weddingProfile.weddingPartyMembers.map(o => o.position);
-            const maximumPosition = positions.length > 0 ? Math.max(...positions) : 0;
+            const max = yield WeddingPartyMember
+                .forge({ weddingProfileId: WEDDING_PROFILE_ID })
+                .query({ max: 'position' })
+                .fetch();
+
+            const maximumPosition = max.get('max') || 0;
+
             const position = integer(maximumPosition + MINIMUM_NUMBER, maximumPosition + MAXIMUM_NUMBER);
 
-            const weddingPartyMember = weddingProfile.weddingPartyMembers.create({
-                name: req.body.name,
-                title: req.body.title,
-                imageUrl: req.body.imageUrl,
-                description: req.body.description,
+            const weddingPartyMember = new WeddingPartyMember({
+                name,
+                title,
+                imageUrl,
+                description,
                 position,
+                weddingProfileId: WEDDING_PROFILE_ID,
             });
 
-            weddingProfile.weddingPartyMembers.push(weddingPartyMember);
-
-            yield weddingProfile.save();
+            yield weddingPartyMember.save();
 
             return res
                 .status(201)
@@ -56,12 +59,14 @@ module.exports = (app, express) => {
         }));
 
     router
-        .route('/:weddingPartyMemberId')
+        .route('/:id')
 
-        .get(wrap(function* getWeddingPartyMember(req, res) {
-            const weddingProfile = yield WeddingProfile.findOne({});
+        .get(secure, wrap(function* getWeddingPartyMember(req, res) {
+            const { id } = req.params;
 
-            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
 
             if (!weddingPartyMember) {
                 return res
@@ -72,8 +77,8 @@ module.exports = (app, express) => {
             return res.json(weddingPartyMember);
         }))
 
-        .put(wrap(function* updateWeddingPartyMember(req, res) {
-            req.checkBody('_id').equals(req.params.weddingPartyMemberId);
+        .put(secure, wrap(function* updateWeddingPartyMember(req, res) {
+            req.checkBody('id').equals(req.params.id);
             req.checkBody('name').notEmpty();
             req.checkBody('title').notEmpty();
             req.checkBody('imageUrl').isURL();
@@ -88,9 +93,11 @@ module.exports = (app, express) => {
                     .send(errors);
             }
 
-            const weddingProfile = yield WeddingProfile.findOne({});
+            const { id } = req.params;
 
-            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
 
             if (!weddingPartyMember) {
                 return res
@@ -98,21 +105,27 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            weddingPartyMember.name = req.body.name;
-            weddingPartyMember.title = req.body.title;
-            weddingPartyMember.imageUrl = req.body.imageUrl;
-            weddingPartyMember.description = req.body.description;
-            weddingPartyMember.position = req.body.position;
+            const { name, title, imageUrl, description, position } = req.body;
 
-            yield weddingProfile.save();
+            weddingPartyMember.set({
+                name,
+                title,
+                imageUrl,
+                description,
+                position,
+            });
+
+            yield weddingPartyMember.save();
 
             return res.json(weddingPartyMember);
         }))
 
-        .delete(wrap(function* deleteWeddingPartyMember(req, res) {
-            const weddingProfile = yield WeddingProfile.findOne({});
+        .delete(secure, wrap(function* deleteWeddingPartyMember(req, res) {
+            const { id } = req.params;
 
-            const weddingPartyMember = weddingProfile.weddingPartyMembers.id(req.params.weddingPartyMemberId);
+            const weddingPartyMember = yield WeddingPartyMember
+                .forge({ id })
+                .fetch();
 
             if (!weddingPartyMember) {
                 return res
@@ -120,9 +133,7 @@ module.exports = (app, express) => {
                     .send();
             }
 
-            weddingPartyMember.remove();
-
-            yield weddingProfile.save();
+            yield weddingPartyMember.destroy();
 
             return res
                 .status(204)

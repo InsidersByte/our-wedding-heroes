@@ -1,46 +1,45 @@
 /* @flow */
 
+// TODO: Look at how much polyfilling we actually need
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
-import jwtDecode from 'jwt-decode';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'animate.css/animate.css';
-import 'font-awesome/css/font-awesome.css';
-import history from './helpers/history';
 import routes from './routes';
-import alt from './helpers/alt';
-// FIXME:FLOW need to fix import .styl
+import configureStore from './store/configureStore';
+import { TOKEN } from './constants';
+import jwtDecoder from './utils/jwtDecoder';
 import './index.styl';
 
-const jwt = localStorage.getItem('jwt');
+let initialState = {};
 
-if (jwt !== null) {
-    const user = jwtDecode(jwt);
-    const expiryDate = new Date(0);
-    expiryDate.setUTCSeconds(user.exp);
+const jwt = localStorage.getItem(TOKEN);
+const user = jwtDecoder(jwt);
 
-    // Check if the token is expired
-    if (new Date() < expiryDate) {
-        alt.bootstrap(JSON.stringify({
-            LoginStore: {
-                jwt,
-                user,
-                isLoggedIn: true,
-            },
-        }));
-    }
+if (user) {
+    initialState = {
+        auth: {
+            user,
+            isAuthenticated: true,
+        },
+    };
 }
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+const store = configureStore(initialState, browserHistory);
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
-    <Router history={history}>
-        {routes}
-    </Router>,
+    <Provider store={store}>
+        <Router history={history}>
+            {routes(store)}
+        </Router>
+    </Provider>,
     document.getElementById('app')
 );
