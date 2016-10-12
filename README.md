@@ -10,7 +10,7 @@ A wedding website with a honeymoon gift list.
 
 ## Install
 
-First, you'll need **Node.js v6** and **MongoDB v3**.
+First, you'll need **Node.js v6** and **PostgreSQL v9**.
 
 1.  **Clone the repo**
 
@@ -25,11 +25,7 @@ First, you'll need **Node.js v6** and **MongoDB v3**.
     $ npm install
     ```
     
-3. **Ensure MongoDB is running**
-
-    ```bash
-    $ lsof -iTCP:27017 -sTCP:LISTEN
-    ```
+3. **Ensure PostgresSQL is running**
     
 4. **Start the server**
 
@@ -80,8 +76,10 @@ First, you'll need **Docker**.
 
     Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
 
-## Deployment
+## Deploying on Heroku
 
-This will documented as part of this [issue](https://github.com/InsidersByte/our-wedding-heroes/issues/243).
+To get your own Our Wedding Heroes site running on Heroku, click the button below:
 
-> For now see this [discussion](https://github.com/InsidersByte/our-wedding-heroes/issues/216).
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+Fill out the form, and you should be ready to go in a few seconds.

@@ -3,17 +3,19 @@
 import React from 'react';
 import { Paper, Toolbar, ToolbarGroup, ToolbarTitle, IconButton } from 'material-ui';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
+import Loader from './Loader';
 import ActiveUserList from './ActiveUserList';
 import InvitedUserList from './InvitedUserList';
 
 type PropsType = {
+    loading: boolean,
     activeUsers: Array<{
-        _id: string,
+        id: string,
         name: string,
         email: string,
     }>,
     invitedUsers: Array<{
-        _id: string,
+        id: string,
         email: string,
     }>,
     loggedInUser: {
@@ -23,7 +25,7 @@ type PropsType = {
     onDelete: Function,
 };
 
-export default function UserList({ activeUsers, invitedUsers, loggedInUser, onAdd, onDelete }: PropsType) {
+export default function UserList({ loading, activeUsers, invitedUsers, loggedInUser, onAdd, onDelete }: PropsType) {
     return (
         <Paper>
             <Toolbar>
@@ -38,16 +40,18 @@ export default function UserList({ activeUsers, invitedUsers, loggedInUser, onAd
                 </ToolbarGroup>
             </Toolbar>
 
-            <InvitedUserList
-                users={invitedUsers}
-                onDelete={onDelete}
-            />
+            <Loader loading={loading}>
+                <InvitedUserList
+                    users={invitedUsers}
+                    onDelete={onDelete}
+                />
 
-            <ActiveUserList
-                users={activeUsers}
-                loggedInUser={loggedInUser}
-                onDelete={onDelete}
-            />
+                <ActiveUserList
+                    users={activeUsers}
+                    loggedInUser={loggedInUser}
+                    onDelete={onDelete}
+                />
+            </Loader>
         </Paper>
     );
 }

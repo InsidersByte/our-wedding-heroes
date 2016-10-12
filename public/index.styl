@@ -1,21 +1,95 @@
+$link-colour = #337AB6
+$link-hover-colour = #23527c
+$code-color = #c7254e
+$code-background-color = #f9f2f4
+
 // @stylint off
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
 // @stylint on
 
-body
+/* Global Styles */
+
 html
-:global(#app)
+    height 100%
+    margin 0
+    width 100%
+
+body
     font 14px 'Roboto', sans-serif
     height 100%
     margin 0
     width 100%
 
+:global(#app)
+    height 100%
+    width 100%
+
+h1, h2, h3, h4, h5, h6
+    font-weight 500
+    margin-bottom 10px
+
+h1, h2, h3
+    margin-top 20px
+
+h4, h5, h6
+    margin-top 10px
+
+p
+    margin 0 0 10px
+
+a
+    color $link-colour
+    text-decoration none
+
+    &:active
+    &:hover
+        outline 0
+
+    &:hover
+    &:focus
+        color $link-hover-colour
+        text-decoration underline
+
+    &:focus
+        outline 5px auto -webkit-focus-ring-color
+        outline-offset -2px
+
+code
+    background-color $code-background-color
+    border-radius 4px
+    color $code-color
+    font-size 90%
+    padding 2px 4px
+
 *, :after, :before
     box-sizing border-box
 
-:global(.radio)
-    margin-top 0
+/* Overrides */
 
-:global(.jumbotron)
-    padding-left 60px
-    padding-right 60px
+:global(.markdown-editor__textarea)
+    font-size 1em
+
+// FIXME: https://github.com/callemall/material-ui/issues/5163
+// @stylint off
+td
+    overflow hidden
+// @stylint on
+
+/* Keyframes */
+
+// copied from https://github.com/daneden/animate.css/blob/master/source/attention_seekers/bounce.css
+@keyframes bounce
+    from, 20%, 53%, 80%, to
+        animation-timing-function cubic-bezier(.215, .610, .355, 1.000)
+        transform translate3d(0, 0, 0)
+
+    40%, 43%
+        animation-timing-function cubic-bezier(.755, .050, .855, .060)
+        transform translate3d(0, -30px, 0)
+
+    70%
+        animation-timing-function cubic-bezier(.755, .050, .855, .060)
+        transform translate3d(0, -15px, 0)
+
+    90%
+        transform translate3d(0, -4px, 0)

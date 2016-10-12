@@ -1,8 +1,5 @@
-/* @flow */
-
 import React from 'react';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
-import { SORTABLE_ITEM } from '../constants/itemTypes';
 
 type PropsType = {
     connectDragSource: Function,
@@ -16,6 +13,8 @@ const sourceSpec = {
         return { id };
     },
 };
+
+const SORTABLE_ITEM = 'SortableItem';
 
 const targetSpec = {
     hover(targetProps, monitor) {

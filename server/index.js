@@ -6,7 +6,7 @@ if (!Object.values) {
     values.shim();
 }
 
-const environment = process.env.NODE_ENV || environmentConstants.DEVELOPMENT;
+const environment = process.env.NODE_ENV = process.env.NODE_ENV || environmentConstants.DEVELOPMENT;
 
 if (environment === environmentConstants.DEVELOPMENT) {
     require('dotenv').config({ silent: true }); // eslint-disable-line global-require, import/no-extraneous-dependencies
@@ -14,13 +14,10 @@ if (environment === environmentConstants.DEVELOPMENT) {
 
 const app = express();
 
-const config = require('./config/config');
+const config = require('./config');
 
-require('./config/express')(app, environment);
-
-require('./config/mongoose')(config);
-
-require('./routes/index')(app, express, config, environment);
+require('./config/express')({ app, environment });
+require('./routes')({ app, express, config, environment });
 
 app.listen(config.port, () => {
     console.log(`Server running on port ${config.port}`);

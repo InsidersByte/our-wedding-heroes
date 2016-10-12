@@ -1,47 +1,40 @@
-/* @flow */
-
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
-import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routeConstants';
-import loginStore from '../stores/LoginStore';
-import SetupApi from '../api/SetupApi';
+import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
+import api from '../api';
+import { HTTP_METHODS } from '../constants/api';
 
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
 
-import App from '../containers/App';
+import Root from '../containers/Root';
 
-import LandingPage from '../components/Landing/LandingPage';
-import BasketSummaryPage from '../components/Checkout/BasketSummaryPage';
-import GiverDetailsPage from '../components/Checkout/GiverDetailsPage';
-import ConfirmationPage from '../components/Checkout/ConfirmationPage';
+import Main from '../containers/Main';
+import LandingPage from '../containers/LandingPage';
+import BasketSummaryPage from '../containers/BasketSummaryPage';
+import GiverDetailsPage from '../containers/GiverDetailsPage';
+import ConfirmationPage from '../containers/ConfirmationPage';
 
 import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
-import SetupPage from '../components/Setup/SetupPage';
+import SetupPage from '../containers/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
 import Admin from '../containers/Admin';
-import CoverPage from '../containers/CoverPage';
-import AboutUsPage from '../components/AboutUs/AboutUsPage';
-import RsvpPage from '../components/Rsvp/RsvpPage';
-import AboutOurDayPage from '../components/AboutOurDay/AboutOurDayPage';
-import LocalFlavourPage from '../components/LocalFlavour/LocalFlavourPage';
-import OnTheDayPage from '../components/OnTheDay/OnTheDayPage';
-import WeddingPlaylistPage from '../components/WeddingPlaylist/WeddingPlaylistPage';
-import AboutOurHoneymoonPage from '../components/AboutOurHoneymoon/AboutOurHoneymoonPage';
-import HoneymoonGiftListItemPage from '../components/HoneymoonGiftListItem/HoneymoonGiftListItemPage';
-import HoneymoonGiftListPage from '../containers/HoneymoonGiftListPage';
+import WeddingProfilePage from '../containers/WeddingProfilePage';
+import GiftsPage from '../containers/GiftsPage';
 import UsersPage from '../containers/UsersPage';
-import GiftSetsPage from '../components/GiftSet/GiftSetsPage';
-import GiftSetPage from '../components/GiftSet/GiftSetPage';
-import ResetPage from '../components/Reset/ResetPage';
-import WeddingPartyMembersPage from '../components/WeddingPartyMembers/WeddingPartyMembersPage';
-import CreateWeddingPartyMemberPage from '../components/WeddingPartyMembers/CreateWeddingPartyMemberPage';
-import UpdateWeddingPartyMemberPage from '../components/WeddingPartyMembers/UpdateWeddingPartyMemberPage';
+import GiftSetsPage from '../containers/GiftSetsPage';
+import GiftSetPage from '../containers/GiftSetPage';
+import ResetPasswordPage from '../containers/ResetPasswordPage';
+import WeddingPartyMembersPage from '../containers/WeddingPartyMembersPage';
+import CreateWeddingPartyMemberPage from '../containers/CreateWeddingPartyMemberPage';
+import UpdateWeddingPartyMemberPage from '../containers/UpdateWeddingPartyMemberPage';
+import SectionsPage from '../containers/SectionsPage';
+import CreateSectionPage from '../containers/CreateSectionPage';
+import UpdateSectionPage from '../containers/UpdateSectionPage';
 
 function checkSetup(callback, onSuccess) {
-    SetupApi
-        .get()
+    api({ method: HTTP_METHODS.GET, endpoint: 'setup' })
         .then(({ status }) => {
             onSuccess({ status });
             callback();
@@ -67,52 +60,54 @@ function requireSetup(nextState, replace, callback) {
     });
 }
 
-function requireAuth(nextState, replace) {
-    const { isLoggedIn } = loginStore.getState();
+function requireAuth(store) {
+    return (nextState, replace) => {
+        const { auth: { isAuthenticated } } = store.getState();
 
-    if (!isLoggedIn) {
-        replace(LOGIN_ROUTE);
-    }
+        if (!isAuthenticated) {
+            replace(LOGIN_ROUTE);
+        }
+    };
 }
 
-function ifLoggedInRedirectToAdmin(nextState, replace) {
-    const { isLoggedIn } = loginStore.getState();
+function ifLoggedInRedirectToAdmin(store) {
+    return (nextState, replace) => {
+        const { auth: { isAuthenticated } } = store.getState();
 
-    if (isLoggedIn) {
-        replace(ADMIN_ROUTE);
-    }
+        if (isAuthenticated) {
+            replace(ADMIN_ROUTE);
+        }
+    };
 }
 
-export default (
-    <Route path="/" component={App}>
-        <IndexRoute component={LandingPage} />
-        <Route path="basket" component={BasketSummaryPage} />
-        <Route path="giver" component={GiverDetailsPage} />
-        <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
+export default store => (
+    <Route path="/" component={Root}>
+        <Route component={Main}>
+            <IndexRoute component={LandingPage} />
+            <Route path="basket" component={BasketSummaryPage} />
+            <Route path="giver" component={GiverDetailsPage} />
+            <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
+        </Route>
+
         <Route path="admin" component={Admin}>
             <IndexRedirect to="giftSet" />
             <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
             <Route onEnter={requireSetup}>
-                <Route onEnter={ifLoggedInRedirectToAdmin}>
+                <Route onEnter={ifLoggedInRedirectToAdmin(store)}>
                     <Route path="login" component={LoginPage} />
-                    <Route path="reset/:token" component={ResetPage} />
+                    <Route path="reset/:token" component={ResetPasswordPage} />
                     <Route path="signUp/:token" component={SignUpPage} />
                 </Route>
 
-                <Route onEnter={requireAuth}>
+                <Route onEnter={requireAuth(store)}>
                     <Route path="profile" component={ProfilePage} />
-                    <Route path="cover" component={CoverPage} />
-                    <Route path="aboutUs" component={AboutUsPage} />
-                    <Route path="rsvp" component={RsvpPage} />
-                    <Route path="aboutOurDay" component={AboutOurDayPage} />
-                    <Route path="localFlavour" component={LocalFlavourPage} />
-                    <Route path="onTheDay" component={OnTheDayPage} />
-                    <Route path="weddingPlaylist" component={WeddingPlaylistPage} />
-                    <Route path="aboutOurHoneymoon" component={AboutOurHoneymoonPage} />
-                    <Route path="honeymoonGiftList" component={HoneymoonGiftListPage} />
-                    <Route path="honeymoonGiftListItem" component={HoneymoonGiftListItemPage} />
-                    <Route path="users" component={UsersPage} />
+                    <Route path="weddingProfile" component={WeddingProfilePage} />
+                    <Route path="gift" component={GiftsPage} />
+                    <Route path="section" component={SectionsPage} />
+                    <Route path="section/create" component={CreateSectionPage} />
+                    <Route path="section/:id" component={UpdateSectionPage} />
+                    <Route path="user" component={UsersPage} />
                     <Route path="giftSet" component={GiftSetsPage} />
                     <Route path="giftSet/:giftSetId" component={GiftSetPage} />
                     <Route path="weddingPartyMember" component={WeddingPartyMembersPage} />
