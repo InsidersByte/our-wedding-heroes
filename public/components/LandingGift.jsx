@@ -58,7 +58,7 @@ export default class LandingGift extends Component {
     };
 
     render() {
-        const { gift: { name, imageUrl, inStock } } = this.props;
+        const { gift: { name, imageUrl } } = this.props;
 
         const backgroundImageStyle = { backgroundImage: `url(${imageUrl})` };
 
