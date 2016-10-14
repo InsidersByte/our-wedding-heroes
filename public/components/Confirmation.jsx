@@ -64,6 +64,9 @@ export default function Confirmation({ loading, giftSet: { paymentMethod, paypal
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={onLinkClicked}
+                        disableFocusRipple
+                        disableKeyboardFocus
+                        disableTouchRipple
                         style={styles.button}
                     />
                 }

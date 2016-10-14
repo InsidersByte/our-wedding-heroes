@@ -42,6 +42,9 @@ export default class LandingGift extends Component {
         return (
             <RaisedButton
                 primary
+                disableFocusRipple
+                disableKeyboardFocus
+                disableTouchRipple
                 label={`Add to Basket £${price}`}
                 onClick={this.onClick}
                 icon={<AddShoppingCart />}
