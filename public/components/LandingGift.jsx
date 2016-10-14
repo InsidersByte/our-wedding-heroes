@@ -12,8 +12,8 @@ type PropsType = {
         imageUrl: string,
         price: number,
         remaining: number,
+        inStock: number,
     },
-    basket: Map<number, Object>,
     addToBasket: Function,
 };
 
@@ -25,32 +25,40 @@ export default class LandingGift extends Component {
     };
 
     renderAddToBasketButton = () => {
-        const { gift: { id, remaining, price }, basket } = this.props;
+        const { gift: { inStock, price } } = this.props;
 
-        const { quantity } = basket.get(id) || { quantity: 0 };
-        const outOfStock = remaining - quantity <= 0;
-
-        if (outOfStock) {
+        if (inStock <= 0) {
             return (
-                <RaisedButton
-                    label="Fully Gifted!"
-                    disabled
-                />
+                <div>
+                    <p>&nbsp;</p>
+
+                    <RaisedButton
+                        label="Fully Gifted!"
+                        disabled
+                    />
+                </div>
             );
         }
 
         return (
-            <RaisedButton
-                primary
-                label={`Add to Basket £${price}`}
-                onClick={this.onClick}
-                icon={<AddShoppingCart />}
-            />
+            <div>
+                <p>Remaining: {inStock}</p>
+
+                <RaisedButton
+                    primary
+                    disableFocusRipple
+                    disableKeyboardFocus
+                    disableTouchRipple
+                    label={`Add to Basket £${price}`}
+                    onClick={this.onClick}
+                    icon={<AddShoppingCart />}
+                />
+            </div>
         );
     };
 
     render() {
-        const { gift: { name, imageUrl, remaining } } = this.props;
+        const { gift: { name, imageUrl } } = this.props;
 
         const backgroundImageStyle = { backgroundImage: `url(${imageUrl})` };
 
@@ -60,8 +68,6 @@ export default class LandingGift extends Component {
 
                 <div className={css.content}>
                     <h4>{name}</h4>
-                    <p>Remaining: {remaining}</p>
-
                     {this.renderAddToBasketButton()}
                 </div>
             </div>

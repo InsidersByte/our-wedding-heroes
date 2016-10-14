@@ -46,6 +46,7 @@ type PropsType = {
         imageUrl: string,
         price: number,
         remaining: number,
+        inStock: number,
     }>,
 };
 
@@ -59,7 +60,7 @@ export default class Landing extends Component {
     };
 
     render() {
-        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts, basket, basketCount, basketTotal } = this.props;
+        const { loading, onScrollDown, addToBasket, weddingProfile, sections, weddingPartyMembers, gifts, basketCount, basketTotal } = this.props;
 
         return (
             <Loader loading={loading} className={css.root}>
@@ -89,7 +90,7 @@ export default class Landing extends Component {
                 }
 
                 <LandingWeddingPartyMembers weddingPartyMembers={weddingPartyMembers} />
-                <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} basket={basket} />
+                <LandingGifts weddingProfile={weddingProfile} gifts={gifts} addToBasket={addToBasket} />
                 <LandingBasket count={basketCount} total={basketTotal} />
             </Loader>
         );

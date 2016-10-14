@@ -65,6 +65,9 @@ export default class BasketSummaryListItem extends React.Component {
                             icon={<Remove style={styles.icon} />}
                             onClick={this.onRemove}
                             disabled={quantity === 1}
+                            disableFocusRipple
+                            disableKeyboardFocus
+                            disableTouchRipple
                             style={styles.button}
                         />
 
@@ -77,6 +80,9 @@ export default class BasketSummaryListItem extends React.Component {
                             icon={<Add style={styles.icon} />}
                             onClick={this.onAdd}
                             disabled={quantity === remaining}
+                            disableFocusRipple
+                            disableKeyboardFocus
+                            disableTouchRipple
                             style={styles.button}
                         />
                     </div>
