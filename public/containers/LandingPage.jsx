@@ -43,6 +43,7 @@ type PropsType = {
         imageUrl: string,
         price: number,
         remaining: number,
+        inStock: number,
     }>,
     basket: Map<number, Object>,
     basketCount: number,
@@ -87,7 +88,12 @@ type PropsType = {
         const sortedSections = visibleSections.sort((a, b) => a.position - b.position);
 
         const { gifts } = giftsState;
-        const sortedGifts = gifts.sort((a, b) => a.position - b.position);
+        const giftsWithRemaining = gifts.map((gift) => {
+            const { id, remaining } = gift;
+            const { quantity } = basket.get(id) || { quantity: 0 };
+            return Object.assign({}, gift, { inStock: remaining - quantity });
+        });
+        const sortedGifts = giftsWithRemaining.sort((a, b) => a.position - b.position);
 
         return {
             weddingProfile,

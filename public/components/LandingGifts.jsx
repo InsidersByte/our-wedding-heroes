@@ -21,8 +21,8 @@ type PropsType = {
         imageUrl: string,
         price: number,
         remaining: number,
+        inStock: number,
     }>,
-    basket: Map<number, Object>,
     addToBasket: Function,
 };
 
@@ -33,7 +33,7 @@ const styles = {
     },
 };
 
-export default function LandingGifts({ weddingProfile, gifts, basket, addToBasket }: PropsType) {
+export default function LandingGifts({ weddingProfile, gifts, addToBasket }: PropsType) {
     const { giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage, disclaimerMessage } = weddingProfile;
 
     const giftsElement = (
@@ -43,7 +43,6 @@ export default function LandingGifts({ weddingProfile, gifts, basket, addToBaske
                     <LandingGift
                         key={gift.id}
                         gift={gift}
-                        basket={basket}
                         addToBasket={addToBasket}
                     />
                 )
