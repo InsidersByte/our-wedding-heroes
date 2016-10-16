@@ -30,6 +30,7 @@ const styles = {
     icon: {
         height: 18,
         width: 18,
+        fill: null,
     },
 };
 
@@ -60,7 +61,7 @@ export default function LandingGifts({ weddingProfile, gifts, addToBasket }: Pro
                         <br />
                         <br />
 
-                        <Info color={'#9a9ca7'} style={styles.icon} /> {paymentMessage}
+                        <Info style={styles.icon} /> {paymentMessage}
                     </span>
                 )}
 
@@ -69,7 +70,7 @@ export default function LandingGifts({ weddingProfile, gifts, addToBasket }: Pro
                         <br />
                         <br />
 
-                        <Info color={'#9a9ca7'} style={styles.icon} /> {disclaimerMessage}
+                        <Info style={styles.icon} /> {disclaimerMessage}
                     </span>
                 )}
             </div>
