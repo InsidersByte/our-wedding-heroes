@@ -2,6 +2,7 @@ $link-colour = #337AB6
 $link-hover-colour = #23527c
 $code-color = #c7254e
 $code-background-color = #f9f2f4
+$hr-background-color = #eeeeee
 
 // @stylint off
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,700)
@@ -53,6 +54,12 @@ a
     &:focus
         outline 5px auto -webkit-focus-ring-color
         outline-offset -2px
+
+hr
+    border 0
+    border-top 1px solid $hr-background-color
+    margin-top 20px
+    margin-bottom 20px
 
 code
     background-color $code-background-color
