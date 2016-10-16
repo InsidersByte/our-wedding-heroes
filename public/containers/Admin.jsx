@@ -6,11 +6,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { AppBar } from 'material-ui';
 import { getMuiTheme, MuiThemeProvider, spacing } from 'material-ui/styles';
+import withWidth, { LARGE } from 'material-ui/utils/withWidth';
 import * as actions from '../actions/auth';
 import NavigationDrawer from '../components/NavigationDrawer';
 
 type PropsType = {
     isAuthenticated: boolean,
+    width: number,
     user: {
         name: string,
     },
@@ -21,15 +23,9 @@ type PropsType = {
     children: React$Element<any>,
 };
 
-const styles = {
-    root: {},
-    container: {
-        margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`,
-    },
-};
-
 const muiTheme = getMuiTheme();
 
+@withWidth({ largeWidth: 1200 })
 @withRouter
 @connect(
     (state) => {
@@ -48,6 +44,15 @@ export default class Admin extends Component {
     state = {
         navDrawerOpen: false,
     };
+
+    getStyles() {
+        return {
+            root: {},
+            container: {
+                margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`,
+            },
+        };
+    }
 
     handleTouchTapLeftIconButton = () => {
         this.setState({ navDrawerOpen: !this.state.navDrawerOpen });
@@ -72,20 +77,31 @@ export default class Admin extends Component {
     };
 
     render() {
-        const { isAuthenticated, user, children } = this.props;
+        const { isAuthenticated, user, children, width } = this.props;
         const { navDrawerOpen } = this.state;
+        let docked = false;
+
+        const styles = this.getStyles();
+        let open = navDrawerOpen;
+
+        if (width === LARGE) {
+            open = true;
+            docked = true;
+            styles.root.paddingLeft = 256;
+        }
 
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div style={styles.root}>
                     <AppBar
-                        onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
                         title="Our Wedding Heroes"
+                        onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
+                        showMenuIconButton={!docked}
                     />
 
                     <NavigationDrawer
-                        docked={false}
-                        open={navDrawerOpen}
+                        docked={docked}
+                        open={open}
                         onRequestChange={this.handleRequestChange}
                         onChange={this.handleChangeList}
                         location={location}
