@@ -25,6 +25,15 @@ export default function authReducer(state = auth, action) {
         case TYPES.LOGOUT:
             return Object.assign({}, state, { user: {}, isAuthenticated: false, saving: false });
 
+        case TYPES.REQUEST_PASSWORD_RESET_REQUEST:
+            return Object.assign({}, state, { saving: true });
+
+        case TYPES.REQUEST_PASSWORD_RESET_SUCCESS:
+            return Object.assign({}, state, { saving: false });
+
+        case TYPES.REQUEST_PASSWORD_RESET_ERROR:
+            return Object.assign({}, state, { saving: false });
+
         case TYPES.PASSWORD_RESET_REQUEST:
             return Object.assign({}, state, { saving: true });
 
