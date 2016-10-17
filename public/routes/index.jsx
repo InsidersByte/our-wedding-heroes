@@ -15,11 +15,13 @@ import BasketSummaryPage from '../containers/BasketSummaryPage';
 import GiverDetailsPage from '../containers/GiverDetailsPage';
 import ConfirmationPage from '../containers/ConfirmationPage';
 
+import Admin from '../containers/Admin';
 import LoginPage from '../containers/LoginPage';
 import ProfilePage from '../containers/ProfilePage';
 import SetupPage from '../containers/SetupPage';
 import SignUpPage from '../containers/SignUpPage';
-import Admin from '../containers/Admin';
+import AdminLoggedIn from '../containers/AdminLoggedIn';
+import AdminNotLoggedIn from '../containers/AdminNotLoggedIn';
 import WeddingProfilePage from '../containers/WeddingProfilePage';
 import GiftsPage from '../containers/GiftsPage';
 import UsersPage from '../containers/UsersPage';
@@ -91,16 +93,19 @@ export default store => (
 
         <Route path="admin" component={Admin}>
             <IndexRedirect to="giftSet" />
-            <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
 
-            <Route onEnter={requireSetup}>
-                <Route onEnter={ifLoggedInRedirectToAdmin(store)}>
+            <Route onEnter={ifLoggedInRedirectToAdmin(store)} component={AdminNotLoggedIn}>
+                <Route path="setup" component={SetupPage} onEnter={requireNoSetup} />
+
+                <Route onEnter={requireSetup}>
                     <Route path="login" component={LoginPage} />
                     <Route path="reset/:token" component={ResetPasswordPage} />
                     <Route path="signUp/:token" component={SignUpPage} />
                 </Route>
+            </Route>
 
-                <Route onEnter={requireAuth(store)}>
+            <Route onEnter={requireSetup}>
+                <Route onEnter={requireAuth(store)} component={AdminLoggedIn}>
                     <Route path="profile" component={ProfilePage} />
                     <Route path="weddingProfile" component={WeddingProfilePage} />
                     <Route path="gift" component={GiftsPage} />
@@ -118,6 +123,7 @@ export default store => (
                 </Route>
             </Route>
         </Route>
+
         <Route path="*" component={NoMatch} />
     </Route>
 );
