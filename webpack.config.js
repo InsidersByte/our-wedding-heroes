@@ -30,7 +30,7 @@ const config = {
                 include: [PATHS.PUBLIC, PATHS.LIB],
                 query: {
                     presets: ['react', 'es2015', 'stage-1', 'react-hmre'],
-                    plugins: ['transform-decorators-legacy'],
+                    plugins: ['transform-decorators-legacy', 'flow-react-proptypes'],
                 },
             },
             {
