@@ -43,7 +43,7 @@ type PropsType = {
             weddingProfile: updatedWeddingProfile,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class WeddingProfilePage extends React.Component {
     props: PropsType;

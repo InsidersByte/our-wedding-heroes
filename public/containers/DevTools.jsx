@@ -13,7 +13,7 @@ const DevTools = createDevTools(
         defaultIsVisible={false}
     >
         <LogMonitor />
-    </DockMonitor>
+    </DockMonitor>,
 );
 
 export default DevTools;

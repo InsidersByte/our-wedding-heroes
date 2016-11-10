@@ -34,7 +34,7 @@ type PropsType = {
             basketTotal,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class BasketSummaryPage extends React.Component {
     props: PropsType;

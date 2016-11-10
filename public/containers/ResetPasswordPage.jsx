@@ -21,7 +21,7 @@ type PropsType = {
 
 @connect(
     ({ auth }) => auth,
-    dispatch => ({ actions: { ...bindActionCreators(authActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+    dispatch => ({ actions: { ...bindActionCreators(authActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } }),
 )
 export default class ResetPasswordPage extends React.Component {
     props: PropsType;

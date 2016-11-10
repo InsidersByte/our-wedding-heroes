@@ -33,7 +33,7 @@ const styles = {
             notifications: notificationsToShow,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class App extends React.Component {
     props: PropsType;

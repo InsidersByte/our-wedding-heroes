@@ -112,7 +112,7 @@ type PropsType = {
             ...bindActionCreators(giftActions, dispatch),
             ...bindActionCreators(basketActions, dispatch),
         },
-    })
+    }),
 )
 export default class LandingPage extends React.Component {
     props: PropsType;

@@ -57,7 +57,7 @@ export default function GiftList({ gifts, loading, onAdd, onSelect, onMove, onDr
                                 />
 
                                 <Divider />
-                            </SortableItem>
+                            </SortableItem>,
                         )
                     }
                 </SortableContainer>

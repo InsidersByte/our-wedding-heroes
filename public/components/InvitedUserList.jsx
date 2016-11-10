@@ -31,7 +31,7 @@ export default function InvitedUserList({ users, onDelete }: PropsType) {
                         key={i}
                         user={user}
                         onDelete={onDelete}
-                    />
+                    />,
                 )
             }
         </List>

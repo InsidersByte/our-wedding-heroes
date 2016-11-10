@@ -22,7 +22,7 @@ type PropsType = {
 
 @connect(
     ({ giftSet }) => giftSet,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class ConfirmationPage extends React.Component {
     props: PropsType;

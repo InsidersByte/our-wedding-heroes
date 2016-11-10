@@ -29,7 +29,7 @@ export default function LandingWeddingPartyMembers({ weddingPartyMembers }: Prop
                             <LandingWeddingPartyMember
                                 key={id}
                                 weddingPartyMember={weddingPartyMember}
-                            />
+                            />,
                         )
                 }
             </div>

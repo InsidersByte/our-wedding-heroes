@@ -51,7 +51,7 @@ const styles = {
 const DateTimeFormat = global.Intl.DateTimeFormat;
 
 export default function WeddingProfileForm(
-    { weddingProfile, loading, saving, onChange, onDateChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType
+    { weddingProfile, loading, saving, onChange, onDateChange, onContentChange, onCheck, onSubmit, open, handleOpen, handleClose }: PropsType,
 ) {
     const {
         coverTitle, coverImageUrl, weddingDate, giftListContent, showPaymentMessage, paymentMessage, showDisclaimerMessage,

@@ -41,5 +41,5 @@ ReactDOM.render(
             {routes(store)}
         </Router>
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app'),
 );

@@ -18,7 +18,7 @@ type PropsType = {
 
 @connect(
     ({ setup }) => setup,
-    dispatch => ({ actions: { ...bindActionCreators(setupActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+    dispatch => ({ actions: { ...bindActionCreators(setupActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } }),
 )
 export default class SetupPage extends React.Component {
     props: PropsType;

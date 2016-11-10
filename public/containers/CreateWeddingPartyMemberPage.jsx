@@ -15,7 +15,7 @@ type PropsType = {
 
 @connect(
     ({ weddingPartyMember }) => weddingPartyMember,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class CreateWeddingPartyMemberPage extends Component {
     props: PropsType;

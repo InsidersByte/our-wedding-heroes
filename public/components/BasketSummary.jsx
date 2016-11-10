@@ -67,7 +67,7 @@ export default function BasketSummary({ basket, basketCount, basketTotal, addToB
                                 />
 
                                 <Divider />
-                            </div>
+                            </div>,
                         )
                     }
                 </div>

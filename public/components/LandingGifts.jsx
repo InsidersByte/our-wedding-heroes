@@ -45,7 +45,7 @@ export default function LandingGifts({ weddingProfile, gifts, addToBasket }: Pro
                         key={gift.id}
                         gift={gift}
                         addToBasket={addToBasket}
-                    />
+                    />,
                 )
             }
         </div>

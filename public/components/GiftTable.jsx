@@ -35,7 +35,7 @@ export default function GiftTable({ gifts }: PropsType) {
                                 <TableRowColumn>{gift.price}</TableRowColumn>
                                 <TableRowColumn>{gift.quantity}</TableRowColumn>
                                 <TableRowColumn>{gift.total}</TableRowColumn>
-                            </TableRow>
+                            </TableRow>,
                         )
                     }
                 </TableBody>

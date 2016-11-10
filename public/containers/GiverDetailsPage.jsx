@@ -36,7 +36,7 @@ type PropsType = {
             basketCount,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class GiverDetailsPage extends React.Component {
     props: PropsType;

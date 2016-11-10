@@ -12,7 +12,7 @@ import api from '../middleware/api';
 module.exports = (initialState: Object, history: any) => {
     const enhancer = compose(
         applyMiddleware(thunk, api, routerMiddleware(history), reduxImmutableStateInvariant(), createLogger()),
-        DevTools.instrument()
+        DevTools.instrument(),
     );
 
     const store = createStore(rootReducer, initialState, enhancer);
@@ -21,7 +21,7 @@ module.exports = (initialState: Object, history: any) => {
     if (module.hot) {
         // FIXME:FLOW ignore error
         module.hot.accept('../reducers', () =>
-            store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+            store.replaceReducer(require('../reducers')), // eslint-disable-line global-require
         );
     }
 

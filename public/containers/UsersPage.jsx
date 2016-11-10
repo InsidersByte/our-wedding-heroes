@@ -49,7 +49,7 @@ const initialUser = {
             invitedUsers,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class Users extends React.Component {
     props: PropsType;

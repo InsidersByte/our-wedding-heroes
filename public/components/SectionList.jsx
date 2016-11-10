@@ -56,7 +56,7 @@ export default function SectionList({ loading, sections, onAdd, onSelect, onMove
                                 />
 
                                 <Divider />
-                            </SortableItem>
+                            </SortableItem>,
                         )
                     }
                 </SortableContainer>

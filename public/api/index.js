@@ -34,7 +34,7 @@ function createResult(req: any): Promise<any> {
 }
 
 export default (
-    { endpoint, method, data, authenticated = false }: { endpoint: string, method: string, data: any, authenticated: boolean }
+    { endpoint, method, data, authenticated = false }: { endpoint: string, method: string, data: any, authenticated: boolean },
 ): Promise<any> => {
     const req = createRequest({ endpoint, method, authenticated });
 

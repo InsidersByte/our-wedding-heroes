@@ -80,7 +80,7 @@ type PropsType = {
             giftSet: updatedGiftSet,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class GiftSetPage extends React.Component {
     props: PropsType;

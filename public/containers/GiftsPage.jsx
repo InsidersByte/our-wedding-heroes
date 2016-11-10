@@ -47,7 +47,7 @@ const initialGift = {
             gifts: sortedGifts,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class HoneymoonGiftListItemPage extends React.Component {
     props: PropsType;

@@ -23,11 +23,18 @@ type PropsType = {
     children: React$Element<any>,
 };
 
+const getStyles = () => ({
+    root: {},
+    container: {
+        margin: spacing.desktopGutter,
+    },
+});
+
 @withWidth({ largeWidth: 1200 })
 @withRouter
 @connect(
     ({ auth }) => auth,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class AdminLoggedIn extends Component {
     props: PropsType;
@@ -35,15 +42,6 @@ export default class AdminLoggedIn extends Component {
     state = {
         navDrawerOpen: false,
     };
-
-    getStyles() {
-        return {
-            root: {},
-            container: {
-                margin: spacing.desktopGutter,
-            },
-        };
-    }
 
     handleTouchTapLeftIconButton = () => {
         this.setState({ navDrawerOpen: !this.state.navDrawerOpen });
@@ -77,7 +75,7 @@ export default class AdminLoggedIn extends Component {
             return null;
         }
 
-        const styles = this.getStyles();
+        const styles = getStyles();
         let open = navDrawerOpen;
 
         if (width === LARGE) {

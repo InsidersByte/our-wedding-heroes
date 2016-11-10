@@ -39,7 +39,7 @@ type PropsType = {
             weddingPartyMembers: sortedWeddingPartyMembers,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class WeddingPartyMembersPage extends React.Component {
     props: PropsType;

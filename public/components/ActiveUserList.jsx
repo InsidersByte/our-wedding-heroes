@@ -32,7 +32,7 @@ export default function ActiveUserList({ users, loggedInUser, onDelete }: PropsT
                         user={user}
                         loggedInUser={loggedInUser}
                         onDelete={onDelete}
-                    />
+                    />,
                 )
             }
         </List>

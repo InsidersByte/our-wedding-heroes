@@ -50,7 +50,7 @@ export default class SortableItem extends React.Component {
         return connectDragSource(connectDropTarget(
             <div style={{ opacity: isDragging ? 0 : 1 }}>
                 {children}
-            </div>
+            </div>,
         ));
     }
 }

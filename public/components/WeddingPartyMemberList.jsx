@@ -56,7 +56,7 @@ export default function WeddingPartyMembersList({ weddingPartyMembers, loading, 
                                 />
 
                                 <Divider />
-                            </SortableItem>
+                            </SortableItem>,
                         )
                     }
                 </SortableContainer>

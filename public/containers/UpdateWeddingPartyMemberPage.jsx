@@ -27,7 +27,7 @@ type PropsType = {
 
 @connect(
     ({ weddingPartyMember }) => weddingPartyMember,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class UpdateWeddingPartyMemberPage extends React.Component {
     props: PropsType;

@@ -28,7 +28,7 @@ type PropsType = {
 @withRouter
 @connect(
     ({ signUp }) => signUp,
-    dispatch => ({ actions: { ...bindActionCreators(signUpActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+    dispatch => ({ actions: { ...bindActionCreators(signUpActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } }),
 )
 export default class SignUpPage extends Component {
     props: PropsType;

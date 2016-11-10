@@ -18,7 +18,7 @@ type PropsType = {
 
 @connect(
     ({ users }) => users,
-    dispatch => ({ actions: { ...bindActionCreators(userActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } })
+    dispatch => ({ actions: { ...bindActionCreators(userActions, dispatch), ...bindActionCreators(notificationActions, dispatch) } }),
 )
 export default class ProfilePage extends React.Component {
     props: PropsType;

@@ -50,6 +50,6 @@ export default class WeddingPartyMemberItem extends Component {
                     <Delete />
                 </IconButton>
             </div>
-     );
+        );
     }
 }

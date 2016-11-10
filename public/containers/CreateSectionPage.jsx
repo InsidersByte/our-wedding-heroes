@@ -15,7 +15,7 @@ type PropsType = {
 
 @connect(
     ({ section }) => section,
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class CreateSectionPage extends Component {
     props: PropsType;

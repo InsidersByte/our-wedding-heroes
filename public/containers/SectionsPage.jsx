@@ -37,7 +37,7 @@ type PropsType = {
             sections: sortedSections,
         };
     },
-    dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+    dispatch => ({ actions: bindActionCreators(actions, dispatch) }),
 )
 export default class SectionsPage extends Component {
     props: PropsType;
