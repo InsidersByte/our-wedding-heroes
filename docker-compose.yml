@@ -21,6 +21,11 @@ services:
     db:
         container_name: our-wedding-heroes-db
         image: postgres
+        volumes:
+          - data:/var/lib/postgresql/data
+
+volumes:
+  data: {}
 
 networks:
     default:
