@@ -1,14 +1,7 @@
 // TODO: flow this file
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { DragSource as dragSource, DropTarget as dropTarget } from 'react-dnd';
-
-type PropsType = {
-    connectDragSource: Function,
-    connectDropTarget: Function,
-    isDragging: boolean,
-    children?: React$Element<any>,
-};
 
 const sourceSpec = {
     beginDrag({ id }) {
@@ -42,7 +35,12 @@ const targetSpec = {
     connectDropTarget: connect.dropTarget(),
 }))
 export default class SortableItem extends React.Component {
-    props: PropsType;
+    static propTypes = {
+        connectDragSource: PropTypes.func.isRequired,
+        connectDropTarget: PropTypes.func.isRequired,
+        isDragging: PropTypes.bool.isRequired,
+        children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    };
 
     render() {
         const { connectDragSource, connectDropTarget, isDragging, children } = this.props;
