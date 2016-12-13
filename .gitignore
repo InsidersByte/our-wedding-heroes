@@ -38,3 +38,6 @@ dist
 
 # Environment file
 .env
+
+# Webpack stats
+stats.json

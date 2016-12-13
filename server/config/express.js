@@ -10,12 +10,19 @@ module.exports = ({ app, environment }) => {
         app.use(require('errorhandler')()); // eslint-disable-line global-require, import/no-extraneous-dependencies
     }
 
+    app.disable('x-powered-by');
     app.use(cors());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(expressValidator());
 
     if (environment === environmentConstants.PRODUCTION) {
+        app.get('*.js', (req, res, next) => {
+            req.url = `${req.url}.gz`; // eslint-disable-line no-param-reassign
+            res.set('Content-Encoding', 'gzip');
+            next();
+        });
+
         app.use(express.static('./dist'));
     } else {
         const webpack = require('webpack'); // eslint-disable-line global-require, import/no-extraneous-dependencies

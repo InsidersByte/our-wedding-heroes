@@ -97,6 +97,11 @@ const config = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
     },
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+    },
 };
 
 module.exports = validate(config);

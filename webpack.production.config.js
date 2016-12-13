@@ -2,8 +2,9 @@ const path = require('path');
 const webpack = require('webpack'); // eslint-disable-line import/no-extraneous-dependencies
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 const validate = require('webpack-validator'); // eslint-disable-line import/no-extraneous-dependencies
-const StatsPlugin = require('stats-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 const ExtractTextPlugin = require('extract-text-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const ManifestPlugin = require('webpack-manifest-plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const CompressionPlugin = require('compression-webpack-plugin'); // eslint-disable-line import/no-extraneous-dependencies
 const autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-extraneous-dependencies
 
 const PATHS = {
@@ -26,13 +27,6 @@ const config = {
         filename: '[name]-[hash].min.js',
     },
     module: {
-        preLoaders: [
-            {
-                test: /\.(js|jsx)$/,
-                loader: 'eslint',
-                include: [PATHS.PUBLIC],
-            },
-        ],
         loaders: [
             {
                 test: /\.(js|jsx)$/,
@@ -101,7 +95,12 @@ const config = {
                 minifyURLs: true,
             },
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),
+            },
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -116,12 +115,19 @@ const config = {
                 screw_ie8: true,
             },
         }),
-        new StatsPlugin('webpack.stats.json', {
-            source: false,
-            modules: false,
+        new webpack.optimize.AggressiveMergingPlugin(),
+        new CompressionPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8,
         }),
         extractCss,
         extractStyl,
+        new ManifestPlugin({
+            fileName: 'asset-manifest.json',
+        }),
     ],
     postcss: () => [
         autoprefixer({
@@ -135,6 +141,11 @@ const config = {
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
+    },
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
     },
 };
 
