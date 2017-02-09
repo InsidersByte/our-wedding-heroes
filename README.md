@@ -8,73 +8,24 @@
 
 A wedding website with a honeymoon gift list.
 
-## Install
+## Development
 
-First, you'll need **Node.js v6** and **PostgreSQL v9**.
+* nvm use || Install [Node.js](https://nodejs.org/en/)
+* install [yarn](https://yarnpkg.com/)
+* install [PostgreSQL](https://www.postgresql.org/)
 
-1.  **Clone the repo**
+```bash
+# Install the dependencies
+yarn
 
-    ```bash
-    $ git clone https://github.com/InsidersByte/our-wedding-heroes.git
-    $ cd our-wedding-heroes
-    ```
-    
-2. **Install dependencies**
+# Ensure postgres is running
 
-    ```bash
-    $ npm install
-    ```
-    
-3. **Ensure PostgresSQL is running**
-    
-4. **Start the server**
+# Run the website
+yarn start:dev
 
-    ```bash
-    $ npm start-dev
-    ```
-    
-5.  **Run the setup**
-    
-    Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
-
-## Docker Install
-
-First, you'll need **Docker**.
-
-1.  **Clone the repo**
-
-    ```bash
-    $ git clone https://github.com/InsidersByte/our-wedding-heroes.git
-    $ cd our-wedding-heroes
-    ```
-    
-2. **Build the images**
-
-    ```bash
-    $ docker-compose build
-    ```
-    
-3. **Create the containers**
-
-    ```bash
-    $ docker-compose up -d
-    ```
-    
-4. **Install your dependencies**
-
-    ```bash
-    $ docker-compose run web npm install
-    ```
-    
-5. **Restart the website**
-
-    ```bash
-    $ docker-compose restart web
-    ```
-    
-6.  **Run the setup**
-
-    Navigate to [http://localhost:8080/admin](http://localhost:8080/admin)
+# Run the setup
+Go to http://localhost:8080/admin
+```
 
 ## Deploying on Heroku
 
