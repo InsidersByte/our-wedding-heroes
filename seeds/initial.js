@@ -1,4 +1,6 @@
-const wedding_profile_id = 1; // eslint-disable-line camelcase
+/* eslint-disable camelcase, max-len, no-console */
+
+const wedding_profile_id = 1;
 
 function createSection(knex, { title, position, content }) {
     return {
@@ -30,7 +32,7 @@ exports.seed = knex =>
                     cover_title: 'Our Wedding',
                     cover_image_url: 'http://www.giveasyoulive.com/blog/wp-content/uploads/2016/07/fpt-112704-Wedding-Flowers.jpg',
                     wedding_date: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-                    gift_list_content: 'In this section you can describe the motivation behind your gift list. You could also link to any other gift lifts you have in here too.', // eslint-disable-line max-len
+                    gift_list_content: 'In this section you can describe the motivation behind your gift list. You could also link to any other gift lifts you have in here too.',
                     show_payment_message: true,
                     payment_message: 'Payments are taken either offline (via bank transfer or cash) or via the preferred method of PayPal.Me.',
                     show_disclaimer_message: true,
@@ -42,7 +44,7 @@ exports.seed = knex =>
                     knex('sections').transacting(transaction).insert(createSection(knex, {
                         position: 1,
                         title: 'A Little Bit About Us',
-                        content: 'In this section, you could describe a little bit about yourselves and maybe a message saying you can\'t wait to see everyone!', // eslint-disable-line max-len
+                        content: 'In this section, you could describe a little bit about yourselves and maybe a message saying you can\'t wait to see everyone!',
                     })),
                     knex('sections').transacting(transaction).insert(createSection(knex, {
                         position: 2,

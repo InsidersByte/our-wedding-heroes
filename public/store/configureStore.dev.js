@@ -21,6 +21,7 @@ module.exports = (initialState: Object, history: any) => {
     if (module.hot) {
         // FIXME:FLOW ignore error
         module.hot.accept('../reducers', () =>
+            // FIXME:FLOW ignore error
             store.replaceReducer(require('../reducers')), // eslint-disable-line global-require
         );
     }

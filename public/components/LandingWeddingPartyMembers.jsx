@@ -23,15 +23,12 @@ export default function LandingWeddingPartyMembers({ weddingPartyMembers }: Prop
     return (
         <LandingItem title="Wedding Party Members">
             <div className={css.root}>
-                {
-                    weddingPartyMembers
-                        .map(({ id, ...weddingPartyMember }) =>
-                            <LandingWeddingPartyMember
-                                key={id}
-                                weddingPartyMember={weddingPartyMember}
-                            />,
-                        )
-                }
+                {weddingPartyMembers.map(({ id, ...weddingPartyMember }) =>
+                    <LandingWeddingPartyMember
+                        key={id}
+                        weddingPartyMember={weddingPartyMember}
+                    />,
+                )}
             </div>
         </LandingItem>
     );

@@ -50,8 +50,6 @@ export default class BasketSummaryListItem extends React.Component {
     render() {
         const { item: { name, imageUrl, price, quantity, remaining } } = this.props;
 
-        console.log(this.props.item);
-
         return (
             <div className={css.root}>
                 <img className={css.avatar} src={imageUrl} alt={name} />

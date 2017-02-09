@@ -71,8 +71,7 @@ export default class AdminLoggedIn extends Component {
         let docked = false;
 
         if (!isAuthenticated) {
-            console.error('This component can only be rendered if logged in');
-            return null;
+            throw new Error('This component can only be rendered if logged in');
         }
 
         const styles = getStyles();

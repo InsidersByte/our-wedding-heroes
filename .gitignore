@@ -27,17 +27,7 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
-# Webstorm
+# Misc
 .idea
-
-# Build folder (webpack should build in memory)
 build
-
-# Dist folder
-dist
-
-# Environment file
 .env
-
-# Webpack stats
-stats.json

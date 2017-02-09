@@ -1,12 +1,11 @@
 {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": "airbnb-base",
 
     "rules": {
         "indent": [2, 4, {"SwitchCase": 1}],
         "max-len": [2, 160, 2],
         "no-continue": 1,
-        "class-methods-use-this": 1,
         "comma-dangle": ["error", "always-multiline"],
         "no-restricted-syntax": [
             "error",

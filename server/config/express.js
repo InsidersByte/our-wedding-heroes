@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 const environmentConstants = require('../constants/environment');
+const paths = require('../../config/paths');
 
 module.exports = ({ app, environment }) => {
     if (environment !== environmentConstants.PRODUCTION) {
@@ -17,19 +18,12 @@ module.exports = ({ app, environment }) => {
     app.use(expressValidator());
 
     if (environment === environmentConstants.PRODUCTION) {
-        app.get('*.js', (req, res, next) => {
-            req.url = `${req.url}.gz`; // eslint-disable-line no-param-reassign
-            res.set('Content-Encoding', 'gzip');
-            next();
-        });
-
-        app.use(express.static('./dist'));
+        app.use(express.static(paths.appBuild));
     } else {
         const webpack = require('webpack'); // eslint-disable-line global-require, import/no-extraneous-dependencies
         const webpackMiddleware = require('webpack-dev-middleware'); // eslint-disable-line global-require, import/no-extraneous-dependencies
         const webpackHotMiddleware = require('webpack-hot-middleware'); // eslint-disable-line global-require, import/no-extraneous-dependencies
-
-        const config = require('../../webpack.config'); // eslint-disable-line global-require, import/no-extraneous-dependencies
+        const config = require('../../config/webpack.config.dev.js'); // eslint-disable-line global-require, import/no-extraneous-dependencies
 
         const compiler = webpack(config);
         const middleware = webpackMiddleware(compiler, {

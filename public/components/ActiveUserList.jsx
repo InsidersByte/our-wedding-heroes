@@ -25,16 +25,14 @@ export default function ActiveUserList({ users, loggedInUser, onDelete }: PropsT
 
             <Divider />
 
-            {
-                users.map((user, i) =>
-                    <ActiveUserListItem
-                        key={i}
-                        user={user}
-                        loggedInUser={loggedInUser}
-                        onDelete={onDelete}
-                    />,
-                )
-            }
+            {users.map(user =>
+                <ActiveUserListItem
+                    key={user.id}
+                    user={user}
+                    loggedInUser={loggedInUser}
+                    onDelete={onDelete}
+                />,
+            )}
         </List>
     );
 }

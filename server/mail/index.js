@@ -32,7 +32,7 @@ class mailer {
         return from;
     }
 
-    getDomain() {
+    getDomain() { // eslint-disable-line class-methods-use-this
         const domain = config.url.match(new RegExp('^https?://([^/:?#]+)(?:[/:?#]|$)', 'i'));
         return domain && domain[1];
     }

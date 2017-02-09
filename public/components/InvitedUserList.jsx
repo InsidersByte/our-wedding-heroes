@@ -25,15 +25,13 @@ export default function InvitedUserList({ users, onDelete }: PropsType) {
 
             <Divider />
 
-            {
-                users.map((user, i) =>
-                    <InvitedUserListItem
-                        key={i}
-                        user={user}
-                        onDelete={onDelete}
-                    />,
-                )
-            }
+            {users.map(user =>
+                <InvitedUserListItem
+                    key={user.id}
+                    user={user}
+                    onDelete={onDelete}
+                />,
+            )}
         </List>
     );
 }
