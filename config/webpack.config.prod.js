@@ -51,7 +51,7 @@ module.exports = {
                 include: paths.appSrc,
                 use: extractStyl.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'postcss-loader', 'stylus-loader'],
+                    use: ['css-loader?modules', 'postcss-loader', 'stylus-loader'],
                 }),
             },
             {
