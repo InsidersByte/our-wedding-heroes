@@ -76,7 +76,6 @@ export default class GiverDetailsPage extends React.Component {
 
         createGiftSet({
             giver: this.state.giver,
-            // FIXME:FLOW this does work?
             basket: [...basket.values()],
         });
     };
