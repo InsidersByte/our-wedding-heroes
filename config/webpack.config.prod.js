@@ -34,7 +34,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'stage-1', 'react'],
+                        presets: [['es2015', { modules: false }], 'stage-1', 'react'],
                         plugins: ['transform-decorators-legacy'],
                     },
                 },
@@ -137,7 +137,7 @@ module.exports = {
         }),
     ],
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.json', '.jsx'],
     },
     node: {
         fs: 'empty',

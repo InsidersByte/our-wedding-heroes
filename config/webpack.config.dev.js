@@ -94,7 +94,7 @@ module.exports = {
         new WatchMissingNodeModulesPlugin(paths.appNodeModules),
     ],
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.json', '.jsx'],
     },
     node: {
         fs: 'empty',
