@@ -1,0 +1,10 @@
+{
+    "presets": ["env", "stage-1", "react"],
+    "plugins": ["transform-decorators-legacy"],
+    "env": {
+        "development": {
+            "presets": ["react-hmre"],
+            "plugins": ["flow-react-proptypes"]
+        }
+    }
+}

@@ -1,10 +1,10 @@
 import { push } from 'react-router-redux';
-import { success } from './notifications';
+import { success } from '../redux/notifications';
 import { CALL_API } from '../middleware/api';
 import * as TYPES from '../constants/actionTypes';
 import { HTTP_METHODS } from '../constants/api';
 import { confirmationPageRoute } from '../constants/routes';
-import { emptyBasket } from './basket';
+import { emptyBasket } from '../redux/basket';
 
 export function loadGiftSets() {
     return {
