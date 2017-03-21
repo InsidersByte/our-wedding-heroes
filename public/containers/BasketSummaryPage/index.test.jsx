@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { BasketSummaryPage } from './BasketSummaryPage';
+import { BasketSummaryPage } from './';
 
 const basket = new Map();
 basket.set(1, { id: 1, price: 1, quantity: 1, remaining: 10 });

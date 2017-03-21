@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Connector } from 'react-redux';
-import { addToBasket, removeFromBasket, deleteFromBasket } from '../redux/basket';
-import BasketSummary from '../components/BasketSummary';
-import type { StateType, DispatchType, BasketType, ItemType } from '../types';
+import { addToBasket, removeFromBasket, deleteFromBasket } from '../../redux/basket';
+import BasketSummary from '../../components/BasketSummary';
+import type { StateType, DispatchType, BasketType, ItemType } from '../../types';
 
 type PropsType = {
     basket: BasketType,

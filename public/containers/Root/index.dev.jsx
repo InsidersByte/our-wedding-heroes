@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import App from './App';
-import DevTools from './DevTools';
+import App from '../App';
+import DevTools from '../DevTools';
 
 const styles = {
     root: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import { ConfirmationPage } from './ConfirmationPage';
+import { ConfirmationPage } from './';
 
 const loadGiftSet = jest.fn();
 

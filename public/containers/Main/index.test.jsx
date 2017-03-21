@@ -1,13 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AdminNotLoggedIn from './AdminNotLoggedIn';
+import Main from './';
 
-describe('AdminNotLoggedIn', () => {
+describe('Main', () => {
     it('should render correctly', () => {
         const wrapper = shallow(
-            <AdminNotLoggedIn>
-                <h1>Hello World</h1>
-            </AdminNotLoggedIn>,
+            <Main />,
         );
 
         expect(wrapper).toMatchSnapshot();

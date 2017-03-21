@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Connector } from 'react-redux';
-import * as actions from '../actions/giftSet';
-import Confirmation from '../components/Confirmation';
-import type { StateType, DispatchType, GiftSetType } from '../types';
+import * as actions from '../../actions/giftSet';
+import Confirmation from '../../components/Confirmation';
+import type { StateType, DispatchType, GiftSetType } from '../../types';
 
 type PropsType = {
     loading: boolean,
