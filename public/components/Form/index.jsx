@@ -1,18 +1,16 @@
 /* @flow */
 
 import React from 'react';
-import Loader from './Loader';
+import Loader from '../Loader';
 
 type PropsType = {
     loading: boolean,
     saving: boolean,
     children?: React$Element<any> | Array<React$Element<any>>,
-    onSubmit: Function,
+    onSubmit: (event: SyntheticEvent) => void,
 };
 
-export default function Form(props: PropsType) {
-    const { loading, saving, children, onSubmit } = props;
-
+const Form = ({ loading, saving, onSubmit, children, ...props }: PropsType) => {
     if (loading) {
         return (
             <Loader loading />
@@ -26,4 +24,6 @@ export default function Form(props: PropsType) {
             </fieldset>
         </form>
     );
-}
+};
+
+export default Form;

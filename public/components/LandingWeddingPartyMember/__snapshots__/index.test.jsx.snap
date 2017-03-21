@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingWeddingPartyMember should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="image"
+    style={
+      Object {
+        "backgroundImage": "url(http://image.png)",
+      }
+    }
+  />
+  <h1
+    className="name"
+  >
+    Person
+  </h1>
+  <h3
+    className="title"
+  >
+    "
+    Title
+    "
+  </h3>
+  <p
+    className="description"
+  >
+    this is a person
+  </p>
+</div>
+`;

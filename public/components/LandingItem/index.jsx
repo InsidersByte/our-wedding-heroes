@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import smoothscroll from 'smoothscroll';
-import css from './LandingItem.styl';
+import css from './index.styl';
 
 type PropsType = {
     title: string,
@@ -10,9 +10,7 @@ type PropsType = {
     postContent?: React$Element<any>,
 };
 
-export default class LandingItem extends Component {
-    props: PropsType;
-
+export default class LandingItem extends Component<void, PropsType, void> {
     container: any;
 
     scrollTo = () => {

@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import css from './LandingWeddingPartyMember.styl';
+import css from './index.styl';
 
 type PropsType = {
     weddingPartyMember: {

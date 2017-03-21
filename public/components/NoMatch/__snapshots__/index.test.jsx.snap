@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoMatch should render correctly 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "center",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "minHeight": "75%",
+    }
+  }
+>
+  <h1
+    style={
+      Object {
+        "marginBottom": 15,
+      }
+    }
+  >
+    Page not found
+  </h1>
+  <div
+    style={
+      Object {
+        "marginBottom": 20,
+      }
+    }
+  >
+    Woops! Sorry, there is nothing to see here.
+  </div>
+  <Link
+    onlyActiveOnIndex={false}
+    style={Object {}}
+    to="/"
+  >
+    Back to Home
+  </Link>
+</div>
+`;

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingItem should render correctly 1`] = `
+<section
+  className="root"
+>
+  <h1
+    className="title"
+  >
+    Hello World
+  </h1>
+  <div
+    className="content"
+  >
+    <h1>
+      A Heading
+    </h1>
+  </div>
+</section>
+`;
+
+exports[`LandingItem should render postContent if it exists 1`] = `
+<section
+  className="root"
+>
+  <h1
+    className="title"
+  >
+    Hello World
+  </h1>
+  <div
+    className="content"
+  >
+    <h1>
+      A Heading
+    </h1>
+  </div>
+  <h1>
+    I come after the content
+  </h1>
+</section>
+`;

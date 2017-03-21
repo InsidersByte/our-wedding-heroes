@@ -2,16 +2,14 @@
 
 import React, { Component } from 'react';
 import MarkdownRenderer from 'react-markdown-renderer';
-import LandingItem from './LandingItem';
+import LandingItem from '../LandingItem';
 
 type PropsType = {
     title: string,
     content: string,
 };
 
-export default class LandingSection extends Component {
-    props: PropsType;
-
+export default class LandingSection extends Component<void, PropsType, void> {
     landingItem: LandingItem;
 
     scrollTo = () => {

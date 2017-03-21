@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form loading should render correctly 1`] = `
+<Loader
+  loading={true}
+/>
+`;
+
+exports[`Form not loading should render correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <fieldset
+    disabled={false}
+    style={
+      Object {
+        "border": "none",
+        "margin": 0,
+        "padding": 0,
+      }
+    }
+  >
+    <h1>
+      hello world
+    </h1>
+  </fieldset>
+</form>
+`;
