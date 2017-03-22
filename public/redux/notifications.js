@@ -37,6 +37,7 @@ function createErrorNotifications({ payload }) {
 
     return notifications;
 }
+
 export default function reducer(state: NotificationsType = [], action: ActionType): NotificationsType {
     if (action.error && !action.suppressGlobalError) {
         // FIXME:FLOW Can't seem to get the types right for global errors
