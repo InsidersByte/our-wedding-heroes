@@ -1,10 +1,17 @@
 {
-  "ignore": [
-    "**/node_modules/**",
-    "**/flow-typed/**"
-  ],
-  "test": [
-    "**.test.js",
-    "**.test.jsx"
-  ]
+    "ignore": [
+        "**/node_modules/**",
+        "**/flow-typed/**"
+    ],
+    "test": [
+        "**.test.js",
+        "**.test.jsx"
+    ],
+    "dependencies": {
+        "unused-ignores": [
+            "pug",
+            "pg",
+            "bookshelf-camelcase"
+        ]
+    }
 }
