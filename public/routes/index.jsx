@@ -4,10 +4,10 @@ import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
 import api from '../api';
 import { HTTP_METHODS } from '../constants/api';
 
+import App from '../containers/App';
+
 import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
-
-import Root from '../containers/Root';
 
 import Main from '../containers/Main';
 import LandingPage from '../containers/LandingPage';
@@ -83,7 +83,7 @@ function ifLoggedInRedirectToAdmin(store) {
 }
 
 export default store => (
-    <Route path="/" component={Root}>
+    <Route path="/" component={App}>
         <Route component={Main}>
             <IndexRoute component={LandingPage} />
             <Route path="basket" component={BasketSummaryPage} />

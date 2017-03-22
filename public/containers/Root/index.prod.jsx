@@ -1,19 +1,21 @@
 /* @flow */
 
 import React from 'react';
-import App from '../App';
+import { Provider } from 'react-redux';
+import { Router } from 'react-router';
+import routes from '../../routes';
 
-const styles = {
-    root: {
-        height: '100%',
-        width: '100%',
-    },
+type PropsType = {
+    store: Object,
+    history: Object,
 };
 
-const Root = (props: Object) => (
-    <div style={styles.root}>
-        <App {...props} />
-    </div>
+const Root = ({ store, history }: PropsType) => (
+    <Provider store={store}>
+        <Router history={history}>
+            {routes(store)}
+        </Router>
+    </Provider>
 );
 
 export default Root;

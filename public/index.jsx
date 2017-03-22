@@ -3,11 +3,10 @@
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import routes from './routes';
+import Root from './containers/Root';
 import configureStore from './store/configureStore';
 import { TOKEN } from './constants';
 import jwtDecoder from './utils/jwtDecoder';
@@ -36,10 +35,7 @@ const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            {routes(store)}
-        </Router>
-    </Provider>,
+    // FIXME:FLOW works
+    <Root store={store} history={history} />,
     document.getElementById('app'),
 );

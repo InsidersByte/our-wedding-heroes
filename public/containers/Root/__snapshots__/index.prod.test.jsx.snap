@@ -1,18 +1,149 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Root should render correctly 1`] = `
-<div
-  style={
+<Provider
+  store={
     Object {
-      "height": "100%",
-      "width": "100%",
+      "dispatch": [Function],
+      "getState": [Function],
+      "liftedStore": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "replaceReducer": [Function],
+      "subscribe": [Function],
     }
   }
 >
-  <Connect(App)>
-    <h1>
-      Hello World
-    </h1>
-  </Connect(App)>
-</div>
+  <Router
+    history={Object {}}
+    render={[Function]}
+  >
+    <Route
+      component={[Function]}
+      path="/"
+    >
+      <Route
+        component={[Function]}
+      >
+        <IndexRoute
+          component={[Function]}
+        />
+        <Route
+          component={[Function]}
+          path="basket"
+        />
+        <Route
+          component={[Function]}
+          path="giver"
+        />
+        <Route
+          component={[Function]}
+          path="confirmation/:giftSetId"
+        />
+      </Route>
+      <Route
+        component={[Function]}
+        path="admin"
+      >
+        <IndexRedirect
+          to="giftSet"
+        />
+        <Route
+          component={[Function]}
+          onEnter={[Function]}
+        >
+          <Route
+            component={[Function]}
+            onEnter={[Function]}
+            path="setup"
+          />
+          <Route
+            onEnter={[Function]}
+          >
+            <Route
+              component={[Function]}
+              path="login"
+            />
+            <Route
+              component={[Function]}
+              path="reset/:token"
+            />
+            <Route
+              component={[Function]}
+              path="signUp/:token"
+            />
+          </Route>
+        </Route>
+        <Route
+          onEnter={[Function]}
+        >
+          <Route
+            component={[Function]}
+            onEnter={[Function]}
+          >
+            <Route
+              component={[Function]}
+              path="profile"
+            />
+            <Route
+              component={[Function]}
+              path="weddingProfile"
+            />
+            <Route
+              component={[Function]}
+              path="gift"
+            />
+            <Route
+              component={[Function]}
+              path="section"
+            />
+            <Route
+              component={[Function]}
+              path="section/create"
+            />
+            <Route
+              component={[Function]}
+              path="section/:id"
+            />
+            <Route
+              component={[Function]}
+              path="user"
+            />
+            <Route
+              component={[Function]}
+              path="giftSet"
+            />
+            <Route
+              component={[Function]}
+              path="giftSet/:giftSetId"
+            />
+            <Route
+              component={[Function]}
+              path="weddingPartyMember"
+            />
+            <Route
+              component={[Function]}
+              path="weddingPartyMember/create"
+            />
+            <Route
+              component={[Function]}
+              path="weddingPartyMember/:id"
+            />
+            <Route
+              component={[Function]}
+              path="*"
+            />
+          </Route>
+        </Route>
+      </Route>
+      <Route
+        component={[Function]}
+        path="*"
+      />
+    </Route>
+  </Router>
+</Provider>
 `;
