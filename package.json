@@ -137,6 +137,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|styl)$": "identity-obj-proxy"
-    }
+    },
+    "setupTestFrameworkScriptFile": "./config/setupTests"
   }
 }

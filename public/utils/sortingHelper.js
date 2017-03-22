@@ -1,7 +1,9 @@
+/* eslint-disable import/prefer-default-export */
+
 import random from '../../lib/random';
 import { MAXIMUM_NUMBER } from '../constants';
 
-export function move({ sourceId, targetId, data }) { // eslint-disable-line import/prefer-default-export
+export function move({ sourceId, targetId, data }) {
     const items = [...data];
     const sourceIndex = items.findIndex(o => o.id === sourceId);
     const targetIndex = items.findIndex(o => o.id === targetId);

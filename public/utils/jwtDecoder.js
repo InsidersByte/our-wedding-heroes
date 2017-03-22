@@ -2,7 +2,7 @@
 
 import decode from 'jwt-decode';
 
-function getTokenExpirationDate(decodedToken: Object): ?Date {
+const getTokenExpirationDate = (decodedToken: Object): ?Date => {
     if (!decodedToken.exp) {
         return null;
     }
@@ -12,9 +12,9 @@ function getTokenExpirationDate(decodedToken: Object): ?Date {
     date.setUTCSeconds(decodedToken.exp);
 
     return date;
-}
+};
 
-export default function decodeToken(token: ?string): ?Object {
+const decodeToken = (token: ?string): ?Object => {
     if (token == null) {
         return null;
     }
@@ -31,4 +31,6 @@ export default function decodeToken(token: ?string): ?Object {
     }
 
     return decodedToken;
-}
+};
+
+export default decodeToken;

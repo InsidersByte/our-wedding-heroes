@@ -3,13 +3,14 @@
 import request from 'superagent';
 import { BASE_API_URL } from '../constants/api';
 import { TOKEN } from '../constants';
+import { getItem } from '../utils/localStorage';
 
 function createRequest({ endpoint, method, authenticated }: { endpoint: string, method: string, authenticated: boolean }): any {
     const url = `${BASE_API_URL}${endpoint}`;
     const req = request(method, url);
 
     if (authenticated) {
-        const token = localStorage.getItem(TOKEN) || null;
+        const token = getItem(TOKEN) || null;
 
         if (token) {
             req.set('Authorization', `Bearer ${token}`);

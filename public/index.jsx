@@ -11,11 +11,12 @@ import routes from './routes';
 import configureStore from './store/configureStore';
 import { TOKEN } from './constants';
 import jwtDecoder from './utils/jwtDecoder';
+import { getItem } from './utils/localStorage';
 import './index.styl';
 
 let initialState = {};
 
-const jwt = localStorage.getItem(TOKEN);
+const jwt = getItem(TOKEN);
 const user = jwtDecoder(jwt);
 
 if (user) {

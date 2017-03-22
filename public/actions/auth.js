@@ -5,6 +5,7 @@ import * as TYPES from '../constants/actionTypes';
 import { TOKEN } from '../constants';
 import { ADMIN_ROUTE, LOGIN_ROUTE } from '../constants/routes';
 import { HTTP_METHODS } from '../constants/api';
+import { setItem, removeItem } from '../utils/localStorage';
 
 export function login({ email, password }) {
     return {
@@ -13,7 +14,7 @@ export function login({ email, password }) {
             endpoint: 'authenticate',
             method: HTTP_METHODS.POST,
             afterSuccess: (dispatch, { token }) => {
-                localStorage.setItem(TOKEN, token);
+                setItem(TOKEN, token);
                 dispatch(success({ message: 'Successfully logged in' }));
                 dispatch(push(ADMIN_ROUTE));
             },
@@ -24,7 +25,7 @@ export function login({ email, password }) {
 
 export function logout() {
     return (dispatch) => {
-        localStorage.removeItem(TOKEN);
+        removeItem(TOKEN);
         dispatch({ type: TYPES.LOGOUT });
         dispatch(success({ message: 'Successfully logged out' }));
         dispatch(push(LOGIN_ROUTE));
