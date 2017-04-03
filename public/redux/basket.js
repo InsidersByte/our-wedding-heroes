@@ -7,7 +7,7 @@ const REMOVE_FROM_BASKET = 'our-wedding-heroes/basket/REMOVE_FROM_BASKET';
 const DELETE_FROM_BASKET = 'our-wedding-heroes/basket/DELETE_FROM_BASKET';
 const EMPTY_BASKET = 'our-wedding-heroes/basket/EMPTY_BASKET';
 
-export default function reducer(state: BasketType = new Map(), action: ActionType): BasketType {
+const reducer = (state: BasketType = new Map(), action: ActionType): BasketType => {
     switch (action.type) {
         case ADD_TO_BASKET: {
             const { payload: item } = action;
@@ -56,7 +56,9 @@ export default function reducer(state: BasketType = new Map(), action: ActionTyp
         default:
             return state;
     }
-}
+};
+
+export default reducer;
 
 export const addToBasket = (item: ItemType): ActionType => ({
     type: ADD_TO_BASKET,
@@ -76,3 +78,25 @@ export const deleteFromBasket = (item: ItemType): ActionType => ({
 export const emptyBasket = (): ActionType => ({
     type: EMPTY_BASKET,
 });
+
+export const getBasketCount = (state: BasketType): number => {
+    let count = 0;
+
+    for (const item of state.values()) {
+        const { quantity } = item;
+        count += quantity;
+    }
+
+    return count;
+};
+
+export const getBasketTotal = (state: BasketType): number => {
+    let total = 0;
+
+    for (const item of state.values()) {
+        const { quantity, price } = item;
+        total += price * quantity;
+    }
+
+    return total;
+};

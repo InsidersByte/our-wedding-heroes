@@ -6,15 +6,15 @@ import users from '../reducers/users';
 import notifications from './notifications';
 import weddingProfile from '../reducers/weddingProfile';
 import signUp from '../reducers/signUp';
-import setup from '../reducers/setup';
 import weddingPartyMembers from '../reducers/weddingPartyMembers';
 import weddingPartyMember from '../reducers/weddingPartyMember';
 import gifts from '../reducers/gifts';
 import sections from '../reducers/sections';
 import section from '../reducers/section';
-import basket from './basket';
+import basket, * as fromBasket from './basket';
 import giftSet from '../reducers/giftSet';
 import giftSets from '../reducers/giftSets';
+import type { StateType } from '../types';
 
 export default combineReducers({
     auth,
@@ -22,7 +22,6 @@ export default combineReducers({
     notifications,
     weddingProfile,
     signUp,
-    setup,
     weddingPartyMembers,
     weddingPartyMember,
     gifts,
@@ -32,3 +31,6 @@ export default combineReducers({
     giftSet,
     giftSets,
 });
+
+export const getBasketCount = (state: StateType) => fromBasket.getBasketCount(state.basket);
+export const getBasketTotal = (state: StateType) => fromBasket.getBasketTotal(state.basket);
