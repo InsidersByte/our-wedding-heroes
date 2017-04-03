@@ -3,7 +3,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant'; // eslint-disable-line import/no-extraneous-dependencies
-import createLogger from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
+import { createLogger } from 'redux-logger'; // eslint-disable-line import/no-extraneous-dependencies
 import DevTools from '../containers/DevTools';
 import rootReducer from '../redux';
 import api from '../middleware/api';
