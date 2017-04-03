@@ -88,6 +88,7 @@
     "case-sensitive-paths-webpack-plugin": "1.1.4",
     "coveralls": "2.12.0",
     "css-loader": "0.27.3",
+    "empty": "0.10.1",
     "enzyme": "2.7.1",
     "enzyme-to-json": "1.5.0",
     "errorhandler": "1.5.0",

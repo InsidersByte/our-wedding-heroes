@@ -10,4 +10,4 @@
 [options]
 suppress_comment= \\(.\\|\n\\)*\\FIXME:FLOW
 esproposal.decorators=ignore
-module.name_mapper.extension='styl' -> '<PROJECT_ROOT>/flow/CSSModule.js.flow'
+module.name_mapper.extension='styl' -> 'empty/object'
