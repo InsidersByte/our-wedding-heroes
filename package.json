@@ -139,7 +139,8 @@
   "jest": {
     "collectCoverageFrom": [
       "public/**/*.{js,jsx}",
-      "server/**/*.js"
+      "server/**/*.js",
+      "lib/**/*.js"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
