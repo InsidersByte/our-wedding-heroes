@@ -1,7 +1,6 @@
 [ignore]
-.*/node_modules/fbjs/.*
-.*/node_modules/flux/.*
-.*/babel-plugin-flow-react-proptypes/src/__test__/.*
+.*/node_modules/stylelint/lib/.*
+.*/node_modules/styled-components/.*
 
 [include]
 
