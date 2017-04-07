@@ -9,12 +9,14 @@ module.exports = ({ app, express, config, environment }) => {
 
   if (environment === environmentConstants.PRODUCTION) {
     app.get('*', (req, res) => {
+      res.set('Content-Type', 'text/html');
       res.sendFile(path.join(__dirname, '../../', 'build/index.html'));
     });
   } else {
     const middleware = app.get('middleware');
 
     app.get('*', (req, res) => {
+      res.set('Content-Type', 'text/html');
       res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../../', 'build/index.html')));
       res.end();
     });

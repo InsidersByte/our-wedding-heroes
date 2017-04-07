@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
+const helmet = require('helmet');
 const environmentConstants = require('../constants/environment');
 const paths = require('../../config/paths');
 
@@ -11,7 +12,7 @@ module.exports = ({ app, environment }) => {
     app.use(require('errorhandler')()); // eslint-disable-line global-require, import/no-extraneous-dependencies
   }
 
-  app.disable('x-powered-by');
+  app.use(helmet());
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
