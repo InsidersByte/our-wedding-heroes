@@ -6,8 +6,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const paths = require('./paths');
 
-const extractCss = new ExtractTextPlugin('static/css/vendor.[chunkhash:8].min.css');
-const extractStyl = new ExtractTextPlugin('static/css/app.[chunkhash:8].min.css');
+const extractCss = new ExtractTextPlugin('static/css/vendor.[chunkhash:8].css');
+const extractStyl = new ExtractTextPlugin('static/css/app.[chunkhash:8].css');
 
 module.exports = {
   bail: true,
@@ -128,6 +128,13 @@ module.exports = {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => module.context && module.context.indexOf('node_modules') !== -1,
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
     }),
   ],
   resolve: {
