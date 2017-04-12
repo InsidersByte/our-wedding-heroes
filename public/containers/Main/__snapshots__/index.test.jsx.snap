@@ -419,10 +419,15 @@ exports[`Main should render correctly 1`] = `
     }
   }
 >
-  <Route
-    component={[Function]}
-    exact={true}
-    path="/"
-  />
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+    />
+  </Switch>
 </MuiThemeProvider>
 `;

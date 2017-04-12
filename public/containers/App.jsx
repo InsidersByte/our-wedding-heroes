@@ -4,11 +4,10 @@ import React, { Component } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import type { Match } from 'react-router-dom';
 import * as actions from '../redux/notifications';
 import Main from './Main';
-import NoMatch from '../components/NoMatch';
 
 type PropsType = {
   children: React$Element<any>,
@@ -64,10 +63,7 @@ export default class App extends Component {
     return (
       <div style={styles.root}>
         <div style={styles.container}>
-          <Switch>
-            <Route exact path={match.url} component={Main} />
-            <Route component={NoMatch} />
-          </Switch>
+          <Route exact path={match.url} component={Main} />
         </div>
 
         <NotificationSystem

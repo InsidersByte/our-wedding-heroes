@@ -28,8 +28,6 @@ exports[`Root should render correctly 1`] = `
     <BrowserRouter>
       <Route
         component={[Function]}
-        exact={true}
-        path="/"
       />
     </BrowserRouter>
     <DevTools />

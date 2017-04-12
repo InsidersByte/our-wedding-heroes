@@ -1,11 +1,12 @@
 /* @flow */
 
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import type { Match } from 'react-router-dom';
 import { getMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import { lightGreen500 } from 'material-ui/styles/colors';
 import LandingPage from '../LandingPage';
+import NoMatch from '../../components/NoMatch';
 
 type PropsType = {
   match: Match,
@@ -19,7 +20,10 @@ const muiTheme = getMuiTheme({
 
 const Main = ({ match }: PropsType) => (
   <MuiThemeProvider muiTheme={muiTheme}>
-    <Route exact path={match.url} component={LandingPage} />
+    <Switch>
+      <Route exact path={match.url} component={LandingPage} />
+      <Route component={NoMatch} />
+    </Switch>
   </MuiThemeProvider>
 );
 
