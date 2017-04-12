@@ -427,6 +427,18 @@ exports[`Main should render correctly 1`] = `
     />
     <Route
       component={[Function]}
+      path="/basket"
+    />
+    <Route
+      component={[Function]}
+      path="/giver"
+    />
+    <Route
+      component={[Function]}
+      path="/confirmation/:giftSetId"
+    />
+    <Route
+      component={[Function]}
     />
   </Switch>
 </MuiThemeProvider>
