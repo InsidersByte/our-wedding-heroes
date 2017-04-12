@@ -21,7 +21,7 @@ const Root = ({ store }: PropsType) => (
   <Provider store={store}>
     <div style={styles.root}>
       <Router>
-        <Route exact path="/" component={App} />
+        <Route component={App} />
       </Router>
 
       <DevTools />

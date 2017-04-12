@@ -12,7 +12,7 @@ type PropsType = {
 const Root = ({ store }: PropsType) => (
   <Provider store={store}>
     <Router>
-      <Route exact path="/" component={App} />
+      <Route component={App} />
     </Router>
   </Provider>
 );
