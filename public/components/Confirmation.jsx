@@ -54,7 +54,6 @@ const Confirmation = ({ loading, giftSet: { paymentMethod, paypalLink }, onLinkC
         {showPaypalLink &&
           <RaisedButton
             primary
-            linkButton
             label="Pay with PayPal"
             href={paypalLink}
             target="_blank"

@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import type { Connector } from 'react-redux';
+import type { Match } from 'react-router-dom';
 import * as actions from '../../actions/giftSet';
 import Confirmation from '../../components/Confirmation';
 import type { StateType, DispatchType, GiftSetType } from '../../types';
@@ -17,6 +18,7 @@ type PropsType = {
   actions: {
     loadGiftSet: (giftSetId: string) => void,
   },
+  match: Match,
 };
 
 type LocalStateType = {
@@ -30,8 +32,7 @@ export class ConfirmationPage extends Component<void, PropsType, LocalStateType>
   state = { linkClicked: false };
 
   componentDidMount() {
-    const { params: { giftSetId }, actions: { loadGiftSet } } = this.props;
-    loadGiftSet(giftSetId);
+    this.props.actions.loadGiftSet(this.props.match.params.giftSetId);
   }
 
   onLinkClicked = () => {
