@@ -10,8 +10,7 @@ exports[`NoMatchAdmin should render correctly 1`] = `
   </p>
   <p>
     <Link
-      onlyActiveOnIndex={false}
-      style={Object {}}
+      replace={false}
       to="/admin"
     >
       Back to Admin

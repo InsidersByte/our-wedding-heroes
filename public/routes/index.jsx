@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, IndexRoute, IndexRedirect } from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router-dom';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
 import api from '../api';
 import { HTTP_METHODS } from '../constants/api';
@@ -35,7 +35,7 @@ import SectionsPage from '../containers/SectionsPage';
 import CreateSectionPage from '../containers/CreateSectionPage';
 import UpdateSectionPage from '../containers/UpdateSectionPage';
 
-function checkSetup(callback, onSuccess) {
+const checkSetup = (callback, onSuccess) => {
   api({ method: HTTP_METHODS.GET, endpoint: 'setup' })
     .then(({ status }) => {
       onSuccess({ status });
@@ -44,43 +44,41 @@ function checkSetup(callback, onSuccess) {
     .catch(error => {
       callback(error);
     });
-}
+};
 
-function requireNoSetup(nextState, replace, callback) {
+const requireNoSetup = (nextState, replace, callback) => {
   checkSetup(callback, ({ status }) => {
     if (status) {
       replace(ADMIN_ROUTE);
     }
   });
-}
+};
 
-function requireSetup(nextState, replace, callback) {
+const requireSetup = (nextState, replace, callback) => {
   checkSetup(callback, ({ status }) => {
     if (!status) {
       replace(SETUP_ROUTE);
     }
   });
-}
+};
 
-function requireAuth(store) {
-  return (nextState, replace) => {
+const requireAuth = store =>
+  (nextState, replace) => {
     const { auth: { isAuthenticated } } = store.getState();
 
     if (!isAuthenticated) {
       replace(LOGIN_ROUTE);
     }
   };
-}
 
-function ifLoggedInRedirectToAdmin(store) {
-  return (nextState, replace) => {
+const ifLoggedInRedirectToAdmin = store =>
+  (nextState, replace) => {
     const { auth: { isAuthenticated } } = store.getState();
 
     if (isAuthenticated) {
       replace(ADMIN_ROUTE);
     }
   };
-}
 
 export default store => (
   <Route path="/" component={App}>

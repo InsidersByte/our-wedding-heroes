@@ -418,5 +418,11 @@ exports[`Main should render correctly 1`] = `
       },
     }
   }
-/>
+>
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/"
+  />
+</MuiThemeProvider>
 `;

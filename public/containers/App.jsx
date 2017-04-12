@@ -1,10 +1,13 @@
 /* @flow */
 
-import React from 'react';
+import React, { Component } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+import type { Match } from 'react-router-dom';
 import * as actions from '../redux/notifications';
+import Main from './Main';
 
 type PropsType = {
   children: React$Element<any>,
@@ -12,6 +15,7 @@ type PropsType = {
   actions: {
     hideNotification: Function,
   },
+  match: Match,
 };
 
 const styles = {
@@ -35,7 +39,7 @@ const styles = {
   },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-export default class App extends React.Component {
+export default class App extends Component {
   props: PropsType;
 
   componentWillReceiveProps({ notifications, actions: { hideNotification } }: PropsType) {
@@ -54,10 +58,12 @@ export default class App extends React.Component {
   notificationSystem: { addNotification: Function };
 
   render() {
+    const { match } = this.props;
+
     return (
       <div style={styles.root}>
         <div style={styles.container}>
-          {this.props.children}
+          <Route exact path={match.url} component={Main} />
         </div>
 
         <NotificationSystem

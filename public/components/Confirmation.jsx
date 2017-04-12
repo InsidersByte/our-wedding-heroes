@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { RaisedButton } from 'material-ui';
 import { HOME_ROUTE } from '../constants/routes';
 import Loader from './Loader';

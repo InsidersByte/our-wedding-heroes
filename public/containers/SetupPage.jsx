@@ -3,13 +3,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
-import { browserHistory } from 'react-router';
 import { success, error } from '../redux/notifications';
 import { MINIMUM_PASSWORD_LENGTH, MINIMUM_PASSWORD_MESSAGE, MATCHING_PASSWORD_MESSAGE } from '../constants';
 import SetupForm from '../components/SetupForm';
 import api from '../api';
 import { HTTP_METHODS } from '../constants/api';
-import { ADMIN_ROUTE } from '../constants/routes';
+// import { ADMIN_ROUTE } from '../constants/routes';
 
 type PropsType = {
   onSuccess: Function,
@@ -69,7 +68,9 @@ export class SetupPage extends Component<void, PropsType, LocalStateType> {
     try {
       await api({ endpoint: 'setup', method: HTTP_METHODS.POST, data: user });
       onSuccess({ message: 'You are all setup up' });
-      browserHistory.push(ADMIN_ROUTE);
+
+      // TODO: Fix this
+      // browserHistory.push(ADMIN_ROUTE);
     } catch (err) {
       onError(err);
     } finally {
