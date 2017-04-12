@@ -21,7 +21,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "prettier --print-width 160 --trailing-comma es5 --single-quote --write './!(flow-typed)/**/*.{js,jsx}'",
+      "prettier --print-width 160 --trailing-comma es5 --single-quote --write",
       "git add"
     ]
   },
