@@ -4,9 +4,10 @@ import React, { Component } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import * as actions from '../redux/notifications';
 import Main from './Main';
+import Admin from './Admin';
 
 type PropsType = {
   notifications: Array<Object>,
@@ -56,19 +57,20 @@ export default class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div style={styles.root}>
-          <div style={styles.container}>
+      <div style={styles.root}>
+        <div style={styles.container}>
+          <Switch>
+            <Route path="/admin" component={Admin} />
             <Route component={Main} />
-          </div>
-
-          <NotificationSystem
-            ref={c => {
-              this.notificationSystem = c;
-            }}
-          />
+          </Switch>
         </div>
-      </Router>
+
+        <NotificationSystem
+          ref={c => {
+            this.notificationSystem = c;
+          }}
+        />
+      </div>
     );
   }
 }

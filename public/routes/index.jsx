@@ -1,19 +1,12 @@
 import React from 'react';
-import { Route, IndexRoute, IndexRedirect } from 'react-router-dom';
+import { Route, IndexRedirect } from 'react-router-dom';
 import { LOGIN_ROUTE, ADMIN_ROUTE, SETUP_ROUTE } from '../constants/routes';
 import api from '../api';
 import { HTTP_METHODS } from '../constants/api';
 
 import App from '../containers/App';
 
-import NoMatch from '../components/NoMatch';
 import NoMatchAdmin from '../components/NoMatchAdmin';
-
-import Main from '../containers/Main';
-import LandingPage from '../containers/LandingPage';
-import BasketSummaryPage from '../containers/BasketSummaryPage';
-import GiverDetailsPage from '../containers/GiverDetailsPage';
-import ConfirmationPage from '../containers/ConfirmationPage';
 
 import Admin from '../containers/Admin';
 import LoginPage from '../containers/LoginPage';
@@ -82,13 +75,6 @@ const ifLoggedInRedirectToAdmin = store =>
 
 export default store => (
   <Route path="/" component={App}>
-    <Route component={Main}>
-      <IndexRoute component={LandingPage} />
-      <Route path="basket" component={BasketSummaryPage} />
-      <Route path="giver" component={GiverDetailsPage} />
-      <Route path="confirmation/:giftSetId" component={ConfirmationPage} />
-    </Route>
-
     <Route path="admin" component={Admin}>
       <IndexRedirect to="giftSet" />
 
@@ -121,7 +107,5 @@ export default store => (
         </Route>
       </Route>
     </Route>
-
-    <Route path="*" component={NoMatch} />
   </Route>
 );
