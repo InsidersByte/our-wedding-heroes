@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getMuiTheme, MuiThemeProvider } from 'material-ui/styles';
 import type { Match } from 'react-router-dom';
+import api from '../../api';
 import AdminContainer from '../AdminContainer';
 import SetupPage from '../SetupPage';
 import LoginPage from '../LoginPage';

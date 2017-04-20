@@ -426,19 +426,19 @@ exports[`Admin should render correctly 1`] = `
         path="/admin"
         render={[Function]}
       />
-      <Route
+      <Connect(UnauthenticatedRoute)
         component={[Function]}
         path="/admin/setup"
       />
-      <Route
+      <Connect(UnauthenticatedRoute)
         component={[Function]}
         path="/admin/login"
       />
-      <Route
+      <Connect(UnauthenticatedRoute)
         component={[Function]}
         path="/admin/reset/:token"
       />
-      <Route
+      <Connect(UnauthenticatedRoute)
         component={[Function]}
         path="/admin/signUp/:token"
       />
