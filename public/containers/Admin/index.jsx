@@ -23,6 +23,7 @@ import CreateSectionPage from '../CreateSectionPage';
 import UpdateSectionPage from '../UpdateSectionPage';
 import NoMatchAdmin from '../../components/NoMatchAdmin';
 import AuthenticatedRoute from '../../components/AuthenticatedRoute';
+import UnathenticatedRoute from '../../components/UnathenticatedRoute';
 
 type PropsType = {
   match: Match,
@@ -36,10 +37,10 @@ const Admin = ({ match }: PropsType) => (
       <Switch>
         <Route exact path={match.url} render={() => <Redirect to={`${match.url}/giftSet`} />} />
 
-        <Route path={`${match.url}/setup`} component={SetupPage} />
-        <Route path={`${match.url}/login`} component={LoginPage} />
-        <Route path={`${match.url}/reset/:token`} component={ResetPasswordPage} />
-        <Route path={`${match.url}/signUp/:token`} component={SignUpPage} />
+        <UnathenticatedRoute path={`${match.url}/setup`} component={SetupPage} />
+        <UnathenticatedRoute path={`${match.url}/login`} component={LoginPage} />
+        <UnathenticatedRoute path={`${match.url}/reset/:token`} component={ResetPasswordPage} />
+        <UnathenticatedRoute path={`${match.url}/signUp/:token`} component={SignUpPage} />
 
         <AuthenticatedRoute path={`${match.url}/profile`} component={ProfilePage} />
         <AuthenticatedRoute path={`${match.url}/weddingProfile`} component={WeddingProfilePage} />
