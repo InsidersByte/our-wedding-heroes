@@ -12,9 +12,6 @@ import type { StateType, DispatchType, GiftSetType } from '../../types';
 type PropsType = {
   loading: boolean,
   giftSet: GiftSetType,
-  params: {
-    giftSetId: string,
-  },
   actions: {
     loadGiftSet: (giftSetId: string) => void,
   },
